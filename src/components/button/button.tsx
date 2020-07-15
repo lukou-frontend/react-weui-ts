@@ -11,8 +11,8 @@ type IReactComponent<P = any> =
   | React.ClassicComponentClass<P>;
 interface ButtonProps {
   disabled?: boolean,
-  type: string,
-  size?: string,
+  type: 'primary'|'default'|'warn'|'vcode',
+  size?: 'normal'|'small',
   plain?: boolean,
   className?: any,
   href?: string,
@@ -21,9 +21,9 @@ interface ButtonProps {
 export default class Button extends React.Component<ButtonProps> {
 
     static defaultProps = {
-        disabled: false,
-        type: 'primary',
-        size: 'normal',
+        disabled: false as ButtonProps['disabled'],
+        type: 'primary' as ButtonProps['type'],
+        size: 'normal' as ButtonProps['size'],
     };
 
     render() {
