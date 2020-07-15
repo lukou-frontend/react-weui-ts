@@ -22,7 +22,7 @@
     "type": "git",
     "url": "git+https://github.com/weui/react-weui.git"
   },
-  "typings": "lib/index.d.ts",
+  "typings": "build/packages/index.d.ts",
   "keywords": [
     "mobile",
     "ui",
