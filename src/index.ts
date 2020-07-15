@@ -6,7 +6,7 @@ import version from './version';
 //0.4.x components
 import ActionSheet from './components/actionsheet/index';
 
-// import {Button, ButtonArea, PreviewButton} from './components/button/index';
+import {Button, ButtonArea, PreviewButton} from './components/button/index';
 // import {Cells, CellsTitle, CellsTips, Cell, CellHeader, CellBody, CellFooter} from './components/cell/index';
 // import Mask from './components/mask/index';
 // import {Form, FormCell, TextArea, Input, Switch, Radio, Slider, Checkbox, Select, Uploader, VCode, Agreement, Preview, PreviewHeader, PreviewBody, PreviewFooter, PreviewItem} from './components/form/index';
@@ -43,8 +43,8 @@ export default {
     //0.4.x
     ActionSheet,
 
-    // Button,
-    // ButtonArea,
+    Button,
+    ButtonArea,
     // Cells,
     // CellsTitle,
     // CellsTips,
@@ -113,7 +113,7 @@ export default {
     // PreviewBody,
     // PreviewFooter,
     // PreviewItem,
-    // PreviewButton,
+    PreviewButton,
     // Picker,
     // PickerGroup,
     // CityPicker,

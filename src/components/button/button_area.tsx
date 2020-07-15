@@ -1,15 +1,11 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import classNames from '../../utils/classnames';
 
-class ButtonArea extends Component {
-    static propTypes = {
-        /**
-         * Direction of Button Layout inside, Options: veritical, horizontal
-         *
-         */
-        direction: PropTypes.string
-    };
+interface IProps {
+  direction: 'veritical'|'horizontal',
+  className: string
+}
+class ButtonArea extends React.Component<IProps> {
 
     static defaultProps = {
         direction: 'vertical'

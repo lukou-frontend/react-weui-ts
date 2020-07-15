@@ -10,7 +10,7 @@ interface IProps {
   menus: any[],
   actions: any[],
   show: boolean,
-  onRequestClose: (e: any) => void,
+  onRequestClose: React.MouseEventHandler,
   type: string
 }
 class ActionSheet extends React.Component<IProps> {
@@ -57,7 +57,7 @@ class ActionSheet extends React.Component<IProps> {
         });
     }
 
-    handleMaskClick(e: any){
+    handleMaskClick(e: React.MouseEvent){
         if (this.props.onRequestClose) this.props.onRequestClose(e);
     }
 

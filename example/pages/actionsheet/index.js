@@ -1,7 +1,6 @@
 import React from 'react';
 import {Button, ActionSheet} from '../../../build/packages';
 import Page from '../../component/page';
-
 export default class ActionSheetDemo extends React.Component {
 
     state = {

@@ -1,25 +1,24 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import classNames from '../../utils/classnames';
 
 /**
  *  Button usage：OK(primary)、Cancel(default)、Warn(warn).
  *
  */
-export default class Button extends React.Component {
-    static propTypes = {
-        disabled: PropTypes.bool,
-        /**
-         * Options: primary, default, warn, vcode
-         *
-         */
-        type: PropTypes.string,
-        /**
-         * Options: normal, small
-         *
-         */
-        size: PropTypes.string,
-    };
+type IReactComponent<P = any> =
+  | React.FC<P>
+  | React.ComponentClass<P>
+  | React.ClassicComponentClass<P>;
+interface IProps {
+  disabled?: boolean,
+  type?: string,
+  size?: string,
+  plain?: boolean,
+  className?: any,
+  href?: string,
+  component?: IReactComponent
+}
+export default class Button extends React.Component<IProps> {
 
     static defaultProps = {
         disabled: false,

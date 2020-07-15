@@ -1,8 +1,12 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import classNames from '../../utils/classnames';
 
-const PreviewButton = (props) => {
+interface IProps {
+  className: string,
+  primary: boolean,
+  children: React.ReactNode
+}
+const PreviewButton = (props: IProps) => {
     const { className, primary, children, ...others } = props;
     const cls = classNames({
         'weui-form-preview__btn': true,
@@ -16,14 +20,6 @@ const PreviewButton = (props) => {
             {children}
         </a>
     );
-};
-
-PreviewButton.propTypes = {
-    /**
-     * Primary style of button
-     *
-     */
-    primary: PropTypes.bool
 };
 
 PreviewButton.defaultProps = {
