@@ -6,8 +6,8 @@ import * as React from 'react';
 declare type IReactComponent<P = any> = React.FC<P> | React.ComponentClass<P> | React.ClassicComponentClass<P>;
 interface ButtonProps {
     disabled?: boolean;
-    type: string;
-    size?: string;
+    type: 'primary' | 'default' | 'warn' | 'vcode';
+    size?: 'normal' | 'small';
     plain?: boolean;
     className?: any;
     href?: string;
@@ -15,9 +15,9 @@ interface ButtonProps {
 }
 export default class Button extends React.Component<ButtonProps> {
     static defaultProps: {
-        disabled: boolean;
-        type: string;
-        size: string;
+        disabled: boolean | undefined;
+        type: "default" | "primary" | "warn" | "vcode";
+        size: "small" | "normal" | undefined;
     };
     render(): JSX.Element;
 }
