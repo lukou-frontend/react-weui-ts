@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import classNames from '../../utils/classnames';
 import Mask from '../mask/index';
 import './actionsheet.less';
@@ -7,33 +6,14 @@ import './actionsheet.less';
 /**
  * Used to display a collection of actions that contain a set of interactivity, including descriptions, links, and so on. Popup from the bottom, generally used to respond to user clicks on the page.
  */
-class ActionSheet extends Component {
-    static propTypes = {
-        /**
-         * Array of Objects for menus, `label` property is Required
-         *
-         */
-        menus: PropTypes.array,
-        /**
-         * Array of Objects for actions, `label` property is Required
-         *
-         */
-        actions: PropTypes.array,
-        /**
-         * To display ActionSheet
-         *
-         */
-        show: PropTypes.bool,
-        /**
-         * Function triggers when user click on the mask
-         *
-         */
-        onRequestClose: PropTypes.func,
-        /**
-         * style: ios/android
-         */
-        type: PropTypes.string,
-    };
+interface IProps {
+  menus: any[],
+  actions: any[],
+  show: boolean,
+  onRequestClose: (e: any) => void,
+  type: string
+}
+class ActionSheet extends React.Component<IProps> {
 
     static defaultProps = {
         type: '',
@@ -42,7 +22,7 @@ class ActionSheet extends Component {
         show: false,
     };
 
-    constructor(props) {
+    constructor(props: Readonly<IProps>) {
         super(props);
 
 
@@ -77,7 +57,7 @@ class ActionSheet extends Component {
         });
     }
 
-    handleMaskClick(e){
+    handleMaskClick(e: any){
         if (this.props.onRequestClose) this.props.onRequestClose(e);
     }
 

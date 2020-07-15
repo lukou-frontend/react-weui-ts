@@ -21,6 +21,7 @@ const exec = require( 'child_process' ).exec;
 //console utils
 const argv = require('minimist')(process.argv.slice(2));
 const chalk = require('chalk');
+const typescript = require('rollup-plugin-typescript2')
 const showWrite = argv.progress;
 const showSection = argv.step || true;
 const log = console.log;
@@ -74,7 +75,7 @@ function makeBundleAttributes(bundleType){
 function makeConfig(bundleType){
     let atrs = makeBundleAttributes(bundleType);
     let config = {
-      entry: 'src/index.js',
+      entry: 'src/index.ts',
       plugins: [
         less({
           output: atrs.path + 'react-weui.css'
@@ -85,6 +86,7 @@ function makeConfig(bundleType){
             'node_modules/react/react.js': ['PropTypes', 'Component']
           }
         }),
+        typescript(),
         babelRollup({
           babelrc: false,
           exclude: 'node_modules/**',
@@ -139,11 +141,11 @@ function runTasks($tasks){
 function createNodeBuild(){
     return (res, rej)=>{
         let count = 0;
-        let bat = exec('NODE_ENV=production babel ./src --out-dir ./build/packages --copy-files', { stdio: [0, 1, 2] }, (error, stdout, stderr) => {
-              if (error) {
-                rej(error);
-                return;
-              }
+        let bat = exec("npm run build-package && npm run build-less", { stdio: [0, 1, 2] }, (error, stdout, stderr) => {
+          if (error) {
+            rej(error);
+            return;
+          }
         });
         bat.stdout.on('data', (data) => {
           CLI.write(count++, data);

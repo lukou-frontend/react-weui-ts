@@ -8,11 +8,11 @@
 
 var hasOwn = {}.hasOwnProperty;
 
-function classNames () {
+function classNames (...args: any) {
 	var classes = [];
 
-	for (var i = 0; i < arguments.length; i++) {
-		var arg = arguments[i];
+	for (var i = 0; i < args.length; i++) {
+		var arg = args[i];
 		if (!arg) continue;
 
 		var argType = typeof arg;

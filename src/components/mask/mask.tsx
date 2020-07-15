@@ -1,19 +1,16 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import classNames from '../../utils/classnames';
 
 /**
  * screen mask, use in `Dialog`, `ActionSheet`, `Popup`.
  *
  */
-class Mask extends React.Component {
-    static propTypes = {
-        /**
-         * Whather mask should be transparent (no color)
-         *
-         */
-        transparent: PropTypes.bool
-    };
+interface IProps {
+  transparent?: boolean,
+  className?: any,
+  [key: string]: any
+}
+class Mask extends React.Component<IProps> {
 
     static defaultProps = {
         transparent: false
