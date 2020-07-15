@@ -1,9 +1,6 @@
 import * as React from 'react';
 import classNames from '../../utils/classnames';
 export default class Button extends React.Component {
-    constructor(props) {
-        super(props);
-    }
     render() {
         const { component, type, size, plain, className, children, ...others } = this.props;
         const Component = component ? component : this.props.href || type === 'vcode' ? 'a' : 'button';

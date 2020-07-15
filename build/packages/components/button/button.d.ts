@@ -6,7 +6,7 @@ import * as React from 'react';
 declare type IReactComponent<P = any> = React.FC<P> | React.ComponentClass<P> | React.ClassicComponentClass<P>;
 interface ButtonProps {
     disabled?: boolean;
-    type?: string;
+    type: string;
     size?: string;
     plain?: boolean;
     className?: any;
@@ -19,7 +19,6 @@ export default class Button extends React.Component<ButtonProps> {
         type: string;
         size: string;
     };
-    constructor(props: ButtonProps);
     render(): JSX.Element;
 }
 export {};

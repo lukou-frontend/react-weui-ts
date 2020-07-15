@@ -11,7 +11,7 @@ type IReactComponent<P = any> =
   | React.ClassicComponentClass<P>;
 interface ButtonProps {
   disabled?: boolean,
-  type?: string,
+  type: string,
   size?: string,
   plain?: boolean,
   className?: any,

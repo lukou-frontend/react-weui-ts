@@ -146,9 +146,9 @@ function classNames() {
 var Button$1 = function (_React$Component) {
     inherits(Button, _React$Component);
 
-    function Button(props) {
+    function Button() {
         classCallCheck(this, Button);
-        return possibleConstructorReturn(this, (Button.__proto__ || Object.getPrototypeOf(Button)).call(this, props));
+        return possibleConstructorReturn(this, (Button.__proto__ || Object.getPrototypeOf(Button)).apply(this, arguments));
     }
 
     createClass(Button, [{
