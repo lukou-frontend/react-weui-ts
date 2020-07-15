@@ -5,12 +5,12 @@ import classNames from '../../utils/classnames';
  * screen mask, use in `Dialog`, `ActionSheet`, `Popup`.
  *
  */
-interface IProps {
+interface MaskProps {
   transparent?: boolean,
   className?: any,
   [key: string]: any
 }
-class Mask extends React.Component<IProps> {
+class Mask extends React.Component<MaskProps> {
 
     static defaultProps = {
         transparent: false

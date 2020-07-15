@@ -1,4 +1,5 @@
 import * as React from 'react';
+import PropTypes from 'prop-types';
 import classNames from '../../utils/classnames';
 import Mask from '../mask/index';
 import './actionsheet.less';
@@ -6,14 +7,41 @@ import './actionsheet.less';
 /**
  * Used to display a collection of actions that contain a set of interactivity, including descriptions, links, and so on. Popup from the bottom, generally used to respond to user clicks on the page.
  */
-interface IProps {
+interface ActionSheetProps {
   menus: any[],
   actions: any[],
   show: boolean,
   onRequestClose: React.MouseEventHandler,
   type: string
 }
-class ActionSheet extends React.Component<IProps> {
+class ActionSheet extends React.Component<ActionSheetProps> {
+    static propTypes = {
+      /**
+       * Array of Objects for menus, `label` property is Required
+       *
+       */
+      menus: PropTypes.array,
+      /**
+       * Array of Objects for actions, `label` property is Required
+       *
+       */
+      actions: PropTypes.array,
+      /**
+       * To display ActionSheet
+       *
+       */
+      show: PropTypes.bool,
+      /**
+       * Function triggers when user click on the mask
+       *
+       */
+      onRequestClose: PropTypes.func,
+      /**
+       * style: ios/android
+       */
+      type: PropTypes.string,
+    };
+
 
     static defaultProps = {
         type: '',
@@ -22,7 +50,7 @@ class ActionSheet extends React.Component<IProps> {
         show: false,
     };
 
-    constructor(props: Readonly<IProps>) {
+    constructor(props: Readonly<ActionSheetProps>) {
         super(props);
 
 

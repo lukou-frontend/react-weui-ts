@@ -1,11 +1,11 @@
 import * as React from 'react';
 import classNames from '../../utils/classnames';
 
-interface IProps {
+interface ButtonAreaProps {
   direction: 'veritical'|'horizontal',
   className: string
 }
-class ButtonArea extends React.Component<IProps> {
+class ButtonArea extends React.Component<ButtonAreaProps> {
 
     static defaultProps = {
         direction: 'vertical'

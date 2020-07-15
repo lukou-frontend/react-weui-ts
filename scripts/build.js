@@ -141,7 +141,7 @@ function runTasks($tasks){
 function createNodeBuild(){
     return (res, rej)=>{
         let count = 0;
-        let bat = exec("npm run build-package && npm run build-less", { stdio: [0, 1, 2] }, (error, stdout, stderr) => {
+        let bat = exec("npm run tsc && npm run build-less", { stdio: [0, 1, 2] }, (error, stdout, stderr) => {
           if (error) {
             rej(error);
             return;

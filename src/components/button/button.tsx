@@ -9,7 +9,7 @@ type IReactComponent<P = any> =
   | React.FC<P>
   | React.ComponentClass<P>
   | React.ClassicComponentClass<P>;
-interface IProps {
+interface ButtonProps {
   disabled?: boolean,
   type?: string,
   size?: string,
@@ -18,7 +18,7 @@ interface IProps {
   href?: string,
   component?: IReactComponent
 }
-export default class Button extends React.Component<IProps> {
+export default class Button extends React.Component<ButtonProps> {
 
     static defaultProps = {
         disabled: false,

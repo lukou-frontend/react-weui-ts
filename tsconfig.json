@@ -10,13 +10,16 @@
     "noUnusedParameters": true,
     "noUnusedLocals": true,
     "noImplicitAny": true,
-    "target": "es5",
-    "lib": ["dom", "es7"]
+    "target": "esnext",
+    "lib": ["dom", "es7"],
+    "declaration": true,
+    "declarationDir": "build/packages",
   },
   "include": [
     "src/**/*"
   ],
   "exclude": [
-    "node_modules"
+    "node_modules",
   ]
 }
+

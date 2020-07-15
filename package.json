@@ -9,7 +9,8 @@
     "build": "node scripts/build.js -p",
     "build-less": "node scripts/build-less.js",
     "build-package": "npm run tsc && babel dist --out-dir build/packages && rm -rf dist",
-    "tsc": "tsc --outDir dist",
+    "tsc": "tsc --outDir build/packages",
+    "build:types": "tsc -p tsconfig.json",
     "lint": "eslint 'src/**/*.js'",
     "pretest": "npm run lint",
     "test": "mocha",
@@ -21,6 +22,7 @@
     "type": "git",
     "url": "git+https://github.com/weui/react-weui.git"
   },
+  "typings": "lib/index.d.ts",
   "keywords": [
     "mobile",
     "ui",
@@ -42,6 +44,7 @@
   },
   "devDependencies": {
     "@types/react": "^16.9.43",
+    "@types/react-dom": "^16.9.8",
     "autoprefixer": "^6.3.5",
     "babel": "^6.0.0",
     "babel-cli": "^6.18.0",

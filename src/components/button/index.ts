@@ -4,12 +4,15 @@
 
 
 
-import Button from './button';
-import ButtonArea from './button_area';
-import PreviewButton from './button_preview';
+// import Button from './button';
+// import ButtonArea from './button_area';
+// import PreviewButton from './button_preview';
 
-export {
-    Button,
-    ButtonArea,
-    PreviewButton
-};
+// export {
+//     Button,
+//     ButtonArea,
+//     PreviewButton
+// };
+import Button from './button';
+
+export default Button;
