@@ -7,6 +7,7 @@
 // import ActionSheet from './components/actionsheet/index';
 
 export { default as Button } from './components/button/index';
+<<<<<<< HEAD
 export { default as Cell } from './components/cell/index';
 export { default as Article } from './components/article/index';
 export { default as Badge } from './components/badge/index';
@@ -28,6 +29,11 @@ export { default as Panel } from './components/panel/index';
 export { Form, FormCell, TextArea, Input, Switch, Radio, Slider, Checkbox, Select, Uploader, VCode, Agreement, Preview, PreviewHeader, PreviewBody, PreviewFooter, PreviewItem } from './components/form/index';
 
 
+=======
+export { default as Toptips } from './components/toptips';
+export { default as Toast } from './components/toast';
+export { Tab, TabBody, TabBodyItem, NavBar, NavBarItem, TabBar, TabBarItem, TabBarIcon, TabBarLabel } from './components/tab/index';
+>>>>>>> 22457ee33b81803fa4d9d2b69f5cad8d9770b654
 // import {Button, ButtonArea, PreviewButton} from './components/button/index';
 // import {Cells, CellsTitle, CellsTips, Cell, CellHeader, CellBody, CellFooter} from './components/cell/index';
 // import Mask from './components/mask/index';

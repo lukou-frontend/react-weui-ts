@@ -1,12 +1,17 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import classNames from '../../utils/classnames';
+import classNames, { ClassValue } from '../../utils/classnames';
 
 /**
  *  Navbar item to display info
  *
  */
-export default class NavBarItem extends React.Component {
+interface NavBarItemProps {
+  active?: boolean,
+  className?: ClassValue,
+  label: string
+}
+export default class NavBarItem extends React.Component<NavBarItemProps> {
     static propTypes = {
         /**
          * indicate tab is active

@@ -11,23 +11,23 @@ type IReactComponent<P = any> =
   | React.ClassicComponentClass<P>;
 interface ButtonProps {
   disabled?: boolean,
-  type: 'primary'|'default'|'warn'|'vcode',
+  type?: 'primary'|'default'|'warn'|'vcode',
   size?: 'normal'|'small',
   plain?: boolean,
-  className?: any,
+  className?: string,
   href?: string,
   component?: IReactComponent
 }
 export default class Button extends React.Component<ButtonProps> {
 
     static defaultProps = {
-        disabled: false as ButtonProps['disabled'],
+        disabled: false,
         type: 'primary' as ButtonProps['type'],
-        size: 'normal' as ButtonProps['size'],
+        size: 'normal' as ButtonProps['size']
     };
 
     render() {
-        const { component, type, size, plain, className, children, ...others } = this.props;
+        const { component, type, size, plain, className = '', children, ...others } = this.props;
         const Component = component ? component : this.props.href || type === 'vcode' ? 'a' : 'button';
         const cls = type === 'vcode' ? classNames('weui-vcode-btn', {[className]: className}) : classNames({
             'weui-btn': true,

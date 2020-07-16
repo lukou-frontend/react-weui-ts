@@ -1,6 +1,6 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import classNames from '../../utils/classnames';
+import classNames, { ClassValue } from '../../utils/classnames';
 
 import TabBody from './tab_body';
 import TabBodyItem from './tab_body_item';
@@ -15,7 +15,15 @@ import TabBarLabel from './tabbar_label';
  *  Weui Tab component, can be auto mount items or mannually display items
  *
  */
-export default class Tab extends React.Component {
+interface TabProps {
+  defaultIndex: number,
+  type: string,
+  onChange?: (index: number) => void,
+  className?: ClassValue,
+  children: React.ReactElement[],
+  [key: string]: any
+}
+export default class Tab extends React.Component<TabProps> {
     static propTypes = {
         /**
          * layout of the tab, auto mount components when set to `navbar` or `tabbar`
@@ -39,18 +47,18 @@ export default class Tab extends React.Component {
         index: this.props.defaultIndex
     };
 
-    handleHeaderClick(idx) {
+    handleHeaderClick(idx: number) {
         this.setState({index: idx});
         if (this.props.onChange) this.props.onChange(idx);
     }
 
-    parseChild(childrenInput) {
-        const ChildHeaders = [];
-        const ChildContents = [];
+    parseChild(childrenInput: React.ReactElement[]) {
+        const ChildHeaders: React.ReactElement[] = [];
+        const ChildContents: React.ReactElement[] = [];
 
-        React.Children.map(childrenInput, child => {
+        React.Children.map(childrenInput, (child) => {
             if (!child) return;
-            const {children, type, ...others} = child.props;
+            const {children} = child.props;
             if (child.type === TabBarItem || child.type === NavBarItem){
               ChildHeaders.push(child);
               if (children) ChildContents.push(<TabBodyItem children={children}/>);
@@ -63,11 +71,11 @@ export default class Tab extends React.Component {
         return {ChildHeaders, ChildContents};
     }
 
-    renderBar(type, children, cls) {
+    renderBar(type: string, children: React.ReactElement[], cls: string) {
         const {ChildHeaders, ChildContents} = this.parseChild(children);
 
         let _headers = ChildHeaders.map((item, idx)=>{
-            return React.cloneElement(item, {
+            return React.cloneElement((item), {
                 key: idx,
                 active: this.state.index === idx,
                 onClick: this.handleHeaderClick.bind(this, idx, item)
@@ -114,8 +122,9 @@ export default class Tab extends React.Component {
 
     render() {
         const {children, className, type, ...others} = this.props;
-        const divProps = Object.assign({}, others);
+        const divProps: Omit<TabProps, 'defaultIndex'|'onChange'> = Object.assign({}, others);
         delete divProps.defaultIndex;
+        delete divProps.onChange;
 
         const cls = classNames({
             'weui-tab': true

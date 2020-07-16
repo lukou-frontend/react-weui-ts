@@ -1,11 +1,15 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import classNames from '../../utils/classnames';
+import classNames, { ClassValue } from '../../utils/classnames';
 
 /**
  * Content wrapper for each Tab Item
  */
-export default class TabBodyItem extends React.Component {
+interface TabBodyItemProps {
+  active?: boolean,
+  className?: ClassValue
+}
+export default class TabBodyItem extends React.Component<TabBodyItemProps> {
     static propTypes = {
         /**
          * display this component

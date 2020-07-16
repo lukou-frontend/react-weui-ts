@@ -7,8 +7,15 @@ import './toptips.less';
  *  Drop down message from top
  *
  */
-const Toptips = (props) => {
-    const {className, type, children, show, ...others} = props;
+interface ToptipsProps {
+  show: boolean,
+  type?: 'default'|'warn'|'info'|'primary',
+  className?: string,
+  children?: React.ReactNode,
+  [key: string]: any
+}
+const Toptips = (props: ToptipsProps) => {
+    const {className = '', type, children, show, ...others} = props;
     const cls = classNames({
         'weui-toptips': true,
         [`weui-toptips_${type}`]: true,
@@ -36,7 +43,7 @@ Toptips.propTypes = {
 
 Toptips.defaultProps = {
     show: false,
-    type: 'default'
+    type: 'default' as ToptipsProps['type']
 };
 
 export default Toptips;
