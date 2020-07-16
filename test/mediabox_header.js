@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { shallow } from 'enzyme';
 import assert from 'assert';
 import WeUI from '../src/index';
@@ -13,12 +13,12 @@ describe('<MediaBoxHeader></MediaBoxHeader>', ()=> {
                     <MediaBoxHeader className={clazz}>{child}</MediaBoxHeader>
                 );
 
-                it(`should render <MediaBoxHeader></MediaBoxHeader> component `, ()=>{
+                it('should render <MediaBoxHeader></MediaBoxHeader> component ', ()=>{
                     assert(wrapper.instance() instanceof MediaBoxHeader);
                 });
 
-                it(`should have 'weui-media-box__hd' class name`, ()=>{
-                    assert(wrapper.hasClass(`weui-media-box__hd`));
+                it('should have \'weui-media-box__hd\' class name', ()=>{
+                    assert(wrapper.hasClass('weui-media-box__hd'));
                 });
 
                 it(`should have custom class name ${clazz}`, ()=>{
@@ -28,14 +28,14 @@ describe('<MediaBoxHeader></MediaBoxHeader>', ()=> {
                 });
 
                 it(`should have child ${child}`, ()=>{
-                    if(wrapper.children().first().type() !== 'img'){
+                    if (wrapper.children().first().type() !== 'img'){
                         assert(wrapper.contains(child));
                     }
                 });
 
-                it(`should render img child without classname with weui-media-box__thumb class`, ()=>{
-                    if(wrapper.children().first().type() == 'img'){
-                        assert(wrapper.children().first().hasClass(`weui-media-box__thumb`));
+                it('should render img child without classname with weui-media-box__thumb class', ()=>{
+                    if (wrapper.children().first().type() == 'img'){
+                        assert(wrapper.children().first().hasClass('weui-media-box__thumb'));
                     }
                 });
             });

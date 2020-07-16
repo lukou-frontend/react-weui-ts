@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { shallow } from 'enzyme';
 import assert from 'assert';
 import WeUI from '../src/index';
@@ -17,12 +17,12 @@ describe('<Toast></Toast>', ()=> {
                         </Toast>
                     );
 
-                    it(`should render <Toast></Toast> component`, () => {
+                    it('should render <Toast></Toast> component', () => {
                         assert(wrapper.instance() instanceof Toast);
                         assert(wrapper.find('.weui-toast'));
                     });
 
-                    it(`should be hidden when 'show' attribute is false`, ()=> {
+                    it('should be hidden when \'show\' attribute is false', ()=> {
                         if (show) {
                             assert(wrapper.prop('style').display === 'block');
                         }
@@ -31,19 +31,19 @@ describe('<Toast></Toast>', ()=> {
                         }
                     });
 
-                    it(`should have a transparent mask`, ()=> {
+                    it('should have a transparent mask', ()=> {
                         const mask = wrapper.find(Mask).shallow();
                         assert(mask.instance() instanceof Mask);
                         assert(!mask.hasClass('weui-mask'));
                         assert(mask.hasClass('weui-mask_transparent'));
                     });
 
-                    it(`should have a icon`, ()=> {
+                    it('should have a icon', ()=> {
                         const icon = wrapper.find(Icon).shallow();
                         assert(icon.instance() instanceof Icon);
                     });
 
-                    it(`should have a icon with appropriate size`, ()=> {
+                    it('should have a icon with appropriate size', ()=> {
                         const icon = wrapper.find(Icon).shallow();
                         assert(icon.instance() instanceof Icon);
                     });
@@ -51,7 +51,7 @@ describe('<Toast></Toast>', ()=> {
                     it(`should have a icon with appropriate size: ${iconSize}`, ()=> {
                         const iconWrapper = wrapper.find(Icon).shallow();
                         //exclude loading case
-                        if(icon != 'loading'){
+                        if (icon != 'loading'){
                             if (iconSize === 'large') {
                                 assert(iconWrapper.hasClass('weui-icon_msg'));
                             }
@@ -61,7 +61,7 @@ describe('<Toast></Toast>', ()=> {
                         }
                     });
 
-                    it(`should have 'weui-loading' and 'weui-icon_toast' class name when icon is 'loading'`, ()=> {
+                    it('should have \'weui-loading\' and \'weui-icon_toast\' class name when icon is \'loading\'', ()=> {
                         if (icon === 'loading') {
                             let $icon = wrapper.find(Icon).shallow();
                             assert($icon.hasClass('weui-loading'));
@@ -69,7 +69,7 @@ describe('<Toast></Toast>', ()=> {
                         }
                     });
 
-                    it(`should have body`, ()=> {
+                    it('should have body', ()=> {
                         const $body = wrapper.find('.weui-toast_content');
                         assert($body.text() === body);
                     });

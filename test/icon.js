@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { shallow } from 'enzyme';
 import assert from 'assert';
 import WeUI from '../src/index';
@@ -29,7 +29,7 @@ describe('<Icon>', ()=> {
                     <Icon value={value} size={size}/>
                 );
 
-                it(`should render <Icon></Icon> component`, ()=> {
+                it('should render <Icon></Icon> component', ()=> {
                     assert(wrapper.instance() instanceof Icon);
                 });
 
@@ -37,7 +37,7 @@ describe('<Icon>', ()=> {
                     assert(wrapper.hasClass(`weui-icon-${value}`));
                 });
 
-                it(`should have 'weui-icon_msg' when size is large`, ()=> {
+                it('should have \'weui-icon_msg\' when size is large', ()=> {
                     if (size === 'large') {
                         assert(wrapper.hasClass('weui-icon_msg'));
                     }
@@ -46,7 +46,7 @@ describe('<Icon>', ()=> {
                     }
                 });
             });
-        })
+        });
     });
 
     describe('loading', ()=> {
@@ -54,8 +54,8 @@ describe('<Icon>', ()=> {
             <Icon value="loading"/>
         );
 
-        it(`should have 'weui-loading' class name`, ()=> {
+        it('should have \'weui-loading\' class name', ()=> {
             assert(wrapper.hasClass('weui-loading'));
         });
-    })
+    });
 });

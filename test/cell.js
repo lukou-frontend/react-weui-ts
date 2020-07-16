@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { shallow } from 'enzyme';
 import assert from 'assert';
 import WeUI from '../src/index';
@@ -20,8 +20,8 @@ describe('<Cell></Cell>', ()=> {
                     </Cell>
                 );
 
-                it(`should have 'weui-cell' class name`, ()=>{
-                    assert(wrapper.hasClass(`weui-cell`));
+                it('should have \'weui-cell\' class name', ()=>{
+                    assert(wrapper.hasClass('weui-cell'));
                 });
 
                 it(`should have custom class name ${clazz} when className is not null or empty`, ()=>{
@@ -30,21 +30,21 @@ describe('<Cell></Cell>', ()=> {
                     }
                 });
 
-                it(`should have 'weui-cell_access' when access attribute is true`, ()=> {
+                it('should have \'weui-cell_access\' when access attribute is true', ()=> {
                     if (access) {
-                        assert(wrapper.hasClass(`weui-cell_access`));
+                        assert(wrapper.hasClass('weui-cell_access'));
                     }
                 });
 
-                it(`should have header child`, ()=>{
+                it('should have header child', ()=>{
                     assert(shallow(header).html() === wrapper.find(CellHeader).html());
                 });
 
-                it(`should have body child`, ()=>{
+                it('should have body child', ()=>{
                     assert(shallow(body).html() === wrapper.find(CellBody).html());
                 });
 
-                it(`should have footer child`, ()=>{
+                it('should have footer child', ()=>{
                     assert(shallow(footer).html() === wrapper.find(CellFooter).html());
                 });
             });

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import * as React from 'react'
 import PropTypes from 'prop-types';
 import PickerGroup from './picker_group';
 import classNames from '../../utils/classnames';

@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { Tab, TabBarItem, Article } from '../../../build/packages';
 import IconButton from '../home/images/icon_nav_button.png';
 import IconMsg from '../home/images/icon_nav_msg.png';

@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { shallow } from 'enzyme';
 import assert from 'assert';
 import WeUI from '../src/index';
@@ -12,7 +12,7 @@ describe('<VCode></VCode>', ()=> {
                 <VCode className={clazz}/>
             );
 
-            it(`should render VCode div should have img with weui-vcode-img class`, ()=> {
+            it('should render VCode div should have img with weui-vcode-img class', ()=> {
                 assert(wrapper.find('img').hasClass('weui-vcode-img'));
             });
 

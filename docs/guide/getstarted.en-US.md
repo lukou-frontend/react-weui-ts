@@ -19,7 +19,7 @@ npm install weui@1.1.0 react-weui --save
 
 We have several examples on the documentation. Here is the first one to get you started:
 ```javascript
-import React from 'react';
+import * as React from 'react';
 import ReactDOM from 'react-dom';
 import { Button } from 'react-weui';
 //import styles

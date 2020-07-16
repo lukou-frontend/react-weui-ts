@@ -1,5 +1,5 @@
 /* eslint-disable */
-import React, { Component } from 'react';
+import * as React from 'react'
 import Navigation from '../components/navigation';
 import langs from '../langs.json';
 import docs from '../docs.json';

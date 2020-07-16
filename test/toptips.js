@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import {shallow} from 'enzyme';
 import assert from 'assert';
 
@@ -29,7 +29,7 @@ describe('<Toptips></Toptips>', () => {
                     assert(wrapper.hasClass(`${customClassName}`));
                 });
 
-                it(`should display block when show is true, and display none when show is false`, () => {
+                it('should display block when show is true, and display none when show is false', () => {
                     if (show) {
                         assert(wrapper.prop('style').display === 'block');
                     }
@@ -38,7 +38,7 @@ describe('<Toptips></Toptips>', () => {
                     }
                 });
 
-                it(`should have text 'tips'`, () => {
+                it('should have text \'tips\'', () => {
                     assert(wrapper.text() === text);
                 });
             });

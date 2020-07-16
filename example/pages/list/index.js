@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import {
     Cells,
     CellsTitle,
@@ -28,7 +28,7 @@ const ListDemo = (props) => (
         <Cells>
             <Cell>
                 <CellHeader>
-                    <img src={iconSrc} alt="" style={{display: `block`, width: `20px`, marginRight: `5px`}}/>
+                    <img src={iconSrc} alt="" style={{display: 'block', width: '20px', marginRight: '5px'}}/>
                 </CellHeader>
                 <CellBody>
                     Title
@@ -39,7 +39,7 @@ const ListDemo = (props) => (
             </Cell>
             <Cell>
                 <CellHeader>
-                    <img src={iconSrc} alt="" style={{display: `block`, width: `20px`, marginRight: `5px`}}/>
+                    <img src={iconSrc} alt="" style={{display: 'block', width: '20px', marginRight: '5px'}}/>
                 </CellHeader>
                 <CellBody>
                     Title
@@ -90,7 +90,7 @@ const ListDemo = (props) => (
         <Cells>
             <Cell href="javascript:;" access>
                 <CellHeader>
-                    <img src={iconSrc} alt="" style={{display: `block`, width: `20px`, marginRight: `5px`}}/>
+                    <img src={iconSrc} alt="" style={{display: 'block', width: '20px', marginRight: '5px'}}/>
                 </CellHeader>
                 <CellBody>
                     Title
@@ -101,7 +101,7 @@ const ListDemo = (props) => (
             </Cell>
             <Cell access>
                 <CellHeader>
-                    <img src={iconSrc} alt="" style={{display: `block`, width: `20px`, marginRight: `5px`}}/>
+                    <img src={iconSrc} alt="" style={{display: 'block', width: '20px', marginRight: '5px'}}/>
                 </CellHeader>
                 <CellBody>
                     Title

@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { shallow } from 'enzyme';
 import assert from 'assert';
 import WeUI from '../src/index';
@@ -12,11 +12,11 @@ describe('<Radio></Radio>', ()=> {
                 <Radio className={clazz}/>
             );
 
-            it(`should render radio input component with weui-check class`, ()=> {
+            it('should render radio input component with weui-check class', ()=> {
                 assert(wrapper.find('input').hasClass('weui-check'));
             });
 
-            it(`should render span with weui_icon_checked class`, ()=> {
+            it('should render span with weui_icon_checked class', ()=> {
                 assert(wrapper.find('span').hasClass('weui-icon-checked'));
             });
 
@@ -25,6 +25,6 @@ describe('<Radio></Radio>', ()=> {
                     assert(wrapper.find('input').hasClass(clazz));
                 }
             });
-        })
+        });
     });
 });

@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { Msg, Footer, FooterLinks, FooterLink, FooterText } from '../../../build/packages';
 import Page from '../../component/page';
 
@@ -11,7 +11,7 @@ const FailFooter = ()=>(
             Copyright © 2008-2016 weui.io
         </FooterText>
     </Footer>
-)
+);
 
 const FailMsg = (props) => {
     return (
@@ -32,7 +32,7 @@ const FailMsg = (props) => {
                 footer={FailFooter}
             />
         </Page>
-    )
-}
+    );
+};
 
 export default FailMsg;

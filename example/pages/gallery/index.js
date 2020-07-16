@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import * as React from 'react'
 import Page from '../../component/page';
 import { Gallery, GalleryDelete, Button, Icon } from '../../../build/packages';
 import imgSrc from '../uploader/photo.png';

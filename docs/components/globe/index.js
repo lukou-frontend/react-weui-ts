@@ -1,6 +1,6 @@
 //from http://codepen.io/kgierke/pen/GJbYWr
 
-import React, { Component } from 'react';
+import * as React from 'react'
 import './style.less';
 
 const Globe = () => {

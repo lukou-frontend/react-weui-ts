@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { shallow } from 'enzyme';
 import assert from 'assert';
 import WeUI from '../src/index';
@@ -15,15 +15,15 @@ describe('<Cells></Cells>', ()=> {
                 <Cells access={access} className={customClassName}>{child}</Cells>
             );
 
-            it(`should have 'weui-cells' class name`, ()=> {
-                assert(wrapper.hasClass(`weui-cells`));
+            it('should have \'weui-cells\' class name', ()=> {
+                assert(wrapper.hasClass('weui-cells'));
             });
 
             it(`should have custom class name ${customClassName}`, ()=> {
                 assert(wrapper.hasClass(customClassName));
             });
 
-            it(`should have child typeof Cell`, ()=> {
+            it('should have child typeof Cell', ()=> {
                 assert(wrapper.find(Cell).html() === shallow(child).html());
             });
         });

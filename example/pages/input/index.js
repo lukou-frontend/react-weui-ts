@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { ButtonArea,
     Button,
     CellsTitle,
@@ -33,7 +33,7 @@ export default class inputDemo extends React.Component {
 
         this.state = {
             showToptips: false
-        }
+        };
     }
 
     render(){
@@ -220,9 +220,9 @@ export default class inputDemo extends React.Component {
                 <Button
                     //button to display toptips
                     onClick={ e=> {
-                        if(this.state.showToptips) return;
-                        this.setState({showToptips: !this.state.showToptips})
-                        window.setTimeout(e=> this.setState({showToptips: !this.state.showToptips}), 2000)
+                        if (this.state.showToptips) return;
+                        this.setState({showToptips: !this.state.showToptips});
+                        window.setTimeout(e=> this.setState({showToptips: !this.state.showToptips}), 2000);
                     }
                 }>
                     OK
@@ -235,6 +235,6 @@ export default class inputDemo extends React.Component {
                 Oops, something is wrong!
             </Toptips>
         </Page>
-        )
+        );
     }
 }

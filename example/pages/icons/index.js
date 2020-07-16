@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import {Icon} from '../../../build/packages';
 import Page from '../../component/page';
 import './icons.less';
@@ -11,7 +11,7 @@ const IconBox = (props) => (
             <p className="icon-box__desc">{props.desc}</p>
         </div>
     </div>
-)
+);
 
 export default class IconDemo extends React.Component {
 

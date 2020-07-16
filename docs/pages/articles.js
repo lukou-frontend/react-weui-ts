@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import * as React from 'react'
 import ReactDOM from 'react-dom';
 import Remarkable from 'react-remarkable';
 import { Article, Toast, Tab, NavBarItem } from '../../build/packages';

@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import {
     PullToRefresh,
     Cells,
@@ -14,11 +14,11 @@ import './ptr.less';
 class PtrDemo extends React.Component {
 
     constructor(props){
-        super(props)
+        super(props);
 
         this.state = {
-            items: [1,2,3,4,5,6,7,8,9]
-        }
+            items: [1, 2, 3, 4, 5, 6, 7, 8, 9]
+        };
     }
 
     render(){
@@ -35,8 +35,8 @@ class PtrDemo extends React.Component {
                             setTimeout(()=>{
                                 this.setState({
                                     items: this.state.items.concat([this.state.items.length + 1])
-                                }, ()=> resolve())
-                            }, 1000)
+                                }, ()=> resolve());
+                            }, 1000);
                         }
                     }
                 >
@@ -51,7 +51,7 @@ class PtrDemo extends React.Component {
                                     </CellBody>
                                     <CellFooter/>
                                 </Cell>
-                            )
+                            );
                         })
                     }
                     </Cells>
@@ -69,12 +69,12 @@ class PtrDemo extends React.Component {
                         (progress) => {
                             let style = {
                                 transform: `rotate(-${progress * 5}deg)`
-                            }
+                            };
                             return (
                                 <div style={{ flex: 1, padding: '5px' }}>
                                     <img src={momentLoader} width="40px" style={style}/>
                                 </div>
-                            )
+                            );
                         }
                     }
                     loaderLoadingIcon={
@@ -93,8 +93,8 @@ class PtrDemo extends React.Component {
                             setTimeout(()=>{
                                 this.setState({
                                     items: this.state.items.concat([this.state.items.length + 1])
-                                }, ()=> resolve())
-                            }, 1000)
+                                }, ()=> resolve());
+                            }, 1000);
                         }
                     }
                 >
@@ -109,7 +109,7 @@ class PtrDemo extends React.Component {
                                     </CellBody>
                                     <CellFooter/>
                                 </Cell>
-                            )
+                            );
                         })
                     }
                     </Cells>
@@ -117,7 +117,7 @@ class PtrDemo extends React.Component {
                 </PullToRefresh>
             </div>
         </Page>
-        )
+        );
     }
 }
 

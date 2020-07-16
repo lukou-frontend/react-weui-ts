@@ -1,5 +1,5 @@
 /*global before*/
-import React from 'react';
+import * as React from 'react';
 import { mount } from 'enzyme';
 import sinon from 'sinon';
 import assert from 'assert';
@@ -48,8 +48,8 @@ describe('<ActionSheet></ActionSheet>', ()=> {
                             assert(wrapperInstance instanceof ActionSheet);
                         });
 
-                        it(`should have a hidden <Mask></Mask> when 'show' prop is false or undefined`, ()=> {
-                            const mask = wrapper.find(Mask)
+                        it('should have a hidden <Mask></Mask> when \'show\' prop is false or undefined', ()=> {
+                            const mask = wrapper.find(Mask);
                             if (show) {
                                 assert(mask.prop('style').display === 'block');
                             }
@@ -58,20 +58,20 @@ describe('<ActionSheet></ActionSheet>', ()=> {
                             }
                         });
 
-                        it(`should have 'onRequestClose' event on Mask when 'show' prop is true`, ()=> {
+                        it('should have \'onRequestClose\' event on Mask when \'show\' prop is true', ()=> {
                             if (show && onRequestClose) {
                                 wrapper.find(Mask).simulate('click');
                                 assert(onRequestClose.calledOnce === true);
                             }
                         });
 
-                        it(`should have 'weui_actionsheet_toggle' class name when 'show' prop is true`, ()=> {
+                        it('should have \'weui_actionsheet_toggle\' class name when \'show\' prop is true', ()=> {
                             const actionSheet = wrapper.find('.weui-actionsheet');
                             if (show) {
-                                assert(actionSheet.hasClass(`weui-actionsheet_toggle`));
+                                assert(actionSheet.hasClass('weui-actionsheet_toggle'));
                             }
                             else {
-                                assert(!actionSheet.hasClass(`weui-actionsheet_toggle`));
+                                assert(!actionSheet.hasClass('weui-actionsheet_toggle'));
                             }
                         });
 
@@ -97,16 +97,16 @@ describe('<ActionSheet></ActionSheet>', ()=> {
                             });
                         });
 
-                        if(type == 'android'){
+                        if (type == 'android'){
                             it('should have "weui-skin_android" class on main wrapper', ()=> {
                                 assert(wrapper.find('div').first().hasClass('weui-skin_android'));
                             });
                         }
 
                     });
-                })
+                });
             });
-        })
-    })
+        });
+    });
 
 });

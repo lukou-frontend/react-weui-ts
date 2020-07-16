@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { shallow } from 'enzyme';
 import assert from 'assert';
 import WeUI from '../src/index';
@@ -12,11 +12,11 @@ describe('<Mask></Mask>', ()=> {
                 <Mask transparent={transparent}/>
             );
 
-            it(`should render <Mask></Mask> component`, ()=> {
+            it('should render <Mask></Mask> component', ()=> {
                 assert(wrapper.instance() instanceof Mask);
             });
 
-            it(`should transparent with transparent attribute`, ()=> {
+            it('should transparent with transparent attribute', ()=> {
                 if (transparent) {
                     assert(!wrapper.hasClass('weui-mask'));
                     assert(wrapper.hasClass('weui-mask_transparent'));
@@ -25,7 +25,7 @@ describe('<Mask></Mask>', ()=> {
                     assert(wrapper.hasClass('weui-mask'));
                     assert(!wrapper.hasClass('weui-mask_transparent'));
                 }
-            })
-        })
-    })
+            });
+        });
+    });
 });

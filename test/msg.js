@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { shallow } from 'enzyme';
 import assert from 'assert';
 import WeUI from '../src/index';
@@ -22,7 +22,7 @@ describe('<Msg></Msg>', ()=> {
     it('should have footer for 0.4.x method', ()=> {
         const $warningWrapper = shallow(
             <Msg extraHref="test" extraText="label" />
-        )
+        );
 
         assert($warningWrapper.find(Footer).shallow().hasClass('weui-footer'));
         //assert(spy.calledOnce());

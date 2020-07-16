@@ -1,12 +1,12 @@
 /*global before*/
-import React from 'react';
+import * as React from 'react';
 import sinon from 'sinon';
 import { mount } from 'enzyme';
 import assert from 'assert';
 import WeUI from '../src/index';
 var jsdom = require('jsdom');
 
-const { Picker, PickerGroup, Mask } = WeUI
+const { Picker, PickerGroup, Mask } = WeUI;
 
 describe('<Picker></Picker>', ()=>{
     before(() => {
@@ -15,9 +15,9 @@ describe('<Picker></Picker>', ()=>{
     });
 
     it('should render Picker', ()=>{
-        const wrapper = mount(<Picker />)
-        assert(wrapper.instance() instanceof Picker)
-    })
+        const wrapper = mount(<Picker />);
+        assert(wrapper.instance() instanceof Picker);
+    });
 
     it('should render PickerGroup', ()=>{
         const groups = [
@@ -49,14 +49,14 @@ describe('<Picker></Picker>', ()=>{
                     },
                 ]
             }
-        ]
+        ];
 
         const wrapper = mount(
             <Picker show groups={groups} />
-        )
+        );
 
-        assert(wrapper.find(PickerGroup).length == 2)
-    })
+        assert(wrapper.find(PickerGroup).length == 2);
+    });
 
     it('should change value state whith touch event', ()=>{
         const groups = [
@@ -80,11 +80,11 @@ describe('<Picker></Picker>', ()=>{
                     }
                 ]
             }
-        ]
+        ];
 
         const wrapper = mount(
             <Picker show groups={groups} />
-        )
+        );
 
         const $handler = wrapper.find(PickerGroup);
 
@@ -97,7 +97,7 @@ describe('<Picker></Picker>', ()=>{
                 pageY: 500
               }
             ]
-        })
+        });
 
         $handler.simulate('touchMove', {
             targetTouches: [
@@ -106,13 +106,13 @@ describe('<Picker></Picker>', ()=>{
                 pageY: 538
               }
             ]
-        })
+        });
 
-        $handler.simulate('touchEnd')
+        $handler.simulate('touchEnd');
 
-        assert(wrapper.state().selected[0] == (ogSelected - 1) )
+        assert(wrapper.state().selected[0] == (ogSelected - 1) );
 
-    })
+    });
 
     it('should stay same item when not moving enough', ()=>{
         const groups = [
@@ -136,11 +136,11 @@ describe('<Picker></Picker>', ()=>{
                     }
                 ]
             }
-        ]
+        ];
 
         const wrapper = mount(
             <Picker show groups={groups} />
-        )
+        );
 
         const $handler = wrapper.find(PickerGroup);
 
@@ -153,7 +153,7 @@ describe('<Picker></Picker>', ()=>{
                 pageY: 500
               }
             ]
-        })
+        });
 
         $handler.simulate('touchMove', {
             targetTouches: [
@@ -162,51 +162,51 @@ describe('<Picker></Picker>', ()=>{
                 pageY: 515
               }
             ]
-        })
+        });
 
-        $handler.simulate('touchEnd')
-        assert(wrapper.state().selected[0] == ogSelected)
+        $handler.simulate('touchEnd');
+        assert(wrapper.state().selected[0] == ogSelected);
 
-    })
+    });
 
     it('should render 2 action button by default', ()=> {
         const wrapper = mount(
             <Picker show />
-        )
+        );
 
-        assert(wrapper.find('.weui-picker__action').length == 2)
-    })
+        assert(wrapper.find('.weui-picker__action').length == 2);
+    });
 
     it('should trigger onCancel when click cancel', ()=>{
-        let cb = sinon.spy()
+        let cb = sinon.spy();
         const wrapper = mount(
             <Picker show onCancel={cb} />
-        )
+        );
 
-        const $btn = wrapper.find('.weui-picker__action').first()
+        const $btn = wrapper.find('.weui-picker__action').first();
 
-        $btn.simulate('click')
+        $btn.simulate('click');
 
         //after closing animation
-        setTimeout(()=>assert(cb.calledOnce == true), 500)
-    })
+        setTimeout(()=>assert(cb.calledOnce == true), 500);
+    });
 
     it('should trigger onCancel when click Mask', ()=>{
-        let cb = sinon.spy()
+        let cb = sinon.spy();
         const wrapper = mount(
             <Picker show onCancel={cb} />
-        )
+        );
 
-        const mask = wrapper.find(Mask)
+        const mask = wrapper.find(Mask);
 
-        mask.simulate('click')
+        mask.simulate('click');
 
         //after closing animation
-        setTimeout(()=>assert(cb.calledOnce == true), 500)
-    })
+        setTimeout(()=>assert(cb.calledOnce == true), 500);
+    });
 
     it('should trigger onGroupChange after scroll', ()=>{
-        let value = null, changeCb = (item, i, groupIndex) => value = groupIndex
+        let value = null, changeCb = (item, i, groupIndex) => value = groupIndex;
 
         const groups = [
             {
@@ -229,11 +229,11 @@ describe('<Picker></Picker>', ()=>{
                     }
                 ]
             }
-        ]
+        ];
 
         const wrapper = mount(
             <Picker show groups={groups} onGroupChange={changeCb} />
-        )
+        );
 
         const $handler = wrapper.find(PickerGroup);
 
@@ -244,7 +244,7 @@ describe('<Picker></Picker>', ()=>{
                 pageY: 500
               }
             ]
-        })
+        });
 
         $handler.simulate('touchMove', {
             targetTouches: [
@@ -253,15 +253,15 @@ describe('<Picker></Picker>', ()=>{
                 pageY: 100
               }
             ]
-        })
+        });
 
-        $handler.simulate('touchEnd')
+        $handler.simulate('touchEnd');
 
-        assert(value == 0)
-    })
+        assert(value == 0);
+    });
 
     it('should trigger onChange after scroll and click selected', ()=>{
-        let value = '', changeCb = selected => value = selected
+        let value = '', changeCb = selected => value = selected;
 
         const groups = [
             {
@@ -274,11 +274,11 @@ describe('<Picker></Picker>', ()=>{
                     },
                 ]
             }
-        ]
+        ];
 
         const wrapper = mount(
             <Picker show groups={groups} onChange={changeCb} />
-        )
+        );
 
         const $handler = wrapper.find(PickerGroup);
 
@@ -289,7 +289,7 @@ describe('<Picker></Picker>', ()=>{
                 pageY: 500
               }
             ]
-        })
+        });
 
         $handler.simulate('touchMove', {
             targetTouches: [
@@ -298,14 +298,14 @@ describe('<Picker></Picker>', ()=>{
                 pageY: 1000
               }
             ]
-        })
+        });
 
-        $handler.simulate('touchEnd')
+        $handler.simulate('touchEnd');
 
-        const $btn = wrapper.find('.weui-picker__action').last()
+        const $btn = wrapper.find('.weui-picker__action').last();
 
-        $btn.simulate('click')
+        $btn.simulate('click');
 
-        setTimeout(()=>assert(value !== ''), 500)
-    })
-})
+        setTimeout(()=>assert(value !== ''), 500);
+    });
+});

@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { shallow } from 'enzyme';
 import assert from 'assert';
 import WeUI from '../src/index';
@@ -12,7 +12,7 @@ describe('<Switch></Switch>', ()=> {
                 <Switch className={clazz}/>
             );
 
-            it(`should render <Switch></Switch> component`, ()=> {
+            it('should render <Switch></Switch> component', ()=> {
                 assert(wrapper.find('input').hasClass('weui-switch'));
             });
 
@@ -21,6 +21,6 @@ describe('<Switch></Switch>', ()=> {
                     assert(wrapper.find('input').hasClass(clazz));
                 }
             });
-        })
+        });
     });
 });

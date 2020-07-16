@@ -13,7 +13,7 @@ interface MaskProps {
 class Mask extends React.Component<MaskProps> {
 
     static defaultProps = {
-        transparent: false
+        transparent: false as MaskProps['transparent']
     };
 
     render() {

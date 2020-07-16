@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { shallow } from 'enzyme';
 import assert from 'assert';
 import WeUI from '../src/index';
@@ -15,13 +15,13 @@ describe('<Form></Form>', ()=> {
                 <Form radio={radio} className={customClassName}>{child}</Form>
             );
 
-            it(`should render <Form></Form> component `, ()=> {
+            it('should render <Form></Form> component ', ()=> {
                 assert(wrapper.instance() instanceof Form);
             });
 
-            it(`should have 'weui-cells_form' class name when radio attribute is false`, ()=> {
-                if(!radio){
-                    assert(wrapper.hasClass(`weui-cells_form`));
+            it('should have \'weui-cells_form\' class name when radio attribute is false', ()=> {
+                if (!radio){
+                    assert(wrapper.hasClass('weui-cells_form'));
                 }
             });
 
@@ -29,13 +29,13 @@ describe('<Form></Form>', ()=> {
                 assert(wrapper.hasClass(customClassName));
             });
 
-            it(`should have 'weui_cells_radio' when radio attribute is true`, ()=> {
+            it('should have \'weui_cells_radio\' when radio attribute is true', ()=> {
                 if (radio) {
-                    assert(wrapper.hasClass(`weui-cells_radio`));
+                    assert(wrapper.hasClass('weui-cells_radio'));
                 }
             });
 
-            it(`should have child typeof Cell`, ()=> {
+            it('should have child typeof Cell', ()=> {
                 assert(wrapper.find(FormCell).html() === shallow(child).html());
             });
         });
@@ -49,13 +49,13 @@ describe('<Form></Form>', ()=> {
                 <Form checkbox={checkbox} className={customClassName}>{child}</Form>
             );
 
-            it(`should render <Form></Form> component `, ()=> {
+            it('should render <Form></Form> component ', ()=> {
                 assert(wrapper.instance() instanceof Form);
             });
 
-            it(`should have 'weui-cells_form' class name when checkbox attribute is false`, ()=> {
-                if(!checkbox){
-                    assert(wrapper.hasClass(`weui-cells_form`));
+            it('should have \'weui-cells_form\' class name when checkbox attribute is false', ()=> {
+                if (!checkbox){
+                    assert(wrapper.hasClass('weui-cells_form'));
                 }
             });
 
@@ -63,13 +63,13 @@ describe('<Form></Form>', ()=> {
                 assert(wrapper.hasClass(customClassName));
             });
 
-            it(`should have 'weui-cells_checkbox' when checkbox attribute is true`, ()=> {
+            it('should have \'weui-cells_checkbox\' when checkbox attribute is true', ()=> {
                 if (checkbox) {
-                    assert(wrapper.hasClass(`weui-cells_checkbox`));
+                    assert(wrapper.hasClass('weui-cells_checkbox'));
                 }
             });
 
-            it(`should have child typeof Cell`, ()=> {
+            it('should have child typeof Cell', ()=> {
                 assert(wrapper.find(FormCell).html() === shallow(child).html());
             });
         });

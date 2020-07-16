@@ -7,6 +7,26 @@
 // import ActionSheet from './components/actionsheet/index';
 
 export { default as Button } from './components/button/index';
+export { default as Cell } from './components/cell/index';
+export { default as Article } from './components/article/index';
+export { default as Badge } from './components/badge/index';
+export { default as Dialog } from './components/dialog/index';
+export { default as Flex } from './components/flex/index';
+export { default as Footer } from './components/footer/index';
+// export { default as Form } from './components/form/index';
+export { default as Gallery } from './components/gallery/index';
+export { default as Grid } from './components/grid/index';
+export { default as Icon } from './components/icon/index';
+export { default as InfiniteLoader } from './components/infiniteLoader/index';
+export { default as Label } from './components/label/index';
+export { default as LoadMore } from './components/loadmore/index';
+export { default as Mask } from './components/mask/index';
+export { default as MediaBox } from './components/mediabox/index';
+export { default as Msg } from './components/msg/index';
+export { default as Page } from './components/page/index';
+export { default as Panel } from './components/panel/index';
+export { Form, FormCell, TextArea, Input, Switch, Radio, Slider, Checkbox, Select, Uploader, VCode, Agreement, Preview, PreviewHeader, PreviewBody, PreviewFooter, PreviewItem } from './components/form/index';
+
 
 // import {Button, ButtonArea, PreviewButton} from './components/button/index';
 // import {Cells, CellsTitle, CellsTips, Cell, CellHeader, CellBody, CellFooter} from './components/cell/index';
