@@ -6,7 +6,7 @@ import classNames, { ClassValue } from '../../utils/classnames';
  *
  */
 interface NavBarProps {
-  className: ClassValue
+  className?: ClassValue
 }
 export default class NavBar extends React.Component<NavBarProps> {
 
