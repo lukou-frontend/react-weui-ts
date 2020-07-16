@@ -1,11 +1,14 @@
-import React from 'react';
-import classNames from '../../utils/classnames';
+import * as React from 'react';
+import classNames, { ClassValue } from '../../utils/classnames';
 
 /**
  *  label wrapper for text inside TabBarItem
  *
  */
-export default class TabBarLabel extends React.Component {
+interface TabBarLabelProps {
+  className?: ClassValue
+}
+export default class TabBarLabel extends React.Component<TabBarLabelProps> {
 
     render() {
 

@@ -1,11 +1,14 @@
-import React from 'react';
-import classNames from '../../utils/classnames';
+import * as React from 'react';
+import classNames, { ClassValue } from '../../utils/classnames';
 
 /**
  *  Icon wrapper for icon use in TabBar
  *
  */
-export default class TabBarIcon extends React.Component {
+interface TabBarIconProps {
+  className?: ClassValue
+}
+export default class TabBarIcon extends React.Component<TabBarIconProps> {
 
     render() {
 

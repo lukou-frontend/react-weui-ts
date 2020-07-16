@@ -1,17 +1,20 @@
-import React from 'react';
-import classNames from '../../utils/classnames';
+import * as React from 'react';
+import classNames, { ClassValue } from '../../utils/classnames';
 
 /**
- *  Bottom bar for tabs
+ *  wrapper for navbar
  *
  */
-export default class TabBar extends React.Component {
+interface NavBarProps {
+  className: ClassValue
+}
+export default class NavBar extends React.Component<NavBarProps> {
 
     render() {
 
         const {children, className, ...others} = this.props;
         const cls = classNames({
-            'weui-tabbar': true
+            'weui-navbar': true
         }, className);
 
         return (

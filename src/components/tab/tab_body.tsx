@@ -1,10 +1,13 @@
-import React from 'react';
-import classNames from '../../utils/classnames';
+import * as React from 'react';
+import classNames, { ClassValue } from '../../utils/classnames';
 
 /**
  * Content Wrapper for Tab
  */
-export default class TabBody extends React.Component {
+interface TabBodyProps {
+  className?: ClassValue
+}
+export default class TabBody extends React.Component<TabBodyProps> {
 
     render() {
 

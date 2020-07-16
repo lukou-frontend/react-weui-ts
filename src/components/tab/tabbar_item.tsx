@@ -1,6 +1,6 @@
-import React from 'react';
+import * as React from 'react';
 import PropTypes from 'prop-types';
-import classNames from '../../utils/classnames';
+import classNames, { ClassValue } from '../../utils/classnames';
 import TabBarIcon from './tabbar_icon';
 import TabBarLabel from './tabbar_label';
 
@@ -8,7 +8,13 @@ import TabBarLabel from './tabbar_label';
  *  Tabbar item
  *
  */
-export default class TabBarItem extends React.Component {
+interface TabBarItemProps {
+  active?: boolean,
+  icon?: any,
+  label?: string,
+  className?: ClassValue
+}
+export default class TabBarItem extends React.Component<TabBarItemProps> {
     static propTypes = {
         /**
          * indicate currently active
