@@ -2,7 +2,7 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 import classNames from '../../utils/classnames';
 import Mask from '../mask/index';
-import Icon from '../icon/index';
+import Icon, { SizeType } from '../icon/index';
 
 /**
  *  pop out indicator to inform users
@@ -11,7 +11,7 @@ import Icon from '../icon/index';
 interface ToastProps {
   className?: string,
   show: boolean,
-  iconSize: string,
+  iconSize?: SizeType,
   [key: string]: any
 }
 class Toast extends React.Component<ToastProps> {
