@@ -10,6 +10,8 @@ export { default as Button } from './components/button/index';
 export { default as Toptips } from './components/toptips';
 export { default as Toast } from './components/toast';
 export { Tab, TabBody, TabBodyItem, NavBar, NavBarItem, TabBar, TabBarItem, TabBarIcon, TabBarLabel } from './components/tab/index';
+export { default as Swiper } from './components/swiper';
+
 // import {Button, ButtonArea, PreviewButton} from './components/button/index';
 // import {Cells, CellsTitle, CellsTips, Cell, CellHeader, CellBody, CellFooter} from './components/cell/index';
 // import Mask from './components/mask/index';
