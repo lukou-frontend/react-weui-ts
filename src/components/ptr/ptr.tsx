@@ -1,7 +1,7 @@
 import * as React from 'react'
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
-import classNames from '../../utils/classnames';
+import classNames, { ClassValue } from '../../utils/classnames';
 import Icon from '../icon';
 import LoadMore from '../loadmore';
 
@@ -10,7 +10,25 @@ import './ptr.less';
  *  A Pull to refresh container enable user to pull the container and refresh it's content
  *
  */
-class PullToRefresh extends Component{
+interface PullToRefreshState {
+  pullPercent: number,
+  touching: boolean,
+  ogY: number,
+  touchId: number,
+  animating: boolean,
+  loading: boolean,
+  initScrollTop: number
+}
+interface PullToRefreshProps {
+  disable: boolean,
+  height: string,
+  loaderDefaultIcon: (progress: number) => void,
+  loaderHeight: number,
+  loaderLoadingIcon: any,
+  onRefresh: (func: Function) => void,
+  className?: ClassValue
+}
+class PullToRefresh extends React.Component<PullToRefreshProps, PullToRefreshState>{
 
     static propTypes = {
         /**
@@ -48,7 +66,7 @@ class PullToRefresh extends Component{
     static defaultProps = {
         height: '100%',
         loaderHeight: 100,
-        loaderDefaultIcon: (progress) => {
+        loaderDefaultIcon: (progress: number) => {
             let style = {
                 transform: `rotate(-${progress !== 100 ? progress * 1.8 : 0}deg)`,
                 color: progress !== 100 ? '#5f5f5f' : '#1AAD19'
@@ -60,18 +78,18 @@ class PullToRefresh extends Component{
             );
         },
         loaderLoadingIcon: <LoadMore loading></LoadMore>,
-        onRefresh: (resolve, reject) => setTimeout( ()=> resolve(), 1000),
+        onRefresh: (resolve: Function) => setTimeout( ()=> resolve(), 1000),
         disable: false
     };
 
-    constructor(props){
+    constructor(props: PullToRefreshProps){
         super(props);
 
         this.state = {
             pullPercent: 0,
             touching: false,
             ogY: 0,
-            touchId: undefined,
+            touchId: -1,
             animating: false,
             loading: false,
             initScrollTop: 0
@@ -93,10 +111,10 @@ class PullToRefresh extends Component{
         });
     }
 
-    handleTouchStart(e){
+    handleTouchStart(e: React.TouchEvent){
         if (this.state.touching || this.state.loading || this.props.disable) return;
 
-        let $content = ReactDOM.findDOMNode(this.refs.content);
+        let $content = ReactDOM.findDOMNode(this.refs.content) as HTMLDivElement;
 
         this.setState({
             touching: true,
@@ -107,7 +125,7 @@ class PullToRefresh extends Component{
         });
     }
 
-    handleTouchMove(e){
+    handleTouchMove(e: React.TouchEvent){
         if (!this.state.touching || this.state.loading || this.props.disable) return;
         if (e.targetTouches[0].identifier !== this.state.touchId) return;
 
@@ -119,7 +137,7 @@ class PullToRefresh extends Component{
         if (diffY < 0) return;
 
         //if it's not at top
-        let $content = ReactDOM.findDOMNode(this.refs.content);
+        let $content = ReactDOM.findDOMNode(this.refs.content) as HTMLDivElement;
         if ($content.scrollTop > 0) return;
 
         //prevent move background
@@ -132,7 +150,7 @@ class PullToRefresh extends Component{
         });
     }
 
-    handleTouchEnd(e){
+    handleTouchEnd(){
         if (!this.state.touching || this.state.loading || this.props.disable) return;
 
         let pullPercent = this.state.pullPercent;
@@ -148,7 +166,7 @@ class PullToRefresh extends Component{
         this.setState({
             touching: false,
             ogY: 0,
-            touchId: undefined,
+            touchId: -1,
             initScrollTop: 0,
             animating: loading,
             pullPercent,
