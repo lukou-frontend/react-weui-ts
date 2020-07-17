@@ -10,13 +10,13 @@ import deprecationWarning from '../../utils/deprecationWarning';
  * A full notification page to indicate results
  *
  */
-interface Button {
+interface Thisbutton {
   label: string,
-  type?: string
+  type: 'primary'|'default'|'warn'|'vcode'
 }
 interface MsgProps {
-  type?: string,
-  buttons: Array<Button>,
+  type: string,
+  buttons: Array<Thisbutton>,
   title?: string,
   description?: string,
   extraHref?: string,
