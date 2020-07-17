@@ -1,14 +1,34 @@
 import * as React from 'react';
-import ReactDOM from 'react-dom';
+// import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
-import classNames from '../../utils/classnames';
+import classNames, { ClassValue } from '../../utils/classnames';
 import Icon from '../icon';
 
 /**
  *  weui search component
  *
  */
-class SearchBar extends React.Component {
+interface SearchBarState {
+  text: string,
+  focus: boolean,
+  clearing: boolean
+}
+interface SearchBarProps {
+  defaultValue: string,
+  autocomplete: string,
+  lang: { cancel: string },
+  onCancel?: (e: React.TouchEvent) => void,
+  onChange?: (text: string, e?: React.ChangeEvent<HTMLInputElement>|React.TouchEvent) => void,
+  onClear?: (e: React.TouchEvent) => void,
+  onSubmit?: (text: string, e: React.SyntheticEvent<HTMLFormElement>) => void,
+  placeholder: string,
+  searchName: string,
+  className?: ClassValue
+}
+class SearchBar extends React.Component<SearchBarProps, SearchBarState> {
+
+    private searchInput = React.createRef<HTMLInputElement>()
+
     static propTypes = {
         /**
          * default value for the searchbar if any
@@ -63,7 +83,7 @@ class SearchBar extends React.Component {
         autocomplete: 'off'
     };
 
-    constructor(props){
+    constructor(props: SearchBarProps){
         super(props);
 
         this.state = {
@@ -77,13 +97,13 @@ class SearchBar extends React.Component {
         }
     }
 
-    changeHandle(e) {
+    changeHandle(e: React.ChangeEvent<HTMLInputElement>) {
         let text = e.target.value;
         if (this.props.onChange) this.props.onChange(text, e);
         this.setState({text});
     }
 
-    cancelHandle(e) {
+    cancelHandle(e: React.TouchEvent) {
         this.setState({
             focus: false,
             text: ''
@@ -92,7 +112,7 @@ class SearchBar extends React.Component {
         if (this.props.onChange) this.props.onChange('', e);
     }
 
-    clearHandle(e) {
+    clearHandle(e: React.TouchEvent) {
         e.preventDefault();
         e.stopPropagation();
 
@@ -101,18 +121,18 @@ class SearchBar extends React.Component {
         // In most cases, you can attach a ref to the DOM node and avoid using findDOMNode at all.
         // When render returns null or false, findDOMNode returns null.
         // 这里是截取官网的说明，在ref回调函数内确实会返回null，尤其是配合redux使用的时候，这个时候需要对其进行null判断
-        this.refs.searchInput.focus();
+        this.searchInput.current!.focus();
         // ReactDOM.findDOMNode(this.refs.searchInput).focus()
         if (this.props.onChange) this.props.onChange('', e);
     }
 
-    blurHandle(e) {
+    blurHandle() {
         if (this.state.text === ''){
             this.setState({ focus: false});
         }
     }
 
-    submitHandle(e) {
+    submitHandle(e: React.SyntheticEvent<HTMLFormElement>) {
         if (this.props.onSubmit) {
             e.preventDefault();
             e.stopPropagation();
@@ -121,7 +141,7 @@ class SearchBar extends React.Component {
     }
 
     render() {
-        const {children, defaultValue, autocomplete, placeholder, className, searchName} = this.props;
+        const {autocomplete, placeholder, className, searchName} = this.props;
         const clz = classNames({
             'weui-search-bar': true,
             'weui-search-bar_focusing': this.state.focus
@@ -133,12 +153,12 @@ class SearchBar extends React.Component {
                     <div className='weui-search-bar__box'>
                         <Icon value='search'/>
                         <input
-                            ref='searchInput'
+                            ref={this.searchInput}
                             type='search'
                             name={searchName}
                             className='weui-search-bar__input'
                             placeholder={placeholder}
-                            onFocus={e=>this.setState({focus: true})}
+                            onFocus={() => this.setState({focus: true})}
                             onBlur={this.blurHandle.bind(this)}
                             onChange={this.changeHandle.bind(this)}
                             value={this.state.text}
@@ -153,12 +173,12 @@ class SearchBar extends React.Component {
                     <label
                         className='weui-search-bar__label'
                         onClick={()=>{
-                            let searchInput = this.refs.searchInput;
-                            if (searchInput) {
-                                searchInput.focus();
+                            let searchInput = this.searchInput;
+                            if (searchInput.current) {
+                                searchInput.current.focus();
                             }
                         }}
-                        style={{display: this.state.text ? 'none' : null}}
+                        style={{display: this.state.text ? 'none' : undefined}}
                     >
                         <Icon value='search'/>
                         <span>{placeholder}</span>
