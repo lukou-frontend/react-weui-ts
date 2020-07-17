@@ -1,6 +1,7 @@
 import * as React from 'react';
 import classNames from '../../utils/classnames';
 import PropTypes from 'prop-types';
+import './switch.less'
 
 /**
  * weui switch style for checkbox

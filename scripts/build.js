@@ -15,13 +15,16 @@ const less = require('rollup-plugin-less');
 const progress = require('rollup-plugin-progress');
 //file handling
 const rimraf = require('rimraf');
-const join = require('path').join;
+const path = require('path');
 const fs = require('fs');
 const exec = require( 'child_process' ).exec;
 //console utils
 const argv = require('minimist')(process.argv.slice(2));
 const chalk = require('chalk');
 const typescript = require('rollup-plugin-typescript2')
+const postcss = require('rollup-plugin-postcss');
+const autoprefixer = require('autoprefixer');
+
 const showWrite = argv.progress;
 const showSection = argv.step || true;
 const log = console.log;
@@ -75,11 +78,17 @@ function makeBundleAttributes(bundleType){
 function makeConfig(bundleType){
     let atrs = makeBundleAttributes(bundleType);
     let config = {
-      entry: 'src/index.ts',
+      input: 'src/index.ts',
       plugins: [
-        less({
-          output: atrs.path + 'react-weui.css'
+        postcss({
+          extract: false, // 可配置生成绝对路径
+          extensions: ['css', 'less'],
+          plugins: [autoprefixer],
+          extract: path.resolve(atrs.path + 'react-weui.css')
         }),
+        // less({
+        //   output: atrs.path + 'react-weui.css'
+        // }),
         cjs({
           include: 'node_modules/**',
           namedExports: {
@@ -178,10 +187,10 @@ function createBundle(bundleType){
         .then( bundle => {
             CLI.section('Writing Bundle to file');
             return bundle.write({
-              moduleName: 'WeUI',
-              dest: atrs.path + (atrs.env === 'production' ? 'react-weui.min.js' : 'react-weui.js'),
+              name: 'WeUI',
+              file: atrs.path + (atrs.env === 'production' ? 'react-weui.min.js' : 'react-weui.js'),
               format: atrs.format,
-              sourceMap: atrs.sourceMap
+              sourcemap: atrs.sourceMap
             });
         })
         .then(()=>{
@@ -198,9 +207,9 @@ rimraf('build', ()=>{
   // create a new build directory
   fs.mkdirSync('build');
   // create the packages folder for NODE+UMD bundles
-  fs.mkdirSync(join('build', 'packages'));
+  fs.mkdirSync(path.join('build', 'packages'));
   // create the dist folder for UMD bundles
-  fs.mkdirSync(join('build', 'dist'));
+  fs.mkdirSync(path.join('build', 'dist'));
   // adding build tasks
   tasks.push(
     //Node individual components build
@@ -209,8 +218,8 @@ rimraf('build', ()=>{
     createTask('Making UMD Production Bundles', createBundle(Bundles.UMD_PROD)),
     createTask('Making IIFE Dev Bundles', createBundle(Bundles.IIFE_DEV)),
     createTask('Making IIFE Production Bundles', createBundle(Bundles.IIFE_PROD)),
-    createTask('Making Demo Build', createWebpackBuild(webpackConfig) ),
-    createTask('Making Docs Build', createWebpackBuild(webpackDocConfig) )
+    // createTask('Making Demo Build', createWebpackBuild(webpackConfig) ),
+    // createTask('Making Docs Build', createWebpackBuild(webpackDocConfig) )
   );
 
   // run tasks
