@@ -20,7 +20,6 @@ class Docs extends React.Component {
     let code = '';
     if(article.preview && article.component){
       Sample = Demos[article.preview]
-
       if(article.code){
         code = require(`!!raw-loader!../../example/pages/${article.code}`)
       }else{
@@ -28,7 +27,7 @@ class Docs extends React.Component {
       }
 
     }
-    let src = article.component ? require(`!!raw-loader!../../src/components/${article.component}`) : false
+    let src = article.component ? require(`!!raw-loader!../../build/packages/components/${article.component}`) : false
 
     let content = src ? generateMarkdown(article.name, article.version, reactDocs.parse(src), this.props.langs.article) : false
 
