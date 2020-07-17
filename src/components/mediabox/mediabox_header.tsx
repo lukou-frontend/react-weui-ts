@@ -15,7 +15,7 @@ export default class MediaBoxHeader extends React.Component<MediaBoxHeaderProps>
             'weui-media-box__hd': true
         }, className);
 
-        let childrenWithProps = React.Children.map(children, child => {
+        let childrenWithProps = React.Children.map(children, (child: React.ReactElement) => {
             if (child.type === 'img' && !child.props.className){
               return React.cloneElement(child, { className: 'weui-media-box__thumb' });
             } else {

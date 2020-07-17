@@ -1,6 +1,6 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import { SizeType } from '../icon/icon';
+import { SizeType } from '../icon/index';
 /**
  *  pop out indicator to inform users
  *
