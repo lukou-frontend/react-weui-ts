@@ -15,7 +15,7 @@ interface PageProps {
   onLoadMore: (resolve?: () => void, finish?: () => void) => void,
   ptrOnRefresh: (resolve?: () => void, finish?: () => void) => void,
   className?: any,
-  style?: any
+  style?: React.CSSProperties
 }
 interface PageStates {
   ptrRefreshing: boolean,

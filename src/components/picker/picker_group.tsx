@@ -2,7 +2,31 @@ import * as React from 'react'
 import PropTypes from 'prop-types';
 import classNames from '../../utils/classnames';
 
-class PickerGroup extends Component {
+interface PickerGroupProps {
+  height: number,
+  itemHeight: number,
+  indicatorTop: number,
+  indicatorHeight: number,
+  onChange: (item?:any, selected?: number, groupIndex?: number) => void,
+  animation?: boolean,
+  groupIndex: number,
+  defaultIndex: number,
+  aniamtion: boolean,
+  className?: any,
+  items?: any,
+  mapKeys?: any
+}
+interface PickerGroupStates {
+  touching: boolean,
+  ogY: number,
+  ogTranslate: number,
+  touchId: any,
+  translate: number,
+  totalHeight: number,
+  selected: number,
+  animating: boolean | undefined
+}
+class PickerGroup extends React.Component<PickerGroupProps, PickerGroupStates> {
     static propTypes = {
         height: PropTypes.number,
         itemHeight: PropTypes.number,
@@ -15,19 +39,19 @@ class PickerGroup extends Component {
     }
 
     static defaultProps = {
-        height: 238,
-        itemHeight: 25 + 9, //content + padding
-        indicatorTop: 102,
-        indicatorHeight: 34,
-        aniamtion: true,
-        groupIndex: -1,
-        defaultIndex: -1,
+        height: 238 as PickerGroupProps['height'],
+        itemHeight: 25 + 9 as PickerGroupProps['itemHeight'], //content + padding
+        indicatorTop: 102 as PickerGroupProps['indicatorHeight'],
+        indicatorHeight: 34 as PickerGroupProps['indicatorHeight'],
+        aniamtion: true as PickerGroupProps['animation'],
+        groupIndex: -1 as PickerGroupProps['groupIndex'],
+        defaultIndex: -1 as PickerGroupProps['defaultIndex'],
         mapKeys: {
             label: 'label'
         }
     }
 
-    constructor(props){
+    constructor(props: PickerGroupProps){
         super(props);
 
         this.state = {
@@ -51,11 +75,11 @@ class PickerGroup extends Component {
         this.adjustPosition(this.props);
     }
 
-    componentWillReceiveProps(nextProps){
+    componentWillReceiveProps(nextProps: PickerGroupProps){
         this.adjustPosition(nextProps);
     }
 
-    adjustPosition(props){
+    adjustPosition(props: PickerGroupProps){
         const { items, itemHeight, indicatorTop, defaultIndex } = props;
         const totalHeight = items.length * itemHeight;
         let translate = totalHeight <= indicatorTop ? indicatorTop : 0;
@@ -87,7 +111,7 @@ class PickerGroup extends Component {
     updateSelected(propagate = true){
         const { items, itemHeight, indicatorTop, indicatorHeight, onChange, groupIndex } = this.props;
         let selected = 0;
-        items.forEach( (item, i) => {
+        items.forEach( (item: { disabled: any; }, i: number) => {
             //console.log(i, this.state.translate, (this.state.translate + (itemHeight * i)), indicatorTop, this.state.translate + (itemHeight * i) + itemHeight , indicatorTop + indicatorHeight)
             if ( !item.disabled && (this.state.translate + (itemHeight * i)) >= indicatorTop &&
             ( this.state.translate + (itemHeight * i) + itemHeight ) <= indicatorTop + indicatorHeight ){
@@ -98,7 +122,7 @@ class PickerGroup extends Component {
         if (onChange && propagate) onChange(items[selected], selected, groupIndex);
     }
 
-    handleTouchStart(e){
+    handleTouchStart(e: React.TouchEvent){
         if (this.state.touching || this.props.items.length <= 1) return;
 
         this.setState({
@@ -110,7 +134,7 @@ class PickerGroup extends Component {
         });
     }
 
-    handleTouchMove(e){
+    handleTouchMove(e: React.TouchEvent){
         if (!this.state.touching || this.props.items.length <= 1) return;
         if (e.targetTouches[0].identifier !== this.state.touchId) return;
 
@@ -125,7 +149,7 @@ class PickerGroup extends Component {
         });
     }
 
-    handleTouchEnd(e){
+    handleTouchEnd(){
         if (!this.state.touching || this.props.items.length <= 1) return;
 
         const { indicatorTop, indicatorHeight, itemHeight } = this.props;
@@ -183,7 +207,7 @@ class PickerGroup extends Component {
                 <div className="weui-picker__content"
                     style={styles}
                     ref="content">
-                    { items.map( (item, j) => {
+                    { items.map( (item: { [x: string]: any; disabled: any; }, j: string | number | undefined) => {
                         const label = item[this.props.mapKeys.label];
                         const itemCls = classNames('weui-picker__item', {
                             'weui-picker__item_disabled': item.disabled

@@ -7,7 +7,30 @@ import Mask from '../mask';
  *  Mobile select ui, currently only support Touch Events
  *
  */
-class Picker extends Component {
+interface Action {
+  label: string,
+  onClick?: (e: any) => void
+}
+interface PickerProps {
+  actions: Array<Action>,
+  defaultSelect: Array<any>,
+  groups: Array<any>,
+  lang: {
+    leftBtn: string,
+    rightBtn: string
+  },
+  onCancel: (e: any) => void,
+  onChange: (selected: any, arg2: any) => void,
+  onGroupChange: (item: any, i: any, groupIndex: any, selected: number, arg4: any) => void,
+  show: boolean,
+  className?: any
+}
+interface PickerStates {
+  selected: any,
+  actions: Array<Action>,
+  closing: boolean
+}
+class Picker extends React.Component<PickerProps, PickerStates> {
     static propTypes = {
         /**
          * consists of array of object(max 2) with property `label` and others pass into element
@@ -52,24 +75,24 @@ class Picker extends Component {
     };
 
     static defaultProps = {
-        actions: [],
-        groups: [],
-        show: false,
-        lang: { leftBtn: 'Cancel', rightBtn: 'Ok' },
+        actions: [] as PickerProps['actions'],
+        groups: [] as PickerProps['groups'],
+        show: false as PickerProps['show'],
+        lang: { leftBtn: 'Cancel', rightBtn: 'Ok' } as PickerProps['lang'],
     }
 
-    constructor(props){
+    constructor(props: Readonly<PickerProps>){
         super(props);
 
         this.state = {
             selected: this.props.defaultSelect ? this.props.defaultSelect : Array(this.props.groups.length).fill(-1),
             actions: this.props.actions.length > 0 ? this.props.actions : [{
                 label: this.props.lang.leftBtn,
-                onClick: e=>this.handleClose( ()=> {if (this.props.onCancel) this.props.onCancel(e);} )
+                onClick: (e: any)=>this.handleClose( ()=> {if (this.props.onCancel) this.props.onCancel(e);} )
             },
             {
                 label: this.props.lang.rightBtn,
-                onClick: e=>this.handleChanges()
+                onClick: ()=>this.handleChanges()
             }],
             closing: false
         };
@@ -83,7 +106,7 @@ class Picker extends Component {
         this.handleClose( ()=> { if (this.props.onChange) this.props.onChange(this.state.selected, this); } );
     }
 
-    handleChange(item, i, groupIndex){
+    handleChange(item: any, i: any, groupIndex: React.ReactText){
         let selected = this.state.selected;
 
         selected[groupIndex] = i;
@@ -92,7 +115,7 @@ class Picker extends Component {
         });
     }
 
-    handleClose(cb){
+    handleClose(cb: { (): void; (): void; (): void; (): void; }){
         this.setState({
             closing: true
         }, ()=> setTimeout( ()=> {
@@ -102,7 +125,7 @@ class Picker extends Component {
     }
 
     renderActions(){
-        let elActions = this.state.actions.map( (action, i)=> {
+        let elActions = this.state.actions.map( (action: { [x: string]: any; label: any; }, i: string | number | undefined)=> {
             const { label, ...others } = action;
             return <a {...others} key={i} className="weui-picker__action"> { label }</a>;
         });
@@ -121,7 +144,7 @@ class Picker extends Component {
     }
 
     render(){
-        const { className, show, actions, groups, defaultSelect, onGroupChange, onChange, onCancel, ...others } = this.props;
+        const { className, show, actions, groups, defaultSelect, onGroupChange, onChange, onCancel, lang, ...others } = this.props;
         const cls = classNames('weui-picker', {
             'weui-animate-slide-up': show && !this.state.closing,
             'weui-animate-slide-down': this.state.closing
@@ -134,7 +157,7 @@ class Picker extends Component {
 
         return this.props.show ? (
             <div>
-                <Mask className={maskCls} onClick={e=>this.handleClose( ()=> {if (this.props.onCancel) this.props.onCancel(e);} )} />
+                <Mask className={maskCls} onClick={(e: any)=>this.handleClose( ()=> {if (this.props.onCancel) this.props.onCancel(e);} )} />
                 <div className={cls} {...others}>
                     { this.renderActions() }
                     <div className="weui-picker__bd">

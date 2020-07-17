@@ -64,8 +64,8 @@ export default class Msg extends React.Component<MsgProps> {
   };
 
   static defaultProps = {
-    type: 'success',
-    buttons: []
+    type: 'success' as MsgProps['type'],
+    buttons: [] as MsgProps['buttons']
   };
 
   _renderButtons() {
