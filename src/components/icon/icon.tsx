@@ -23,7 +23,8 @@ interface IconProps {
   size?: 'small' | 'large',
   value: string,
   className?: any,
-  primary?: any
+  primary?: any,
+  [key: string]: any
 }
 class Icon extends React.Component<IconProps> {
     static propTypes = {

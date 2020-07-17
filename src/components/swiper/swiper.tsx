@@ -1,7 +1,7 @@
-import * as React from 'react'
+import * as React from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
-import classNames from '../../utils/classnames';
+import classNames, { ClassValue } from '../../utils/classnames';
 
 import './swiper.less';
 
@@ -9,7 +9,37 @@ import './swiper.less';
  *   The ultimate mobile swipe component
  *
  */
-class Swiper extends Component {
+interface SwiperChildren extends React.ReactElement {
+  className?: ClassValue
+}
+interface SwiperProps {
+  height?: number,
+  width?: number,
+  className?: ClassValue,
+  defaultIndex: number,
+  direction?: 'horizontal'|'vertical',
+  speed?: number,
+  threshold: number,
+  indicators?: boolean,
+  onChange?: (ogIndex: number, currentIndex: number) => void,
+  children: SwiperChildren[]
+}
+interface SwiperState {
+  containerWidth: number,
+  containerHeight: number,
+  currentIndex: number,
+
+  //touch
+  touching: boolean,
+  og: number,
+  ogTranslate: number,
+  touchId: number,
+  translate: number,
+  animating: boolean,
+  wrapperWidth: number,
+  wrapperHeight: number
+}
+class Swiper extends React.Component<SwiperProps, SwiperState> {
 
     static propTypes = {
         /**
@@ -64,7 +94,7 @@ class Swiper extends Component {
         indicators: true
     };
 
-    constructor(props){
+    constructor(props: SwiperProps){
         super(props);
 
         this.state = {
@@ -76,9 +106,11 @@ class Swiper extends Component {
             touching: false,
             og: 0,
             ogTranslate: 0,
-            touchId: undefined,
+            touchId: -1,
             translate: 0,
-            animating: false
+            animating: false,
+            wrapperWidth: 0,
+            wrapperHeight: 0
         };
 
         this.handleTouchStart = this.handleTouchStart.bind(this);
@@ -87,7 +119,7 @@ class Swiper extends Component {
     }
 
     componentDidMount(){
-        let $container = ReactDOM.findDOMNode(this.refs.container);
+        let $container = ReactDOM.findDOMNode(this.refs.container) as HTMLDivElement;
 
         this.setState({
             wrapperWidth: this.props.direction === 'horizontal' ? $container.offsetWidth * this.props.children.length : $container.offsetWidth,
@@ -99,7 +131,7 @@ class Swiper extends Component {
         //console.log($container.offsetWidth, $container.offsetHeight)
     }
 
-    handleTouchStart(e){
+    handleTouchStart(e: React.TouchEvent<HTMLDivElement>){
         if (this.state.touching || this.props.children.length <= 1) return;
 
         let og = 0;
@@ -120,7 +152,7 @@ class Swiper extends Component {
 
     }
 
-    handleTouchMove(e){
+    handleTouchMove(e: React.TouchEvent<HTMLDivElement>){
         if (!this.state.touching || this.props.children.length <= 1) return;
         if (e.targetTouches[0].identifier !== this.state.touchId) return;
 
@@ -145,7 +177,7 @@ class Swiper extends Component {
         });
     }
 
-    handleTouchEnd(e){
+    handleTouchEnd(){
         if (!this.state.touching || this.props.children.length <= 1) return;
 
         let translate = this.state.translate;
@@ -188,7 +220,7 @@ class Swiper extends Component {
         this.setState({
             touching: false,
             og: 0,
-            touchId: undefined,
+            touchId: -1,
             ogTranslate: 0,
             animating: true,
             translate,
@@ -211,7 +243,7 @@ class Swiper extends Component {
 
     render() {
 
-        const { className, children, height, width, defaultIndex, direction, speed, indicators, ...domProps } = this.props;
+        const { className, children, height, width, direction, speed = 300, indicators } = this.props;
         let clx = classNames('react-weui-swiper__container', className, {
             'react-weui-swiper__container-horizontal': direction === 'horizontal',
             'react-weui-swiper__container-vertical': direction === 'vertical',
@@ -244,7 +276,7 @@ class Swiper extends Component {
                 >
                 {
                     children.map( (child, i) => {
-                        return React.cloneElement(child, {
+                        return React.cloneElement((child), {
                             className: classNames('react-weui-swiper__item', child.className),
                             key: i,
                             style: Object.assign({}, child.props.style, {

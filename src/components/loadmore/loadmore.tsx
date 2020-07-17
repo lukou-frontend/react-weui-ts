@@ -2,7 +2,7 @@
  * @Author: 刘佑祥
  * @LastEditors: 刘佑祥
  * @LastEditTime: 2020-07-16 18:04:26
- */ 
+ */
 import * as React from 'react';
 import PropTypes from 'prop-types';
 import classNames from '../../utils/classnames';
@@ -17,7 +17,7 @@ interface LoadMoreProps {
   loading?: boolean,
   showLine?: boolean,
   showDot?: boolean,
-  children: React.ReactNode
+  children?: React.ReactNode
 }
 const LoadMore = (props: LoadMoreProps) => {
 
