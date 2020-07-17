@@ -7,11 +7,16 @@ import './actionsheet.less';
 /**
  * Used to display a collection of actions that contain a set of interactivity, including descriptions, links, and so on. Popup from the bottom, generally used to respond to user clicks on the page.
  */
+type item = {
+  label: string,
+  className?: string,
+  [key: string]: any
+}
 interface ActionSheetProps {
-  menus: any[],
-  actions: any[],
+  menus: item[],
+  actions: item[],
   show: boolean,
-  onRequestClose: React.MouseEventHandler,
+  onRequestClose: React.TouchEventHandler,
   type: string
 }
 class ActionSheet extends React.Component<ActionSheetProps> {
@@ -59,7 +64,7 @@ class ActionSheet extends React.Component<ActionSheetProps> {
 
     renderMenuItem() {
         return this.props.menus.map((menu, idx) => {
-            const {label, className, ...others} = menu;
+            const {label, className = '', ...others} = menu;
             const cls = classNames({
                 'weui-actionsheet__cell': true,
                 [className]: className
@@ -73,7 +78,7 @@ class ActionSheet extends React.Component<ActionSheetProps> {
 
     renderActions() {
         return this.props.actions.map((action, idx) => {
-            const {label, className, ...others} = action;
+            const {label, className = '', ...others} = action;
             const cls = classNames({
                 'weui-actionsheet__cell': true,
                 [className]: className
@@ -85,7 +90,7 @@ class ActionSheet extends React.Component<ActionSheetProps> {
         });
     }
 
-    handleMaskClick(e: React.MouseEvent){
+    handleMaskClick(e: React.TouchEvent){
         if (this.props.onRequestClose) this.props.onRequestClose(e);
     }
 
