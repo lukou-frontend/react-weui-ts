@@ -8,10 +8,10 @@
  */
 var __DEV__ = process.env.NODE_ENV !== 'production';
 
-var warning = function() {};
+var warning: (condition: boolean, format: string, args?: any) => void = function() {};
 
 if (__DEV__) {
-  warning = function(condition, format, args) {
+  warning = function(condition: boolean, format: string, args?: any) {
     var len = arguments.length;
     args = new Array(len > 2 ? len - 2 : 0);
     for (var key = 2; key < len; key++) {
@@ -49,12 +49,14 @@ if (__DEV__) {
   };
 }
 
+type warned = {
+  [key: string]: any
+}
+const warned: warned = {};
 
-const warned = {};
-
-export default function deprecationWarning(oldname, newname, link) {
+export default function deprecationWarning(oldname: string, newname: string, link?: any) {
   //avoid test warnings
-  if (typeof global.it === 'function') {
+  if (typeof (global as any).it === 'function') {
     return;
   }
 

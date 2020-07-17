@@ -1,176 +1,68 @@
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _defineProperty2 = require('babel-runtime/helpers/defineProperty');
-
-var _defineProperty3 = _interopRequireDefault(_defineProperty2);
-
-var _extends2 = require('babel-runtime/helpers/extends');
-
-var _extends3 = _interopRequireDefault(_extends2);
-
-var _objectWithoutProperties2 = require('babel-runtime/helpers/objectWithoutProperties');
-
-var _objectWithoutProperties3 = _interopRequireDefault(_objectWithoutProperties2);
-
-var _getPrototypeOf = require('babel-runtime/core-js/object/get-prototype-of');
-
-var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
-
-var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
-
-var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-
-var _createClass2 = require('babel-runtime/helpers/createClass');
-
-var _createClass3 = _interopRequireDefault(_createClass2);
-
-var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
-
-var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
-
-var _inherits2 = require('babel-runtime/helpers/inherits');
-
-var _inherits3 = _interopRequireDefault(_inherits2);
-
-var _react = require('react');
-
-var _react2 = _interopRequireDefault(_react);
-
-var _propTypes = require('prop-types');
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
-
-var _classnames = require('../../utils/classnames');
-
-var _classnames2 = _interopRequireDefault(_classnames);
-
-var _index = require('../mask/index');
-
-var _index2 = _interopRequireDefault(_index);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-/**
- * Modals provide feedback to user
- *
- */
-var Dialog = function (_Component) {
-    (0, _inherits3.default)(Dialog, _Component);
-
-    function Dialog(props) {
-        (0, _classCallCheck3.default)(this, Dialog);
-
-        var _this = (0, _possibleConstructorReturn3.default)(this, (Dialog.__proto__ || (0, _getPrototypeOf2.default)(Dialog)).call(this, props));
-
-        _this.state = {
+import * as React from 'react';
+import PropTypes from 'prop-types';
+import classNames from '../../utils/classnames';
+import Mask from '../mask/index';
+class Dialog extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
             isAndroid: ''
         };
-        return _this;
     }
-
-    (0, _createClass3.default)(Dialog, [{
-        key: 'renderButtons',
-        value: function renderButtons() {
-            return this.props.buttons.map(function (action, idx) {
-                var type = action.type,
-                    label = action.label,
-                    others = (0, _objectWithoutProperties3.default)(action, ['type', 'label']);
-
-                var className = (0, _classnames2.default)({
-                    'weui-dialog__btn': true,
-                    'weui-dialog__btn_default': type === 'default',
-                    'weui-dialog__btn_primary': type === 'primary'
-                });
-
-                return _react2.default.createElement(
-                    'a',
-                    (0, _extends3.default)({ key: idx, href: 'javascript:;' }, others, { className: className }),
-                    label
-                );
+    renderButtons() {
+        return this.props.buttons.map((action, idx) => {
+            const { type, label, ...others } = action;
+            const className = classNames({
+                'weui-dialog__btn': true,
+                'weui-dialog__btn_default': type === 'default',
+                'weui-dialog__btn_primary': type === 'primary'
             });
-        }
-    }, {
-        key: 'render',
-        value: function render() {
-            var _props = this.props,
-                title = _props.title,
-                show = _props.show,
-                className = _props.className,
-                children = _props.children,
-                buttons = _props.buttons,
-                type = _props.type,
-                autoDectect = _props.autoDectect,
-                others = (0, _objectWithoutProperties3.default)(_props, ['title', 'show', 'className', 'children', 'buttons', 'type', 'autoDectect']);
-
-            var styleType = type ? type : 'ios';
-            var cls = (0, _classnames2.default)('weui-dialog', (0, _defineProperty3.default)({
-                'weui-skin_android': styleType === 'android'
-            }, className, className));
-
-            return _react2.default.createElement(
-                'div',
-                { style: { display: show ? 'block' : 'none' } },
-                _react2.default.createElement(_index2.default, null),
-                _react2.default.createElement(
-                    'div',
-                    (0, _extends3.default)({ className: cls }, others),
-                    title ? _react2.default.createElement(
-                        'div',
-                        { className: 'weui-dialog__hd' },
-                        _react2.default.createElement(
-                            'strong',
-                            { className: 'weui-dialog__title' },
-                            title
-                        )
-                    ) : false,
-                    _react2.default.createElement(
-                        'div',
-                        { className: 'weui-dialog__bd' },
-                        children
-                    ),
-                    _react2.default.createElement(
-                        'div',
-                        { className: 'weui-dialog__ft' },
-                        this.renderButtons()
-                    )
-                )
-            );
-        }
-    }]);
-    return Dialog;
-}(_react.Component);
-
+            return (React.createElement("a", Object.assign({ key: idx, href: "javascript:;" }, others, { className: className }), label));
+        });
+    }
+    render() {
+        const { title, show, className, children, buttons, type, autoDectect, ...others } = this.props;
+        const styleType = type ? type : 'ios';
+        const cls = classNames('weui-dialog', {
+            'weui-skin_android': styleType === 'android',
+            [className]: className
+        });
+        return (React.createElement("div", { style: { display: show ? 'block' : 'none' } },
+            React.createElement(Mask, null),
+            React.createElement("div", Object.assign({ className: cls }, others),
+                title ?
+                    React.createElement("div", { className: "weui-dialog__hd" },
+                        React.createElement("strong", { className: "weui-dialog__title" }, title)) : false,
+                React.createElement("div", { className: "weui-dialog__bd" }, children),
+                React.createElement("div", { className: "weui-dialog__ft" }, this.renderButtons()))));
+    }
+}
 Dialog.propTypes = {
     /**
      * Object Arrays of buttons, `label` property is require
      *
      */
-    buttons: _propTypes2.default.array,
+    buttons: PropTypes.array,
     /**
      * to display the dialog
      *
      */
-    show: _propTypes2.default.bool,
+    show: PropTypes.bool,
     /**
      * Title of dialog
      *
      */
-    title: _propTypes2.default.string,
+    title: PropTypes.string,
     /**
      * Specify display style: ios/android, default is ios when autoDetect not on
      *
      */
-    type: _propTypes2.default.string
+    type: PropTypes.string,
 };
 Dialog.defaultProps = {
     buttons: [],
     show: false,
     title: '',
-    type: ''
+    type: '',
 };
-exports.default = Dialog;
-module.exports = exports['default'];
+export default Dialog;

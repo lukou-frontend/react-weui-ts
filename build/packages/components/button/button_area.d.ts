@@ -1,7 +1,7 @@
 import * as React from 'react';
 interface ButtonAreaProps {
     direction: 'veritical' | 'horizontal';
-    className: string;
+    className?: string;
 }
 declare class ButtonArea extends React.Component<ButtonAreaProps> {
     static defaultProps: {

@@ -1,3 +1,14 @@
 import * as React from 'react';
-declare const PreviewButton: React.FC<any>;
+interface PreviewButtonProps {
+    className?: string;
+    primary: boolean;
+    children: React.ReactNode;
+    [key: string]: any;
+}
+declare const PreviewButton: {
+    (props: PreviewButtonProps): JSX.Element;
+    defaultProps: {
+        primary: boolean;
+    };
+};
 export default PreviewButton;

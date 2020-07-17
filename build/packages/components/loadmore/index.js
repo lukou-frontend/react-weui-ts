@@ -1,14 +1,7 @@
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _loadmore = require('./loadmore');
-
-var _loadmore2 = _interopRequireDefault(_loadmore);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-exports.default = _loadmore2.default;
-module.exports = exports['default'];
+/*
+ * @Author: 刘佑祥
+ * @LastEditors: 刘佑祥
+ * @LastEditTime: 2020-07-16 15:48:52
+ */
+import LoadMore from './loadmore';
+export default LoadMore;

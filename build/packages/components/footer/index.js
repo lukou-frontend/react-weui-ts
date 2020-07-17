@@ -1,29 +1,10 @@
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-exports.FooterLink = exports.FooterLinks = exports.FooterText = exports.Footer = undefined;
-
-var _footer = require('./footer');
-
-var _footer2 = _interopRequireDefault(_footer);
-
-var _footer_text = require('./footer_text');
-
-var _footer_text2 = _interopRequireDefault(_footer_text);
-
-var _footer_links = require('./footer_links');
-
-var _footer_links2 = _interopRequireDefault(_footer_links);
-
-var _footer_link = require('./footer_link');
-
-var _footer_link2 = _interopRequireDefault(_footer_link);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-exports.Footer = _footer2.default;
-exports.FooterText = _footer_text2.default;
-exports.FooterLinks = _footer_links2.default;
-exports.FooterLink = _footer_link2.default;
+/*
+ * @Author: 刘佑祥
+ * @LastEditors: 刘佑祥
+ * @LastEditTime: 2020-07-16 17:28:19
+ */
+import Footer from './footer';
+import FooterText from './footer_text';
+import FooterLinks from './footer_links';
+import FooterLink from './footer_link';
+export { Footer, FooterText, FooterLinks, FooterLink };

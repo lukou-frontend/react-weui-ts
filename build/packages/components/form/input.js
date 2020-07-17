@@ -1,62 +1,20 @@
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _extends2 = require('babel-runtime/helpers/extends');
-
-var _extends3 = _interopRequireDefault(_extends2);
-
-var _defineProperty2 = require('babel-runtime/helpers/defineProperty');
-
-var _defineProperty3 = _interopRequireDefault(_defineProperty2);
-
-var _objectWithoutProperties2 = require('babel-runtime/helpers/objectWithoutProperties');
-
-var _objectWithoutProperties3 = _interopRequireDefault(_objectWithoutProperties2);
-
-var _react = require('react');
-
-var _react2 = _interopRequireDefault(_react);
-
-var _propTypes = require('prop-types');
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
-
-var _classnames = require('../../utils/classnames');
-
-var _classnames2 = _interopRequireDefault(_classnames);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-/**
- * WeUI Input wrapper for `input`
- *
- */
-var Input = function Input(props) {
-    var className = props.className,
-        others = (0, _objectWithoutProperties3.default)(props, ['className']);
-
-    var cls = (0, _classnames2.default)((0, _defineProperty3.default)({
-        'weui-input': true
-    }, className, className));
-
-    return _react2.default.createElement(
-        'div',
-        null,
-        _react2.default.createElement('input', (0, _extends3.default)({ className: cls }, others)),
-        _react2.default.createElement('span', { className: 'weui-icon-checked' })
-    );
+import * as React from 'react';
+import PropTypes from 'prop-types';
+import classNames from '../../utils/classnames';
+const Input = (props) => {
+    const { className, ...others } = props;
+    const cls = classNames({
+        'weui-input': true,
+        [className]: className
+    });
+    return (React.createElement("div", null,
+        React.createElement("input", Object.assign({ className: cls }, others)),
+        React.createElement("span", { className: "weui-icon-checked" })));
 };
-
 Input.propTypes = {
-    defaultValue: _propTypes2.default.string
+    defaultValue: PropTypes.string
 };
-
 Input.defaultProps = {
     defaultValue: undefined
 };
-
-exports.default = Input;
-module.exports = exports['default'];
+export default Input;

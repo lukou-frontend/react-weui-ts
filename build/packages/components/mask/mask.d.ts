@@ -10,7 +10,7 @@ interface MaskProps {
 }
 declare class Mask extends React.Component<MaskProps> {
     static defaultProps: {
-        transparent: boolean;
+        transparent: boolean | undefined;
     };
     render(): JSX.Element;
 }

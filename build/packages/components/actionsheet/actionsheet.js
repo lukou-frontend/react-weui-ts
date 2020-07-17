@@ -10,7 +10,7 @@ class ActionSheet extends React.Component {
     }
     renderMenuItem() {
         return this.props.menus.map((menu, idx) => {
-            const { label, className, ...others } = menu;
+            const { label, className = '', ...others } = menu;
             const cls = classNames({
                 'weui-actionsheet__cell': true,
                 [className]: className
@@ -20,7 +20,7 @@ class ActionSheet extends React.Component {
     }
     renderActions() {
         return this.props.actions.map((action, idx) => {
-            const { label, className, ...others } = action;
+            const { label, className = '', ...others } = action;
             const cls = classNames({
                 'weui-actionsheet__cell': true,
                 [className]: className

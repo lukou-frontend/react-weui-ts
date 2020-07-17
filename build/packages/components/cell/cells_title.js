@@ -1,50 +1,16 @@
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _extends2 = require('babel-runtime/helpers/extends');
-
-var _extends3 = _interopRequireDefault(_extends2);
-
-var _defineProperty2 = require('babel-runtime/helpers/defineProperty');
-
-var _defineProperty3 = _interopRequireDefault(_defineProperty2);
-
-var _objectWithoutProperties2 = require('babel-runtime/helpers/objectWithoutProperties');
-
-var _objectWithoutProperties3 = _interopRequireDefault(_objectWithoutProperties2);
-
-var _react = require('react');
-
-var _react2 = _interopRequireDefault(_react);
-
-var _classnames = require('../../utils/classnames');
-
-var _classnames2 = _interopRequireDefault(_classnames);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-/**
- * Heading for `Cells`
- *
+/*
+ * @Author: 刘佑祥
+ * @LastEditors: 刘佑祥
+ * @LastEditTime: 2020-07-16 17:23:52
  */
-var CellsTitle = function CellsTitle(props) {
-    var className = props.className,
-        children = props.children,
-        others = (0, _objectWithoutProperties3.default)(props, ['className', 'children']);
-
-    var cls = (0, _classnames2.default)((0, _defineProperty3.default)({
-        'weui-cells__title': true
-    }, className, className));
-
-    return _react2.default.createElement(
-        'div',
-        (0, _extends3.default)({ className: cls }, others),
-        children
-    );
+import * as React from 'react';
+import classNames from '../../utils/classnames';
+const CellsTitle = (props) => {
+    const { className, children, ...others } = props;
+    const cls = classNames({
+        'weui-cells__title': true,
+        [className]: className
+    });
+    return (React.createElement("div", Object.assign({ className: cls }, others), children));
 };
-
-exports.default = CellsTitle;
-module.exports = exports['default'];
+export default CellsTitle;

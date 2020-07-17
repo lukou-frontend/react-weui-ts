@@ -2,7 +2,7 @@ import * as React from 'react';
 import classNames from '../../utils/classnames';
 export default class Button extends React.Component {
     render() {
-        const { component, type, size, plain, className, children, ...others } = this.props;
+        const { component, type, size, plain, className = '', children, ...others } = this.props;
         const Component = component ? component : this.props.href || type === 'vcode' ? 'a' : 'button';
         const cls = type === 'vcode' ? classNames('weui-vcode-btn', { [className]: className }) : classNames({
             'weui-btn': true,
@@ -22,6 +22,6 @@ export default class Button extends React.Component {
 Button.defaultProps = {
     disabled: false,
     type: 'primary',
-    size: 'normal',
+    size: 'normal'
 };
 ;
