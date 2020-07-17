@@ -1,158 +1,43 @@
+/*
+ * @Author: 刘佑祥
+ * @LastEditors: 刘佑祥
+ * @LastEditTime: 2020-07-17 13:49:25
+ */ 
 /**
  * Created by jf on 15/10/27.
  */
-// import version from './version';
+export { default as version } from './version';
 
 //0.4.x components
-// import ActionSheet from './components/actionsheet/index';
-
-export { default as Button } from './components/button/index';
-<<<<<<< HEAD
-export { default as Cell } from './components/cell/index';
-export { default as Article } from './components/article/index';
-export { default as Badge } from './components/badge/index';
-export { default as Dialog } from './components/dialog/index';
-export { default as Flex } from './components/flex/index';
-export { default as Footer } from './components/footer/index';
-// export { default as Form } from './components/form/index';
-export { default as Gallery } from './components/gallery/index';
-export { default as Grid } from './components/grid/index';
-export { default as Icon } from './components/icon/index';
-export { default as InfiniteLoader } from './components/infiniteLoader/index';
-export { default as Label } from './components/label/index';
-export { default as LoadMore } from './components/loadmore/index';
+export { Button, ButtonArea, PreviewButton } from './components/button/index';
+export { Cells, CellsTitle, CellsTips, Cell, CellHeader, CellBody, CellFooter } from './components/cell/index';
 export { default as Mask } from './components/mask/index';
-export { default as MediaBox } from './components/mediabox/index';
-export { default as Msg } from './components/msg/index';
-export { default as Page } from './components/page/index';
-export { default as Panel } from './components/panel/index';
 export { Form, FormCell, TextArea, Input, Switch, Radio, Slider, Checkbox, Select, Uploader, VCode, Agreement, Preview, PreviewHeader, PreviewBody, PreviewFooter, PreviewItem } from './components/form/index';
-
-
-=======
-export { default as Toptips } from './components/toptips';
-export { default as Toast } from './components/toast';
+export { default as Label } from './components/label/index';
+export { default as Toast } from './components/toast/index';
+export { default as Progress } from './components/progress/index';
+export { default as ActionSheet } from './components/actionsheet/index';
+export { default as Dialog } from './components/dialog/index';
+export { default as Msg } from './components/msg/index';
+export { default as Article } from './components/article/index';
+export { default as Icon } from './components/icon/index';
+export { Grids, Grid, GridIcon, GridLabel } from './components/grid/index';
+export { Panel, PanelHeader, PanelBody, PanelFooter } from './components/panel/index';
+export { MediaBox, MediaBoxHeader, MediaBoxBody, MediaBoxTitle, MediaBoxDescription, MediaBoxInfo, MediaBoxInfoMeta } from './components/mediabox/index';
 export { Tab, TabBody, TabBodyItem, NavBar, NavBarItem, TabBar, TabBarItem, TabBarIcon, TabBarLabel } from './components/tab/index';
->>>>>>> 22457ee33b81803fa4d9d2b69f5cad8d9770b654
-// import {Button, ButtonArea, PreviewButton} from './components/button/index';
-// import {Cells, CellsTitle, CellsTips, Cell, CellHeader, CellBody, CellFooter} from './components/cell/index';
-// import Mask from './components/mask/index';
-// import {Form, FormCell, TextArea, Input, Switch, Radio, Slider, Checkbox, Select, Uploader, VCode, Agreement, Preview, PreviewHeader, PreviewBody, PreviewFooter, PreviewItem} from './components/form/index';
-// import Label from './components/label/index';
-// import Toast from './components/toast/index';
-// import Progress from './components/progress/index';
-// import Dialog from './components/dialog/index';
-// import Msg from './components/msg/index';
-// import Article from './components/article/index';
-// import Icon from './components/icon/index';
-// import {Grids, Grid, GridIcon, GridLabel} from './components/grid/index';
-// import {Panel, PanelHeader, PanelBody, PanelFooter} from './components/panel/index';
-// import {MediaBox, MediaBoxHeader, MediaBoxBody, MediaBoxTitle, MediaBoxDescription, MediaBoxInfo, MediaBoxInfoMeta} from './components/mediabox/index';
-// import {Tab, TabBody, TabBodyItem, NavBar, NavBarItem, TabBar, TabBarItem, TabBarIcon, TabBarLabel} from './components/tab/index';
-// import SearchBar from './components/searchbar/index';
-// //1.0.0 components
-// import {Flex, FlexItem} from './components/flex/index';
-// import Toptips from './components/toptips';
-// import {Gallery, GalleryDelete} from './components/gallery';
-// import {Footer, FooterText, FooterLinks, FooterLink} from './components/footer';
-// import LoadMore from './components/loadmore';
-// import { Picker, CityPicker, PickerGroup } from './components/picker';
-// import Badge from './components/badge';
-// //non standard
-// import { Popup, PopupHeader } from './components/popup';
-// import PullToRefresh from './components/ptr';
-// import InfiniteLoader from './components/infiniteloader';
-// import Swiper from './components/swiper';
-// import Page from './components/page';
+export { default as SearchBar } from './components/searchbar/index';
+//1.0.0 components
+export { Flex, FlexItem } from './components/flex/index';
+export { default as Toptips } from './components/toptips';
+export { Gallery, GalleryDelete } from './components/gallery';
+export { Footer, FooterText, FooterLinks, FooterLink } from './components/footer';
+export { default as LoadMore } from './components/loadmore';
+export { Picker, CityPicker, PickerGroup } from './components/picker';
+export { default as Badge } from './components/badge';
+//non standard
+export { Popup, PopupHeader } from './components/popup';
+export { default as PullToRefresh } from './components/ptr';
+export { default as InfiniteLoader } from './components/infiniteloader';
+export { default as Swiper } from './components/swiper';
+export { default as Page } from './components/page';
 
-// export default {
-    // version,
-
-    //0.4.x
-    // ActionSheet,
-
-    // Button,
-    // ButtonArea,
-    // Cells,
-    // CellsTitle,
-    // CellsTips,
-    // Cell,
-    // CellHeader,
-    // CellBody,
-    // CellFooter,
-    // Mask,
-    // Form,
-    // FormCell,
-    // Radio,
-    // Checkbox,
-    // Input,
-    // TextArea,
-    // Switch,
-    // Select,
-    // Uploader,
-    // Label,
-    // Toast,
-    // Progress,
-    // Dialog,
-    // Msg,
-    // Article,
-    // Icon,
-    // Grids,
-    // Grid,
-    // GridIcon,
-    // GridLabel,
-    // Panel,
-    // PanelHeader,
-    // PanelBody,
-    // PanelFooter,
-    // MediaBox,
-    // MediaBoxHeader,
-    // MediaBoxBody,
-    // MediaBoxTitle,
-    // MediaBoxDescription,
-    // MediaBoxInfo,
-    // MediaBoxInfoMeta,
-    // NavBar,
-    // NavBarItem,
-    // Tab,
-    // TabBody,
-    // TabBodyItem,
-    // TabBar,
-    // TabBarIcon,
-    // TabBarItem,
-    // TabBarLabel,
-    // SearchBar,
-
-    // //1.0.0
-    // Flex,
-    // FlexItem,
-    // VCode,
-    // Agreement,
-    // Toptips,
-    // Gallery,
-    // GalleryDelete,
-    // Footer,
-    // FooterText,
-    // FooterLinks,
-    // FooterLink,
-    // LoadMore,
-    // Preview,
-    // PreviewHeader,
-    // PreviewBody,
-    // PreviewFooter,
-    // PreviewItem,
-    // PreviewButton,
-    // Picker,
-    // PickerGroup,
-    // CityPicker,
-    // Slider,
-    // Badge,
-
-    // //non-standard
-    // Popup,
-    // PopupHeader,
-    // PullToRefresh,
-    // InfiniteLoader,
-    // Swiper,
-    // Page
-// };

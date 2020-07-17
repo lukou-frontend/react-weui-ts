@@ -6,7 +6,14 @@ import classNames from '../../utils/classnames';
  *  Sample Popup header for Popup
  *
  */
-const PopupHeader = (props) => {
+interface PopupHeaderProps {
+  left: string,
+  right: string,
+  leftOnClick: () => void,
+  rightOnClick: () => void,
+  className?: any
+}
+const PopupHeader = (props: PopupHeaderProps) => {
     const { left, right, leftOnClick, rightOnClick, className } = props;
     const cls = classNames('weui-popup__hd', className);
     return (

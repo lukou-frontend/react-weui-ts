@@ -8,7 +8,14 @@ import './popup.less';
  *  An Popup modal from bottom
  *
  */
-class Popup extends Component {
+interface PopupProps {
+  enableMask: boolean,
+  show: boolean,
+  className?: any,
+  children?: React.ReactNode,
+  onRequestClose?: () => void
+}
+class Popup extends React.Component<PopupProps> {
     static propTypes = {
         /**
          * display the component
