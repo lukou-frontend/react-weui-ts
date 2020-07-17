@@ -23,7 +23,6 @@ const argv = require('minimist')(process.argv.slice(2));
 const chalk = require('chalk');
 const typescript = require('rollup-plugin-typescript2')
 const postcss = require('rollup-plugin-postcss');
-const autoprefixer = require('autoprefixer');
 
 const showWrite = argv.progress;
 const showSection = argv.step || true;
@@ -81,9 +80,13 @@ function makeConfig(bundleType){
       input: 'src/index.ts',
       plugins: [
         postcss({
-          extract: false, // 可配置生成绝对路径
+          minimize: atrs.env === 'production',
           extensions: ['css', 'less'],
-          plugins: [autoprefixer],
+          plugins: [
+            require('autoprefixer')({
+              overrideBrowserslist: ['iOS >= 8', 'Android >= 4.0']
+            })
+          ],
           extract: path.resolve(atrs.path + 'react-weui.css')
         }),
         // less({
