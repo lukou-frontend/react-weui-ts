@@ -7,9 +7,15 @@ import Icon from '../icon';
  *  progress bar
  *
  */
-const Progress = (props) => {
+interface ProgressProps {
+  className?: string,
+  showCancel: boolean,
+  value: number,
+  onClick: (e: React.MouseEvent<HTMLAnchorElement>) => void
+}
+const Progress = (props: ProgressProps) => {
 
-    const { className, showCancel, value, onClick, ...others } = props;
+    const { className = '', showCancel, value, onClick, ...others } = props;
     const cls = classNames({
         'weui-progress': true,
         [className]: className
