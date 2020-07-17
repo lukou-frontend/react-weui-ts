@@ -146,7 +146,7 @@ export default class Uploader extends React.Component<UploaderProps> {
           //patch subsampling bug
           //http://jsfiddle.net/gWY2a/24/
           let drawImage = ctx.drawImage;
-          ctx.drawImage = (_img: CanvasImageSource, sx: number, sy: number, sw: number, sh: number, dx: number, dy: number, dw: number, dh: number): number => {
+          ctx.drawImage = (_img: CanvasImageSource, sx: number, sy: number, sw: number, sh: number, dx: number, dy: number, dw: number, dh: number): T => {
             let vertSquashRatio = 1;
             // Detect if img param is indeed image
             if (!!_img && (_img as HTMLImageElement).nodeName === 'IMG') {
