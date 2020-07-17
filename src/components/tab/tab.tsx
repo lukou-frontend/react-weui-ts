@@ -8,8 +8,6 @@ import NavBar from './navbar';
 import NavBarItem from './navbar_item';
 import TabBar from './tabbar';
 import TabBarItem from './tabbar_item';
-import TabBarIcon from './tabbar_icon';
-import TabBarLabel from './tabbar_label';
 
 /**
  *  Weui Tab component, can be auto mount items or mannually display items

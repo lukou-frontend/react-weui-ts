@@ -10,4 +10,5 @@ pendingtest
 .nyc_output
 dist
 demo
+test.html
 # build
