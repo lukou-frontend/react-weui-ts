@@ -3,7 +3,7 @@ import classNames from '../../utils/classnames';
 
 interface ButtonAreaProps {
   direction: 'veritical'|'horizontal',
-  className: string
+  className?: string
 }
 class ButtonArea extends React.Component<ButtonAreaProps> {
 
@@ -12,7 +12,7 @@ class ButtonArea extends React.Component<ButtonAreaProps> {
     };
 
     render() {
-        const {direction, children, className} = this.props;
+        const {direction, children, className = ''} = this.props;
         const cls = classNames({
             'weui-btn-area': true,
             'weui-btn-area_inline': direction === 'horizontal',

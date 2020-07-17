@@ -25,7 +25,7 @@ interface BadgeProps {
   dot?: boolean,
   preset: 'header' | 'body' |'footer' | 'default',
   className?: any,
-  style?:any
+  style?: React.CSSProperties
 }
 
 class Badge extends React.Component<BadgeProps> {
