@@ -5,7 +5,7 @@ import langs from '../langs.json';
 import docs from '../docs.json';
 import './root.less';
 
-class Root extends Component {
+class Root extends React.Component {
 
   constructor(props){
     super(props)

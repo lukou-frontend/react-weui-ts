@@ -10,7 +10,7 @@ import {
 import { Link } from 'react-router-dom';
 import './start.less';
 
-class Start extends Component {
+class Start extends React.Component {
     componentDidMount() {
         this.canvasInit();
     }

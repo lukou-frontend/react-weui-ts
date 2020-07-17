@@ -15,7 +15,7 @@ import 'codemirror/addon/display/autorefresh';
 import 'github-markdown-css';
 import './home.less';
 
-class Articles extends Component {
+class Articles extends React.Component {
     static defaultProps = {
         langs: {
             detail: 'Detail',

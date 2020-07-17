@@ -41,11 +41,11 @@ const rules = [
         test: /\.(js|jsx)$/,
         oneOf: [
             {
-                include: [path.resolve(__dirname, 'docs'), path.resolve(__dirname, 'example')],
+                include: [path.resolve(__dirname, 'docs'), path.resolve(__dirname, 'example'), path.resolve(__dirname, 'build/packages')],
                 exclude: [/node_modules/, path.resolve(__dirname, 'src')],
-                use: [
-                    'babel-loader',
-                ]
+                use: {
+                  loader: 'babel-loader'    //babel的相关配置在.babelrc文件里
+               }
             },
             {
                 include: path.resolve(__dirname, 'src'),

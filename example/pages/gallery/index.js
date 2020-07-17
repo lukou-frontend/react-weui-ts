@@ -5,7 +5,7 @@ import imgSrc from '../uploader/photo.png';
 import imgSrc2 from './2.png';
 import imgSrc3 from './3.png';
 
-class GalleryDemo extends Component {
+class GalleryDemo extends React.Component {
     constructor(props){
         super(props)
 

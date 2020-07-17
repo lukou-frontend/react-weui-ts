@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 
-class Accordion extends Component {
+class Accordion extends React.Component {
     static defaultProps = {
         transitionName: 'slide'
     }

@@ -12,7 +12,7 @@ import iconSrc from '../logo.svg';
 import Demos from '../../example';
 import './home.less';
 
-class Docs extends Component {
+class Docs extends React.Component {
 
   renderWithMenu(){
     let article = this.props.docs[this.props.params.id].items[this.props.params.aid]

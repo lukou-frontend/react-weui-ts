@@ -4,7 +4,7 @@ import { NavLink as Link } from 'react-router-dom';
 import { SearchBar, Cells, CellsTitle, FormCell, Label, Select, Cell, CellHeader, CellBody, CellFooter, Dialog } from '../../../build/packages';
 import './style.css';
 
-class Navigation extends Component {
+class Navigation extends React.Component {
 
     constructor(props){
         super(props);
