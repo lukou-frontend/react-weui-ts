@@ -19,8 +19,9 @@ const deprecateValue:deprecateValue = {
  * WeUI Icons
  *
  */
+export type SizeType = 'small' | 'large'
 interface IconProps {
-  size?: 'small' | 'large',
+  size?: SizeType,
   value: string,
   className?: any,
   primary?: any,

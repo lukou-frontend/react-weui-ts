@@ -75,7 +75,7 @@ export default class Uploader extends React.Component {
                     //patch subsampling bug
                     //http://jsfiddle.net/gWY2a/24/
                     let drawImage = ctx.drawImage;
-                    ctx.drawImage = (_img, sx, sy, sw, sh, dx, dy, dw, dh) => {
+                    const newDrawImage = (_img, sx, sy, sw, sh, dx, dy, dw, dh) => {
                         let vertSquashRatio = 1;
                         // Detect if img param is indeed image
                         if (!!_img && _img.nodeName === 'IMG') {
@@ -96,7 +96,7 @@ export default class Uploader extends React.Component {
                     };
                     canvas.width = w;
                     canvas.height = h;
-                    ctx.drawImage(img, 0, 0, w, h);
+                    newDrawImage(img, 0, 0, w, h);
                     let base64 = canvas.toDataURL('image/png');
                     cb({
                         nativeFile: file,
@@ -119,7 +119,7 @@ export default class Uploader extends React.Component {
     handleChange(e) {
         const langs = this.props.lang;
         let _files = e.target.files;
-        if (_files.length === 0)
+        if (!_files || _files.length === 0)
             return;
         if (this.props.files.length >= this.props.maxCount) {
             this.props.onError(langs.maxError(this.props.maxCount));
@@ -133,7 +133,7 @@ export default class Uploader extends React.Component {
                 if (this.props.onChange)
                     this.props.onChange(_file, _e);
                 ReactDOM.findDOMNode(this.refs.uploader);
-            }, e);
+            });
         }
     }
     renderFiles() {

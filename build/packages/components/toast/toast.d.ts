@@ -1,5 +1,6 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
+import { SizeType } from '../icon/icon';
 /**
  *  pop out indicator to inform users
  *
@@ -7,7 +8,7 @@ import PropTypes from 'prop-types';
 interface ToastProps {
     className?: string;
     show: boolean;
-    iconSize: string;
+    iconSize?: SizeType;
     [key: string]: any;
 }
 declare class Toast extends React.Component<ToastProps> {

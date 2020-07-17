@@ -3,5 +3,6 @@
  */
 
 import Icon from './icon';
+export { SizeType } from './icon'
 
 export default Icon;

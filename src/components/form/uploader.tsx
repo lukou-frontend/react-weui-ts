@@ -13,7 +13,7 @@ interface Lang {
   maxError: (value: number) => void
 }
 interface MyFile extends File {
-  lastModifiedDate: any;
+  lastModifiedDate: Date;
   error?: any,
   url?: string,
   status: any,
@@ -29,6 +29,19 @@ interface UploaderProps {
   title?: string,
   className?: any,
   onFileClick?: (e?: any, file?: File, idx?: any) => void
+}
+type customFile = {
+  nativeFile: Blob,
+  lastModified: number,
+  lastModifiedDate: Date,
+  data: string
+  name: string,
+  size: number,
+  type: string,
+}
+type handleFileCallback = (file: customFile | Blob, e: renderOnloadEvent) => void
+type renderOnloadEvent = {
+  target: { result: any }
 }
 export default class Uploader extends React.Component<UploaderProps> {
   static propTypes = {
@@ -120,7 +133,7 @@ export default class Uploader extends React.Component<UploaderProps> {
   }
 
 
-  handleFile(file: Blob, cb: { (_file: any, _e: any): void; (arg0: { nativeFile: any; lastModified: any; lastModifiedDate: any; name: any; size: any; type: any; data: string; }, arg1: ProgressEvent<FileReader>): void; }) {
+  handleFile(file: Blob, cb: handleFileCallback) {
     let reader: any;
     if (typeof FileReader !== 'undefined') {
       reader = new FileReader();
@@ -128,7 +141,7 @@ export default class Uploader extends React.Component<UploaderProps> {
       if (window.FileReader) reader = new window.FileReader();
     }
 
-    reader.onload = (e: any) => {
+    reader.onload = (e: renderOnloadEvent) => {
       let img: any;
       if (typeof Image !== 'undefined') {
         img = new Image();
@@ -146,7 +159,7 @@ export default class Uploader extends React.Component<UploaderProps> {
           //patch subsampling bug
           //http://jsfiddle.net/gWY2a/24/
           let drawImage = ctx.drawImage;
-          ctx.drawImage = (_img: CanvasImageSource, sx: number, sy: number, sw: number, sh: number, dx: number, dy: number, dw: number, dh: number): number => {
+          const newDrawImage = (_img: CanvasImageSource, sx: number, sy: number, sw: number, sh: number, dx?: number, dy?: number, dw?: number, dh?: number) => {
             let vertSquashRatio = 1;
             // Detect if img param is indeed image
             if (!!_img && (_img as HTMLImageElement).nodeName === 'IMG') {
@@ -158,7 +171,7 @@ export default class Uploader extends React.Component<UploaderProps> {
             // Execute several cases (Firefox does not handle undefined as no param)
             // by call (apply is bad performance)
             if (arguments.length === 9)
-              drawImage.call(ctx, _img, sx, sy, sw, sh, dx, dy, dw, dh / vertSquashRatio);
+              drawImage.call(ctx, _img, sx, sy, sw, sh, dx, dy, dw, dh! / vertSquashRatio);
             else if (typeof sw !== 'undefined')
               drawImage.call(ctx, _img, sx, sy, sw, sh / vertSquashRatio);
             else
@@ -167,7 +180,7 @@ export default class Uploader extends React.Component<UploaderProps> {
 
           canvas.width = w;
           canvas.height = h;
-          ctx.drawImage(img, 0, 0, w, h);
+          newDrawImage(img, 0, 0, w, h);
 
           let base64 = canvas.toDataURL('image/png');
 
@@ -189,11 +202,11 @@ export default class Uploader extends React.Component<UploaderProps> {
     reader.readAsDataURL(file);
   }
 
-  handleChange(e: { target: { files: any; }; }) {
+  handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     const langs = this.props.lang;
     let _files = e.target.files;
 
-    if (_files.length === 0) return;
+    if (!_files || _files.length === 0 ) return;
 
     if (this.props.files.length >= this.props.maxCount) {
       this.props.onError(langs.maxError(this.props.maxCount));
@@ -204,10 +217,10 @@ export default class Uploader extends React.Component<UploaderProps> {
       if (!_files.hasOwnProperty(key)) continue;
       let file = _files[key];
 
-      this.handleFile(file, (_file: File, _e: any) => {
+      this.handleFile(file, (_file: File, _e: renderOnloadEvent) => {
         if (this.props.onChange) this.props.onChange(_file, _e);
         (ReactDOM.findDOMNode(this.refs.uploader) as HTMLInputElement)
-      }, e)
+      })
     }
   }
 

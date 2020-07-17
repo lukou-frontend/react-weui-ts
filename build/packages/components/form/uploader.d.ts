@@ -8,7 +8,7 @@ interface Lang {
     maxError: (value: number) => void;
 }
 interface MyFile extends File {
-    lastModifiedDate: any;
+    lastModifiedDate: Date;
     error?: any;
     url?: string;
     status: any;
@@ -25,6 +25,21 @@ interface UploaderProps {
     className?: any;
     onFileClick?: (e?: any, file?: File, idx?: any) => void;
 }
+declare type customFile = {
+    nativeFile: Blob;
+    lastModified: number;
+    lastModifiedDate: Date;
+    data: string;
+    name: string;
+    size: number;
+    type: string;
+};
+declare type handleFileCallback = (file: customFile | Blob, e: renderOnloadEvent) => void;
+declare type renderOnloadEvent = {
+    target: {
+        result: any;
+    };
+};
 export default class Uploader extends React.Component<UploaderProps> {
     static propTypes: {
         /**
@@ -79,23 +94,8 @@ export default class Uploader extends React.Component<UploaderProps> {
      * With react fix by n7best
      */
     detectVerticalSquash(img: any): number | undefined;
-    handleFile(file: Blob, cb: {
-        (_file: any, _e: any): void;
-        (arg0: {
-            nativeFile: any;
-            lastModified: any;
-            lastModifiedDate: any;
-            name: any;
-            size: any;
-            type: any;
-            data: string;
-        }, arg1: ProgressEvent<FileReader>): void;
-    }): void;
-    handleChange(e: {
-        target: {
-            files: any;
-        };
-    }): void;
+    handleFile(file: Blob, cb: handleFileCallback): void;
+    handleChange(e: React.ChangeEvent<HTMLInputElement>): void;
     renderFiles(): JSX.Element[];
     render(): JSX.Element;
 }

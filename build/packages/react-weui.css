@@ -2,3 +2,14 @@ label.weui-cell > *,
 label.weui-agree > * {
   pointer-events: none;
 }
+.weui-skin_android .weui-actionsheet_toggle {
+  opacity: 1 !important;
+  top: 50% !important;
+  bottom: auto !important;
+}
+.weui-skin_android .weui-actionsheet {
+  opacity: 0;
+  transition: opacity .3s;
+  top: 150%;
+  bottom: 0;
+}

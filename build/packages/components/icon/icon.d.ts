@@ -4,8 +4,9 @@ import PropTypes from 'prop-types';
  * WeUI Icons
  *
  */
+export declare type SizeType = 'small' | 'large';
 interface IconProps {
-    size?: 'small' | 'large';
+    size?: SizeType;
     value: string;
     className?: any;
     primary?: any;
