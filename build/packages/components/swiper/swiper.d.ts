@@ -91,7 +91,7 @@ declare class Swiper extends React.Component<SwiperProps, SwiperState> {
     handleTouchStart(e: React.TouchEvent<HTMLDivElement>): void;
     handleTouchMove(e: React.TouchEvent<HTMLDivElement>): void;
     handleTouchEnd(): void;
-    renderPagination(): (JSX.Element | undefined)[];
+    renderPagination(): JSX.Element[];
     render(): JSX.Element;
 }
 export default Swiper;

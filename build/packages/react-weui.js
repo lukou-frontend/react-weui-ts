@@ -4206,13 +4206,12 @@ var Swiper$1 = function (_React$Component) {
         value: function renderPagination() {
             var _this3 = this;
 
+            // @ts-ignore
             return this.props.children.map(function (child, i) {
-                if (child) {
-                    var clx = classNames('react-weui-swiper__pagination-bullet', {
-                        active: i === _this3.state.currentIndex
-                    });
-                    return React.createElement("span", { className: clx, key: i });
-                }
+                var clx = classNames('react-weui-swiper__pagination-bullet', {
+                    active: i === _this3.state.currentIndex
+                });
+                return React.createElement("span", { className: clx, key: i });
             });
         }
     }, {

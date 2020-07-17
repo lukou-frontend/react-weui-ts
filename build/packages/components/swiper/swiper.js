@@ -124,13 +124,12 @@ class Swiper extends React.Component {
             this.props.onChange(ogIndex, currentIndex);
     }
     renderPagination() {
+        // @ts-ignore
         return this.props.children.map((child, i) => {
-            if (child) {
-                let clx = classNames('react-weui-swiper__pagination-bullet', {
-                    active: i === this.state.currentIndex
-                });
-                return (React.createElement("span", { className: clx, key: i }));
-            }
+            let clx = classNames('react-weui-swiper__pagination-bullet', {
+                active: i === this.state.currentIndex
+            });
+            return (React.createElement("span", { className: clx, key: i }));
         });
     }
     render() {
