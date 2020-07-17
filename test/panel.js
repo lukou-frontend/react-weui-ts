@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { shallow } from 'enzyme';
 import assert from 'assert';
 import WeUI from '../src/index';
@@ -20,12 +20,12 @@ describe('<Panel></Panel>', ()=> {
                     </Panel>
                 );
 
-                it(`should have 'weui-panel' class name`, ()=> {
-                    assert(wrapper.hasClass(`weui-panel`));
+                it('should have \'weui-panel\' class name', ()=> {
+                    assert(wrapper.hasClass('weui-panel'));
                 });
 
                 it(`should have custom class name ${clazz}`, ()=> {
-                    if(clazz){
+                    if (clazz){
                         assert(wrapper.hasClass(clazz));
                     }
                 });
@@ -35,15 +35,15 @@ describe('<Panel></Panel>', ()=> {
 
                 });*/
 
-                it(`should have header child`, ()=>{
+                it('should have header child', ()=>{
                     assert(shallow(header).html() === wrapper.find(PanelHeader).html());
                 });
 
-                it(`should have body child`, ()=>{
+                it('should have body child', ()=>{
                     assert(shallow(body).html() === wrapper.find(PanelBody).html());
                 });
 
-                it(`should have footer child`, ()=>{
+                it('should have footer child', ()=>{
                     assert(shallow(footer).html() === wrapper.find(PanelFooter).html());
                 });
             });

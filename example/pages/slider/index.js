@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { Slider, CellsTitle, Button, ButtonArea } from '../../../build/packages';
 import Page from '../../component/page';
 
@@ -38,7 +38,7 @@ class SliderDemo extends React.Component {
                     <Button
                         size="small"
                         onClick={()=> {
-                            if(this.state.controlValue >= 10) this.setState({ controlValue: this.state.controlValue - 10})
+                            if (this.state.controlValue >= 10) this.setState({ controlValue: this.state.controlValue - 10});
                         }}>
                         - 10
                     </Button>
@@ -46,7 +46,7 @@ class SliderDemo extends React.Component {
                         style={{marginLeft: '10px'}}
                         size="small"
                         onClick={()=> {
-                            if(this.state.controlValue <= 90) this.setState({ controlValue: this.state.controlValue + 10})
+                            if (this.state.controlValue <= 90) this.setState({ controlValue: this.state.controlValue + 10});
                         }}>
                         + 10
                     </Button>
@@ -65,4 +65,4 @@ class SliderDemo extends React.Component {
 
 };
 
-export default SliderDemo
+export default SliderDemo;

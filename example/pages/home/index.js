@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import {Flex, FlexItem, Cells, Cell, CellBody, CellFooter} from '../../../build/packages';
 import { Link } from 'react-router-dom';
 import Page from '../../component/page';
@@ -179,7 +179,7 @@ const menus = [
             }
         ]
     }
-]
+];
 
 const Home = (props) => {
     return (

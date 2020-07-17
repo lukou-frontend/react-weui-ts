@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import * as React from 'react'
 import ReactDOM from 'react-dom';
 import Globe from '../components/globe';
 import FontAwesome from 'react-fontawesome';

@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 
 import {
     Tab,
@@ -17,7 +17,7 @@ import IconCell from '../home/images/icon_nav_cell.png';
 
 export default class TabBarDemo extends React.Component {
     state={
-        tab:0
+        tab: 0
     };
 
     render() {
@@ -80,11 +80,11 @@ export default class TabBarDemo extends React.Component {
                 <TabBar>
                     <TabBarItem
                         active={this.state.tab == 0}
-                        onClick={e=>this.setState({tab:0})}
+                        onClick={e=>this.setState({tab: 0})}
                         icon={<img src={IconButton}/>}
                         label="Tab1"
                     />
-                    <TabBarItem active={this.state.tab == 1} onClick={e=>this.setState({tab:1})}>
+                    <TabBarItem active={this.state.tab == 1} onClick={e=>this.setState({tab: 1})}>
                         <TabBarIcon>
                             <img src={IconMsg}/>
                         </TabBarIcon>
@@ -92,13 +92,13 @@ export default class TabBarDemo extends React.Component {
                     </TabBarItem>
                     <TabBarItem
                         active={this.state.tab == 2}
-                        onClick={e=>this.setState({tab:2})}
+                        onClick={e=>this.setState({tab: 2})}
                         icon={<img src={IconArticle}/>}
                         label="Tab3"
                     />
                     <TabBarItem
                         active={this.state.tab == 3}
-                        onClick={e=>this.setState({tab:3})}
+                        onClick={e=>this.setState({tab: 3})}
                         icon={<img src={IconCell}/>}
                         label="Tab4"
                     />

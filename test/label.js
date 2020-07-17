@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { shallow } from 'enzyme';
 import assert from 'assert';
 import WeUI from '../src/index';
@@ -12,7 +12,7 @@ describe('<Label></Label>', ()=> {
                 <Label className={clazz}/>
             );
 
-            it(`should render Label label component with weui_label class`, ()=> {
+            it('should render Label label component with weui_label class', ()=> {
                 assert(wrapper.find('label').hasClass('weui-label'));
             });
 

@@ -1,74 +1,74 @@
 /*global before*/
-import React from 'react';
+import * as React from 'react';
 import sinon from 'sinon';
 import { mount, shallow } from 'enzyme';
 import assert from 'assert';
 import WeUI from '../src/index';
 var jsdom = require('jsdom');
 
-const { CityPicker, Picker, PickerGroup, Mask } = WeUI
+const { CityPicker, Picker, PickerGroup, Mask } = WeUI;
 
 describe('<CityPicker></CityPicker>', ()=>{
     const data = [
         {
-            "name":"city1",
-            "code":"110000",
-            "sub": [
+            'name': 'city1',
+            'code': '110000',
+            'sub': [
                 {
-                    "name": "city1-1",
-                    "code": "110000",
-                    "sub": [
+                    'name': 'city1-1',
+                    'code': '110000',
+                    'sub': [
                         {
-                            "name": "city1-1-1",
-                            "code": "110000",
+                            'name': 'city1-1-1',
+                            'code': '110000',
                         }
                     ]
                 },
                 {
-                    "name": "city1-2",
-                    "code": "110000",
-                    "sub": [
+                    'name': 'city1-2',
+                    'code': '110000',
+                    'sub': [
                         {
-                            "name": "city1-2-1",
-                            "code": "110000",
+                            'name': 'city1-2-1',
+                            'code': '110000',
                         }
                     ]
                 }
             ]
         }
-    ]
+    ];
 
     it('should render CityPicker and Picker', ()=>{
-        const wrapper = mount(<CityPicker data={data}/>)
-        assert(wrapper.instance() instanceof CityPicker)
-        assert(wrapper.find(Picker).length > 0)
-    })
+        const wrapper = mount(<CityPicker data={data}/>);
+        assert(wrapper.instance() instanceof CityPicker);
+        assert(wrapper.find(Picker).length > 0);
+    });
 
     it('should trigger onCancel on Picker', ()=>{
-        let cb = sinon.spy()
-        const wrapper = mount(<CityPicker data={data} onCancel={cb} show/>)
+        let cb = sinon.spy();
+        const wrapper = mount(<CityPicker data={data} onCancel={cb} show/>);
 
         let mask = wrapper.find(Mask);
 
-        mask.simulate('click')
-        setTimeout(()=>assert(cb.calledOnce == true), 500)
-    })
+        mask.simulate('click');
+        setTimeout(()=>assert(cb.calledOnce == true), 500);
+    });
 
     it('should render 3 pickergroup', ()=>{
-        const wrapper = mount(<CityPicker data={data} show/>)
+        const wrapper = mount(<CityPicker data={data} show/>);
         let $pickergroup = wrapper.find(PickerGroup);
-        assert($pickergroup.length == 3)
-    })
+        assert($pickergroup.length == 3);
+    });
 
     it('should update onChange after selected', ()=>{
-        let cb = sinon.spy()
+        let cb = sinon.spy();
         const wrapper = mount(
             <CityPicker
-            selected={[0,0,0]}
+            selected={[0, 0, 0]}
             data={data}
             onChange={cb}
             show/>
-        )
+        );
         let $pickergroup = wrapper.find(PickerGroup).last();
 
         $pickergroup.simulate('touchStart', {
@@ -78,7 +78,7 @@ describe('<CityPicker></CityPicker>', ()=>{
                 pageY: 500
               }
             ]
-        })
+        });
 
         $pickergroup.simulate('touchMove', {
             targetTouches: [
@@ -87,29 +87,29 @@ describe('<CityPicker></CityPicker>', ()=>{
                 pageY: 538
               }
             ]
-        })
+        });
 
-        $pickergroup.simulate('touchEnd')
+        $pickergroup.simulate('touchEnd');
 
-        const $btn = wrapper.find('.weui-picker__action').last()
-        $btn.simulate('click')
+        const $btn = wrapper.find('.weui-picker__action').last();
+        $btn.simulate('click');
 
         // after use react 16 adapter will trigger twice cb?
-        setTimeout(()=>assert(cb.called == true), 500)
-    })
+        setTimeout(()=>assert(cb.called == true), 500);
+    });
 
     it('should change pickergroup item when scroll on parent group', ()=>{
         const wrapper = mount(
             <CityPicker
-            selected={[0,0,0]}
+            selected={[0, 0, 0]}
             data={data}
             show/>
-        )
+        );
         let $parent = wrapper.find(PickerGroup).at(1);
         let $child = wrapper.find(PickerGroup).last();
 
         //assert original
-        assert($child.find('.weui-picker__item').text() == 'city1-1-1')
+        assert($child.find('.weui-picker__item').text() == 'city1-1-1');
 
         $parent.simulate('touchStart', {
             targetTouches: [
@@ -118,7 +118,7 @@ describe('<CityPicker></CityPicker>', ()=>{
                 pageY: 500
               }
             ]
-        })
+        });
 
         $parent.simulate('touchMove', {
             targetTouches: [
@@ -127,11 +127,11 @@ describe('<CityPicker></CityPicker>', ()=>{
                 pageY: 450
               }
             ]
-        })
+        });
 
-        $parent.simulate('touchEnd')
+        $parent.simulate('touchEnd');
 
         //assert after change
-        assert($child.find('.weui-picker__item').text() == 'city1-2-1')
-    })
-})
+        assert($child.find('.weui-picker__item').text() == 'city1-2-1');
+    });
+});

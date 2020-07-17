@@ -1,3 +1,8 @@
+<!--
+ * @Author: 刘佑祥
+ * @LastEditors: 刘佑祥
+ * @LastEditTime: 2020-07-16 10:37:49
+--> 
 # React-WeUI 
 
 [![Build Status](https://travis-ci.org/weui/react-weui.svg?branch=master)](https://travis-ci.org/weui/react-weui) 
@@ -53,7 +58,7 @@ We have several examples on the documentation. Here is the first one to get you 
 ```javascript
 // app.js
 
-import React from 'react';
+import * as React from 'react';
 import ReactDOM from 'react-dom';
 import { Button } from 'react-weui';
 //import styles

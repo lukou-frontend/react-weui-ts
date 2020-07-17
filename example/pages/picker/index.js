@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { Popup, Picker, CityPicker, Form, FormCell, CellBody, CellHeader, Label, Input } from '../../../build/packages';
 import Page from '../../component/page';
 import cnCity from './cnCity';
@@ -38,7 +38,7 @@ class PickerDemo extends React.Component {
         this.setState({
             picker_show: false,
             city_show: false
-        })
+        });
     }
 
     render() {
@@ -54,7 +54,7 @@ class PickerDemo extends React.Component {
                                 value={this.state.city_value}
                                 onClick={ e=> {
                                     e.preventDefault();
-                                    this.setState({city_show: true})
+                                    this.setState({city_show: true});
                                 }}
                                 placeholder="Chose Your City"
                                 readOnly={true}
@@ -81,8 +81,8 @@ class PickerDemo extends React.Component {
                             <Input
                                 type="text"
                                 onClick={e=>{
-                                    e.preventDefault()
-                                    this.setState({picker_show: true})
+                                    e.preventDefault();
+                                    this.setState({picker_show: true});
                                 }}
                                 placeholder="Pick a item"
                                 value={this.state.picker_value}
@@ -94,14 +94,14 @@ class PickerDemo extends React.Component {
 
                 <Picker
                     onChange={selected=>{
-                        let value = ''
+                        let value = '';
                         selected.forEach( (s, i)=> {
-                            value = this.state.picker_group[i]['items'][s].label
-                        })
+                            value = this.state.picker_group[i]['items'][s].label;
+                        });
                         this.setState({
                             picker_value: value,
                             picker_show: false
-                        })
+                        });
                     }}
                     groups={this.state.picker_group}
                     show={this.state.picker_show}

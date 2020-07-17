@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { mount, shallow } from 'enzyme';
 import assert from 'assert';
 import sinon from 'sinon';
@@ -113,4 +113,4 @@ describe('<Tab></Tab>', ()=>{
         assert(wrapper.html() == null);
     });
 
-})
+});

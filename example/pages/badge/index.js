@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import {
     Badge, Cells, Cell, CellBody, CellFooter, CellHeader, CellsTitle
 } from '../../../build/packages';

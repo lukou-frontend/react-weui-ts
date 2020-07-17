@@ -19,7 +19,7 @@ npm install weui@1.1.0 react-weui --save
 
 我们的组件文档里头有很多例子, 这里提供给一个快速上手的例子:
 ```javascript
-import React from 'react';
+import * as React from 'react';
 import ReactDOM from 'react-dom';
 import { Button } from 'react-weui';
 //import styles

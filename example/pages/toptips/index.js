@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import {Button, Toast, Toptips} from '../../../build/packages';
 import Page from '../../component/page';
 
@@ -59,4 +59,4 @@ class ToptipsDemo extends React.Component {
 
 };
 
-export default ToptipsDemo
+export default ToptipsDemo;

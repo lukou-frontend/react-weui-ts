@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { shallow } from 'enzyme';
 import assert from 'assert';
 import WeUI from '../src/index';
@@ -19,7 +19,7 @@ const presetStyles = {
         marginLeft: '5px',
         marginRight: '5px'
     }
-}
+};
 
 describe('<Badge></Badge>', ()=> {
 
@@ -30,8 +30,8 @@ describe('<Badge></Badge>', ()=> {
                 <Badge className={customClassName} preset={preset}> { content } </Badge>
             );
 
-            it(`should have 'weui-badge' class name`, ()=>{
-                assert(wrapper.hasClass(`weui-badge`))
+            it('should have \'weui-badge\' class name', ()=>{
+                assert(wrapper.hasClass('weui-badge'));
             });
 
             it(`should have custom class name ${customClassName}`, ()=> {
@@ -39,12 +39,12 @@ describe('<Badge></Badge>', ()=> {
             });
 
             it(`should have preset style ${preset}`, ()=> {
-                if(preset){
-                    assert(JSON.stringify(wrapper.props().style) == JSON.stringify(presetStyles[preset]))
+                if (preset){
+                    assert(JSON.stringify(wrapper.props().style) == JSON.stringify(presetStyles[preset]));
                 }
-            })
+            });
 
-            it(`should have child 2`, ()=>{
+            it('should have child 2', ()=>{
                 assert(wrapper.text() == content);
             });
         });

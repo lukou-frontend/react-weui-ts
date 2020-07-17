@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import ReactDOM from 'react-dom';
 import {
     InfiniteLoader,
@@ -14,11 +14,11 @@ import Page from '../../component/page';
 class InfiniteDemo extends React.Component {
 
     constructor(props){
-        super(props)
+        super(props);
 
         this.state = {
             items: [...Array(20).keys()]
-        }
+        };
     }
 
     render(){
@@ -27,14 +27,14 @@ class InfiniteDemo extends React.Component {
                 onLoadMore={ (resolve, finish) => {
                     //mock request
                     setTimeout( ()=> {
-                        if(this.state.items.length > 22){
-                            finish()
-                        }else{
+                        if (this.state.items.length > 22){
+                            finish();
+                        } else {
                             this.setState({
                                 items: this.state.items.concat([this.state.items.length])
-                            }, ()=> resolve())
+                            }, ()=> resolve());
                         }
-                    }, 1000)
+                    }, 1000);
                 }}
             >
             <Page className="infinite" title="Infinite Loader" subTitle="滚动加载" >
@@ -50,14 +50,14 @@ class InfiniteDemo extends React.Component {
                                     </CellBody>
                                     <CellFooter/>
                                 </Cell>
-                            )
+                            );
                         })
                     }
                     </Cells>
 
             </Page>
             </InfiniteLoader>
-        )
+        );
     }
 }
 

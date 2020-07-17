@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { Article } from '../../../build/packages';
 import srcArticle from './pic_article.png';
 import Page from '../../component/page';

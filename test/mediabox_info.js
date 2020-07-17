@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { shallow } from 'enzyme';
 import assert from 'assert';
 import WeUI from '../src/index';
@@ -24,8 +24,8 @@ describe('<MediaBoxInfo></MediaBoxInfo>', ()=> {
                             <MediaBoxInfo data={data} className={clazz} extra={extra}>{child}</MediaBoxInfo>
                         );
 
-                        it(`should have 'weui-media-box__info' class name`, ()=>{
-                            assert(wrapper.hasClass(`weui-media-box__info`));
+                        it('should have \'weui-media-box__info\' class name', ()=>{
+                            assert(wrapper.hasClass('weui-media-box__info'));
                         });
 
                         it(`should have custom class name ${clazz}`, ()=>{
@@ -34,16 +34,16 @@ describe('<MediaBoxInfo></MediaBoxInfo>', ()=> {
                             }
                         });
 
-                        it(`should render testDatas with 2 metas, second one with extra tag`, ()=>{
-                            if(data.length > 0){
-                                assert(wrapper.find(MediaBoxInfoMeta).first().shallow().hasClass(`weui-media-box__info__meta`));
-                                assert(wrapper.find(MediaBoxInfoMeta).last().shallow().hasClass(`weui-media-box__info__meta`));
-                                assert(wrapper.find(MediaBoxInfoMeta).last().shallow().hasClass(`weui-media-box__info__meta_extra`));
+                        it('should render testDatas with 2 metas, second one with extra tag', ()=>{
+                            if (data.length > 0){
+                                assert(wrapper.find(MediaBoxInfoMeta).first().shallow().hasClass('weui-media-box__info__meta'));
+                                assert(wrapper.find(MediaBoxInfoMeta).last().shallow().hasClass('weui-media-box__info__meta'));
+                                assert(wrapper.find(MediaBoxInfoMeta).last().shallow().hasClass('weui-media-box__info__meta_extra'));
                             }
                         });
 
                         it(`should have child ${child}`, ()=>{
-                            if(data.length == 0){
+                            if (data.length == 0){
                                 assert(wrapper.contains(child));
                             }
                         });

@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import {Button, ButtonArea} from '../../../build/packages';
 import Page from '../../component/page';
 import './button.less';

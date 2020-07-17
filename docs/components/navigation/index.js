@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import * as React from 'react'
 import FontAwesome from 'react-fontawesome';
 import { NavLink as Link } from 'react-router-dom';
 import { SearchBar, Cells, CellsTitle, FormCell, Label, Select, Cell, CellHeader, CellBody, CellFooter, Dialog } from '../../../build/packages';

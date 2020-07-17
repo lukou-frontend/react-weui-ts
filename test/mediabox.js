@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { shallow } from 'enzyme';
 import assert from 'assert';
 import WeUI from '../src/index';
@@ -41,9 +41,9 @@ describe('<MediaBox></MediaBox>', () => {
                     it(`should have class with "weui-media-box" & weui_media_${type}`, ()=> {
                         assert(wrapper.hasClass('weui-media-box'));
 
-                        if(type == 'small_appmsg'){
-                            assert(wrapper.hasClass(`weui-media-box_small-appmsg`));
-                        }else{
+                        if (type == 'small_appmsg'){
+                            assert(wrapper.hasClass('weui-media-box_small-appmsg'));
+                        } else {
                             assert(wrapper.hasClass(`weui-media-box_${type}`));
                         }
 

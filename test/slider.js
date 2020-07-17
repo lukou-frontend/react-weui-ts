@@ -1,5 +1,5 @@
 /*global before*/
-import React from 'react';
+import * as React from 'react';
 import ReactDOM from 'react-dom';
 import { mount } from 'enzyme';
 import assert from 'assert';
@@ -25,7 +25,7 @@ describe('<Slider></Slider>', ()=>{
             pageX: ogX
           }
         ]
-      })
+      });
 
       $handler.simulate('touchMove', {
         targetTouches: [
@@ -34,20 +34,20 @@ describe('<Slider></Slider>', ()=>{
             pageX: ogX + distance
           }
         ]
-      })
+      });
 
-      $handler.simulate('touchEnd')
-  }
+      $handler.simulate('touchEnd');
+  };
 
   it('render a Slider with weui-slider-box wrapper', ()=>{
       const wrapper = mount(<Slider />);
       assert(wrapper.instance() instanceof Slider);
       assert(wrapper.find('.weui-slider-box').length > 0);
-  })
+  });
 
   it('can slide left/right and trigger onChange', ()=>{
       let value = 1,
-          cb = v => value = v
+          cb = v => value = v;
 
       const wrapper = mount(
         <Slider
@@ -59,23 +59,23 @@ describe('<Slider></Slider>', ()=>{
         />
       );
 
-      let $node = ReactDOM.findDOMNode(wrapper.instance())
+      let $node = ReactDOM.findDOMNode(wrapper.instance());
       let $renderedBar = $node.querySelector('.weui-slider__inner');
 
-      $renderedBar.clientWidth = 500
+      $renderedBar.clientWidth = 500;
 
       //checking touch move right
-      simulateTouch(wrapper, 49)
-      assert(value === 60)
+      simulateTouch(wrapper, 49);
+      assert(value === 60);
 
       //checking touch move left
-      simulateTouch(wrapper, -100)
-      assert(value === 40)
-  })
+      simulateTouch(wrapper, -100);
+      assert(value === 40);
+  });
 
   it('should void changes with disabled', ()=>{
       let value = 50,
-          cb = v => value = v
+          cb = v => value = v;
 
       const wrapper = mount(
         <Slider
@@ -88,15 +88,15 @@ describe('<Slider></Slider>', ()=>{
         />
       );
 
-      let $node = ReactDOM.findDOMNode(wrapper.instance())
+      let $node = ReactDOM.findDOMNode(wrapper.instance());
       let $renderedBar = $node.querySelector('.weui-slider__inner');
 
-      $renderedBar.clientWidth = 500
+      $renderedBar.clientWidth = 500;
 
       //checking touch move right
-      simulateTouch(wrapper, 50)
-      assert(value === 50)
-  })
+      simulateTouch(wrapper, 50);
+      assert(value === 50);
+  });
 
   it('should render value with showValue', ()=>{
       [true, false].map(showValue=>{
@@ -109,12 +109,12 @@ describe('<Slider></Slider>', ()=>{
           />
         );
 
-        if(showValue){
-          assert(wrapper.find('.weui-slider-box__value').length > 0)
-        }else{
-          assert(wrapper.find('.weui-slider-box__value').length == 0)
+        if (showValue){
+          assert(wrapper.find('.weui-slider-box__value').length > 0);
+        } else {
+          assert(wrapper.find('.weui-slider-box__value').length == 0);
         }
-      })
-  })
+      });
+  });
 
-})
+});

@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { Button, Popup, Grids, PopupHeader, Article } from '../../../build/packages';
 import Page from '../../component/page';
 import iconSrc from '../grid/icon_tabbar.png';
@@ -8,7 +8,7 @@ const data = Array(6).fill({
     icon: <img src={iconSrc}/>,
     label: 'Grid',
     href: 'javascript:;'
-})
+});
 
 class PopupDemo extends React.Component {
 
@@ -21,7 +21,7 @@ class PopupDemo extends React.Component {
         this.setState({
             bottom_show: false,
             fullpage_show: false,
-        })
+        });
     }
 
     render() {

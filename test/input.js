@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { shallow } from 'enzyme';
 import assert from 'assert';
 import WeUI from '../src/index';
@@ -12,7 +12,7 @@ describe('<Input></Input>', ()=> {
                 <Input className={clazz}/>
             );
 
-            it(`should render <Input></Input> component`, ()=> {
+            it('should render <Input></Input> component', ()=> {
                 assert(wrapper.find('input').hasClass('weui-input'));
             });
 

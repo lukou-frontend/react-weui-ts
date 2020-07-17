@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { shallow } from 'enzyme';
 import assert from 'assert';
 import WeUI from '../src/index';
@@ -27,18 +27,18 @@ describe('<PreviewButton></PreviewButton>', () => {
                     assert(wrapper.hasClass('weui-form-preview__btn_primary'));
                 }
             });
-        })
-    })
-})
+        });
+    });
+});
 
 describe('<Button></Button>', () => {
 
-    describe(`<Button type="vcode"></Button>`, ()=> {
+    describe('<Button type="vcode"></Button>', ()=> {
         let wrapper = shallow(
             <Button type="vcode">ok</Button>
         );
 
-        it(`should have class with "weui-vcode-btn"`, ()=> {
+        it('should have class with "weui-vcode-btn"', ()=> {
             assert(wrapper.hasClass('weui-vcode-btn'));
         });
     });
@@ -86,7 +86,7 @@ describe('<Button></Button>', () => {
                             });
 
 
-                            it(`should have class with "weui-btn_mini" when size is 'small'`, ()=> {
+                            it('should have class with "weui-btn_mini" when size is \'small\'', ()=> {
                                 if (size === 'small') {
                                     assert(wrapper.hasClass('weui-btn_mini'));
                                 }
@@ -95,10 +95,10 @@ describe('<Button></Button>', () => {
                                 }
                             });
 
-                            it(`should have class with "weui-btn_disabled" and "disabled" attribute when disabled is true`, ()=> {
+                            it('should have class with "weui-btn_disabled" and "disabled" attribute when disabled is true', ()=> {
                                 if (disabled) {
                                     assert(wrapper.hasClass('weui-btn_disabled'));
-                                    assert(wrapper.prop('disabled'))
+                                    assert(wrapper.prop('disabled'));
                                 }
                                 else {
                                     assert(!wrapper.hasClass('weui-btn_disabled'));

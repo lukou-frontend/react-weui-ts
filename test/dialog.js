@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { shallow } from 'enzyme';
 import assert from 'assert';
 import WeUI from '../src/index';
@@ -30,7 +30,7 @@ const testStyles = {
                 onClick: sinon.spy()
             }
         ]
-}}
+}};
 //for dialog
 
 describe('<Dialog></Dialog>', ()=> {
@@ -53,13 +53,13 @@ describe('<Dialog></Dialog>', ()=> {
                             assert(wrapper.find('div.weui-dialog').length > 0);
                         });
 
-                        it(`should render a non transparent <Mask></Mask>`, ()=> {
+                        it('should render a non transparent <Mask></Mask>', ()=> {
                             const mask = wrapper.find(Mask).shallow();
                             assert(mask.hasClass('weui-mask'));
                             assert(!mask.hasClass('weui-mask_transparent'));
                         });
 
-                        it(`should be hidden when 'show' prop is false or undefined`, ()=> {
+                        it('should be hidden when \'show\' prop is false or undefined', ()=> {
                             if (show) {
                                 assert(wrapper.prop('style').display === 'block');
                             }
@@ -85,27 +85,27 @@ describe('<Dialog></Dialog>', ()=> {
                             $buttons.forEach(($button, index) => {
                                 assert($button.text() === testStyles[buttons].buttons[index].label);
 
-                                if(testStyles[buttons].buttons[index].type){
+                                if (testStyles[buttons].buttons[index].type){
                                     assert($button.hasClass(testStyles[buttons].buttons[index].cls));
                                 }
 
-                                $button.simulate('click')
-                                assert(testStyles[buttons].buttons[index].onClick.called)
-                                testStyles[buttons].buttons[index].onClick.reset()
-                            })
+                                $button.simulate('click');
+                                assert(testStyles[buttons].buttons[index].onClick.called);
+                                testStyles[buttons].buttons[index].onClick.reset();
+                            });
                         });
 
                         //type
-                        if(type == 'android'){
-                            it('should have render `weui-skin_android` class' ,  ()=> {
+                        if (type == 'android'){
+                            it('should have render `weui-skin_android` class', ()=> {
                                 //console.log(wrapper.debug())
                                 assert(wrapper.find('div.weui-dialog').hasClass('weui-skin_android'));
-                            })
+                            });
                         }
 
-                    })
-                })
-            })
-        })
+                    });
+                });
+            });
+        });
     });
 });
