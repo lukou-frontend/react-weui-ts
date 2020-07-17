@@ -26,9 +26,12 @@ interface UploaderProps {
   maxWidth: number,
   onChange?: (file: File, event?: any) => void
   onError: (error: any) => void,
-  title?: string,
   className?: any,
-  onFileClick?: (e?: any, file?: File, idx?: any) => void
+  onFileClick?: (e?: any, file?: File, idx?: any) => void,
+  imageWidth: number,
+  imageHeight: number,
+  maxSize: number,
+  oversize: (val: number) => void
 }
 type customFile = {
   nativeFile: Blob,
@@ -46,11 +49,6 @@ type renderOnloadEvent = {
 export default class Uploader extends React.Component<UploaderProps> {
   static propTypes = {
     /**
-     * title of uploader
-     *
-     */
-    title: PropTypes.string,
-    /**
      * max amount of allow file
      *
      */
@@ -61,6 +59,21 @@ export default class Uploader extends React.Component<UploaderProps> {
      */
     maxWidth: PropTypes.number,
     /**
+     * 图片宽
+     *
+     */
+    imageWidth: PropTypes.number,
+    /**
+     * 图片高
+     *
+     */
+    imageHeight: PropTypes.number,
+    /**
+     * 文件大小限制
+     *
+     */
+    maxSize: PropTypes.number,
+    /**
      * when file change, pass property `(event, file)`
      *
      */
@@ -70,6 +83,11 @@ export default class Uploader extends React.Component<UploaderProps> {
      *
      */
     onError: PropTypes.func,
+    /**
+     * 文件大小超出限制触发
+     *
+     */
+    oversize: PropTypes.func,
     /**
      * array of photos thumbnails to indicator status, include property `url`, `status`, `error`
      *
@@ -83,12 +101,15 @@ export default class Uploader extends React.Component<UploaderProps> {
   };
 
   static defaultProps = {
-    title: '图片上传' as UploaderProps['title'],
     maxCount: 4 as UploaderProps['maxCount'],
+    imageWidth: 79 as UploaderProps['imageWidth'],
+    imageHeight: 79 as UploaderProps['imageHeight'],
+    maxSize: 5 as UploaderProps['maxSize'],
     maxWidth: 500 as UploaderProps['maxWidth'],
     files: [] as UploaderProps['files'],
     onChange: undefined as UploaderProps['onChange'],
     onError: undefined as unknown as UploaderProps['onError'],
+    oversize: undefined as any as UploaderProps['oversize'],
     lang: { maxError: maxCount => `最多只能上传${maxCount}张图片` } as UploaderProps['lang']
   };
 
@@ -134,6 +155,10 @@ export default class Uploader extends React.Component<UploaderProps> {
 
 
   handleFile(file: Blob, cb: handleFileCallback) {
+    if(file.size / (1024 * 1024) < this.props.maxSize) {
+      this.props.oversize(file.size)
+      return
+    }
     let reader: any;
     if (typeof FileReader !== 'undefined') {
       reader = new FileReader();
@@ -159,11 +184,7 @@ export default class Uploader extends React.Component<UploaderProps> {
           //patch subsampling bug
           //http://jsfiddle.net/gWY2a/24/
           let drawImage = ctx.drawImage;
-<<<<<<< HEAD
-          ctx.drawImage = (_img: CanvasImageSource, sx: number, sy: number, sw: number, sh: number, dx: number, dy: number, dw: number, dh: number): T => {
-=======
           const newDrawImage = (_img: CanvasImageSource, sx: number, sy: number, sw: number, sh: number, dx?: number, dy?: number, dw?: number, dh?: number) => {
->>>>>>> 0533c206e80f1dac81b8e359162fba9c43a0746c
             let vertSquashRatio = 1;
             // Detect if img param is indeed image
             if (!!_img && (_img as HTMLImageElement).nodeName === 'IMG') {
@@ -232,7 +253,9 @@ export default class Uploader extends React.Component<UploaderProps> {
     return this.props.files.map((file, idx) => {
       let { url, error, status, onClick, ...others } = file;
       let fileStyle = {
-        backgroundImage: `url(${url})`
+        backgroundImage: `url(${url})`,
+        width: this.props.imageWidth,
+        height: this.props.imageHeight
       };
       let cls = classNames({
         'weui-uploader__file': true,
@@ -262,7 +285,7 @@ export default class Uploader extends React.Component<UploaderProps> {
   }
 
   render() {
-    const { className, title, maxCount, files, onChange, onFileClick, lang, ...others } = this.props;
+    const { className, maxCount, files, onChange, onFileClick, lang, imageWidth, imageHeight, ...others } = this.props;
     const inputProps = Object.assign({}, others);
     delete inputProps.onError;
     delete inputProps.maxWidth;
@@ -276,7 +299,6 @@ export default class Uploader extends React.Component<UploaderProps> {
     return (
       <div className={cls}>
         <div className="weui-uploader__hd">
-          <p className="weui-uploader__title">{title}</p>
           <div className="weui-uploader__info">{files.length}/{maxCount}</div>
         </div>
         <div className="weui-uploader__bd">
@@ -288,8 +310,7 @@ export default class Uploader extends React.Component<UploaderProps> {
               ref="uploader"//let react to reset after onchange
               className="weui-uploader__input"
               type="file"
-              accept="image/*"
-              capture="camera"
+              accept="video/*｜image/*"
               onChange={this.handleChange.bind(this)}
               {...inputProps}
             />

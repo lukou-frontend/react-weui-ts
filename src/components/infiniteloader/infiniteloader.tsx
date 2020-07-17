@@ -18,7 +18,8 @@ interface InfiniteLoaderProps {
   onScroll?: (e?: Event) => void,
   onScrollEnd?: () => void,
   triggerPercent: number,
-  className?: any
+  className?: any,
+  children?: React.ReactNode
 }
 interface InfiniteLoaderStates {
   loading: boolean,
