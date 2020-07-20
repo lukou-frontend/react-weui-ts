@@ -32,9 +32,6 @@ interface UploaderProps {
   onOversize: (val: number) => void,
   accepted: 'image/*' | 'vedio/*'
 }
-interface UploaderStates {
-  videoSrc: string
-}
 type customFile = {
   nativeFile: Blob,
   lastModified: number,
@@ -48,13 +45,7 @@ type handleFileCallback = (file: customFile | Blob, e: renderOnloadEvent) => voi
 type renderOnloadEvent = {
   target: { result: any }
 }
-export default class Uploader extends React.Component<UploaderProps, UploaderStates> {
-  constructor(props: UploaderProps) {
-    super(props)
-    this.state = {
-      videoSrc: ''
-    }
-  }
+export default class Uploader extends React.Component<UploaderProps> {
   static propTypes = {
     /**
      * max amount of allow file
@@ -165,18 +156,19 @@ export default class Uploader extends React.Component<UploaderProps, UploaderSta
     }
 
     reader.onload = (e: renderOnloadEvent) => {
-      let img: any;
-      if (typeof img !== 'undefined') {
-        img = new Image();
-      } else {
-        if (window.Image) img = new window.Image();
-      }
-      img.onload = () => {
-        if (/image/g.test(file.type)) {
+      if (/image/g.test(file.type)) {
+        let img: any;
+        if (typeof img !== 'undefined') {
+          img = new Image();
+        } else {
+          if (window.Image) img = new window.Image();
+        }
+        img.onload = () => {
           let w = Math.min(this.props.maxWidth, img.width);
           let h = img.height * (w / img.width);
           let canvas = document.createElement('canvas');
           let ctx = canvas.getContext('2d');
+
           //check canvas support, for test
           if (ctx) {
             //patch subsampling bug
@@ -219,17 +211,24 @@ export default class Uploader extends React.Component<UploaderProps, UploaderSta
           } else {
             cb(file, e);
           }
-          img.src = e.target.result;
-          reader.readAsDataURL(file);
-        }
-        // 视频上传
-        else if (/video/g.test(file.type)) {
-          this.setState({
-            videoSrc: e.target.result
-          })
-        }
-      };
+        };
+        img.src = e.target.result;
+      } else if (/video/g.test(file.type)) {
+        let video = document.createElement('video')
+        video.src = e.target.result;
+        video.width = 79
+        video.height = 79
+        video.controls = true
+        video.muted = true
+        let li = document.createElement('li')
+        li.classList.add('weui-uploader__file')
+        li.appendChild(video)
+        let ul = document.querySelector('ul') as HTMLUListElement
+        ul.appendChild(li)
+      }
+
     };
+    reader.readAsDataURL(file);
   }
 
   handleChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -259,15 +258,15 @@ export default class Uploader extends React.Component<UploaderProps, UploaderSta
 
   renderFiles() {
     return this.props.files.map((file, idx) => {
-      let { url, error, status, onClick, type, ...others } = file;
+      console.log(file)
+      let { url, error, status, onClick, ...others } = file;
+      let fileStyle = {
+        backgroundImage: `url(${url})`
+      };
       let cls = classNames({
         'weui-uploader__file': true,
         'weui-uploader__file_status': error || status
       });
-      if(/image/g.test(file.type)) {
-        let fileStyle = {
-        backgroundImage: `url(${url})`
-      };
 
       if (onClick) {
         deprecationWarning('File onClick', 'Uploader onFileClick', null);
@@ -276,7 +275,6 @@ export default class Uploader extends React.Component<UploaderProps, UploaderSta
       let handleFileClick = onClick ? onClick : (e: any) => {
         if (this.props.onFileClick) this.props.onFileClick(e, file, idx);
       };
-
       return (
         <li className={cls} key={idx} style={fileStyle} onClick={handleFileClick} {...others}>
           {
@@ -288,21 +286,8 @@ export default class Uploader extends React.Component<UploaderProps, UploaderSta
           }
         </li>
       );
-      } else if(/video/g.test(file.type)) {
-        return (
-          <video src={this.state.videoSrc} className={cls}>
-            {
-              error || status ?
-                <div className="weui-uploader__file-content">
-                  {error ? <Icon value="warn" /> : status}
-                </div>
-                : false
-            }
-          </video>
-        );
-      }
-      
-    });
+    }
+    );
   }
 
   render() {
