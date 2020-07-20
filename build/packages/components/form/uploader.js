@@ -138,6 +138,9 @@ export default class Uploader extends React.Component {
                 continue;
             let file = _files[key];
             this.handleFile(file, (_file, _e) => {
+                if (file.size / (1024 * 1024) < this.props.maxsize) {
+                    this.props.onOversize(file.size);
+                }
                 if (this.props.onChange)
                     this.props.onChange(_file, _e);
                 ReactDOM.findDOMNode(this.uploaderRef);
@@ -148,9 +151,7 @@ export default class Uploader extends React.Component {
         return this.props.files.map((file, idx) => {
             let { url, error, status, onClick, ...others } = file;
             let fileStyle = {
-                backgroundImage: `url(${url})`,
-                width: this.props.imageWidth,
-                height: this.props.imageHeight
+                backgroundImage: `url(${url})`
             };
             let cls = classNames({
                 'weui-uploader__file': true,
@@ -169,7 +170,7 @@ export default class Uploader extends React.Component {
         });
     }
     render() {
-        const { className, maxCount, files, onChange, onFileClick, lang, imageWidth, imageHeight, ...others } = this.props;
+        const { className, maxCount, files, onChange, onFileClick, myFileType, onOversize, maxsize, lang, ...others } = this.props;
         const inputProps = Object.assign({}, others);
         delete inputProps.onError;
         delete inputProps.maxWidth;
@@ -201,20 +202,15 @@ Uploader.propTypes = {
      */
     maxWidth: PropTypes.number,
     /**
-     * 图片宽
-     *
-     */
-    imageWidth: PropTypes.number,
-    /**
-     * 图片高
-     *
-     */
-    imageHeight: PropTypes.number,
-    /**
      * 文件大小限制
      *
      */
     maxsize: PropTypes.number,
+    /**
+     * 文件类型
+     *
+     */
+    myFileType: PropTypes.string,
     /**
      * when file change, pass property `(event, file)`
      *
@@ -243,14 +239,13 @@ Uploader.propTypes = {
 };
 Uploader.defaultProps = {
     maxCount: 4,
-    imageWidth: 79,
-    imageHeight: 79,
     maxsize: 5,
     maxWidth: 500,
     files: [],
     onChange: undefined,
     onError: undefined,
     onOversize: undefined,
-    lang: { maxError: maxCount => `最多只能上传${maxCount}张图片` }
+    lang: { maxError: maxCount => `最多只能上传${maxCount}张图片` },
+    myFileType: 'image',
 };
 ;
