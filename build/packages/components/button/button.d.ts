@@ -16,8 +16,8 @@ interface ButtonProps {
 export default class Button extends React.Component<ButtonProps> {
     static defaultProps: {
         disabled: boolean;
-        type: "primary" | "default" | "warn" | "vcode" | undefined;
-        size: "normal" | "small" | undefined;
+        type: "default" | "primary" | "warn" | "vcode" | undefined;
+        size: "small" | "normal" | undefined;
     };
     render(): JSX.Element;
 }

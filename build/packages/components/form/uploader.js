@@ -5,6 +5,12 @@ import Icon from '../icon';
 import classNames from '../../utils/classnames';
 import deprecationWarning from '../../utils/deprecationWarning';
 export default class Uploader extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            videoSrc: ''
+        };
+    }
     /**
      * Detecting vertical squash in loaded image.
      * Fixes a bug which squash image vertically while drawing into canvas for some images.
@@ -58,7 +64,7 @@ export default class Uploader extends React.Component {
         }
         reader.onload = (e) => {
             let img;
-            if (typeof Image !== 'undefined') {
+            if (typeof img !== 'undefined') {
                 img = new Image();
             }
             else {
@@ -66,55 +72,63 @@ export default class Uploader extends React.Component {
                     img = new window.Image();
             }
             img.onload = () => {
-                let w = Math.min(this.props.maxWidth, img.width);
-                let h = img.height * (w / img.width);
-                let canvas = document.createElement('canvas');
-                let ctx = canvas.getContext('2d');
-                //check canvas support, for test
-                if (ctx) {
-                    //patch subsampling bug
-                    //http://jsfiddle.net/gWY2a/24/
-                    let drawImage = ctx.drawImage;
-                    const newDrawImage = (_img, sx, sy, sw, sh, dx, dy, dw, dh) => {
-                        let vertSquashRatio = 1;
-                        // Detect if img param is indeed image
-                        if (!!_img && _img.nodeName === 'IMG') {
-                            vertSquashRatio = this.detectVerticalSquash(_img);
-                            if (typeof sw === 'undefined')
-                                (sw = _img.naturalWidth);
-                            if (typeof sh === 'undefined')
-                                (sh = _img.naturalHeight);
-                        }
-                        // Execute several cases (Firefox does not handle undefined as no param)
-                        // by call (apply is bad performance)
-                        if (arguments.length === 9)
-                            drawImage.call(ctx, _img, sx, sy, sw, sh, dx, dy, dw, dh / vertSquashRatio);
-                        else if (typeof sw !== 'undefined')
-                            drawImage.call(ctx, _img, sx, sy, sw, sh / vertSquashRatio);
-                        else
-                            drawImage.call(ctx, _img, sx, sy);
-                    };
-                    canvas.width = w;
-                    canvas.height = h;
-                    newDrawImage(img, 0, 0, w, h);
-                    let base64 = canvas.toDataURL('image/png');
-                    cb({
-                        nativeFile: file,
-                        lastModified: file.lastModified,
-                        lastModifiedDate: file.lastModifiedDate,
-                        name: file.name,
-                        size: file.size,
-                        type: file.type,
-                        data: base64
-                    }, e);
+                if (/image/g.test(file.type)) {
+                    let w = Math.min(this.props.maxWidth, img.width);
+                    let h = img.height * (w / img.width);
+                    let canvas = document.createElement('canvas');
+                    let ctx = canvas.getContext('2d');
+                    //check canvas support, for test
+                    if (ctx) {
+                        //patch subsampling bug
+                        //http://jsfiddle.net/gWY2a/24/
+                        let drawImage = ctx.drawImage;
+                        const newDrawImage = (_img, sx, sy, sw, sh, dx, dy, dw, dh) => {
+                            let vertSquashRatio = 1;
+                            // Detect if img param is indeed image
+                            if (!!_img && _img.nodeName === 'IMG') {
+                                vertSquashRatio = this.detectVerticalSquash(_img);
+                                if (typeof sw === 'undefined')
+                                    (sw = _img.naturalWidth);
+                                if (typeof sh === 'undefined')
+                                    (sh = _img.naturalHeight);
+                            }
+                            // Execute several cases (Firefox does not handle undefined as no param)
+                            // by call (apply is bad performance)
+                            if (arguments.length === 9)
+                                drawImage.call(ctx, _img, sx, sy, sw, sh, dx, dy, dw, dh / vertSquashRatio);
+                            else if (typeof sw !== 'undefined')
+                                drawImage.call(ctx, _img, sx, sy, sw, sh / vertSquashRatio);
+                            else
+                                drawImage.call(ctx, _img, sx, sy);
+                        };
+                        canvas.width = w;
+                        canvas.height = h;
+                        newDrawImage(img, 0, 0, w, h);
+                        let base64 = canvas.toDataURL('image/png');
+                        cb({
+                            nativeFile: file,
+                            lastModified: file.lastModified,
+                            lastModifiedDate: file.lastModifiedDate,
+                            name: file.name,
+                            size: file.size,
+                            type: file.type,
+                            data: base64
+                        }, e);
+                    }
+                    else {
+                        cb(file, e);
+                    }
+                    img.src = e.target.result;
+                    reader.readAsDataURL(file);
                 }
-                else {
-                    cb(file, e);
+                // 视频上传
+                else if (/video/g.test(file.type)) {
+                    this.setState({
+                        videoSrc: e.target.result
+                    });
                 }
             };
-            img.src = e.target.result;
         };
-        reader.readAsDataURL(file);
     }
     handleChange(e) {
         const langs = this.props.lang;
@@ -142,24 +156,31 @@ export default class Uploader extends React.Component {
     }
     renderFiles() {
         return this.props.files.map((file, idx) => {
-            let { url, error, status, onClick, ...others } = file;
-            let fileStyle = {
-                backgroundImage: `url(${url})`
-            };
+            let { url, error, status, onClick, type, ...others } = file;
             let cls = classNames({
                 'weui-uploader__file': true,
                 'weui-uploader__file_status': error || status
             });
-            if (onClick) {
-                deprecationWarning('File onClick', 'Uploader onFileClick', null);
+            if (/image/g.test(file.type)) {
+                let fileStyle = {
+                    backgroundImage: `url(${url})`
+                };
+                if (onClick) {
+                    deprecationWarning('File onClick', 'Uploader onFileClick', null);
+                }
+                let handleFileClick = onClick ? onClick : (e) => {
+                    if (this.props.onFileClick)
+                        this.props.onFileClick(e, file, idx);
+                };
+                return (React.createElement("li", Object.assign({ className: cls, key: idx, style: fileStyle, onClick: handleFileClick }, others), error || status ?
+                    React.createElement("div", { className: "weui-uploader__file-content" }, error ? React.createElement(Icon, { value: "warn" }) : status)
+                    : false));
             }
-            let handleFileClick = onClick ? onClick : (e) => {
-                if (this.props.onFileClick)
-                    this.props.onFileClick(e, file, idx);
-            };
-            return (React.createElement("li", Object.assign({ className: cls, key: idx, style: fileStyle, onClick: handleFileClick }, others), error || status ?
-                React.createElement("div", { className: "weui-uploader__file-content" }, error ? React.createElement(Icon, { value: "warn" }) : status)
-                : false));
+            else if (/video/g.test(file.type)) {
+                return (React.createElement("video", { src: this.state.videoSrc, className: cls }, error || status ?
+                    React.createElement("div", { className: "weui-uploader__file-content" }, error ? React.createElement(Icon, { value: "warn" }) : status)
+                    : false));
+            }
         });
     }
     render() {
