@@ -25,6 +25,7 @@ interface UploaderProps {
     onFileClick?: (e?: any, file?: File, idx?: any) => void;
     maxsize: number;
     onOversize: (val: number) => void;
+    accepted: 'image/*' | 'vedio/*';
 }
 declare type customFile = {
     nativeFile: Blob;
@@ -83,6 +84,11 @@ export default class Uploader extends React.Component<UploaderProps> {
          *
          */
         lang: PropTypes.Requireable<object>;
+        /**
+         * 接收文件类型
+         *
+         */
+        accepted: PropTypes.Requireable<string>;
     };
     static defaultProps: {
         maxCount: number;
@@ -93,6 +99,7 @@ export default class Uploader extends React.Component<UploaderProps> {
         onError: (error: any) => void;
         onOversize: (val: number) => void;
         lang: Lang;
+        accepted: string;
     };
     /**
      * Detecting vertical squash in loaded image.

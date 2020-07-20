@@ -163,7 +163,7 @@ export default class Uploader extends React.Component {
         });
     }
     render() {
-        const { className, maxCount, files, onChange, onFileClick, lang, maxsize, onOversize, ...others } = this.props;
+        const { className, maxCount, files, onChange, onFileClick, lang, maxsize, onOversize, accepted, ...others } = this.props;
         const inputProps = Object.assign({}, others);
         delete inputProps.onError;
         delete inputProps.maxWidth;
@@ -181,7 +181,7 @@ export default class Uploader extends React.Component {
                 React.createElement("ul", { className: "weui-uploader__files" }, this.renderFiles()),
                 React.createElement("div", { className: "weui-uploader__input-box" },
                     React.createElement("input", Object.assign({ ref: "uploader" //let react to reset after onchange
-                        , className: "weui-uploader__input", type: "file", accept: "video/*\uFF5Cimage/*", onChange: this.handleChange.bind(this) }, inputProps))))));
+                        , className: "weui-uploader__input", type: "file", accept: accepted, onChange: this.handleChange.bind(this) }, inputProps))))));
     }
 }
 Uploader.propTypes = {
@@ -224,7 +224,12 @@ Uploader.propTypes = {
      * languages object, with property `maxError`
      *
      */
-    lang: PropTypes.object
+    lang: PropTypes.object,
+    /**
+     * 接收文件类型
+     *
+     */
+    accepted: PropTypes.string,
 };
 Uploader.defaultProps = {
     maxCount: 4,
@@ -234,6 +239,7 @@ Uploader.defaultProps = {
     onChange: undefined,
     onError: undefined,
     onOversize: undefined,
-    lang: { maxError: maxCount => `最多只能上传${maxCount}张图片` }
+    lang: { maxError: maxCount => `最多只能上传${maxCount}张图片` },
+    accepted: 'image/*',
 };
 ;
