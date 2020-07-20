@@ -23,10 +23,9 @@ interface UploaderProps {
     onError: (error: any) => void;
     className?: any;
     onFileClick?: (e?: any, file?: File, idx?: any) => void;
-    imageWidth: number;
-    imageHeight: number;
-    maxSize: number;
-    oversize: (val: number) => void;
+    maxsize: number;
+    onOversize: (val: number) => void;
+    accepted: 'image/*' | 'vedio/*';
 }
 declare type customFile = {
     nativeFile: Blob;
@@ -56,20 +55,10 @@ export default class Uploader extends React.Component<UploaderProps> {
          */
         maxWidth: PropTypes.Requireable<number>;
         /**
-         * 图片宽
-         *
-         */
-        imageWidth: PropTypes.Requireable<number>;
-        /**
-         * 图片高
-         *
-         */
-        imageHeight: PropTypes.Requireable<number>;
-        /**
          * 文件大小限制
          *
          */
-        maxSize: PropTypes.Requireable<number>;
+        maxsize: PropTypes.Requireable<number>;
         /**
          * when file change, pass property `(event, file)`
          *
@@ -84,7 +73,7 @@ export default class Uploader extends React.Component<UploaderProps> {
          * 文件大小超出限制触发
          *
          */
-        oversize: PropTypes.Requireable<(...args: any[]) => any>;
+        onOversize: PropTypes.Requireable<(...args: any[]) => any>;
         /**
          * array of photos thumbnails to indicator status, include property `url`, `status`, `error`
          *
@@ -95,18 +84,22 @@ export default class Uploader extends React.Component<UploaderProps> {
          *
          */
         lang: PropTypes.Requireable<object>;
+        /**
+         * 接收文件类型
+         *
+         */
+        accepted: PropTypes.Requireable<string>;
     };
     static defaultProps: {
         maxCount: number;
-        imageWidth: number;
-        imageHeight: number;
-        maxSize: number;
+        maxsize: number;
         maxWidth: number;
         files: MyFile[];
         onChange: ((file: File, event?: any) => void) | undefined;
         onError: (error: any) => void;
-        oversize: (val: number) => void;
+        onOversize: (val: number) => void;
         lang: Lang;
+        accepted: string;
     };
     /**
      * Detecting vertical squash in loaded image.

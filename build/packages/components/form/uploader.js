@@ -48,10 +48,6 @@ export default class Uploader extends React.Component {
         return (ratio === 0) ? 1 : ratio;
     }
     handleFile(file, cb) {
-        if (file.size / (1024 * 1024) < this.props.maxSize) {
-            this.props.oversize(file.size);
-            return;
-        }
         let reader;
         if (typeof FileReader !== 'undefined') {
             reader = new FileReader();
@@ -133,6 +129,10 @@ export default class Uploader extends React.Component {
             if (!_files.hasOwnProperty(key))
                 continue;
             let file = _files[key];
+            if (file.size / (1024 * 1024) > this.props.maxsize) {
+                this.props.onOversize(file.size);
+                return;
+            }
             this.handleFile(file, (_file, _e) => {
                 if (this.props.onChange)
                     this.props.onChange(_file, _e);
@@ -144,9 +144,7 @@ export default class Uploader extends React.Component {
         return this.props.files.map((file, idx) => {
             let { url, error, status, onClick, ...others } = file;
             let fileStyle = {
-                backgroundImage: `url(${url})`,
-                width: this.props.imageWidth,
-                height: this.props.imageHeight
+                backgroundImage: `url(${url})`
             };
             let cls = classNames({
                 'weui-uploader__file': true,
@@ -165,7 +163,7 @@ export default class Uploader extends React.Component {
         });
     }
     render() {
-        const { className, maxCount, files, onChange, onFileClick, lang, imageWidth, imageHeight, ...others } = this.props;
+        const { className, maxCount, files, onChange, onFileClick, lang, maxsize, onOversize, accepted, ...others } = this.props;
         const inputProps = Object.assign({}, others);
         delete inputProps.onError;
         delete inputProps.maxWidth;
@@ -183,7 +181,7 @@ export default class Uploader extends React.Component {
                 React.createElement("ul", { className: "weui-uploader__files" }, this.renderFiles()),
                 React.createElement("div", { className: "weui-uploader__input-box" },
                     React.createElement("input", Object.assign({ ref: "uploader" //let react to reset after onchange
-                        , className: "weui-uploader__input", type: "file", accept: "video/*\uFF5Cimage/*", onChange: this.handleChange.bind(this) }, inputProps))))));
+                        , className: "weui-uploader__input", type: "file", accept: accepted, onChange: this.handleChange.bind(this) }, inputProps))))));
     }
 }
 Uploader.propTypes = {
@@ -198,20 +196,10 @@ Uploader.propTypes = {
      */
     maxWidth: PropTypes.number,
     /**
-     * 图片宽
-     *
-     */
-    imageWidth: PropTypes.number,
-    /**
-     * 图片高
-     *
-     */
-    imageHeight: PropTypes.number,
-    /**
      * 文件大小限制
      *
      */
-    maxSize: PropTypes.number,
+    maxsize: PropTypes.number,
     /**
      * when file change, pass property `(event, file)`
      *
@@ -226,7 +214,7 @@ Uploader.propTypes = {
      * 文件大小超出限制触发
      *
      */
-    oversize: PropTypes.func,
+    onOversize: PropTypes.func,
     /**
      * array of photos thumbnails to indicator status, include property `url`, `status`, `error`
      *
@@ -236,18 +224,22 @@ Uploader.propTypes = {
      * languages object, with property `maxError`
      *
      */
-    lang: PropTypes.object
+    lang: PropTypes.object,
+    /**
+     * 接收文件类型
+     *
+     */
+    accepted: PropTypes.string,
 };
 Uploader.defaultProps = {
     maxCount: 4,
-    imageWidth: 79,
-    imageHeight: 79,
-    maxSize: 5,
+    maxsize: 5,
     maxWidth: 500,
     files: [],
     onChange: undefined,
     onError: undefined,
-    oversize: undefined,
-    lang: { maxError: maxCount => `最多只能上传${maxCount}张图片` }
+    onOversize: undefined,
+    lang: { maxError: maxCount => `最多只能上传${maxCount}张图片` },
+    accepted: 'image/*',
 };
 ;

@@ -218,9 +218,9 @@ rimraf('build', ()=>{
     //Node individual components build
     createTask('Making Babel Modules', createNodeBuild()),
     createTask('Making UMD Dev Bundles', createBundle(Bundles.UMD_DEV)),
-    // createTask('Making UMD Production Bundles', createBundle(Bundles.UMD_PROD)),
-    // createTask('Making IIFE Dev Bundles', createBundle(Bundles.IIFE_DEV)),
-    // createTask('Making IIFE Production Bundles', createBundle(Bundles.IIFE_PROD)),
+    createTask('Making UMD Production Bundles', createBundle(Bundles.UMD_PROD)),
+    createTask('Making IIFE Dev Bundles', createBundle(Bundles.IIFE_DEV)),
+    createTask('Making IIFE Production Bundles', createBundle(Bundles.IIFE_PROD)),
     createTask('Making Demo Build', createWebpackBuild(webpackConfig) ),
     createTask('Making Docs Build', createWebpackBuild(webpackDocConfig) )
   );
