@@ -9,7 +9,7 @@ npm install --save react react-dom
 npm install --save weui@1.1.0 react-weui
 ```
 
-如果 React 已经安装
+如果 React 已经安装，注意weui的版本必须为weui@1.1.0，新版本很多样式不兼容
 
 ```
 npm install weui@1.1.0 react-weui --save

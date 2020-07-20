@@ -83,7 +83,9 @@ export default class inputDemo extends React.Component {
                 <FormCell switch>
                     <CellBody>Switch Label default</CellBody>
                     <CellFooter>
-                        {/* <Switch/> */}
+                        <Switch checked={this.state.checked} onChange={e => {
+                          this.setState({ checked: e });
+                        }}/>
                     </CellFooter>
                 </FormCell>
                 <FormCell switch>
