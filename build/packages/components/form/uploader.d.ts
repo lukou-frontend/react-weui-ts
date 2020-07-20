@@ -27,6 +27,9 @@ interface UploaderProps {
     onOversize: (val: number) => void;
     accepted: 'image/*' | 'vedio/*';
 }
+interface UploaderStates {
+    videoLength: number;
+}
 declare type customFile = {
     nativeFile: Blob;
     lastModified: number;
@@ -42,7 +45,8 @@ declare type renderOnloadEvent = {
         result: any;
     };
 };
-export default class Uploader extends React.Component<UploaderProps> {
+export default class Uploader extends React.Component<UploaderProps, UploaderStates> {
+    constructor(props: UploaderProps);
     static propTypes: {
         /**
          * max amount of allow file

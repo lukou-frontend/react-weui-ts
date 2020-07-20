@@ -5,6 +5,12 @@ import Icon from '../icon';
 import classNames from '../../utils/classnames';
 import deprecationWarning from '../../utils/deprecationWarning';
 export default class Uploader extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            videoLength: document.querySelectorAll('video').length
+        };
+    }
     /**
      * Detecting vertical squash in loaded image.
      * Fixes a bug which squash image vertically while drawing into canvas for some images.
@@ -127,6 +133,9 @@ export default class Uploader extends React.Component {
                 li.appendChild(video);
                 let ul = document.querySelector('ul');
                 ul.appendChild(li);
+                this.setState({
+                    videoLength: document.querySelectorAll('video').length
+                });
             }
         };
         reader.readAsDataURL(file);
@@ -136,7 +145,7 @@ export default class Uploader extends React.Component {
         let _files = e.target.files;
         if (!_files || _files.length === 0)
             return;
-        if (this.props.files.length >= this.props.maxCount) {
+        if (this.props.files.length + this.state.videoLength >= this.props.maxCount) {
             this.props.onError(langs.maxError(this.props.maxCount));
             return;
         }
@@ -190,7 +199,7 @@ export default class Uploader extends React.Component {
         return (React.createElement("div", { className: cls },
             React.createElement("div", { className: "weui-uploader__hd" },
                 React.createElement("div", { className: "weui-uploader__info" },
-                    files.length,
+                    files.length + this.state.videoLength,
                     "/",
                     maxCount)),
             React.createElement("div", { className: "weui-uploader__bd" },
