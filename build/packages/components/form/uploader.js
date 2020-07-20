@@ -5,10 +5,6 @@ import Icon from '../icon';
 import classNames from '../../utils/classnames';
 import deprecationWarning from '../../utils/deprecationWarning';
 export default class Uploader extends React.Component {
-    constructor(props) {
-        super(props);
-        this.uploaderRef = React.useRef();
-    }
     /**
      * Detecting vertical squash in loaded image.
      * Fixes a bug which squash image vertically while drawing into canvas for some images.
@@ -52,10 +48,6 @@ export default class Uploader extends React.Component {
         return (ratio === 0) ? 1 : ratio;
     }
     handleFile(file, cb) {
-        if (file.size / (1024 * 1024) < this.props.maxsize) {
-            this.props.onOversize(file.size);
-            return;
-        }
         let reader;
         if (typeof FileReader !== 'undefined') {
             reader = new FileReader();
@@ -137,13 +129,13 @@ export default class Uploader extends React.Component {
             if (!_files.hasOwnProperty(key))
                 continue;
             let file = _files[key];
+            if (file.size / (1024 * 1024) < this.props.maxsize) {
+                this.props.onOversize(file.size);
+            }
             this.handleFile(file, (_file, _e) => {
-                if (file.size / (1024 * 1024) < this.props.maxsize) {
-                    this.props.onOversize(file.size);
-                }
                 if (this.props.onChange)
                     this.props.onChange(_file, _e);
-                ReactDOM.findDOMNode(this.uploaderRef);
+                ReactDOM.findDOMNode(this.refs.uploader);
             });
         }
     }
@@ -170,7 +162,7 @@ export default class Uploader extends React.Component {
         });
     }
     render() {
-        const { className, maxCount, files, onChange, onFileClick, myFileType, onOversize, maxsize, lang, ...others } = this.props;
+        const { className, maxCount, files, onChange, onFileClick, lang, maxsize, onOversize, ...others } = this.props;
         const inputProps = Object.assign({}, others);
         delete inputProps.onError;
         delete inputProps.maxWidth;
@@ -187,7 +179,8 @@ export default class Uploader extends React.Component {
             React.createElement("div", { className: "weui-uploader__bd" },
                 React.createElement("ul", { className: "weui-uploader__files" }, this.renderFiles()),
                 React.createElement("div", { className: "weui-uploader__input-box" },
-                    React.createElement("input", Object.assign({ ref: this.uploaderRef, className: "weui-uploader__input", type: "file", accept: "video/*\uFF5Cimage/*", onChange: this.handleChange.bind(this) }, inputProps))))));
+                    React.createElement("input", Object.assign({ ref: "uploader" //let react to reset after onchange
+                        , className: "weui-uploader__input", type: "file", accept: "video/*\uFF5Cimage/*", onChange: this.handleChange.bind(this) }, inputProps))))));
     }
 }
 Uploader.propTypes = {
@@ -206,11 +199,6 @@ Uploader.propTypes = {
      *
      */
     maxsize: PropTypes.number,
-    /**
-     * 文件类型
-     *
-     */
-    myFileType: PropTypes.string,
     /**
      * when file change, pass property `(event, file)`
      *
@@ -245,7 +233,6 @@ Uploader.defaultProps = {
     onChange: undefined,
     onError: undefined,
     onOversize: undefined,
-    lang: { maxError: maxCount => `最多只能上传${maxCount}张图片` },
-    myFileType: 'image',
+    lang: { maxError: maxCount => `最多只能上传${maxCount}张图片` }
 };
 ;
