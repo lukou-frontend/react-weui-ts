@@ -38,7 +38,7 @@ declare const Switch: {
     };
     defaultProps: {
         checked: boolean;
-        size: "small" | "default";
+        size: "default" | "small";
     };
 };
 export default Switch;
