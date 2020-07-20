@@ -16,7 +16,8 @@
     "test": "mocha",
     "test:watch": "npm run test -- --watch",
     "coverage": "npm run lint & nyc --require babel-core/register mocha && nyc report --reporter=lcov",
-    "postpublish": "gh-pages -d ./build/demo"
+    "postpublish": "gh-pages -d ./build/demo",
+    "deploy:doc": "scp -r build/demo/* lukou@121.41.121.230:/home/lukou/tmp/coupon_qiuyu/react-weui"
   },
   "repository": {
     "type": "git",
