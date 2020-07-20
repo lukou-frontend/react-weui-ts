@@ -22,7 +22,6 @@ const Switch = (props: SwitchProps) => {
         [className]: className
     });
     const inputProps: any = Object.assign({}, others);
-    checked && (inputProps['checked'] = 'checked')
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       onChange && onChange(e.target.checked, e)
@@ -30,7 +29,7 @@ const Switch = (props: SwitchProps) => {
 
     return (
         <div>
-            <input className={cls} type="checkbox" {...inputProps} onChange={handleChange} />
+            <input className={cls} type="checkbox" checked={checked} {...inputProps} onChange={handleChange} />
             <span className="weui-icon-checked"></span>
         </div>
     );

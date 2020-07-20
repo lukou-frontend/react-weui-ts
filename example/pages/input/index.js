@@ -32,7 +32,8 @@ export default class inputDemo extends React.Component {
         super(props);
 
         this.state = {
-            showToptips: false
+            showToptips: false,
+            checked: false
         };
     }
 
@@ -80,9 +81,17 @@ export default class inputDemo extends React.Component {
             <CellsTitle>Switch</CellsTitle>
             <Form>
                 <FormCell switch>
-                    <CellBody>Switch Label</CellBody>
+                    <CellBody>Switch Label default</CellBody>
                     <CellFooter>
-                        <Switch/>
+                        {/* <Switch/> */}
+                    </CellFooter>
+                </FormCell>
+                <FormCell switch>
+                    <CellBody>Switch Label small</CellBody>
+                    <CellFooter>
+                        <Switch size="small" checked={this.state.checked} onChange={e => {
+                          this.setState({ checked: e });
+                        }}/>
                     </CellFooter>
                 </FormCell>
             </Form>
