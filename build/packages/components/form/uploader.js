@@ -5,6 +5,10 @@ import Icon from '../icon';
 import classNames from '../../utils/classnames';
 import deprecationWarning from '../../utils/deprecationWarning';
 export default class Uploader extends React.Component {
+    constructor(props) {
+        super(props);
+        this.uploaderRef = React.useRef();
+    }
     /**
      * Detecting vertical squash in loaded image.
      * Fixes a bug which squash image vertically while drawing into canvas for some images.
@@ -48,8 +52,8 @@ export default class Uploader extends React.Component {
         return (ratio === 0) ? 1 : ratio;
     }
     handleFile(file, cb) {
-        if (file.size / (1024 * 1024) < this.props.maxSize) {
-            this.props.oversize(file.size);
+        if (file.size / (1024 * 1024) < this.props.maxsize) {
+            this.props.onOversize(file.size);
             return;
         }
         let reader;
@@ -136,7 +140,7 @@ export default class Uploader extends React.Component {
             this.handleFile(file, (_file, _e) => {
                 if (this.props.onChange)
                     this.props.onChange(_file, _e);
-                ReactDOM.findDOMNode(this.refs.uploader);
+                ReactDOM.findDOMNode(this.uploaderRef);
             });
         }
     }
@@ -182,8 +186,7 @@ export default class Uploader extends React.Component {
             React.createElement("div", { className: "weui-uploader__bd" },
                 React.createElement("ul", { className: "weui-uploader__files" }, this.renderFiles()),
                 React.createElement("div", { className: "weui-uploader__input-box" },
-                    React.createElement("input", Object.assign({ ref: "uploader" //let react to reset after onchange
-                        , className: "weui-uploader__input", type: "file", accept: "video/*\uFF5Cimage/*", onChange: this.handleChange.bind(this) }, inputProps))))));
+                    React.createElement("input", Object.assign({ ref: this.uploaderRef, className: "weui-uploader__input", type: "file", accept: "video/*\uFF5Cimage/*", onChange: this.handleChange.bind(this) }, inputProps))))));
     }
 }
 Uploader.propTypes = {
@@ -211,7 +214,7 @@ Uploader.propTypes = {
      * 文件大小限制
      *
      */
-    maxSize: PropTypes.number,
+    maxsize: PropTypes.number,
     /**
      * when file change, pass property `(event, file)`
      *
@@ -226,7 +229,7 @@ Uploader.propTypes = {
      * 文件大小超出限制触发
      *
      */
-    oversize: PropTypes.func,
+    onOversize: PropTypes.func,
     /**
      * array of photos thumbnails to indicator status, include property `url`, `status`, `error`
      *
@@ -242,12 +245,12 @@ Uploader.defaultProps = {
     maxCount: 4,
     imageWidth: 79,
     imageHeight: 79,
-    maxSize: 5,
+    maxsize: 5,
     maxWidth: 500,
     files: [],
     onChange: undefined,
     onError: undefined,
-    oversize: undefined,
+    onOversize: undefined,
     lang: { maxError: maxCount => `最多只能上传${maxCount}张图片` }
 };
 ;

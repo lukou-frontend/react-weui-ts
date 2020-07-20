@@ -25,8 +25,8 @@ interface UploaderProps {
     onFileClick?: (e?: any, file?: File, idx?: any) => void;
     imageWidth: number;
     imageHeight: number;
-    maxSize: number;
-    oversize: (val: number) => void;
+    maxsize: number;
+    onOversize: (val: number) => void;
 }
 declare type customFile = {
     nativeFile: Blob;
@@ -44,6 +44,8 @@ declare type renderOnloadEvent = {
     };
 };
 export default class Uploader extends React.Component<UploaderProps> {
+    uploaderRef: any;
+    constructor(props: UploaderProps);
     static propTypes: {
         /**
          * max amount of allow file
@@ -69,7 +71,7 @@ export default class Uploader extends React.Component<UploaderProps> {
          * 文件大小限制
          *
          */
-        maxSize: PropTypes.Requireable<number>;
+        maxsize: PropTypes.Requireable<number>;
         /**
          * when file change, pass property `(event, file)`
          *
@@ -84,7 +86,7 @@ export default class Uploader extends React.Component<UploaderProps> {
          * 文件大小超出限制触发
          *
          */
-        oversize: PropTypes.Requireable<(...args: any[]) => any>;
+        onOversize: PropTypes.Requireable<(...args: any[]) => any>;
         /**
          * array of photos thumbnails to indicator status, include property `url`, `status`, `error`
          *
@@ -100,12 +102,12 @@ export default class Uploader extends React.Component<UploaderProps> {
         maxCount: number;
         imageWidth: number;
         imageHeight: number;
-        maxSize: number;
+        maxsize: number;
         maxWidth: number;
         files: MyFile[];
         onChange: ((file: File, event?: any) => void) | undefined;
         onError: (error: any) => void;
-        oversize: (val: number) => void;
+        onOversize: (val: number) => void;
         lang: Lang;
     };
     /**
