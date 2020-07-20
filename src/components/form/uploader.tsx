@@ -32,6 +32,9 @@ interface UploaderProps {
   onOversize: (val: number) => void,
   accepted: 'image/*' | 'vedio/*'
 }
+interface UploaderStates {
+  videoLength: number,
+}
 type customFile = {
   nativeFile: Blob,
   lastModified: number,
@@ -45,7 +48,13 @@ type handleFileCallback = (file: customFile | Blob, e: renderOnloadEvent) => voi
 type renderOnloadEvent = {
   target: { result: any }
 }
-export default class Uploader extends React.Component<UploaderProps> {
+export default class Uploader extends React.Component<UploaderProps, UploaderStates> {
+  constructor (props: UploaderProps) {
+    super(props)
+    this.state = {
+      videoLength: document.querySelectorAll('video').length
+    }
+  }
   static propTypes = {
     /**
      * max amount of allow file
@@ -225,6 +234,9 @@ export default class Uploader extends React.Component<UploaderProps> {
         li.appendChild(video)
         let ul = document.querySelector('ul') as HTMLUListElement
         ul.appendChild(li)
+        this.setState({
+          videoLength: document.querySelectorAll('video').length
+        })
       }
 
     };
@@ -237,7 +249,7 @@ export default class Uploader extends React.Component<UploaderProps> {
 
     if (!_files || _files.length === 0) return;
 
-    if (this.props.files.length >= this.props.maxCount) {
+    if (this.props.files.length + this.state.videoLength >= this.props.maxCount) {
       this.props.onError(langs.maxError(this.props.maxCount));
       return;
     }
@@ -305,7 +317,7 @@ export default class Uploader extends React.Component<UploaderProps> {
     return (
       <div className={cls}>
         <div className="weui-uploader__hd">
-          <div className="weui-uploader__info">{files.length}/{maxCount}</div>
+          <div className="weui-uploader__info">{files.length + this.state.videoLength}/{maxCount}</div>
         </div>
         <div className="weui-uploader__bd">
           <ul className="weui-uploader__files">
