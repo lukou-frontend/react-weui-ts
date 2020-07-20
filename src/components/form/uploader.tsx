@@ -223,8 +223,9 @@ export default class Uploader extends React.Component<UploaderProps> {
     for (let key in _files) {
       if (!_files.hasOwnProperty(key)) continue;
       let file = _files[key];
-      if(file.size / (1024 * 1024) < this.props.maxsize) {
+      if(file.size / (1024 * 1024) > this.props.maxsize) {
         this.props.onOversize(file.size)
+        return
       }
       this.handleFile(file, (_file: File, _e: renderOnloadEvent) => {
         if (this.props.onChange) this.props.onChange(_file, _e);

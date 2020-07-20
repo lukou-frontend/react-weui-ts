@@ -2138,8 +2138,9 @@
               for (var key in _files) {
                   if (!_files.hasOwnProperty(key)) continue;
                   var file = _files[key];
-                  if (file.size / (1024 * 1024) < this.props.maxsize) {
+                  if (file.size / (1024 * 1024) > this.props.maxsize) {
                       this.props.onOversize(file.size);
+                      return;
                   }
                   this.handleFile(file, function (_file, _e) {
                       if (_this3.props.onChange) _this3.props.onChange(_file, _e);
