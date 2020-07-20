@@ -2,7 +2,7 @@
  * @Author: 刘佑祥
  * @LastEditors: 刘佑祥
  * @LastEditTime: 2020-07-17 13:52:56
- */ 
+ */
 /**
  * Created by jf on 15/10/27.
  */
@@ -40,3 +40,5 @@ export { default as PullToRefresh } from './components/ptr';
 export { default as InfiniteLoader } from './components/infiniteloader';
 export { default as Swiper } from './components/swiper';
 export { default as Page } from './components/page';
+// 新增
+export { default as SwipeAction } from './components/swipeaction/index';

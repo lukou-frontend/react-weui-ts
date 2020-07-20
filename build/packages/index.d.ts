@@ -31,3 +31,4 @@ export { default as PullToRefresh } from './components/ptr';
 export { default as InfiniteLoader } from './components/infiniteloader';
 export { default as Swiper } from './components/swiper';
 export { default as Page } from './components/page';
+export { default as SwipeAction } from './components/swipeaction/index';

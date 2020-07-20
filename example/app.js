@@ -18,7 +18,7 @@ import 'babel-polyfill';
 const { Home, Button, List, Input, Toast, Dialog, Progress, Msg, Article,
 ActionSheet, Icons, Panel, NavBar, NavBar2, TabBar, TabBar2, SearchBar, Gallery,
 Uploader, Flex, Footer, Grid, LoadMore, Preview, MsgDemo, MsgSuccess, MsgFail, TopTips,
-Popup, Picker, Slider, Badge, PTR, Infinite, Swiper, Page
+Popup, Picker, Slider, Badge, PTR, Infinite, Swiper, Page, SwipeAction
 } = Pages;
 
 window.addEventListener('load', () => {
@@ -60,7 +60,8 @@ const routes = [
     { path: '/ptr', component: PTR },
     { path: '/infinite', component: Infinite },
     { path: '/swiper', component: Swiper },
-    { path: '/page', component: Page }
+    { path: '/page', component: Page },
+    { path: '/swipe-action', component: SwipeAction },
 ];
 
 

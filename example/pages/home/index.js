@@ -144,6 +144,10 @@ const menus = [
             {
                 label: 'Infinite Loader',
                 to: '/infinite'
+            },
+            {
+                label: 'SwipeAction滑动操作',
+                to: '/swipe-action'
             }
         ]
     },

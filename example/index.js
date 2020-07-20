@@ -34,6 +34,7 @@ import PTR from './pages/ptr';
 import Infinite from './pages/infiniteloader';
 import Swiper from './pages/swiper';
 import Page from './pages/page';
+import SwipeAction from './pages/swipeaction';
 
 export default {
     Home,
@@ -71,5 +72,6 @@ export default {
     PTR,
     Infinite,
     Swiper,
-    Page
+    Page,
+    SwipeAction
 };

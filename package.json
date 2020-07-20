@@ -41,6 +41,7 @@
   "dependencies": {
     "babel-runtime": "^6.26.0",
     "prop-types": "^15.7.2",
+    "rc-swipeout": "^2.0.11",
     "weui": "^1.1.0"
   },
   "devDependencies": {
