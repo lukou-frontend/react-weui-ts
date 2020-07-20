@@ -27,9 +27,6 @@ interface UploaderProps {
     onOversize: (val: number) => void;
     accepted: 'image/*' | 'vedio/*';
 }
-interface UploaderStates {
-    videoSrc: string;
-}
 declare type customFile = {
     nativeFile: Blob;
     lastModified: number;
@@ -45,8 +42,7 @@ declare type renderOnloadEvent = {
         result: any;
     };
 };
-export default class Uploader extends React.Component<UploaderProps, UploaderStates> {
-    constructor(props: UploaderProps);
+export default class Uploader extends React.Component<UploaderProps> {
     static propTypes: {
         /**
          * max amount of allow file
@@ -59,7 +55,7 @@ export default class Uploader extends React.Component<UploaderProps, UploaderSta
          */
         maxWidth: PropTypes.Requireable<number>;
         /**
-         * 文件大小限制
+         * 文件大小上限(单位：M)
          *
          */
         maxsize: PropTypes.Requireable<number>;
@@ -89,7 +85,7 @@ export default class Uploader extends React.Component<UploaderProps, UploaderSta
          */
         lang: PropTypes.Requireable<object>;
         /**
-         * 接收文件类型
+         * 接收文件类型(取值为'image/*'时上传图片，为'video/*'时上传视频)
          *
          */
         accepted: PropTypes.Requireable<string>;
@@ -114,7 +110,7 @@ export default class Uploader extends React.Component<UploaderProps, UploaderSta
     detectVerticalSquash(img: any): number | undefined;
     handleFile(file: Blob, cb: handleFileCallback): void;
     handleChange(e: React.ChangeEvent<HTMLInputElement>): void;
-    renderFiles(): (JSX.Element | undefined)[];
+    renderFiles(): JSX.Element[];
     render(): JSX.Element;
 }
 export {};

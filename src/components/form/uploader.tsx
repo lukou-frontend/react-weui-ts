@@ -58,7 +58,7 @@ export default class Uploader extends React.Component<UploaderProps> {
      */
     maxWidth: PropTypes.number,
     /**
-     * 文件大小限制
+     * 文件大小上限(单位：M)
      *
      */
     maxsize: PropTypes.number,
@@ -88,7 +88,7 @@ export default class Uploader extends React.Component<UploaderProps> {
      */
     lang: PropTypes.object,
     /**
-     * 接收文件类型
+     * 接收文件类型(取值为'image/*'时上传图片，为'video/*'时上传视频)
      *
      */
     accepted: PropTypes.string,

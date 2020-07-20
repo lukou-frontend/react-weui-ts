@@ -5,12 +5,6 @@ import Icon from '../icon';
 import classNames from '../../utils/classnames';
 import deprecationWarning from '../../utils/deprecationWarning';
 export default class Uploader extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            videoSrc: ''
-        };
-    }
     /**
      * Detecting vertical squash in loaded image.
      * Fixes a bug which squash image vertically while drawing into canvas for some images.
@@ -63,16 +57,16 @@ export default class Uploader extends React.Component {
                 reader = new window.FileReader();
         }
         reader.onload = (e) => {
-            let img;
-            if (typeof img !== 'undefined') {
-                img = new Image();
-            }
-            else {
-                if (window.Image)
-                    img = new window.Image();
-            }
-            img.onload = () => {
-                if (/image/g.test(file.type)) {
+            if (/image/g.test(file.type)) {
+                let img;
+                if (typeof img !== 'undefined') {
+                    img = new Image();
+                }
+                else {
+                    if (window.Image)
+                        img = new window.Image();
+                }
+                img.onload = () => {
                     let w = Math.min(this.props.maxWidth, img.width);
                     let h = img.height * (w / img.width);
                     let canvas = document.createElement('canvas');
@@ -118,17 +112,24 @@ export default class Uploader extends React.Component {
                     else {
                         cb(file, e);
                     }
-                    img.src = e.target.result;
-                    reader.readAsDataURL(file);
-                }
-                // 视频上传
-                else if (/video/g.test(file.type)) {
-                    this.setState({
-                        videoSrc: e.target.result
-                    });
-                }
-            };
+                };
+                img.src = e.target.result;
+            }
+            else if (/video/g.test(file.type)) {
+                let video = document.createElement('video');
+                video.src = e.target.result;
+                video.width = 79;
+                video.height = 79;
+                video.controls = true;
+                video.muted = true;
+                let li = document.createElement('li');
+                li.classList.add('weui-uploader__file');
+                li.appendChild(video);
+                let ul = document.querySelector('ul');
+                ul.appendChild(li);
+            }
         };
+        reader.readAsDataURL(file);
     }
     handleChange(e) {
         const langs = this.props.lang;
@@ -156,31 +157,25 @@ export default class Uploader extends React.Component {
     }
     renderFiles() {
         return this.props.files.map((file, idx) => {
-            let { url, error, status, onClick, type, ...others } = file;
+            console.log(file);
+            let { url, error, status, onClick, ...others } = file;
+            let fileStyle = {
+                backgroundImage: `url(${url})`
+            };
             let cls = classNames({
                 'weui-uploader__file': true,
                 'weui-uploader__file_status': error || status
             });
-            if (/image/g.test(file.type)) {
-                let fileStyle = {
-                    backgroundImage: `url(${url})`
-                };
-                if (onClick) {
-                    deprecationWarning('File onClick', 'Uploader onFileClick', null);
-                }
-                let handleFileClick = onClick ? onClick : (e) => {
-                    if (this.props.onFileClick)
-                        this.props.onFileClick(e, file, idx);
-                };
-                return (React.createElement("li", Object.assign({ className: cls, key: idx, style: fileStyle, onClick: handleFileClick }, others), error || status ?
-                    React.createElement("div", { className: "weui-uploader__file-content" }, error ? React.createElement(Icon, { value: "warn" }) : status)
-                    : false));
+            if (onClick) {
+                deprecationWarning('File onClick', 'Uploader onFileClick', null);
             }
-            else if (/video/g.test(file.type)) {
-                return (React.createElement("video", { src: this.state.videoSrc, className: cls }, error || status ?
-                    React.createElement("div", { className: "weui-uploader__file-content" }, error ? React.createElement(Icon, { value: "warn" }) : status)
-                    : false));
-            }
+            let handleFileClick = onClick ? onClick : (e) => {
+                if (this.props.onFileClick)
+                    this.props.onFileClick(e, file, idx);
+            };
+            return (React.createElement("li", Object.assign({ className: cls, key: idx, style: fileStyle, onClick: handleFileClick }, others), error || status ?
+                React.createElement("div", { className: "weui-uploader__file-content" }, error ? React.createElement(Icon, { value: "warn" }) : status)
+                : false));
         });
     }
     render() {
@@ -217,7 +212,7 @@ Uploader.propTypes = {
      */
     maxWidth: PropTypes.number,
     /**
-     * 文件大小限制
+     * 文件大小上限(单位：M)
      *
      */
     maxsize: PropTypes.number,
@@ -247,7 +242,7 @@ Uploader.propTypes = {
      */
     lang: PropTypes.object,
     /**
-     * 接收文件类型
+     * 接收文件类型(取值为'image/*'时上传图片，为'video/*'时上传视频)
      *
      */
     accepted: PropTypes.string,
