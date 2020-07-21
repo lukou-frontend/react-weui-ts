@@ -33,7 +33,8 @@ interface UploaderProps {
   onOversize: (val: number) => void,
   type: 'image' | 'vedio',
   onDelete: (file: File, id: number) => void,
-  currentVideo: string
+  currentVideo: (val: string) => void,
+  showTitle: boolean
 }
 type customFile = {
   nativeFile: Blob,
@@ -103,7 +104,16 @@ export default class Uploader extends React.Component<UploaderProps> {
      *
      */
     type: PropTypes.string,
-    currentVideo: PropTypes.string
+    /**
+     * 当前视频src
+     *
+     */
+    currentVideo: PropTypes.func,
+    /**
+     * 是否展示标题
+     *
+     */
+    showTitle: PropTypes.bool
   };
 
   static defaultProps = {
@@ -117,7 +127,8 @@ export default class Uploader extends React.Component<UploaderProps> {
     onDelete: undefined as any as UploaderProps['onDelete'],
     lang: { maxError: maxCount => `最多只能上传${maxCount}张图片` } as UploaderProps['lang'],
     type: 'image' as UploaderProps['type'],
-    currentVideo: '' as UploaderProps['currentVideo']
+    currentVideo: undefined as unknown as UploaderProps['currentVideo'],
+    showTitle: false as UploaderProps['showTitle']
   };
 
   /**
@@ -228,6 +239,7 @@ export default class Uploader extends React.Component<UploaderProps> {
         video.muted = true
         video.autoplay = true
         video.preload = 'preload'
+        this.props.currentVideo(e.target.result)
         video.addEventListener('loadeddata', function () {
           let canvas = document.createElement('canvas');
           let ctx = canvas.getContext('2d');
@@ -303,7 +315,7 @@ export default class Uploader extends React.Component<UploaderProps> {
         top: '50%',
         left: '50%',
         transform: 'translate(-50%, -50%)',
-        filter:'brightness(0%)'
+        filter: 'brightness(0%)'
       }
       let cls = classNames({
         'weui-uploader__file': true,
@@ -354,7 +366,7 @@ export default class Uploader extends React.Component<UploaderProps> {
   }
 
   render() {
-    const { className, maxCount, files, onChange, onFileClick, lang, maxsize, onOversize, type, onDelete, currentVideo, ...others } = this.props;
+    const { className, maxCount, files, onChange, onFileClick, lang, maxsize, onOversize, type, onDelete, currentVideo, showTitle, ...others } = this.props;
     const inputProps = Object.assign({}, others);
     delete inputProps.onError;
     delete inputProps.maxWidth;
@@ -367,9 +379,13 @@ export default class Uploader extends React.Component<UploaderProps> {
 
     return (
       <div className={cls}>
-        <div className="weui-uploader__hd">
-          <div className="weui-uploader__info">{files.length}/{maxCount}</div>
-        </div>
+        {
+          showTitle ?
+            <div className="weui-uploader__hd">
+              <div className="weui-uploader__info">{files.length}/{maxCount}</div>
+            </div> :
+            null
+        }
         <div className="weui-uploader__bd">
           <ul className="weui-uploader__files">
             {this.renderFiles()}

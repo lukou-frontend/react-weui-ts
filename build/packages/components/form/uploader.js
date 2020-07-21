@@ -121,6 +121,7 @@ export default class Uploader extends React.Component {
                 video.muted = true;
                 video.autoplay = true;
                 video.preload = 'preload';
+                this.props.currentVideo(e.target.result);
                 video.addEventListener('loadeddata', function () {
                     let canvas = document.createElement('canvas');
                     let ctx = canvas.getContext('2d');
@@ -231,7 +232,7 @@ export default class Uploader extends React.Component {
         });
     }
     render() {
-        const { className, maxCount, files, onChange, onFileClick, lang, maxsize, onOversize, type, onDelete, currentVideo, ...others } = this.props;
+        const { className, maxCount, files, onChange, onFileClick, lang, maxsize, onOversize, type, onDelete, currentVideo, showTitle, ...others } = this.props;
         const inputProps = Object.assign({}, others);
         delete inputProps.onError;
         delete inputProps.maxWidth;
@@ -240,11 +241,13 @@ export default class Uploader extends React.Component {
             [className]: className
         });
         return (React.createElement("div", { className: cls },
-            React.createElement("div", { className: "weui-uploader__hd" },
-                React.createElement("div", { className: "weui-uploader__info" },
-                    files.length,
-                    "/",
-                    maxCount)),
+            showTitle ?
+                React.createElement("div", { className: "weui-uploader__hd" },
+                    React.createElement("div", { className: "weui-uploader__info" },
+                        files.length,
+                        "/",
+                        maxCount)) :
+                null,
             React.createElement("div", { className: "weui-uploader__bd" },
                 React.createElement("ul", { className: "weui-uploader__files" }, this.renderFiles()),
                 React.createElement("div", { className: "weui-uploader__input-box" },
@@ -303,7 +306,16 @@ Uploader.propTypes = {
      *
      */
     type: PropTypes.string,
-    currentVideo: PropTypes.string
+    /**
+     * 刚刚上传的视频
+     *
+     */
+    currentVideo: PropTypes.func,
+    /**
+     * 是否展示标题
+     *
+     */
+    showTitle: PropTypes.bool
 };
 Uploader.defaultProps = {
     maxCount: 4,
@@ -316,6 +328,7 @@ Uploader.defaultProps = {
     onDelete: undefined,
     lang: { maxError: maxCount => `最多只能上传${maxCount}张图片` },
     type: 'image',
-    currentVideo: ''
+    currentVideo: undefined,
+    showTitle: false
 };
 ;
