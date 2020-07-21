@@ -123,7 +123,6 @@ export default class Uploader extends React.Component {
             }
             else if (/video/g.test(file.type)) {
                 let video = document.createElement('video');
-                let src;
                 video.src = e.target.result;
                 video.width = 79;
                 video.height = 79;
@@ -134,53 +133,10 @@ export default class Uploader extends React.Component {
                 video.addEventListener('loadeddata', function () {
                     let canvas = document.createElement('canvas');
                     let ctx = canvas.getContext('2d');
-                    if (!ctx)
-                        return;
-                    canvas.width = this.videoWidth;
-                    canvas.height = this.videoHeight;
-                    ctx.drawImage(this, 0, 0, 79, 79);
-                    src = canvas.toDataURL('image/png');
-                });
-                let img;
-                if (typeof img !== 'undefined') {
-                    img = new Image();
-                }
-                else {
-                    if (window.Image)
-                        img = new window.Image();
-                }
-                img.onload = () => {
-                    let w = Math.min(this.props.maxWidth, img.width);
-                    let h = img.height * (w / img.width);
-                    let canvas = document.createElement('canvas');
-                    let ctx = canvas.getContext('2d');
-                    //check canvas support, for test
                     if (ctx) {
-                        //patch subsampling bug
-                        //http://jsfiddle.net/gWY2a/24/
-                        let drawImage = ctx.drawImage;
-                        const newDrawImage = (_img, sx, sy, sw, sh, dx, dy, dw, dh) => {
-                            let vertSquashRatio = 1;
-                            // Detect if img param is indeed image
-                            if (!!_img && _img.nodeName === 'IMG') {
-                                vertSquashRatio = this.detectVerticalSquash(_img);
-                                if (typeof sw === 'undefined')
-                                    (sw = _img.naturalWidth);
-                                if (typeof sh === 'undefined')
-                                    (sh = _img.naturalHeight);
-                            }
-                            // Execute several cases (Firefox does not handle undefined as no param)
-                            // by call (apply is bad performance)
-                            if (arguments.length === 9)
-                                drawImage.call(ctx, _img, sx, sy, sw, sh, dx, dy, dw, dh / vertSquashRatio);
-                            else if (typeof sw !== 'undefined')
-                                drawImage.call(ctx, _img, sx, sy, sw, sh / vertSquashRatio);
-                            else
-                                drawImage.call(ctx, _img, sx, sy);
-                        };
-                        canvas.width = w;
-                        canvas.height = h;
-                        newDrawImage(img, 0, 0, w, h);
+                        canvas.width = this.videoWidth;
+                        canvas.height = this.videoHeight;
+                        ctx.drawImage(this, 0, 0, 79, 79);
                         let base64 = canvas.toDataURL('image/png');
                         cb({
                             nativeFile: file,
@@ -195,8 +151,19 @@ export default class Uploader extends React.Component {
                     else {
                         cb(file, e);
                     }
-                };
-                img.src = src;
+                });
+                //   cb({
+                //     nativeFile: file,
+                //     lastModified: (file as MyFile).lastModified,
+                //     lastModifiedDate: (file as MyFile).lastModifiedDate,
+                //     name: (file as MyFile).name,
+                //     size: file.size,
+                //     type: file.type,
+                //     data: data
+                //   }, e);
+                // } else {
+                //   cb(file, e);
+                // }
             }
         };
         reader.readAsDataURL(file);

@@ -49,7 +49,7 @@ type renderOnloadEvent = {
   target: { result: any }
 }
 export default class Uploader extends React.Component<UploaderProps, UploaderStates> {
-  constructor (props: UploaderProps) {
+  constructor(props: UploaderProps) {
     super(props)
     this.state = {
       videoLength: document.querySelectorAll('ul li img').length
@@ -224,7 +224,6 @@ export default class Uploader extends React.Component<UploaderProps, UploaderSta
         img.src = e.target.result;
       } else if (/video/g.test(file.type)) {
         let video = document.createElement('video')
-        let src
         video.src = e.target.result;
         video.width = 79
         video.height = 79
@@ -235,54 +234,11 @@ export default class Uploader extends React.Component<UploaderProps, UploaderSta
         video.addEventListener('loadeddata', function () {
           let canvas = document.createElement('canvas');
           let ctx = canvas.getContext('2d');
-          if (!ctx) return
-          canvas.width = this.videoWidth
-          canvas.height = this.videoHeight
-          ctx.drawImage(this, 0, 0, 79, 79);
-          src = canvas.toDataURL('image/png');
-        })
-        let img: any;
-        if (typeof img !== 'undefined') {
-          img = new Image();
-        } else {
-          if (window.Image) img = new window.Image();
-        }
-        img.onload = () => {
-          let w = Math.min(this.props.maxWidth, img.width);
-          let h = img.height * (w / img.width);
-          let canvas = document.createElement('canvas');
-          let ctx = canvas.getContext('2d');
-
-          //check canvas support, for test
           if (ctx) {
-            //patch subsampling bug
-            //http://jsfiddle.net/gWY2a/24/
-            let drawImage = ctx.drawImage;
-            const newDrawImage = (_img: CanvasImageSource, sx: number, sy: number, sw: number, sh: number, dx?: number, dy?: number, dw?: number, dh?: number) => {
-              let vertSquashRatio = 1;
-              // Detect if img param is indeed image
-              if (!!_img && (_img as HTMLImageElement).nodeName === 'IMG') {
-                vertSquashRatio = this.detectVerticalSquash(_img) as number;
-                if (typeof sw === 'undefined') (sw = (_img as HTMLImageElement).naturalWidth);
-                if (typeof sh === 'undefined') (sh = (_img as HTMLImageElement).naturalHeight);
-              }
-
-              // Execute several cases (Firefox does not handle undefined as no param)
-              // by call (apply is bad performance)
-              if (arguments.length === 9)
-                drawImage.call(ctx, _img, sx, sy, sw, sh, dx, dy, dw, dh! / vertSquashRatio);
-              else if (typeof sw !== 'undefined')
-                drawImage.call(ctx, _img, sx, sy, sw, sh / vertSquashRatio);
-              else
-                drawImage.call(ctx, _img, sx, sy);
-            };
-
-            canvas.width = w;
-            canvas.height = h;
-            newDrawImage(img, 0, 0, w, h);
-
+            canvas.width = this.videoWidth
+            canvas.height = this.videoHeight
+            ctx.drawImage(this, 0, 0, 79, 79);
             let base64 = canvas.toDataURL('image/png');
-
             cb({
               nativeFile: file,
               lastModified: (file as MyFile).lastModified,
@@ -295,8 +251,7 @@ export default class Uploader extends React.Component<UploaderProps, UploaderSta
           } else {
             cb(file, e);
           }
-        };
-        img.src = src;
+        })
       }
     };
     reader.readAsDataURL(file);
@@ -387,7 +342,7 @@ export default class Uploader extends React.Component<UploaderProps, UploaderSta
               ref="uploader"//let react to reset after onchange
               className="weui-uploader__input"
               type="file"
-              accept={type==='image' ? 'image/*' : 'video/*'}
+              accept={type === 'image' ? 'image/*' : 'video/*'}
               onChange={this.handleChange.bind(this)}
               {...inputProps}
             />
