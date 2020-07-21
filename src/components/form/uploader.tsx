@@ -17,7 +17,8 @@ interface MyFile extends File {
   error?: any,
   url?: string,
   status: any,
-  onClick?: () => void
+  onClick?: () => void,
+  video: string
 }
 interface UploaderProps {
   files: Array<MyFile>,
@@ -31,10 +32,8 @@ interface UploaderProps {
   maxsize: number,
   onOversize: (val: number) => void,
   type: 'image' | 'vedio',
-  onDelete: (file: File, id: number) => void
-}
-interface UploaderStates {
-  videoLength: number,
+  onDelete: (file: File, id: number) => void,
+  currentVideo: string
 }
 type customFile = {
   nativeFile: Blob,
@@ -49,12 +48,9 @@ type handleFileCallback = (file: customFile | Blob, e: renderOnloadEvent) => voi
 type renderOnloadEvent = {
   target: { result: any }
 }
-export default class Uploader extends React.Component<UploaderProps, UploaderStates> {
+export default class Uploader extends React.Component<UploaderProps> {
   constructor(props: UploaderProps) {
     super(props)
-    this.state = {
-      videoLength: document.querySelectorAll('ul li img').length
-    }
   }
   static propTypes = {
     /**
@@ -107,6 +103,7 @@ export default class Uploader extends React.Component<UploaderProps, UploaderSta
      *
      */
     type: PropTypes.string,
+    currentVideo: PropTypes.string
   };
 
   static defaultProps = {
@@ -119,7 +116,8 @@ export default class Uploader extends React.Component<UploaderProps, UploaderSta
     onOversize: undefined as any as UploaderProps['onOversize'],
     onDelete: undefined as any as UploaderProps['onDelete'],
     lang: { maxError: maxCount => `最多只能上传${maxCount}张图片` } as UploaderProps['lang'],
-    type: 'image',
+    type: 'image' as UploaderProps['type'],
+    currentVideo: '' as UploaderProps['currentVideo']
   };
 
   /**
@@ -230,7 +228,6 @@ export default class Uploader extends React.Component<UploaderProps, UploaderSta
         video.muted = true
         video.autoplay = true
         video.preload = 'preload'
-        video.style.display = 'none'
         video.addEventListener('loadeddata', function () {
           let canvas = document.createElement('canvas');
           let ctx = canvas.getContext('2d');
@@ -263,7 +260,7 @@ export default class Uploader extends React.Component<UploaderProps, UploaderSta
 
     if (!_files || _files.length === 0) return;
 
-    if (this.props.files.length + this.state.videoLength >= this.props.maxCount) {
+    if (this.props.files.length >= this.props.maxCount) {
       this.props.onError(langs.maxError(this.props.maxCount));
       return;
     }
@@ -275,6 +272,7 @@ export default class Uploader extends React.Component<UploaderProps, UploaderSta
         this.props.onOversize(file.size)
         return
       }
+      console.log(file)
       this.handleFile(file, (_file: File, _e: renderOnloadEvent) => {
         if (this.props.onChange) this.props.onChange(_file, _e);
         (ReactDOM.findDOMNode(this.refs.uploader) as HTMLInputElement)
@@ -285,7 +283,7 @@ export default class Uploader extends React.Component<UploaderProps, UploaderSta
   renderFiles() {
     return this.props.files.map((file, idx) => {
       console.log(file)
-      let imgSrc = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAC4AAAAuCAYAAABXuSs3AAAE+ElEQVRoQ8WZaYydYxTHf3/7vm+JtYJaYm8RGjtDU0vSWGeoftDaihD7rkHiI0opCZEWCWqJkEnoB7EEQRqhRWINsaugCDnynzx38s6du7zvc++dOcnN5E7e53l+9+Q85/zPeUWHFhETgCOBfYGJwLbA+sBawB/Ab8BnwHLgLWCJpB86PBblbBAR6wG7p89OgD/bAJsDGyXo1YB/gL+An4HvgS+BT4FPgA+BZZL8TGWrBB4RqwDrANsDZwCnAjtXPDWAt4EngKcAe3+lJP+/tFUF3xI4DZgK7ABsDdj7Ve0X4Ovk+cXAYkkOq9JWCjx5elfgUOCU9Neh0KkZ9qXk+dclfVF2w7LgawCXAVeli7dq2QPaPOfw+A/4BrhG0qKy+7YFj4jNgPOAE1Pm6Ian6/lWAm8CjwOPSvL3ltYSPCI2SKnuDsCh0mtbAtzktCnp71aHtQM/AHgQ2AVYs9fUwO8p18+Q5Mvb1JqCR4RhLwfOTnl5DLiHjvgJmAfc06pQNQSPCFe9M4F7x8jT9U5xsTodeFXSv4081gx8b+ChdBlddMbaXE1fBmZK+q4UeERYZ1wBXA2sPtbEhfNcpK4EHm7k9VEejwjrDpdka47xNuuZAyX50o6wEeAR4Rx9J3Ah4KIz3rYiFab72oE7kzyf0t94Q9fOHwT6Jf1YBKr3+KXJ4+MZ2/UOcxWdJumVhuARsTHwZKqUVb1tzdFWPlTdtPD8fGBO8ZIOHxYRk5w3M4qNPeIOx/LWsrcXFfYrYHIxNRbBbwWuA6rm7Q+A84H9gUsAt3LdNuuWAUmOiCEbAo+IdZMunpJx4rOpE3IanQ4cA1jjdNvzC4DZtU6pBu5uxs1sTgq8S5I9bQc4nc5yCgO2yNyvme/cZEysqcYa+ADwSEaY+JAiuPfb0UUDOAc4KnPPRvB/AlMkvVcMFSd4Nws5NgxeW5x0fH8KnX2ATXM2brDmXEmW2cMxvhTYM3PzRuD2vGN8cqoLB2XuXb/MumXmEHhE2BuecziP59go8ILnPWdxg30CcFIX9M+7wCRfUINbwr6fQ5zWNAUv/IA+wFXZZznXV025ta1+9eDJowyDW7A/1mPwDdMc5gJgRgep0hOBPSQtN/i1wG29BE+p0qn2iBQ2x2ZMwGqIfZIGDW4dMLvX4IWwcc1wJ+9xh6cIVccdsyQtMPgz6eLksreN8eLGEeHZo+Xz8UkqeLpbxW6UNNfgrwEHV1lZ92wl8ILnnX4d74cDe1VoE++WdLHBl6W5di57LrhzveN+DnBDCpsyDIsk9Rv88zQ2LrOo0TNZ4OnCOi3uZuWXmvMyDE9Lmm7wb4Gtyqxo8kw2eCFsTvaouSTDC5KmGdy9XCdaohvg1kmjGuImP2RQUt+4ejy1i84uZwHHVfX4mMd4elFgbeTM4gLo5qOsDcf4Rx2OkCuHSkSsnbxspeecvklZamChpAGHyhtAJ7KzEnialFkx1tq8qqOQeZIuMvhzST9U+NEjHi0FnsLD5d2i7vb04ivnzJsl3WLw+1OfmLOJ15QFd/fvds4Cy/LW4ZJjbpgfMPj1wNycHdKaluAR4eroN86HJW3iF7ud2FRJLxrcA/yFHezUDtw1wpnD3s5Rg/Vo7vQ/Nvh+wDsdjNAagqeYPgRwVTw6pb5Ox3SemU+QtMLgzqcecXkolGONmmWP47ZL6s9V0Z7uhi2V5PvB/xhloz72A4RfAAAAAElFTkSuQmCC"
+      let imgSrc = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAC4AAAAuCAYAAABXuSs3AAAEVElEQVRoQ82Za8ilUxTHf3/3SxhyyS2XSUjJdT64ROMyyDBTIuMyDJFBQmRcx62GEMOUomimMbl8mDEJzQef5DJ8INdkNEoSCkUpLP2nfd6eOec55+xnP+e9rE9v77v2Wr+93rXXXns9oqVExEHATOBo4FBgf2AnYDvgT+AP4Dvga+BD4B1JP7d0i0oMRMS+wHzgMuCwhjYCeA9YDqyS5I01lkbgEXEgcBdwObBNY2+9C34DngaekOSfsyULPCIMeTtwJ7B9tvV8xZ+A2yStyF0yFDwiDgZeBo7LNdpC7zXgakm/D7MxEDwiTgFWA9OGGRrh378BZknyge4rfcEjYjbwSqoOI+TKMvUjcIakz/tp14KnSL81SdAd1h+AEyVtrIPvAU85/fEEp0e/wDriMyT91a2wGXiqHu9O0EHMyhngRUlXDgO/G3gw1+IE6p0j6c2qv7GIp8vli8I6/R+wxThu5FvgCEl/d3xUwZ9zDS1w/j5wGuDS+ThweIGNnCXXSXp2M/DUe2wovMaXSrrJBiNiK+AG4L5xONyu64dI+te+NkU8InyVP5yz7RqdMfDO3yJij2RvAbBlod26ZWdJersK/mVBl9cx3ANe2cAxwFLX4xHBr5R06Sbw1E87TUqlL3hlA/OARwG3w23kF2BPSWHwq4DnW1gbCp7SccfUXd7S8kY+StInBn8GuH68wSvRn56qz/mFPhdIesHg64DTC414WVbEu+1HxCzgyYKz9YikOwz+VXorlrIXgaf02Rq4MZXPnTMBXpJ0icHdhe2TuahOrRi8kj6OvrvRHFkr6TyD/wrslrOij84owH1p+e2ZI+sknWnw79NIIWfRSCOeWmi3CXMaOF8taa7BP3MD02Bht2rjiEeES+Mi4NaC0rhc0nyDrwXOnSjwiLg4XUb7Ffq8X9Jigz+Wdl5oJ68cRoQnXb7+Typ1lNbNk7TK4Bem8UOpvYGpEhG7Aw+llnkUDdd0SRsM7k7OA5mhM5YmVSW1uAuBxcCupVHpWrdRkqdpY22t35knFBqva2v9sHiq5aEfWME6/fi1wNjrouEGlklyHXZf78mty9vchjZy1Y+X9FE14r5uPb8omVh53TXAqcDNBeUtF3q9pBkd5eqb8wHgnlwrk6A3R9KaOnBH2w3XXpMANcylz+DJfkD0gKcc9aDeA/epJP8Ax0r6tApVN4J7FbhgCpEvkrSkm6cOfBdgvUcBUwD+DWB2NUVqU6Xzy1TWnFd7TyK8P3TNlOQPYD0yaD7ujtEzjLYv85K9G9rzQr8VamXYF4kDAP+72rS9TcHt76J+kR6YKlVPEbEDsAy4oilBQ31Xj3uBJXU5PfRw9nMWEWen55XHC6MWn6eF3SVvkJNGHWFEbAt4yO5Ph+5L2oqrl2eWr+dEeWAdzyGJCPfVnsX4wvIL3T13rri38dW9otMw5S5sDd51BvxfOxLwgHPYt/wP/AgoAS3O8VE4G6WN/wH0qmQ+I0w9UgAAAABJRU5ErkJggg==";
       let { url, error, status, onClick, ...others } = file;
       let fileStyle: React.CSSProperties = {
         backgroundImage: `url(${url})`,
@@ -293,8 +291,7 @@ export default class Uploader extends React.Component<UploaderProps, UploaderSta
       };
       let videofileStyle: React.CSSProperties = {
         backgroundImage: `url(${url})`,
-        position: 'relative',
-        filter:'brightness(50%)'
+        position: 'relative'
       };
       let iconStyle: React.CSSProperties = {
         position: 'absolute',
@@ -305,7 +302,8 @@ export default class Uploader extends React.Component<UploaderProps, UploaderSta
         position: 'absolute',
         top: '50%',
         left: '50%',
-        transform: 'translate(-50%, -50%)'
+        transform: 'translate(-50%, -50%)',
+        filter:'brightness(0%)'
       }
       let cls = classNames({
         'weui-uploader__file': true,
@@ -356,7 +354,7 @@ export default class Uploader extends React.Component<UploaderProps, UploaderSta
   }
 
   render() {
-    const { className, maxCount, files, onChange, onFileClick, lang, maxsize, onOversize, type, ...others } = this.props;
+    const { className, maxCount, files, onChange, onFileClick, lang, maxsize, onOversize, type, onDelete, currentVideo, ...others } = this.props;
     const inputProps = Object.assign({}, others);
     delete inputProps.onError;
     delete inputProps.maxWidth;
@@ -370,7 +368,7 @@ export default class Uploader extends React.Component<UploaderProps, UploaderSta
     return (
       <div className={cls}>
         <div className="weui-uploader__hd">
-          <div className="weui-uploader__info">{files.length + this.state.videoLength}/{maxCount}</div>
+          <div className="weui-uploader__info">{files.length}/{maxCount}</div>
         </div>
         <div className="weui-uploader__bd">
           <ul className="weui-uploader__files">

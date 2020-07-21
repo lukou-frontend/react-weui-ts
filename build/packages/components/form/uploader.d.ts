@@ -13,6 +13,7 @@ interface MyFile extends File {
     url?: string;
     status: any;
     onClick?: () => void;
+    video: string;
 }
 interface UploaderProps {
     files: Array<MyFile>;
@@ -27,9 +28,7 @@ interface UploaderProps {
     onOversize: (val: number) => void;
     type: 'image' | 'vedio';
     onDelete: (file: File, id: number) => void;
-}
-interface UploaderStates {
-    videoLength: number;
+    currentVideo: string;
 }
 declare type customFile = {
     nativeFile: Blob;
@@ -46,7 +45,7 @@ declare type renderOnloadEvent = {
         result: any;
     };
 };
-export default class Uploader extends React.Component<UploaderProps, UploaderStates> {
+export default class Uploader extends React.Component<UploaderProps> {
     constructor(props: UploaderProps);
     static propTypes: {
         /**
@@ -99,6 +98,7 @@ export default class Uploader extends React.Component<UploaderProps, UploaderSta
          *
          */
         type: PropTypes.Requireable<string>;
+        currentVideo: PropTypes.Requireable<string>;
     };
     static defaultProps: {
         maxCount: number;
@@ -110,7 +110,8 @@ export default class Uploader extends React.Component<UploaderProps, UploaderSta
         onOversize: (val: number) => void;
         onDelete: (file: File, id: number) => void;
         lang: Lang;
-        type: string;
+        type: "image" | "vedio";
+        currentVideo: string;
     };
     /**
      * Detecting vertical squash in loaded image.
