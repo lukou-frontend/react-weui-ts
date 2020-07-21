@@ -27,7 +27,6 @@ interface UploaderProps {
     onOversize: (val: number) => void;
     type: 'image' | 'vedio';
     onDelete: (file: File, id: number) => void;
-    allVideo?: Array<string>;
 }
 interface UploaderStates {
     videoLength: number;
@@ -100,11 +99,6 @@ export default class Uploader extends React.Component<UploaderProps, UploaderSta
          *
          */
         type: PropTypes.Requireable<string>;
-        /**
-         * 所有视频的src
-         *
-         */
-        allVideo: PropTypes.Requireable<any[]>;
     };
     static defaultProps: {
         maxCount: number;
@@ -116,9 +110,9 @@ export default class Uploader extends React.Component<UploaderProps, UploaderSta
         onOversize: (val: number) => void;
         onDelete: (file: File, id: number) => void;
         lang: Lang;
-        type: "image" | "vedio";
-        allVideo: string[] | undefined;
+        type: string;
     };
+    const imgSrc: string;
     /**
      * Detecting vertical squash in loaded image.
      * Fixes a bug which squash image vertically while drawing into canvas for some images.

@@ -25,7 +25,7 @@ declare class Badge extends React.Component<BadgeProps> {
     };
     static defaultProps: {
         dot: boolean | undefined;
-        preset: "header" | "body" | "footer" | "default";
+        preset: "default" | "body" | "footer" | "header";
     };
     render(): JSX.Element;
 }

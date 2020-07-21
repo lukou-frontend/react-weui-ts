@@ -7,6 +7,7 @@ import deprecationWarning from '../../utils/deprecationWarning';
 export default class Uploader extends React.Component {
     constructor(props) {
         super(props);
+        this.imgSrc = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAC4AAAAuCAYAAABXuSs3AAAE+ElEQVRoQ8WZaYydYxTHf3/7vm+JtYJaYm8RGjtDU0vSWGeoftDaihD7rkHiI0opCZEWCWqJkEnoB7EEQRqhRWINsaugCDnynzx38s6du7zvc++dOcnN5E7e53l+9+Q85/zPeUWHFhETgCOBfYGJwLbA+sBawB/Ab8BnwHLgLWCJpB86PBblbBAR6wG7p89OgD/bAJsDGyXo1YB/gL+An4HvgS+BT4FPgA+BZZL8TGWrBB4RqwDrANsDZwCnAjtXPDWAt4EngKcAe3+lJP+/tFUF3xI4DZgK7ABsDdj7Ve0X4Ovk+cXAYkkOq9JWCjx5elfgUOCU9Neh0KkZ9qXk+dclfVF2w7LgawCXAVeli7dq2QPaPOfw+A/4BrhG0qKy+7YFj4jNgPOAE1Pm6Ian6/lWAm8CjwOPSvL3ltYSPCI2SKnuDsCh0mtbAtzktCnp71aHtQM/AHgQ2AVYs9fUwO8p18+Q5Mvb1JqCR4RhLwfOTnl5DLiHjvgJmAfc06pQNQSPCFe9M4F7x8jT9U5xsTodeFXSv4081gx8b+ChdBlddMbaXE1fBmZK+q4UeERYZ1wBXA2sPtbEhfNcpK4EHm7k9VEejwjrDpdka47xNuuZAyX50o6wEeAR4Rx9J3Ah4KIz3rYiFab72oE7kzyf0t94Q9fOHwT6Jf1YBKr3+KXJ4+MZ2/UOcxWdJumVhuARsTHwZKqUVb1tzdFWPlTdtPD8fGBO8ZIOHxYRk5w3M4qNPeIOx/LWsrcXFfYrYHIxNRbBbwWuA6rm7Q+A84H9gUsAt3LdNuuWAUmOiCEbAo+IdZMunpJx4rOpE3IanQ4cA1jjdNvzC4DZtU6pBu5uxs1sTgq8S5I9bQc4nc5yCgO2yNyvme/cZEysqcYa+ADwSEaY+JAiuPfb0UUDOAc4KnPPRvB/AlMkvVcMFSd4Nws5NgxeW5x0fH8KnX2ATXM2brDmXEmW2cMxvhTYM3PzRuD2vGN8cqoLB2XuXb/MumXmEHhE2BuecziP59go8ILnPWdxg30CcFIX9M+7wCRfUINbwr6fQ5zWNAUv/IA+wFXZZznXV025ta1+9eDJowyDW7A/1mPwDdMc5gJgRgep0hOBPSQtN/i1wG29BE+p0qn2iBQ2x2ZMwGqIfZIGDW4dMLvX4IWwcc1wJ+9xh6cIVccdsyQtMPgz6eLksreN8eLGEeHZo+Xz8UkqeLpbxW6UNNfgrwEHV1lZ92wl8ILnnX4d74cDe1VoE++WdLHBl6W5di57LrhzveN+DnBDCpsyDIsk9Rv88zQ2LrOo0TNZ4OnCOi3uZuWXmvMyDE9Lmm7wb4Gtyqxo8kw2eCFsTvaouSTDC5KmGdy9XCdaohvg1kmjGuImP2RQUt+4ejy1i84uZwHHVfX4mMd4elFgbeTM4gLo5qOsDcf4Rx2OkCuHSkSsnbxspeecvklZamChpAGHyhtAJ7KzEnialFkx1tq8qqOQeZIuMvhzST9U+NEjHi0FnsLD5d2i7vb04ivnzJsl3WLw+1OfmLOJ15QFd/fvds4Cy/LW4ZJjbpgfMPj1wNycHdKaluAR4eroN86HJW3iF7ud2FRJLxrcA/yFHezUDtw1wpnD3s5Rg/Vo7vQ/Nvh+wDsdjNAagqeYPgRwVTw6pb5Ox3SemU+QtMLgzqcecXkolGONmmWP47ZL6s9V0Z7uhi2V5PvB/xhloz72A4RfAAAAAElFTkSuQmCC";
         this.state = {
             videoLength: document.querySelectorAll('ul li img').length
         };
@@ -77,14 +78,10 @@ export default class Uploader extends React.Component {
                     let h = img.height * (w / img.width);
                     let canvas = document.createElement('canvas');
                     let ctx = canvas.getContext('2d');
-                    //check canvas support, for test
                     if (ctx) {
-                        //patch subsampling bug
-                        //http://jsfiddle.net/gWY2a/24/
                         let drawImage = ctx.drawImage;
                         const newDrawImage = (_img, sx, sy, sw, sh, dx, dy, dw, dh) => {
                             let vertSquashRatio = 1;
-                            // Detect if img param is indeed image
                             if (!!_img && _img.nodeName === 'IMG') {
                                 vertSquashRatio = this.detectVerticalSquash(_img);
                                 if (typeof sw === 'undefined')
@@ -92,8 +89,6 @@ export default class Uploader extends React.Component {
                                 if (typeof sh === 'undefined')
                                     (sh = _img.naturalHeight);
                             }
-                            // Execute several cases (Firefox does not handle undefined as no param)
-                            // by call (apply is bad performance)
                             if (arguments.length === 9)
                                 drawImage.call(ctx, _img, sx, sy, sw, sh, dx, dy, dw, dh / vertSquashRatio);
                             else if (typeof sw !== 'undefined')
@@ -124,15 +119,13 @@ export default class Uploader extends React.Component {
             else if (/video/g.test(file.type)) {
                 let video = document.createElement('video');
                 video.src = e.target.result;
-                video.width = 600;
-                video.height = 600;
+                video.width = 79;
+                video.height = 79;
                 video.controls = true;
                 video.muted = true;
                 video.autoplay = true;
                 video.preload = 'preload';
-                if (this.props.allVideo) {
-                    this.props.allVideo.push(e.target.result);
-                }
+                video.style.display = 'none';
                 video.addEventListener('loadeddata', function () {
                     let canvas = document.createElement('canvas');
                     let ctx = canvas.getContext('2d');
@@ -185,6 +178,7 @@ export default class Uploader extends React.Component {
     }
     renderFiles() {
         return this.props.files.map((file, idx) => {
+            console.log(file);
             let { url, error, status, onClick, ...others } = file;
             let fileStyle = {
                 backgroundImage: `url(${url})`,
@@ -193,7 +187,7 @@ export default class Uploader extends React.Component {
             let videofileStyle = {
                 backgroundImage: `url(${url})`,
                 position: 'relative',
-                opacity: '50%'
+                filter: 'brightness(50%)'
             };
             let iconStyle = {
                 position: 'absolute',
@@ -221,7 +215,6 @@ export default class Uploader extends React.Component {
                 e.stopPropagation();
                 if (this.props.onDelete)
                     this.props.onDelete(file, idx);
-                console.log(this.props.allVideo[idx]);
             };
             if (this.props.type === 'image') {
                 return (React.createElement("li", Object.assign({ className: cls, key: idx, style: fileStyle, onClick: handleFileClick }, others),
@@ -233,7 +226,7 @@ export default class Uploader extends React.Component {
             else {
                 return (React.createElement("li", Object.assign({ className: cls, key: idx, style: videofileStyle, onClick: handleFileClick }, others),
                     React.createElement(Icon, { value: "clear", style: iconStyle, onClick: handleClick }),
-                    React.createElement("img", { src: "./play.png", style: btnStyle }),
+                    React.createElement("img", { src: this.imgSrc, style: btnStyle }),
                     error || status ?
                         React.createElement("div", { className: "weui-uploader__file-content" }, error ? React.createElement(Icon, { value: "warn" }) : status)
                         : false));
@@ -313,11 +306,6 @@ Uploader.propTypes = {
      *
      */
     type: PropTypes.string,
-    /**
-     * 所有视频的src
-     *
-     */
-    allVideo: PropTypes.array
 };
 Uploader.defaultProps = {
     maxCount: 4,
@@ -330,6 +318,5 @@ Uploader.defaultProps = {
     onDelete: undefined,
     lang: { maxError: maxCount => `最多只能上传${maxCount}张图片` },
     type: 'image',
-    allVideo: []
 };
 ;

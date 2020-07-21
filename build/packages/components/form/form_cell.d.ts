@@ -61,7 +61,7 @@ export default class FormCell extends React.Component<FormCellProps> {
         checkbox: boolean | undefined;
         select: boolean | undefined;
         switch: boolean | undefined;
-        selectPos: "before" | "after" | undefined;
+        selectPos: "after" | "before" | undefined;
     };
     render(): JSX.Element;
 }
