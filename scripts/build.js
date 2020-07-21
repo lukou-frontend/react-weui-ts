@@ -153,7 +153,7 @@ function runTasks($tasks){
 function createNodeBuild(){
     return (res, rej)=>{
         let count = 0;
-        let bat = exec("npm run tsc && npm run build-less", { stdio: [0, 1, 2] }, (error, stdout, stderr) => {
+        let bat = exec("npm run gulp && npm run build-less", { stdio: [0, 1, 2] }, (error, stdout, stderr) => {
           if (error) {
             rej(error);
             return;
@@ -208,19 +208,19 @@ function createBundle(bundleType){
 //clean directory
 rimraf('build', ()=>{
   // create a new build directory
-  fs.mkdirSync('build');
+  // fs.mkdirSync('build');
   // create the packages folder for NODE+UMD bundles
-  fs.mkdirSync(path.join('build', 'packages'));
+  // fs.mkdirSync(path.join('build', 'packages'));
   // create the dist folder for UMD bundles
-  fs.mkdirSync(path.join('build', 'dist'));
+  // fs.mkdirSync(path.join('build', 'dist'));
   // adding build tasks
   tasks.push(
     //Node individual components build
-    createTask('Making Babel Modules', createNodeBuild()),
-    createTask('Making UMD Dev Bundles', createBundle(Bundles.UMD_DEV)),
-    createTask('Making UMD Production Bundles', createBundle(Bundles.UMD_PROD)),
-    createTask('Making IIFE Dev Bundles', createBundle(Bundles.IIFE_DEV)),
-    createTask('Making IIFE Production Bundles', createBundle(Bundles.IIFE_PROD)),
+    // createTask('Making Babel Modules', createNodeBuild()),
+    // createTask('Making UMD Dev Bundles', createBundle(Bundles.UMD_DEV)),
+    // createTask('Making UMD Production Bundles', createBundle(Bundles.UMD_PROD)),
+    // createTask('Making IIFE Dev Bundles', createBundle(Bundles.IIFE_DEV)),
+    // createTask('Making IIFE Production Bundles', createBundle(Bundles.IIFE_PROD)),
     createTask('Making Demo Build', createWebpackBuild(webpackConfig) ),
     createTask('Making Docs Build', createWebpackBuild(webpackDocConfig) )
   );

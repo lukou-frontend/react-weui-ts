@@ -1,6 +1,6 @@
 {
-    "presets": ["env", "stage-2", "react"],
-    "plugins": ["transform-class-properties", "add-module-exports", "transform-runtime"],
+    "presets": ["@babel/preset-env", "@babel/preset-react"],
+    "plugins": ["@babel/plugin-proposal-class-properties", "@babel/plugin-transform-runtime"],
     "env": {
         "test": {
           "plugins": [ "istanbul" ]
