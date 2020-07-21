@@ -30,7 +30,8 @@ interface UploaderProps {
   onFileClick?: (e?: any, file?: File, idx?: any) => void,
   maxsize: number,
   onOversize: (val: number) => void,
-  type: 'image' | 'vedio'
+  type: 'image' | 'vedio',
+  onDelete: (file: File, id: number) => void
 }
 interface UploaderStates {
   videoLength: number,
@@ -87,6 +88,11 @@ export default class Uploader extends React.Component<UploaderProps, UploaderSta
      */
     onOversize: PropTypes.func,
     /**
+     * 删除文件触发，参数为file和id
+     *
+     */
+    onDelete: PropTypes.func,
+    /**
      * array of photos thumbnails to indicator status, include property `url`, `status`, `error`
      *
      */
@@ -111,6 +117,7 @@ export default class Uploader extends React.Component<UploaderProps, UploaderSta
     onChange: undefined as UploaderProps['onChange'],
     onError: undefined as unknown as UploaderProps['onError'],
     onOversize: undefined as any as UploaderProps['onOversize'],
+    onDelete: undefined as any as UploaderProps['onDelete'],
     lang: { maxError: maxCount => `最多只能上传${maxCount}张图片` } as UploaderProps['lang'],
     type: 'image',
   };
@@ -286,9 +293,15 @@ export default class Uploader extends React.Component<UploaderProps, UploaderSta
     return this.props.files.map((file, idx) => {
       console.log(file)
       let { url, error, status, onClick, ...others } = file;
-      let fileStyle = {
-        backgroundImage: `url(${url})`
+      let fileStyle: React.CSSProperties = {
+        backgroundImage: `url(${url})`,
+        position: 'relative'
       };
+      let iconStyle: React.CSSProperties = {
+        position: 'absolute',
+        right: 0,
+        top: 0
+      }
       let cls = classNames({
         'weui-uploader__file': true,
         'weui-uploader__file_status': error || status
@@ -303,6 +316,7 @@ export default class Uploader extends React.Component<UploaderProps, UploaderSta
       };
       return (
         <li className={cls} key={idx} style={fileStyle} onClick={handleFileClick} {...others}>
+          <Icon value="clear" style={iconStyle} onClick={this.props.onDelete(file, idx)} />
           {
             error || status ?
               <div className="weui-uploader__file-content">

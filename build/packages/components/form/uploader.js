@@ -152,18 +152,6 @@ export default class Uploader extends React.Component {
                         cb(file, e);
                     }
                 });
-                //   cb({
-                //     nativeFile: file,
-                //     lastModified: (file as MyFile).lastModified,
-                //     lastModifiedDate: (file as MyFile).lastModifiedDate,
-                //     name: (file as MyFile).name,
-                //     size: file.size,
-                //     type: file.type,
-                //     data: data
-                //   }, e);
-                // } else {
-                //   cb(file, e);
-                // }
             }
         };
         reader.readAsDataURL(file);
@@ -197,7 +185,13 @@ export default class Uploader extends React.Component {
             console.log(file);
             let { url, error, status, onClick, ...others } = file;
             let fileStyle = {
-                backgroundImage: `url(${url})`
+                backgroundImage: `url(${url})`,
+                position: 'relative'
+            };
+            let iconStyle = {
+                position: 'absolute',
+                right: 0,
+                top: 0
             };
             let cls = classNames({
                 'weui-uploader__file': true,
@@ -210,9 +204,11 @@ export default class Uploader extends React.Component {
                 if (this.props.onFileClick)
                     this.props.onFileClick(e, file, idx);
             };
-            return (React.createElement("li", Object.assign({ className: cls, key: idx, style: fileStyle, onClick: handleFileClick }, others), error || status ?
-                React.createElement("div", { className: "weui-uploader__file-content" }, error ? React.createElement(Icon, { value: "warn" }) : status)
-                : false));
+            return (React.createElement("li", Object.assign({ className: cls, key: idx, style: fileStyle, onClick: handleFileClick }, others),
+                React.createElement(Icon, { value: "clear", style: iconStyle, onClick: this.props.onDelete(file, idx) }),
+                error || status ?
+                    React.createElement("div", { className: "weui-uploader__file-content" }, error ? React.createElement(Icon, { value: "warn" }) : status)
+                    : false));
         });
     }
     render() {
@@ -269,6 +265,11 @@ Uploader.propTypes = {
      */
     onOversize: PropTypes.func,
     /**
+     * 删除文件触发，参数为file和id
+     *
+     */
+    onDelete: PropTypes.func,
+    /**
      * array of photos thumbnails to indicator status, include property `url`, `status`, `error`
      *
      */
@@ -292,6 +293,7 @@ Uploader.defaultProps = {
     onChange: undefined,
     onError: undefined,
     onOversize: undefined,
+    onDelete: undefined,
     lang: { maxError: maxCount => `最多只能上传${maxCount}张图片` },
     type: 'image',
 };

@@ -26,6 +26,7 @@ interface UploaderProps {
     maxsize: number;
     onOversize: (val: number) => void;
     type: 'image' | 'vedio';
+    onDelete: (file: File, id: number) => void;
 }
 interface UploaderStates {
     videoLength: number;
@@ -79,6 +80,11 @@ export default class Uploader extends React.Component<UploaderProps, UploaderSta
          */
         onOversize: PropTypes.Requireable<(...args: any[]) => any>;
         /**
+         * 删除文件触发，参数为file和id
+         *
+         */
+        onDelete: PropTypes.Requireable<(...args: any[]) => any>;
+        /**
          * array of photos thumbnails to indicator status, include property `url`, `status`, `error`
          *
          */
@@ -102,6 +108,7 @@ export default class Uploader extends React.Component<UploaderProps, UploaderSta
         onChange: ((file: File, event?: any) => void) | undefined;
         onError: (error: any) => void;
         onOversize: (val: number) => void;
+        onDelete: (file: File, id: number) => void;
         lang: Lang;
         type: string;
     };
