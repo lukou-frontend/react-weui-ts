@@ -25,7 +25,7 @@ interface UploaderProps {
     onFileClick?: (e?: any, file?: File, idx?: any) => void;
     maxsize: number;
     onOversize: (val: number) => void;
-    accepted: 'image/*' | 'vedio/*';
+    type: 'image' | 'vedio';
 }
 interface UploaderStates {
     videoLength: number;
@@ -89,10 +89,10 @@ export default class Uploader extends React.Component<UploaderProps, UploaderSta
          */
         lang: PropTypes.Requireable<object>;
         /**
-         * 接收文件类型(取值为'image/*'时上传图片，为'video/*'时上传视频)
+         * 接收文件类型(取值为'image'时上传图片，为'video'时上传视频)
          *
          */
-        accepted: PropTypes.Requireable<string>;
+        type: PropTypes.Requireable<string>;
     };
     static defaultProps: {
         maxCount: number;
@@ -103,7 +103,7 @@ export default class Uploader extends React.Component<UploaderProps, UploaderSta
         onError: (error: any) => void;
         onOversize: (val: number) => void;
         lang: Lang;
-        accepted: string;
+        type: string;
     };
     /**
      * Detecting vertical squash in loaded image.

@@ -2212,8 +2212,8 @@
                   lang = _props.lang,
                   maxsize = _props.maxsize,
                   onOversize = _props.onOversize,
-                  accepted = _props.accepted,
-                  others = objectWithoutProperties(_props, ['className', 'maxCount', 'files', 'onChange', 'onFileClick', 'lang', 'maxsize', 'onOversize', 'accepted']);
+                  type = _props.type,
+                  others = objectWithoutProperties(_props, ['className', 'maxCount', 'files', 'onChange', 'onFileClick', 'lang', 'maxsize', 'onOversize', 'type']);
 
               var inputProps = Object.assign({}, others);
               delete inputProps.onError;
@@ -2222,7 +2222,7 @@
                   'weui-uploader': true
               }, className, className));
               return React.createElement("div", { className: cls }, React.createElement("div", { className: "weui-uploader__hd" }, React.createElement("div", { className: "weui-uploader__info" }, files.length + this.state.videoLength, "/", maxCount)), React.createElement("div", { className: "weui-uploader__bd" }, React.createElement("ul", { className: "weui-uploader__files" }, this.renderFiles()), React.createElement("div", { className: "weui-uploader__input-box" }, React.createElement("input", Object.assign({ ref: "uploader" //let react to reset after onchange
-                  , className: "weui-uploader__input", type: "file", accept: accepted, onChange: this.handleChange.bind(this) }, inputProps)))));
+                  , className: "weui-uploader__input", type: "file", accept: type === 'image' ? 'image/*' : 'video/*', onChange: this.handleChange.bind(this) }, inputProps)))));
           }
       }]);
       return Uploader;
@@ -2270,10 +2270,10 @@
        */
       lang: propTypes.object,
       /**
-       * 接收文件类型(取值为'image/*'时上传图片，为'video/*'时上传视频)
+       * 接收文件类型(取值为'image'时上传图片，为'video'时上传视频)
        *
        */
-      accepted: propTypes.string
+      type: propTypes.string
   };
   Uploader.defaultProps = {
       maxCount: 4,
@@ -2286,7 +2286,7 @@
       lang: { maxError: function maxError(maxCount) {
               return '\u6700\u591A\u53EA\u80FD\u4E0A\u4F20' + maxCount + '\u5F20\u56FE\u7247';
           } },
-      accepted: 'image/*'
+      type: 'image'
   };
 
   var VCode = function VCode(props) {

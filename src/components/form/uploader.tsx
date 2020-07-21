@@ -30,7 +30,7 @@ interface UploaderProps {
   onFileClick?: (e?: any, file?: File, idx?: any) => void,
   maxsize: number,
   onOversize: (val: number) => void,
-  accepted: 'image/*' | 'vedio/*'
+  type: 'image' | 'vedio'
 }
 interface UploaderStates {
   videoLength: number,
@@ -97,10 +97,10 @@ export default class Uploader extends React.Component<UploaderProps, UploaderSta
      */
     lang: PropTypes.object,
     /**
-     * 接收文件类型(取值为'image/*'时上传图片，为'video/*'时上传视频)
+     * 接收文件类型(取值为'image'时上传图片，为'video'时上传视频)
      *
      */
-    accepted: PropTypes.string,
+    type: PropTypes.string,
   };
 
   static defaultProps = {
@@ -112,7 +112,7 @@ export default class Uploader extends React.Component<UploaderProps, UploaderSta
     onError: undefined as unknown as UploaderProps['onError'],
     onOversize: undefined as any as UploaderProps['onOversize'],
     lang: { maxError: maxCount => `最多只能上传${maxCount}张图片` } as UploaderProps['lang'],
-    accepted: 'image/*',
+    type: 'image',
   };
 
   /**
@@ -238,7 +238,6 @@ export default class Uploader extends React.Component<UploaderProps, UploaderSta
           videoLength: document.querySelectorAll('video').length
         })
       }
-
     };
     reader.readAsDataURL(file);
   }
@@ -303,7 +302,7 @@ export default class Uploader extends React.Component<UploaderProps, UploaderSta
   }
 
   render() {
-    const { className, maxCount, files, onChange, onFileClick, lang, maxsize, onOversize, accepted, ...others } = this.props;
+    const { className, maxCount, files, onChange, onFileClick, lang, maxsize, onOversize, type, ...others } = this.props;
     const inputProps = Object.assign({}, others);
     delete inputProps.onError;
     delete inputProps.maxWidth;
@@ -328,7 +327,7 @@ export default class Uploader extends React.Component<UploaderProps, UploaderSta
               ref="uploader"//let react to reset after onchange
               className="weui-uploader__input"
               type="file"
-              accept={accepted}
+              accept={type==='image' ? 'image/*' : 'video/*'}
               onChange={this.handleChange.bind(this)}
               {...inputProps}
             />
