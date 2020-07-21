@@ -232,8 +232,8 @@ export default class Uploader extends React.Component<UploaderProps, UploaderSta
       } else if (/video/g.test(file.type)) {
         let video = document.createElement('video')
         video.src = e.target.result;
-        video.width = 79
-        video.height = 79
+        video.width = 600
+        video.height = 600
         video.controls = true
         video.muted = true
         video.autoplay = true
@@ -244,8 +244,8 @@ export default class Uploader extends React.Component<UploaderProps, UploaderSta
           if (ctx) {
             canvas.width = this.videoWidth
             canvas.height = this.videoHeight
-            ctx.drawImage(this, 0, 0, 79, 79);
-            let base64 = canvas.toDataURL('image/png');
+            ctx.drawImage(this, 0, 0, 600, 600);
+            let base64 = e.target.result;
             cb({
               nativeFile: file,
               lastModified: (file as MyFile).lastModified,
@@ -297,10 +297,21 @@ export default class Uploader extends React.Component<UploaderProps, UploaderSta
         backgroundImage: `url(${url})`,
         position: 'relative'
       };
+      let videofileStyle: React.CSSProperties = {
+        backgroundImage: `url(${url})`,
+        position: 'relative',
+        opacity: '50%'
+      };
       let iconStyle: React.CSSProperties = {
         position: 'absolute',
-        right: 0,
+        right: '-1px',
         top: 0
+      }
+      let btnStyle: React.CSSProperties = {
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)'
       }
       let cls = classNames({
         'weui-uploader__file': true,
@@ -314,10 +325,12 @@ export default class Uploader extends React.Component<UploaderProps, UploaderSta
       let handleFileClick = onClick ? onClick : (e: any) => {
         if (this.props.onFileClick) this.props.onFileClick(e, file, idx);
       };
-      let handleClick = () => {
+      let handleClick = (e: Event) => {
+        e.stopPropagation()
         if (this.props.onDelete) this.props.onDelete(file, idx);
       };
-      return (
+      if(this.props.type==='image') {
+        return (
         <li className={cls} key={idx} style={fileStyle} onClick={handleFileClick} {...others}>
           <Icon value="clear" style={iconStyle} onClick={handleClick} />
           {
@@ -329,6 +342,22 @@ export default class Uploader extends React.Component<UploaderProps, UploaderSta
           }
         </li>
       );
+      } else {
+        return (
+          <li className={cls} key={idx} style={videofileStyle} onClick={handleFileClick} {...others}>
+            <Icon value="clear" style={iconStyle} onClick={handleClick} />
+            <img src="./play.png" style={btnStyle} />
+            {
+              error || status ?
+                <div className="weui-uploader__file-content">
+                  {error ? <Icon value="warn" /> : status}
+                </div>
+                : false
+            }
+          </li>
+        );
+      }
+      
     }
     );
   }

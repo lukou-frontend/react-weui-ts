@@ -124,8 +124,8 @@ export default class Uploader extends React.Component {
             else if (/video/g.test(file.type)) {
                 let video = document.createElement('video');
                 video.src = e.target.result;
-                video.width = 79;
-                video.height = 79;
+                video.width = 600;
+                video.height = 600;
                 video.controls = true;
                 video.muted = true;
                 video.autoplay = true;
@@ -136,8 +136,8 @@ export default class Uploader extends React.Component {
                     if (ctx) {
                         canvas.width = this.videoWidth;
                         canvas.height = this.videoHeight;
-                        ctx.drawImage(this, 0, 0, 79, 79);
-                        let base64 = canvas.toDataURL('image/png');
+                        ctx.drawImage(this, 0, 0, 600, 600);
+                        let base64 = e.target.result;
                         cb({
                             nativeFile: file,
                             lastModified: file.lastModified,
@@ -188,10 +188,21 @@ export default class Uploader extends React.Component {
                 backgroundImage: `url(${url})`,
                 position: 'relative'
             };
+            let videofileStyle = {
+                backgroundImage: `url(${url})`,
+                position: 'relative',
+                opacity: '50%'
+            };
             let iconStyle = {
                 position: 'absolute',
-                right: 0,
+                right: '-1px',
                 top: 0
+            };
+            let btnStyle = {
+                position: 'absolute',
+                top: '50%',
+                left: '50%',
+                transform: 'translate(-50%, -50%)'
             };
             let cls = classNames({
                 'weui-uploader__file': true,
@@ -204,15 +215,26 @@ export default class Uploader extends React.Component {
                 if (this.props.onFileClick)
                     this.props.onFileClick(e, file, idx);
             };
-            let handleClick = () => {
+            let handleClick = (e) => {
+                e.stopPropagation();
                 if (this.props.onDelete)
                     this.props.onDelete(file, idx);
             };
-            return (React.createElement("li", Object.assign({ className: cls, key: idx, style: fileStyle, onClick: handleFileClick }, others),
-                React.createElement(Icon, { value: "clear", style: iconStyle, onClick: handleClick }),
-                error || status ?
-                    React.createElement("div", { className: "weui-uploader__file-content" }, error ? React.createElement(Icon, { value: "warn" }) : status)
-                    : false));
+            if (this.props.type === 'image') {
+                return (React.createElement("li", Object.assign({ className: cls, key: idx, style: fileStyle, onClick: handleFileClick }, others),
+                    React.createElement(Icon, { value: "clear", style: iconStyle, onClick: handleClick }),
+                    error || status ?
+                        React.createElement("div", { className: "weui-uploader__file-content" }, error ? React.createElement(Icon, { value: "warn" }) : status)
+                        : false));
+            }
+            else {
+                return (React.createElement("li", Object.assign({ className: cls, key: idx, style: videofileStyle, onClick: handleFileClick }, others),
+                    React.createElement(Icon, { value: "clear", style: iconStyle, onClick: handleClick }),
+                    React.createElement("img", { src: "./play.png", style: btnStyle }),
+                    error || status ?
+                        React.createElement("div", { className: "weui-uploader__file-content" }, error ? React.createElement(Icon, { value: "warn" }) : status)
+                        : false));
+            }
         });
     }
     render() {
