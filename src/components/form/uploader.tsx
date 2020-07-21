@@ -31,7 +31,8 @@ interface UploaderProps {
   maxsize: number,
   onOversize: (val: number) => void,
   type: 'image' | 'vedio',
-  onDelete: (file: File, id: number) => void
+  onDelete: (file: File, id: number) => void,
+  allVideo?: Array<string>
 }
 interface UploaderStates {
   videoLength: number,
@@ -107,6 +108,11 @@ export default class Uploader extends React.Component<UploaderProps, UploaderSta
      *
      */
     type: PropTypes.string,
+    /**
+     * 所有视频的src
+     *
+     */
+    allVideo: PropTypes.array
   };
 
   static defaultProps = {
@@ -119,7 +125,8 @@ export default class Uploader extends React.Component<UploaderProps, UploaderSta
     onOversize: undefined as any as UploaderProps['onOversize'],
     onDelete: undefined as any as UploaderProps['onDelete'],
     lang: { maxError: maxCount => `最多只能上传${maxCount}张图片` } as UploaderProps['lang'],
-    type: 'image',
+    type: 'image' as UploaderProps['type'],
+    allVideo: [] as UploaderProps['allVideo']
   };
 
   /**
@@ -238,6 +245,9 @@ export default class Uploader extends React.Component<UploaderProps, UploaderSta
         video.muted = true
         video.autoplay = true
         video.preload = 'preload'
+        if (this.props.allVideo) {
+          this.props.allVideo.push(e.target.result)
+        }
         video.addEventListener('loadeddata', function () {
           let canvas = document.createElement('canvas');
           let ctx = canvas.getContext('2d');
@@ -245,7 +255,7 @@ export default class Uploader extends React.Component<UploaderProps, UploaderSta
             canvas.width = this.videoWidth
             canvas.height = this.videoHeight
             ctx.drawImage(this, 0, 0, 600, 600);
-            let base64 = e.target.result;
+            let base64 = canvas.toDataURL('image/png');
             cb({
               nativeFile: file,
               lastModified: (file as MyFile).lastModified,
@@ -291,7 +301,6 @@ export default class Uploader extends React.Component<UploaderProps, UploaderSta
 
   renderFiles() {
     return this.props.files.map((file, idx) => {
-      console.log(file)
       let { url, error, status, onClick, ...others } = file;
       let fileStyle: React.CSSProperties = {
         backgroundImage: `url(${url})`,
@@ -328,6 +337,7 @@ export default class Uploader extends React.Component<UploaderProps, UploaderSta
       let handleClick = (e: Event) => {
         e.stopPropagation()
         if (this.props.onDelete) this.props.onDelete(file, idx);
+        console.log((this.props.allVideo as unknown as Array<string>)[idx])
       };
       if(this.props.type==='image') {
         return (

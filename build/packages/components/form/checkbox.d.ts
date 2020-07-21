@@ -1,4 +1,5 @@
 import * as React from 'react';
+import PropTypes from 'prop-types';
 /**
  * weui wrapper for checkbox
  *
@@ -6,6 +7,20 @@ import * as React from 'react';
 interface CheckboxProps {
     className?: any;
     children?: React.ReactNode;
+    onChange: (e: Event) => void;
 }
-declare const Checkbox: (props: CheckboxProps) => JSX.Element;
-export default Checkbox;
+export default class Checkbox extends React.Component<CheckboxProps> {
+    constructor(props: CheckboxProps);
+    static propTypes: {
+        /**
+         * onChange事件
+         *
+         */
+        onChange: PropTypes.Requireable<(...args: any[]) => any>;
+    };
+    static defaultProps: {
+        onChange: (e: Event) => void;
+    };
+    render(): JSX.Element;
+}
+export {};

@@ -130,6 +130,9 @@ export default class Uploader extends React.Component {
                 video.muted = true;
                 video.autoplay = true;
                 video.preload = 'preload';
+                if (this.props.allVideo) {
+                    this.props.allVideo.push(e.target.result);
+                }
                 video.addEventListener('loadeddata', function () {
                     let canvas = document.createElement('canvas');
                     let ctx = canvas.getContext('2d');
@@ -137,7 +140,7 @@ export default class Uploader extends React.Component {
                         canvas.width = this.videoWidth;
                         canvas.height = this.videoHeight;
                         ctx.drawImage(this, 0, 0, 600, 600);
-                        let base64 = e.target.result;
+                        let base64 = canvas.toDataURL('image/png');
                         cb({
                             nativeFile: file,
                             lastModified: file.lastModified,
@@ -182,7 +185,6 @@ export default class Uploader extends React.Component {
     }
     renderFiles() {
         return this.props.files.map((file, idx) => {
-            console.log(file);
             let { url, error, status, onClick, ...others } = file;
             let fileStyle = {
                 backgroundImage: `url(${url})`,
@@ -219,6 +221,7 @@ export default class Uploader extends React.Component {
                 e.stopPropagation();
                 if (this.props.onDelete)
                     this.props.onDelete(file, idx);
+                console.log(this.props.allVideo[idx]);
             };
             if (this.props.type === 'image') {
                 return (React.createElement("li", Object.assign({ className: cls, key: idx, style: fileStyle, onClick: handleFileClick }, others),
@@ -310,6 +313,11 @@ Uploader.propTypes = {
      *
      */
     type: PropTypes.string,
+    /**
+     * 所有视频的src
+     *
+     */
+    allVideo: PropTypes.array
 };
 Uploader.defaultProps = {
     maxCount: 4,
@@ -322,5 +330,6 @@ Uploader.defaultProps = {
     onDelete: undefined,
     lang: { maxError: maxCount => `最多只能上传${maxCount}张图片` },
     type: 'image',
+    allVideo: []
 };
 ;
