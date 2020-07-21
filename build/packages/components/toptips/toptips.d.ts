@@ -27,7 +27,7 @@ declare const Toptips: {
     };
     defaultProps: {
         show: boolean;
-        type: "default" | "warn" | "info" | "primary" | undefined;
+        type: "default" | "primary" | "warn" | "info" | undefined;
     };
 };
 export default Toptips;

@@ -8,7 +8,7 @@ export default class Uploader extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            videoLength: document.querySelectorAll('video').length
+            videoLength: document.querySelectorAll('ul li img').length
         };
     }
     /**
@@ -123,18 +123,34 @@ export default class Uploader extends React.Component {
             }
             else if (/video/g.test(file.type)) {
                 let video = document.createElement('video');
+                let img = document.createElement('img');
                 video.src = e.target.result;
                 video.width = 79;
                 video.height = 79;
                 video.controls = true;
                 video.muted = true;
+                video.autoplay = true;
+                video.preload = 'preload';
+                video.addEventListener('loadeddata', function (e) {
+                    let canvas = document.createElement('canvas');
+                    let ctx = canvas.getContext('2d');
+                    if (!ctx)
+                        return;
+                    canvas.width = this.videoWidth;
+                    canvas.height = this.videoHeight;
+                    ctx.drawImage(this, 0, 0, 79, 79);
+                    var src = canvas.toDataURL('image/jpeg');
+                    ctx.drawImage(this, 0, 0, 79, 79);
+                    var src = canvas.toDataURL('image/jpeg');
+                    img.src = src;
+                });
                 let li = document.createElement('li');
                 li.classList.add('weui-uploader__file');
-                li.appendChild(video);
+                li.appendChild(img);
                 let ul = document.querySelector('ul');
                 ul.appendChild(li);
                 this.setState({
-                    videoLength: document.querySelectorAll('video').length
+                    videoLength: document.querySelectorAll('ul li img').length
                 });
             }
         };
