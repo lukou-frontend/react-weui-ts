@@ -112,7 +112,6 @@ export default class Uploader extends React.Component<UploaderProps, UploaderSta
         lang: Lang;
         type: string;
     };
-    const imgSrc: string;
     /**
      * Detecting vertical squash in loaded image.
      * Fixes a bug which squash image vertically while drawing into canvas for some images.
