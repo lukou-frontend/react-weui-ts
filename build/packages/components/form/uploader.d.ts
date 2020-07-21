@@ -13,6 +13,7 @@ interface MyFile extends File {
     url?: string;
     status: any;
     onClick?: () => void;
+    video: string;
 }
 interface UploaderProps {
     files: Array<MyFile>;
@@ -26,9 +27,9 @@ interface UploaderProps {
     maxsize: number;
     onOversize: (val: number) => void;
     type: 'image' | 'vedio';
-}
-interface UploaderStates {
-    videoLength: number;
+    onDelete: (file: File, id: number) => void;
+    currentVideo: (val: string) => void;
+    showTitle: boolean;
 }
 declare type customFile = {
     nativeFile: Blob;
@@ -45,7 +46,7 @@ declare type renderOnloadEvent = {
         result: any;
     };
 };
-export default class Uploader extends React.Component<UploaderProps, UploaderStates> {
+export default class Uploader extends React.Component<UploaderProps> {
     constructor(props: UploaderProps);
     static propTypes: {
         /**
@@ -79,6 +80,11 @@ export default class Uploader extends React.Component<UploaderProps, UploaderSta
          */
         onOversize: PropTypes.Requireable<(...args: any[]) => any>;
         /**
+         * 删除文件触发，参数为file和id
+         *
+         */
+        onDelete: PropTypes.Requireable<(...args: any[]) => any>;
+        /**
          * array of photos thumbnails to indicator status, include property `url`, `status`, `error`
          *
          */
@@ -93,6 +99,16 @@ export default class Uploader extends React.Component<UploaderProps, UploaderSta
          *
          */
         type: PropTypes.Requireable<string>;
+        /**
+         * 当前视频src
+         *
+         */
+        currentVideo: PropTypes.Requireable<(...args: any[]) => any>;
+        /**
+         * 是否展示标题
+         *
+         */
+        showTitle: PropTypes.Requireable<boolean>;
     };
     static defaultProps: {
         maxCount: number;
@@ -102,8 +118,11 @@ export default class Uploader extends React.Component<UploaderProps, UploaderSta
         onChange: ((file: File, event?: any) => void) | undefined;
         onError: (error: any) => void;
         onOversize: (val: number) => void;
+        onDelete: (file: File, id: number) => void;
         lang: Lang;
-        type: string;
+        type: "image" | "vedio";
+        currentVideo: (val: string) => void;
+        showTitle: boolean;
     };
     /**
      * Detecting vertical squash in loaded image.

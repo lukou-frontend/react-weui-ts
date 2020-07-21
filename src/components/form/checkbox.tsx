@@ -1,5 +1,6 @@
 import * as React from 'react';
 import classNames from '../../utils/classnames';
+import PropTypes from 'prop-types'
 
 /**
  * weui wrapper for checkbox
@@ -7,10 +8,25 @@ import classNames from '../../utils/classnames';
  */
 interface CheckboxProps {
   className?: any,
-  children?: React.ReactNode
+  children?: React.ReactNode,
+  onChange: (e: Event) => void
 }
-const Checkbox = (props: CheckboxProps) => {
-    const { className, ...others } = props;
+export default class Checkbox extends React.Component<CheckboxProps>{
+  constructor(props: CheckboxProps) {
+    super(props)
+  }
+  static propTypes = {
+    /**
+     * onChange事件
+     *
+     */
+    onChange: PropTypes.func,
+  }
+  static defaultProps = {
+    onChange: undefined as unknown as CheckboxProps['onChange'],
+  };
+  render () {
+    const { className, onChange, ...others } = this.props;
     const cls = classNames({
         'weui-check': true,
         [className]: className
@@ -18,10 +34,9 @@ const Checkbox = (props: CheckboxProps) => {
 
     return (
         <div>
-            <input className={cls} type="checkbox" {...others}/>
+            <input className={cls} type="checkbox" {...others} onChange={onChange.bind(this)} />
             <span className="weui-icon-checked"></span>
         </div>
     );
+  }
 };
-
-export default Checkbox;
