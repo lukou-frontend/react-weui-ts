@@ -204,8 +204,12 @@ export default class Uploader extends React.Component {
                 if (this.props.onFileClick)
                     this.props.onFileClick(e, file, idx);
             };
+            let handleClick = () => {
+                if (this.props.onDelete)
+                    this.props.onDelete(file, idx);
+            };
             return (React.createElement("li", Object.assign({ className: cls, key: idx, style: fileStyle, onClick: handleFileClick }, others),
-                React.createElement(Icon, { value: "clear", style: iconStyle, onClick: this.props.onDelete(file, idx) }),
+                React.createElement(Icon, { value: "clear", style: iconStyle, onClick: handleClick }),
                 error || status ?
                     React.createElement("div", { className: "weui-uploader__file-content" }, error ? React.createElement(Icon, { value: "warn" }) : status)
                     : false));

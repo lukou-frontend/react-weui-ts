@@ -314,9 +314,12 @@ export default class Uploader extends React.Component<UploaderProps, UploaderSta
       let handleFileClick = onClick ? onClick : (e: any) => {
         if (this.props.onFileClick) this.props.onFileClick(e, file, idx);
       };
+      let handleClick = () => {
+        if (this.props.onDelete) this.props.onDelete(file, idx);
+      };
       return (
         <li className={cls} key={idx} style={fileStyle} onClick={handleFileClick} {...others}>
-          <Icon value="clear" style={iconStyle} onClick={this.props.onDelete(file, idx)} />
+          <Icon value="clear" style={iconStyle} onClick={handleClick} />
           {
             error || status ?
               <div className="weui-uploader__file-content">
