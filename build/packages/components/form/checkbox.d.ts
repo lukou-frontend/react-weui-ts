@@ -7,19 +7,19 @@ import PropTypes from 'prop-types';
 interface CheckboxProps {
     className?: any;
     children?: React.ReactNode;
-    onChange: (e: Event) => void;
+    onChange: (checked: boolean, e: React.ChangeEvent) => void;
 }
 export default class Checkbox extends React.Component<CheckboxProps> {
     constructor(props: CheckboxProps);
     static propTypes: {
         /**
-         * onChange事件
+         * onChange事件回调函数，function(checked:boolean, event: Event)
          *
          */
         onChange: PropTypes.Requireable<(...args: any[]) => any>;
     };
     static defaultProps: {
-        onChange: (e: Event) => void;
+        onChange: (checked: boolean, e: React.ChangeEvent<Element>) => void;
     };
     render(): JSX.Element;
 }

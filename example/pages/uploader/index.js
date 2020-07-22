@@ -6,8 +6,8 @@ import {
     Form,
     Cell,
     CellBody,
-    Page,
-} from 'react-weui'
+} from '../../../build/packages'
+import Page from '../../component/page';
 
 class UploaderDemo extends Component {
     componentDidMount() {

@@ -307,7 +307,7 @@ Uploader.propTypes = {
      */
     type: PropTypes.string,
     /**
-     * 刚刚上传的视频
+     * 参数为当前视频src
      *
      */
     currentVideo: PropTypes.func,
