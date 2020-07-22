@@ -1,7 +1,7 @@
 <!--
  * @Author: 刘佑祥
  * @LastEditors: 刘佑祥
- * @LastEditTime: 2020-07-16 10:37:49
+ * @LastEditTime: 2020-07-22 14:53:10
 --> 
 # React-WeUI 
 
@@ -15,8 +15,7 @@
 
 ## Docs
 
-1.0.x [documentation](https://weui.github.io/react-weui/docs/) with live examples.
-0.4.x [documentation](https://n7best.github.io/react-weui-doc-0.4.0) with live examples.
+1.0.x [documentation](http://qiuyu.coupon.lukou.com/react-weui/docs) with live examples.
 
 ## Installation
 
@@ -83,8 +82,32 @@ See the [contributing guidelines](https://github.com/n7best/react-weui-1/blob/ma
 
 ![react-weui](./docs/qrcode.png)
 
-[1.0.0](https://weui.github.io/react-weui)
+[1.0.0](http://qiuyu.coupon.lukou.com/react-weui/docs)
 
 ## License
 
 The MIT License([http://opensource.org/licenses/MIT](http://opensource.org/licenses/MIT))
+
+## Start Project
+
+```
+npm run build
+npm run build-less
+npm start
+```
+
+## Update Documentation
+
+Update propTypes description in src/components/*/*
+
+```
+npm run build
+npm run build-less
+npm run deploy:doc
+```
+
+## Develop New Component
+
+1.在src/components中创建新文件或在现有的文件中创建tsx文件
+2.组件创建完成后在src/index.ts中导出
+3.在example/pages中创建一个example
