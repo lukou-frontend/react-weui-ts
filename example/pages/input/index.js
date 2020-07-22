@@ -63,13 +63,13 @@ export default class inputDemo extends React.Component {
             <Form checkbox>
                 <FormCell checkbox>
                     <CellHeader>
-                        <Checkbox name="checkbox1" value="1"/>
+                        <Checkbox onChange={checked => {console.log(checked)}} name="checkbox1" value="1"/>
                     </CellHeader>
                     <CellBody>Option 1</CellBody>
                 </FormCell>
                 <FormCell checkbox>
                     <CellHeader>
-                        <Checkbox name="checkbox2" value="2" defaultChecked/>
+                        <Checkbox onChange={checked => {console.log(checked)}} name="checkbox2" value="2" defaultChecked/>
                     </CellHeader>
                     <CellBody>Option 2</CellBody>
                 </FormCell>
