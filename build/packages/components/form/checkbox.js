@@ -11,14 +11,17 @@ export default class Checkbox extends React.Component {
             'weui-check': true,
             [className]: className
         });
+        const handleChange = (e) => {
+            onChange && onChange(e.target.checked, e);
+        };
         return (React.createElement("div", null,
-            React.createElement("input", Object.assign({ className: cls, type: "checkbox" }, others, { onChange: onChange.bind(this) })),
+            React.createElement("input", Object.assign({ className: cls, type: "checkbox" }, others, { onChange: handleChange })),
             React.createElement("span", { className: "weui-icon-checked" })));
     }
 }
 Checkbox.propTypes = {
     /**
-     * onChange事件
+     * onChange事件回调函数，function(checked:boolean, event: Event)
      *
      */
     onChange: PropTypes.func,

@@ -100,7 +100,7 @@ export default class Uploader extends React.Component<UploaderProps> {
          */
         type: PropTypes.Requireable<string>;
         /**
-         * 当前视频src
+         * 参数为当前视频src
          *
          */
         currentVideo: PropTypes.Requireable<(...args: any[]) => any>;

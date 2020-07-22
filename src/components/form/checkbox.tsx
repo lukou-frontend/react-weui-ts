@@ -9,7 +9,7 @@ import PropTypes from 'prop-types'
 interface CheckboxProps {
   className?: any,
   children?: React.ReactNode,
-  onChange: (e: Event) => void
+  onChange: (checked: boolean, e: React.ChangeEvent) => void
 }
 export default class Checkbox extends React.Component<CheckboxProps>{
   constructor(props: CheckboxProps) {
@@ -17,7 +17,7 @@ export default class Checkbox extends React.Component<CheckboxProps>{
   }
   static propTypes = {
     /**
-     * onChange事件
+     * onChange事件回调函数，function(checked:boolean, event: Event)
      *
      */
     onChange: PropTypes.func,
@@ -31,10 +31,13 @@ export default class Checkbox extends React.Component<CheckboxProps>{
         'weui-check': true,
         [className]: className
     });
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      onChange && onChange(e.target.checked, e)
+    }
 
     return (
         <div>
-            <input className={cls} type="checkbox" {...others} onChange={onChange.bind(this)} />
+            <input className={cls} type="checkbox" {...others} onChange= {handleChange} />
             <span className="weui-icon-checked"></span>
         </div>
     );
