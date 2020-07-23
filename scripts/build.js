@@ -84,7 +84,12 @@ function makeConfig(bundleType){
           extensions: ['css', 'less'],
           plugins: [
             require('autoprefixer')({
-              overrideBrowserslist: ['iOS >= 8', 'Android >= 4.0']
+              Browserslist: [
+                "last 3 version",
+                "ie >= 10",
+                "iOS >= 7",
+                "Android >= 4.1"
+              ]
             })
           ],
           extract: path.resolve(atrs.path + 'react-weui.css')

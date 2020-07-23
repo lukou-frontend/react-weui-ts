@@ -65,11 +65,13 @@ const rules = [
           options: {
             sourceMap: !isProduction,
             plugins: (loader) => [
-                autoprefixer({
-                    browsers: [
-                        'last 3 version',
-                        'ie >= 10',
-                    ],
+              require('autoprefixer')({
+                  overrideBrowserslist: [
+                    'last 3 version',
+                    'ie >= 10',
+                    'iOS >= 7',
+                    'Android >= 4.1'
+                  ],
                 })
             ]
           }
@@ -91,10 +93,12 @@ const rules = [
             sourceMap: !isProduction,
             plugins: (loader) => [
                 autoprefixer({
-                    browsers: [
-                        'last 3 version',
-                        'ie >= 10',
-                    ],
+                  Browserslist: [
+                    'last 3 version',
+                    'ie >= 10',
+                    'iOS >= 7',
+                    'Android >= 4.1'
+                  ],
                 })
             ]
           }

@@ -123,6 +123,7 @@ class PickerGroup extends React.Component<PickerGroupProps, PickerGroupStates> {
     }
 
     handleTouchStart(e: React.TouchEvent){
+      e.stopPropagation()
         if (this.state.touching || this.props.items.length <= 1) return;
 
         this.setState({
@@ -135,11 +136,9 @@ class PickerGroup extends React.Component<PickerGroupProps, PickerGroupStates> {
     }
 
     handleTouchMove(e: React.TouchEvent){
+      e.stopPropagation()
         if (!this.state.touching || this.props.items.length <= 1) return;
         if (e.targetTouches[0].identifier !== this.state.touchId) return;
-
-        //prevent move background
-        e.preventDefault();
 
         const pageY = e.targetTouches[0].pageY;
         const diffY = pageY - this.state.ogY;
@@ -195,9 +194,9 @@ class PickerGroup extends React.Component<PickerGroupProps, PickerGroupStates> {
             'transform': `translate(0, ${this.state.translate}px)`,
             'transition': this.state.animating ? 'transform .3s' : 'none'
         };
-
+        
         return (
-            <div className={cls} { ...others }
+            <div style={{touchAction: 'none'}} className={cls} { ...others }
                 onTouchStart={this.handleTouchStart}
                 onTouchMove={this.handleTouchMove}
                 onTouchEnd={this.handleTouchEnd}

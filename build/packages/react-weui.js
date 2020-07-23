@@ -297,6 +297,8 @@
   	return module = { exports: {} }, fn(module, module.exports), module.exports;
   }
 
+<<<<<<< HEAD
+=======
   var reactIs_production_min = createCommonjsModule(function (module, exports) {
   Object.defineProperty(exports,"__esModule",{value:!0});
   var b="function"===typeof Symbol&&Symbol.for,c=b?Symbol.for("react.element"):60103,d=b?Symbol.for("react.portal"):60106,e=b?Symbol.for("react.fragment"):60107,f=b?Symbol.for("react.strict_mode"):60108,g=b?Symbol.for("react.profiler"):60114,h=b?Symbol.for("react.provider"):60109,k=b?Symbol.for("react.context"):60110,l=b?Symbol.for("react.async_mode"):60111,m=b?Symbol.for("react.concurrent_mode"):60111,n=b?Symbol.for("react.forward_ref"):60112,p=b?Symbol.for("react.suspense"):60113,q=b?Symbol.for("react.memo"):
@@ -336,6 +338,7 @@
   var reactIs_production_min_27 = reactIs_production_min.isStrictMode;
   var reactIs_production_min_28 = reactIs_production_min.isSuspense;
 
+>>>>>>> 6738329c60aaa157fd2499282b80fc9c6fab2c5c
   var reactIs_development = createCommonjsModule(function (module, exports) {
 
 
@@ -343,23 +346,54 @@
   {
     (function() {
 
+<<<<<<< HEAD
+  // The Symbol used to tag the ReactElement-like types. If there is no native Symbol
+  // nor polyfill, then a plain number is used for performance.
+  var hasSymbol = typeof Symbol === 'function' && Symbol.for;
+=======
   Object.defineProperty(exports, '__esModule', { value: true });
 
   // The Symbol used to tag the ReactElement-like types. If there is no native Symbol
   // nor polyfill, then a plain number is used for performance.
   var hasSymbol = typeof Symbol === 'function' && Symbol.for;
 
+>>>>>>> 6738329c60aaa157fd2499282b80fc9c6fab2c5c
   var REACT_ELEMENT_TYPE = hasSymbol ? Symbol.for('react.element') : 0xeac7;
   var REACT_PORTAL_TYPE = hasSymbol ? Symbol.for('react.portal') : 0xeaca;
   var REACT_FRAGMENT_TYPE = hasSymbol ? Symbol.for('react.fragment') : 0xeacb;
   var REACT_STRICT_MODE_TYPE = hasSymbol ? Symbol.for('react.strict_mode') : 0xeacc;
   var REACT_PROFILER_TYPE = hasSymbol ? Symbol.for('react.profiler') : 0xead2;
   var REACT_PROVIDER_TYPE = hasSymbol ? Symbol.for('react.provider') : 0xeacd;
+<<<<<<< HEAD
+  var REACT_CONTEXT_TYPE = hasSymbol ? Symbol.for('react.context') : 0xeace; // TODO: We don't use AsyncMode or ConcurrentMode anymore. They were temporary
+  // (unstable) APIs that have been removed. Can we remove the symbols?
+
+=======
   var REACT_CONTEXT_TYPE = hasSymbol ? Symbol.for('react.context') : 0xeace;
+>>>>>>> 6738329c60aaa157fd2499282b80fc9c6fab2c5c
   var REACT_ASYNC_MODE_TYPE = hasSymbol ? Symbol.for('react.async_mode') : 0xeacf;
   var REACT_CONCURRENT_MODE_TYPE = hasSymbol ? Symbol.for('react.concurrent_mode') : 0xeacf;
   var REACT_FORWARD_REF_TYPE = hasSymbol ? Symbol.for('react.forward_ref') : 0xead0;
   var REACT_SUSPENSE_TYPE = hasSymbol ? Symbol.for('react.suspense') : 0xead1;
+<<<<<<< HEAD
+  var REACT_SUSPENSE_LIST_TYPE = hasSymbol ? Symbol.for('react.suspense_list') : 0xead8;
+  var REACT_MEMO_TYPE = hasSymbol ? Symbol.for('react.memo') : 0xead3;
+  var REACT_LAZY_TYPE = hasSymbol ? Symbol.for('react.lazy') : 0xead4;
+  var REACT_BLOCK_TYPE = hasSymbol ? Symbol.for('react.block') : 0xead9;
+  var REACT_FUNDAMENTAL_TYPE = hasSymbol ? Symbol.for('react.fundamental') : 0xead5;
+  var REACT_RESPONDER_TYPE = hasSymbol ? Symbol.for('react.responder') : 0xead6;
+  var REACT_SCOPE_TYPE = hasSymbol ? Symbol.for('react.scope') : 0xead7;
+
+  function isValidElementType(type) {
+    return typeof type === 'string' || typeof type === 'function' || // Note: its typeof might be other than 'symbol' or 'number' if it's a polyfill.
+    type === REACT_FRAGMENT_TYPE || type === REACT_CONCURRENT_MODE_TYPE || type === REACT_PROFILER_TYPE || type === REACT_STRICT_MODE_TYPE || type === REACT_SUSPENSE_TYPE || type === REACT_SUSPENSE_LIST_TYPE || typeof type === 'object' && type !== null && (type.$$typeof === REACT_LAZY_TYPE || type.$$typeof === REACT_MEMO_TYPE || type.$$typeof === REACT_PROVIDER_TYPE || type.$$typeof === REACT_CONTEXT_TYPE || type.$$typeof === REACT_FORWARD_REF_TYPE || type.$$typeof === REACT_FUNDAMENTAL_TYPE || type.$$typeof === REACT_RESPONDER_TYPE || type.$$typeof === REACT_SCOPE_TYPE || type.$$typeof === REACT_BLOCK_TYPE);
+  }
+
+  function typeOf(object) {
+    if (typeof object === 'object' && object !== null) {
+      var $$typeof = object.$$typeof;
+
+=======
   var REACT_MEMO_TYPE = hasSymbol ? Symbol.for('react.memo') : 0xead3;
   var REACT_LAZY_TYPE = hasSymbol ? Symbol.for('react.lazy') : 0xead4;
 
@@ -425,6 +459,7 @@
   function typeOf(object) {
     if (typeof object === 'object' && object !== null) {
       var $$typeof = object.$$typeof;
+>>>>>>> 6738329c60aaa157fd2499282b80fc9c6fab2c5c
       switch ($$typeof) {
         case REACT_ELEMENT_TYPE:
           var type = object.type;
@@ -437,12 +472,29 @@
             case REACT_STRICT_MODE_TYPE:
             case REACT_SUSPENSE_TYPE:
               return type;
+<<<<<<< HEAD
+
+=======
+>>>>>>> 6738329c60aaa157fd2499282b80fc9c6fab2c5c
             default:
               var $$typeofType = type && type.$$typeof;
 
               switch ($$typeofType) {
                 case REACT_CONTEXT_TYPE:
                 case REACT_FORWARD_REF_TYPE:
+<<<<<<< HEAD
+                case REACT_LAZY_TYPE:
+                case REACT_MEMO_TYPE:
+                case REACT_PROVIDER_TYPE:
+                  return $$typeofType;
+
+                default:
+                  return $$typeof;
+              }
+
+          }
+
+=======
                 case REACT_PROVIDER_TYPE:
                   return $$typeofType;
                 default:
@@ -451,15 +503,21 @@
           }
         case REACT_LAZY_TYPE:
         case REACT_MEMO_TYPE:
+>>>>>>> 6738329c60aaa157fd2499282b80fc9c6fab2c5c
         case REACT_PORTAL_TYPE:
           return $$typeof;
       }
     }
 
     return undefined;
+<<<<<<< HEAD
+  } // AsyncMode is deprecated along with isAsyncMode
+
+=======
   }
 
   // AsyncMode is deprecated along with isAsyncMode
+>>>>>>> 6738329c60aaa157fd2499282b80fc9c6fab2c5c
   var AsyncMode = REACT_ASYNC_MODE_TYPE;
   var ConcurrentMode = REACT_CONCURRENT_MODE_TYPE;
   var ContextConsumer = REACT_CONTEXT_TYPE;
@@ -473,6 +531,19 @@
   var Profiler = REACT_PROFILER_TYPE;
   var StrictMode = REACT_STRICT_MODE_TYPE;
   var Suspense = REACT_SUSPENSE_TYPE;
+<<<<<<< HEAD
+  var hasWarnedAboutDeprecatedIsAsyncMode = false; // AsyncMode should be deprecated
+
+  function isAsyncMode(object) {
+    {
+      if (!hasWarnedAboutDeprecatedIsAsyncMode) {
+        hasWarnedAboutDeprecatedIsAsyncMode = true; // Using console['warn'] to evade Babel and ESLint
+
+        console['warn']('The ReactIs.isAsyncMode() alias has been deprecated, ' + 'and will be removed in React 17+. Update your code to use ' + 'ReactIs.isConcurrentMode() instead. It has the exact same API.');
+      }
+    }
+
+=======
 
   var hasWarnedAboutDeprecatedIsAsyncMode = false;
 
@@ -484,6 +555,7 @@
         lowPriorityWarning$1(false, 'The ReactIs.isAsyncMode() alias has been deprecated, ' + 'and will be removed in React 17+. Update your code to use ' + 'ReactIs.isConcurrentMode() instead. It has the exact same API.');
       }
     }
+>>>>>>> 6738329c60aaa157fd2499282b80fc9c6fab2c5c
     return isConcurrentMode(object) || typeOf(object) === REACT_ASYNC_MODE_TYPE;
   }
   function isConcurrentMode(object) {
@@ -523,7 +595,10 @@
     return typeOf(object) === REACT_SUSPENSE_TYPE;
   }
 
+<<<<<<< HEAD
+=======
   exports.typeOf = typeOf;
+>>>>>>> 6738329c60aaa157fd2499282b80fc9c6fab2c5c
   exports.AsyncMode = AsyncMode;
   exports.ConcurrentMode = ConcurrentMode;
   exports.ContextConsumer = ContextConsumer;
@@ -537,7 +612,10 @@
   exports.Profiler = Profiler;
   exports.StrictMode = StrictMode;
   exports.Suspense = Suspense;
+<<<<<<< HEAD
+=======
   exports.isValidElementType = isValidElementType;
+>>>>>>> 6738329c60aaa157fd2499282b80fc9c6fab2c5c
   exports.isAsyncMode = isAsyncMode;
   exports.isConcurrentMode = isConcurrentMode;
   exports.isContextConsumer = isContextConsumer;
@@ -551,6 +629,77 @@
   exports.isProfiler = isProfiler;
   exports.isStrictMode = isStrictMode;
   exports.isSuspense = isSuspense;
+<<<<<<< HEAD
+  exports.isValidElementType = isValidElementType;
+  exports.typeOf = typeOf;
+    })();
+  }
+  });
+  var reactIs_development_1 = reactIs_development.AsyncMode;
+  var reactIs_development_2 = reactIs_development.ConcurrentMode;
+  var reactIs_development_3 = reactIs_development.ContextConsumer;
+  var reactIs_development_4 = reactIs_development.ContextProvider;
+  var reactIs_development_5 = reactIs_development.Element;
+  var reactIs_development_6 = reactIs_development.ForwardRef;
+  var reactIs_development_7 = reactIs_development.Fragment;
+  var reactIs_development_8 = reactIs_development.Lazy;
+  var reactIs_development_9 = reactIs_development.Memo;
+  var reactIs_development_10 = reactIs_development.Portal;
+  var reactIs_development_11 = reactIs_development.Profiler;
+  var reactIs_development_12 = reactIs_development.StrictMode;
+  var reactIs_development_13 = reactIs_development.Suspense;
+  var reactIs_development_14 = reactIs_development.isAsyncMode;
+  var reactIs_development_15 = reactIs_development.isConcurrentMode;
+  var reactIs_development_16 = reactIs_development.isContextConsumer;
+  var reactIs_development_17 = reactIs_development.isContextProvider;
+  var reactIs_development_18 = reactIs_development.isElement;
+  var reactIs_development_19 = reactIs_development.isForwardRef;
+  var reactIs_development_20 = reactIs_development.isFragment;
+  var reactIs_development_21 = reactIs_development.isLazy;
+  var reactIs_development_22 = reactIs_development.isMemo;
+  var reactIs_development_23 = reactIs_development.isPortal;
+  var reactIs_development_24 = reactIs_development.isProfiler;
+  var reactIs_development_25 = reactIs_development.isStrictMode;
+  var reactIs_development_26 = reactIs_development.isSuspense;
+  var reactIs_development_27 = reactIs_development.isValidElementType;
+  var reactIs_development_28 = reactIs_development.typeOf;
+
+  var reactIs_development$1 = /*#__PURE__*/Object.freeze({
+    __proto__: null,
+    'default': reactIs_development,
+    __moduleExports: reactIs_development,
+    AsyncMode: reactIs_development_1,
+    ConcurrentMode: reactIs_development_2,
+    ContextConsumer: reactIs_development_3,
+    ContextProvider: reactIs_development_4,
+    Element: reactIs_development_5,
+    ForwardRef: reactIs_development_6,
+    Fragment: reactIs_development_7,
+    Lazy: reactIs_development_8,
+    Memo: reactIs_development_9,
+    Portal: reactIs_development_10,
+    Profiler: reactIs_development_11,
+    StrictMode: reactIs_development_12,
+    Suspense: reactIs_development_13,
+    isAsyncMode: reactIs_development_14,
+    isConcurrentMode: reactIs_development_15,
+    isContextConsumer: reactIs_development_16,
+    isContextProvider: reactIs_development_17,
+    isElement: reactIs_development_18,
+    isForwardRef: reactIs_development_19,
+    isFragment: reactIs_development_20,
+    isLazy: reactIs_development_21,
+    isMemo: reactIs_development_22,
+    isPortal: reactIs_development_23,
+    isProfiler: reactIs_development_24,
+    isStrictMode: reactIs_development_25,
+    isSuspense: reactIs_development_26,
+    isValidElementType: reactIs_development_27,
+    typeOf: reactIs_development_28
+  });
+
+  var require$$1 = ( reactIs_development$1 && reactIs_development ) || reactIs_development$1;
+=======
     })();
   }
   });
@@ -620,6 +769,7 @@
   });
 
   var require$$1 = ( reactIs_development$2 && reactIs_development$1 ) || reactIs_development$2;
+>>>>>>> 6738329c60aaa157fd2499282b80fc9c6fab2c5c
 
   var reactIs = createCommonjsModule(function (module) {
 
@@ -1858,7 +2008,11 @@
       var handleChange = function handleChange(e) {
           onChange && onChange(e.target.checked, e);
       };
+<<<<<<< HEAD
+      return React.createElement("div", null, React.createElement("input", Object.assign({ className: cls, type: "checkbox", checked: checked }, inputProps, { onChange: handleChange })), React.createElement("span", { className: "weui-icon-checked" }));
+=======
       return React.createElement("div", { style: { fontSize: 0 } }, React.createElement("input", Object.assign({ className: cls, type: "checkbox", checked: checked }, inputProps, { onChange: handleChange })), React.createElement("span", { className: "weui-icon-checked" }));
+>>>>>>> 6738329c60aaa157fd2499282b80fc9c6fab2c5c
   };
   Switch.propTypes = {
       /**
@@ -4489,15 +4643,36 @@
               })));
           }
       }, {
+<<<<<<< HEAD
+          key: 'renderVideos',
+          value: function renderVideos(videos) {
+              var _this4 = this;
+
+              return React.createElement("div", { className: "weui-gallery__img" }, React.createElement(Swiper, { indicators: false, defaultIndex: this.props.defaultIndex, onChange: function onChange(next) {
+                      return _this4.setState({ currentIndex: next });
+                  } }, videos.map(function (video, i) {
+                  return React.createElement("video", { src: video, key: i, muted: true, autoPlay: true, loop: true });
+              })));
+          }
+      }, {
+          key: 'renderOprs',
+          value: function renderOprs() {
+              var _this5 = this;
+=======
           key: 'renderOprs',
           value: function renderOprs() {
               var _this4 = this;
+>>>>>>> 6738329c60aaa157fd2499282b80fc9c6fab2c5c
 
               if (Array.isArray(this.props.children)) {
                   return this.props.children.map(function (child, i) {
                       return React.cloneElement(child, {
                           key: i,
+<<<<<<< HEAD
+                          onClick: _this5.handleClick(child.props.onClick)
+=======
                           onClick: _this4.handleClick(child.props.onClick)
+>>>>>>> 6738329c60aaa157fd2499282b80fc9c6fab2c5c
                       });
                   });
               } else {
@@ -4519,13 +4694,31 @@
                   show = _props.show,
                   src = _props.src,
                   defaultIndex = _props.defaultIndex,
+<<<<<<< HEAD
+                  isVideo = _props.isVideo,
+                  others = objectWithoutProperties(_props, ['children', 'className', 'show', 'src', 'defaultIndex', 'isVideo']);
+=======
                   others = objectWithoutProperties(_props, ['children', 'className', 'show', 'src', 'defaultIndex']);
+>>>>>>> 6738329c60aaa157fd2499282b80fc9c6fab2c5c
 
               var cls = classNames(defineProperty({
                   'weui-gallery': true
               }, className, className));
+<<<<<<< HEAD
+              var Swipe = void 0;
+              if (Array.isArray(src) && !isVideo) {
+                  Swipe = this.renderImages(src);
+              } else if (Array.isArray(src) && isVideo) {
+                  Swipe = this.renderVideos(src);
+              } else {
+                  Swipe = React.createElement("span", { className: "weui-gallery__img", style: { backgroundImage: 'url(' + src + ')' } });
+              }
+              if (!show) return false;
+              return React.createElement("div", Object.assign({ className: cls, style: { display: show ? 'block' : 'none' } }, others), Swipe, React.createElement("div", { className: "weui-gallery__opr" }, this.renderOprs()));
+=======
               if (!show) return false;
               return React.createElement("div", Object.assign({ className: cls, style: { display: show ? 'block' : 'none' } }, others), Array.isArray(src) ? this.renderImages(src) : React.createElement("span", { className: "weui-gallery__img", style: { backgroundImage: 'url(' + src + ')' } }), React.createElement("div", { className: "weui-gallery__opr" }, this.renderOprs()));
+>>>>>>> 6738329c60aaa157fd2499282b80fc9c6fab2c5c
           }
       }]);
       return Gallery;
@@ -4546,12 +4739,26 @@
        * indicate whather the component is display
        *
        */
+<<<<<<< HEAD
+      defaultIndex: propTypes.number,
+      /**
+       * 是否为视频
+       *
+       */
+      isVideo: propTypes.bool
+=======
       defaultIndex: propTypes.number
+>>>>>>> 6738329c60aaa157fd2499282b80fc9c6fab2c5c
   };
   Gallery.defaultProps = {
       show: undefined,
       src: '',
+<<<<<<< HEAD
+      defaultIndex: 0,
+      isVideo: false
+=======
       defaultIndex: 0
+>>>>>>> 6738329c60aaa157fd2499282b80fc9c6fab2c5c
   };
 
   var GalleryDelete = function GalleryDelete(props) {
@@ -4704,6 +4911,10 @@
       }, {
           key: 'handleTouchStart',
           value: function handleTouchStart(e) {
+<<<<<<< HEAD
+              e.stopPropagation();
+=======
+>>>>>>> 6738329c60aaa157fd2499282b80fc9c6fab2c5c
               if (this.state.touching || this.props.items.length <= 1) return;
               this.setState({
                   touching: true,
@@ -4716,10 +4927,16 @@
       }, {
           key: 'handleTouchMove',
           value: function handleTouchMove(e) {
+<<<<<<< HEAD
+              e.stopPropagation();
+              if (!this.state.touching || this.props.items.length <= 1) return;
+              if (e.targetTouches[0].identifier !== this.state.touchId) return;
+=======
               if (!this.state.touching || this.props.items.length <= 1) return;
               if (e.targetTouches[0].identifier !== this.state.touchId) return;
               //prevent move background
               e.preventDefault();
+>>>>>>> 6738329c60aaa157fd2499282b80fc9c6fab2c5c
               var pageY = e.targetTouches[0].pageY;
               var diffY = pageY - this.state.ogY;
               this.setState({
@@ -4794,7 +5011,11 @@
                   'transform': 'translate(0, ' + this.state.translate + 'px)',
                   'transition': this.state.animating ? 'transform .3s' : 'none'
               };
+<<<<<<< HEAD
+              return React.createElement("div", Object.assign({ style: { touchAction: 'none' }, className: cls }, others, { onTouchStart: this.handleTouchStart, onTouchMove: this.handleTouchMove, onTouchEnd: this.handleTouchEnd }), React.createElement("div", { className: "weui-picker__mask" }), React.createElement("div", { className: "weui-picker__indicator" }), React.createElement("div", { className: "weui-picker__content", style: styles, ref: "content" }, items.map(function (item, j) {
+=======
               return React.createElement("div", Object.assign({ className: cls }, others, { onTouchStart: this.handleTouchStart, onTouchMove: this.handleTouchMove, onTouchEnd: this.handleTouchEnd }), React.createElement("div", { className: "weui-picker__mask" }), React.createElement("div", { className: "weui-picker__indicator" }), React.createElement("div", { className: "weui-picker__content", style: styles, ref: "content" }, items.map(function (item, j) {
+>>>>>>> 6738329c60aaa157fd2499282b80fc9c6fab2c5c
                   var label = item[_this5.props.mapKeys.label];
                   var itemCls = classNames('weui-picker__item', {
                       'weui-picker__item_disabled': item.disabled
@@ -5092,6 +5313,16 @@
           }
       }, {
           key: 'updateGroup',
+<<<<<<< HEAD
+          value: function updateGroup(item, i, groupIndex, selected, picker) {
+              var _this3 = this;
+
+              console.log(item, i, groupIndex, picker);
+              this.updateDataBySelected(selected, function () {
+                  //update picker
+                  _this3.setState({
+                      selected: selected
+=======
           value: function updateGroup(selected, picker) {
               var _this3 = this;
 
@@ -5099,6 +5330,7 @@
                   //update picker
                   picker.setState({
                       selected: _this3.state.selected
+>>>>>>> 6738329c60aaa157fd2499282b80fc9c6fab2c5c
                   });
               });
           }
@@ -5785,7 +6017,11 @@
   });
 
   var _core = createCommonjsModule(function (module) {
+<<<<<<< HEAD
+  var core = module.exports = { version: '2.6.11' };
+=======
   var core = module.exports = { version: '2.6.9' };
+>>>>>>> 6738329c60aaa157fd2499282b80fc9c6fab2c5c
   if (typeof __e == 'number') __e = core; // eslint-disable-line no-undef
   });
   var _core_1 = _core.version;
