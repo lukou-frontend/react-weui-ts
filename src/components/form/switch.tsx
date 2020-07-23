@@ -28,7 +28,7 @@ const Switch = (props: SwitchProps) => {
     }
 
     return (
-        <div>
+        <div style={{ fontSize: 0 }}>
             <input className={cls} type="checkbox" checked={checked} {...inputProps} onChange={handleChange} />
             <span className="weui-icon-checked"></span>
         </div>

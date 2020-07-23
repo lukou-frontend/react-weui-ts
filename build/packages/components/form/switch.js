@@ -13,7 +13,7 @@ const Switch = (props) => {
     const handleChange = (e) => {
         onChange && onChange(e.target.checked, e);
     };
-    return (React.createElement("div", null,
+    return (React.createElement("div", { style: { fontSize: 0 } },
         React.createElement("input", Object.assign({ className: cls, type: "checkbox", checked: checked }, inputProps, { onChange: handleChange })),
         React.createElement("span", { className: "weui-icon-checked" })));
 };
