@@ -60,11 +60,12 @@ class CityPicker extends React.Component {
             selected: newselected
         }, () => cb());
     }
-    updateGroup(selected, picker) {
+    updateGroup(item, i, groupIndex, selected, picker) {
+        console.log(item, i, groupIndex, picker);
         this.updateDataBySelected(selected, () => {
             //update picker
-            picker.setState({
-                selected: this.state.selected
+            this.setState({
+                selected: selected
             });
         });
     }

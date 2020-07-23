@@ -12,7 +12,8 @@ interface GalleryProps {
   show?: boolean,
   src?: string | Array<any>,
   className?: any,
-  children?: React.ReactElement[]
+  children?: React.ReactElement[],
+  isVideo: boolean
 }
 interface GalleryStates {
   currentIndex: number
@@ -37,12 +38,18 @@ class Gallery extends React.Component<GalleryProps, GalleryStates> {
      *
      */
     defaultIndex: PropTypes.number,
+    /**
+     * 是否为视频
+     *
+     */
+    isVideo: PropTypes.bool,
   };
 
   static defaultProps = {
     show: undefined as GalleryProps['show'],
     src: '' as GalleryProps['src'],
-    defaultIndex: 0 as GalleryProps['defaultIndex']
+    defaultIndex: 0 as GalleryProps['defaultIndex'],
+    isVideo: false as GalleryProps['isVideo']
   }
 
   constructor(props: GalleryProps) {
@@ -85,6 +92,26 @@ class Gallery extends React.Component<GalleryProps, GalleryStates> {
     );
   }
 
+  renderVideos(videos: any[]) {
+    return (
+      <div className="weui-gallery__img">
+        <Swiper
+          indicators={false}
+          defaultIndex={this.props.defaultIndex}
+          onChange={(next: any) => this.setState({ currentIndex: next })}
+        >
+          {
+            videos.map((video: any, i: string | number | undefined) => {
+              return (
+                <video src={video} key={i} muted autoPlay loop></video>
+              );
+            })
+          }
+        </Swiper>
+      </div>
+    );
+  }
+
   renderOprs() {
     if (Array.isArray(this.props.children)) {
       return this.props.children.map((child, i) => {
@@ -105,19 +132,27 @@ class Gallery extends React.Component<GalleryProps, GalleryStates> {
   }
 
   render() {
-    const { children, className, show, src, defaultIndex, ...others } = this.props;
+    const { children, className, show, src, defaultIndex, isVideo, ...others } = this.props;
     const cls = classNames({
       'weui-gallery': true,
       [className]: className
     });
-
+    let Swipe: any
+    if (Array.isArray(src) && !isVideo) {
+      Swipe = this.renderImages
+    } else if (Array.isArray(src) && isVideo) {
+      Swipe = this.renderVideos
+    } else {
+      Swipe = (
+        <span className="weui-gallery__img" style={{ backgroundImage: `url(${src})` }}></span>
+      )
+    }
     if (!show) return false;
 
     return (
       <div className={cls} style={{ display: show ? 'block' : 'none' }} {...others}>
         {
-          Array.isArray(src) ? this.renderImages(src)
-            : <span className="weui-gallery__img" style={{ backgroundImage: `url(${src})` }}></span>
+          Swipe
         }
 
         <div className="weui-gallery__opr">

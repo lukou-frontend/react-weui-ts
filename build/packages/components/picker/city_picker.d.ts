@@ -4,12 +4,12 @@ import PropTypes from 'prop-types';
  *  An city pick component build on top of picker
  *
  */
-interface Data {
+declare type CityData = {
     label: string;
-    subitems: any;
-}
+    subitems?: any;
+};
 interface CityPickerProps {
-    data: Array<Data>;
+    data: Array<CityData>;
     dataMap: {
         id: string;
         items: string;
@@ -18,14 +18,14 @@ interface CityPickerProps {
         leftBtn: string;
         rightBtn: string;
     };
-    selected: Array<Data>;
+    selected: Array<any>;
     show: boolean;
     onCancel: (e: any) => void;
     onChange: (text: string) => void;
 }
 interface CityPickerStates {
     groups: Array<any>;
-    selected: Array<Data>;
+    selected: Array<CityData>;
     picker_show: boolean;
     text: string;
 }
@@ -73,8 +73,8 @@ declare class CityPicker extends React.Component<CityPickerProps, CityPickerStat
     constructor(props: CityPickerProps);
     parseData(data: Array<any>, subKey: any, selected?: Array<any>, group?: Array<any>, newselected?: Array<any>): any;
     updateDataBySelected(selected: any, cb: any): void;
-    updateGroup(selected: Array<Data>, picker: any): void;
-    handleChange(selected: Array<Data>): void;
+    updateGroup(item: any, i: any, groupIndex: any, selected: any, picker: any): void;
+    handleChange(selected: Array<CityData>): void;
     render(): JSX.Element;
 }
 export default CityPicker;
