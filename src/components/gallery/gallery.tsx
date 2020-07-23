@@ -139,9 +139,9 @@ class Gallery extends React.Component<GalleryProps, GalleryStates> {
     });
     let Swipe: any
     if (Array.isArray(src) && !isVideo) {
-      Swipe = this.renderImages
+      Swipe = this.renderImages(src)
     } else if (Array.isArray(src) && isVideo) {
-      Swipe = this.renderVideos
+      Swipe = this.renderVideos(src)
     } else {
       Swipe = (
         <span className="weui-gallery__img" style={{ backgroundImage: `url(${src})` }}></span>
