@@ -353,7 +353,7 @@ export default class Uploader extends React.Component<UploaderProps> {
         );
       } else {
         return (
-          <div style={wrapStyle}>
+          <div style={wrapStyle} key={idx}>
             <li className={cls} key={idx} style={videofileStyle} onClick={handleFileClick} {...others}>
               {
                 error || status ?

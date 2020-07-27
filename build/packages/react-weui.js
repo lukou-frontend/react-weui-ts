@@ -2174,7 +2174,7 @@
                   if (_this4.props.type === 'image') {
                       return React.createElement("li", Object.assign({ className: cls, key: idx, style: fileStyle, onClick: handleFileClick }, others), React.createElement(Icon, { value: "clear", style: iconStyle, onClick: handleClick }), error || status ? React.createElement("div", { className: "weui-uploader__file-content" }, error ? React.createElement(Icon, { value: "warn" }) : status) : false);
                   } else {
-                      return React.createElement("div", { style: wrapStyle }, React.createElement("li", Object.assign({ className: cls, key: idx, style: videofileStyle, onClick: handleFileClick }, others), error || status ? React.createElement("div", { className: "weui-uploader__file-content" }, error ? React.createElement(Icon, { value: "warn" }) : status) : false), React.createElement(Icon, { value: "clear", style: iconStyle, onClick: handleClick }), React.createElement("img", { src: imgSrc, style: btnStyle }));
+                      return React.createElement("div", { style: wrapStyle, key: idx }, React.createElement("li", Object.assign({ className: cls, key: idx, style: videofileStyle, onClick: handleFileClick }, others), error || status ? React.createElement("div", { className: "weui-uploader__file-content" }, error ? React.createElement(Icon, { value: "warn" }) : status) : false), React.createElement(Icon, { value: "clear", style: iconStyle, onClick: handleClick }), React.createElement("img", { src: imgSrc, style: btnStyle }));
                   }
               });
           }

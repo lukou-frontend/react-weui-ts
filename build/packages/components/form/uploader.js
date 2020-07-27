@@ -227,7 +227,7 @@ export default class Uploader extends React.Component {
                         : false));
             }
             else {
-                return (React.createElement("div", { style: wrapStyle },
+                return (React.createElement("div", { style: wrapStyle, key: idx },
                     React.createElement("li", Object.assign({ className: cls, key: idx, style: videofileStyle, onClick: handleFileClick }, others), error || status ?
                         React.createElement("div", { className: "weui-uploader__file-content" }, error ? React.createElement(Icon, { value: "warn" }) : status)
                         : false),
