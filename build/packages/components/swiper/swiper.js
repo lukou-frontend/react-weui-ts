@@ -59,7 +59,6 @@ class Swiper extends React.Component {
         if (e.targetTouches[0].identifier !== this.state.touchId)
             return;
         //prevent move background
-        e.preventDefault();
         let diff = this.state.translate;
         if (this.props.direction === 'horizontal') {
             const pageX = e.targetTouches[0].pageX;
@@ -140,7 +139,8 @@ class Swiper extends React.Component {
         });
         let containerStyle = {
             height: height ? `${height}px` : '100%',
-            width: width ? `${width}px` : '100%'
+            width: width ? `${width}px` : '100%',
+            touchAction: 'none'
         };
         let wrapperStyle = {
             width: this.state.wrapperWidth,

@@ -178,25 +178,30 @@ export default class Uploader extends React.Component {
             console.log(file);
             let imgSrc = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAC4AAAAuCAYAAABXuSs3AAAEVElEQVRoQ82Za8ilUxTHf3/3SxhyyS2XSUjJdT64ROMyyDBTIuMyDJFBQmRcx62GEMOUomimMbl8mDEJzQef5DJ8INdkNEoSCkUpLP2nfd6eOec55+xnP+e9rE9v77v2Wr+93rXXXns9oqVExEHATOBo4FBgf2AnYDvgT+AP4Dvga+BD4B1JP7d0i0oMRMS+wHzgMuCwhjYCeA9YDqyS5I01lkbgEXEgcBdwObBNY2+9C34DngaekOSfsyULPCIMeTtwJ7B9tvV8xZ+A2yStyF0yFDwiDgZeBo7LNdpC7zXgakm/D7MxEDwiTgFWA9OGGRrh378BZknyge4rfcEjYjbwSqoOI+TKMvUjcIakz/tp14KnSL81SdAd1h+AEyVtrIPvAU85/fEEp0e/wDriMyT91a2wGXiqHu9O0EHMyhngRUlXDgO/G3gw1+IE6p0j6c2qv7GIp8vli8I6/R+wxThu5FvgCEl/d3xUwZ9zDS1w/j5wGuDS+ThweIGNnCXXSXp2M/DUe2wovMaXSrrJBiNiK+AG4L5xONyu64dI+te+NkU8InyVP5yz7RqdMfDO3yJij2RvAbBlod26ZWdJersK/mVBl9cx3ANe2cAxwFLX4xHBr5R06Sbw1E87TUqlL3hlA/OARwG3w23kF2BPSWHwq4DnW1gbCp7SccfUXd7S8kY+StInBn8GuH68wSvRn56qz/mFPhdIesHg64DTC414WVbEu+1HxCzgyYKz9YikOwz+VXorlrIXgaf02Rq4MZXPnTMBXpJ0icHdhe2TuahOrRi8kj6OvrvRHFkr6TyD/wrslrOij84owH1p+e2ZI+sknWnw79NIIWfRSCOeWmi3CXMaOF8taa7BP3MD02Bht2rjiEeES+Mi4NaC0rhc0nyDrwXOnSjwiLg4XUb7Ffq8X9Jigz+Wdl5oJ68cRoQnXb7+Typ1lNbNk7TK4Bem8UOpvYGpEhG7Aw+llnkUDdd0SRsM7k7OA5mhM5YmVSW1uAuBxcCupVHpWrdRkqdpY22t35knFBqva2v9sHiq5aEfWME6/fi1wNjrouEGlklyHXZf78mty9vchjZy1Y+X9FE14r5uPb8omVh53TXAqcDNBeUtF3q9pBkd5eqb8wHgnlwrk6A3R9KaOnBH2w3XXpMANcylz+DJfkD0gKcc9aDeA/epJP8Ax0r6tApVN4J7FbhgCpEvkrSkm6cOfBdgvUcBUwD+DWB2NUVqU6Xzy1TWnFd7TyK8P3TNlOQPYD0yaD7ujtEzjLYv85K9G9rzQr8VamXYF4kDAP+72rS9TcHt76J+kR6YKlVPEbEDsAy4oilBQ31Xj3uBJXU5PfRw9nMWEWen55XHC6MWn6eF3SVvkJNGHWFEbAt4yO5Ph+5L2oqrl2eWr+dEeWAdzyGJCPfVnsX4wvIL3T13rri38dW9otMw5S5sDd51BvxfOxLwgHPYt/wP/AgoAS3O8VE4G6WN/wH0qmQ+I0w9UgAAAABJRU5ErkJggg==";
             let { url, error, status, onClick, ...others } = file;
+            let wrapStyle = {
+                position: 'relative', marginRight: 9, marginBottom: 9, float: 'left', width: 79, height: 79
+            };
             let fileStyle = {
                 backgroundImage: `url(${url})`,
                 position: 'relative'
             };
             let videofileStyle = {
                 backgroundImage: `url(${url})`,
-                position: 'relative'
+                filter: 'contrast(0.4)'
             };
             let iconStyle = {
                 position: 'absolute',
                 right: '-1px',
-                top: 0
+                top: 0,
+                color: '#fff'
             };
             let btnStyle = {
                 position: 'absolute',
                 top: '50%',
                 left: '50%',
                 transform: 'translate(-50%, -50%)',
-                filter: 'brightness(0%)'
+                width: '22px',
+                height: '22px'
             };
             let cls = classNames({
                 'weui-uploader__file': true,
@@ -222,12 +227,12 @@ export default class Uploader extends React.Component {
                         : false));
             }
             else {
-                return (React.createElement("li", Object.assign({ className: cls, key: idx, style: videofileStyle, onClick: handleFileClick }, others),
-                    React.createElement(Icon, { value: "clear", style: iconStyle, onClick: handleClick }),
-                    React.createElement("img", { src: imgSrc, style: btnStyle }),
-                    error || status ?
+                return (React.createElement("div", { style: wrapStyle },
+                    React.createElement("li", Object.assign({ className: cls, key: idx, style: videofileStyle, onClick: handleFileClick }, others), error || status ?
                         React.createElement("div", { className: "weui-uploader__file-content" }, error ? React.createElement(Icon, { value: "warn" }) : status)
-                        : false));
+                        : false),
+                    React.createElement(Icon, { value: "clear", style: iconStyle, onClick: handleClick }),
+                    React.createElement("img", { src: imgSrc, style: btnStyle })));
             }
         });
     }
