@@ -34,7 +34,8 @@ interface UploaderProps {
   type: 'image' | 'vedio',
   onDelete: (file: File, id: number) => void,
   currentVideo: (val: string) => void,
-  showTitle: boolean
+  showTitle: boolean,
+  size: number
 }
 type customFile = {
   nativeFile: Blob,
@@ -113,7 +114,12 @@ export default class Uploader extends React.Component<UploaderProps> {
      * 是否展示标题
      *
      */
-    showTitle: PropTypes.bool
+    showTitle: PropTypes.bool,
+    /**
+     * 图片和视频的预览图宽高
+     *
+     */
+    size: PropTypes.number
   };
 
   static defaultProps = {
@@ -128,7 +134,8 @@ export default class Uploader extends React.Component<UploaderProps> {
     lang: { maxError: maxCount => `最多只能上传${maxCount}张图片` } as UploaderProps['lang'],
     type: 'image' as UploaderProps['type'],
     currentVideo: undefined as unknown as UploaderProps['currentVideo'],
-    showTitle: false as UploaderProps['showTitle']
+    showTitle: false as UploaderProps['showTitle'],
+    size: 79 as UploaderProps['size']
   };
 
   /**
@@ -294,20 +301,25 @@ export default class Uploader extends React.Component<UploaderProps> {
 
   renderFiles() {
     return this.props.files.map((file, idx) => {
+      const size = this.props.size
       console.log(file)
       let imgSrc = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAC4AAAAuCAYAAABXuSs3AAAEVElEQVRoQ82Za8ilUxTHf3/3SxhyyS2XSUjJdT64ROMyyDBTIuMyDJFBQmRcx62GEMOUomimMbl8mDEJzQef5DJ8INdkNEoSCkUpLP2nfd6eOec55+xnP+e9rE9v77v2Wr+93rXXXns9oqVExEHATOBo4FBgf2AnYDvgT+AP4Dvga+BD4B1JP7d0i0oMRMS+wHzgMuCwhjYCeA9YDqyS5I01lkbgEXEgcBdwObBNY2+9C34DngaekOSfsyULPCIMeTtwJ7B9tvV8xZ+A2yStyF0yFDwiDgZeBo7LNdpC7zXgakm/D7MxEDwiTgFWA9OGGRrh378BZknyge4rfcEjYjbwSqoOI+TKMvUjcIakz/tp14KnSL81SdAd1h+AEyVtrIPvAU85/fEEp0e/wDriMyT91a2wGXiqHu9O0EHMyhngRUlXDgO/G3gw1+IE6p0j6c2qv7GIp8vli8I6/R+wxThu5FvgCEl/d3xUwZ9zDS1w/j5wGuDS+ThweIGNnCXXSXp2M/DUe2wovMaXSrrJBiNiK+AG4L5xONyu64dI+te+NkU8InyVP5yz7RqdMfDO3yJij2RvAbBlod26ZWdJersK/mVBl9cx3ANe2cAxwFLX4xHBr5R06Sbw1E87TUqlL3hlA/OARwG3w23kF2BPSWHwq4DnW1gbCp7SccfUXd7S8kY+StInBn8GuH68wSvRn56qz/mFPhdIesHg64DTC414WVbEu+1HxCzgyYKz9YikOwz+VXorlrIXgaf02Rq4MZXPnTMBXpJ0icHdhe2TuahOrRi8kj6OvrvRHFkr6TyD/wrslrOij84owH1p+e2ZI+sknWnw79NIIWfRSCOeWmi3CXMaOF8taa7BP3MD02Bht2rjiEeES+Mi4NaC0rhc0nyDrwXOnSjwiLg4XUb7Ffq8X9Jigz+Wdl5oJ68cRoQnXb7+Typ1lNbNk7TK4Bem8UOpvYGpEhG7Aw+llnkUDdd0SRsM7k7OA5mhM5YmVSW1uAuBxcCupVHpWrdRkqdpY22t35knFBqva2v9sHiq5aEfWME6/fi1wNjrouEGlklyHXZf78mty9vchjZy1Y+X9FE14r5uPb8omVh53TXAqcDNBeUtF3q9pBkd5eqb8wHgnlwrk6A3R9KaOnBH2w3XXpMANcylz+DJfkD0gKcc9aDeA/epJP8Ax0r6tApVN4J7FbhgCpEvkrSkm6cOfBdgvUcBUwD+DWB2NUVqU6Xzy1TWnFd7TyK8P3TNlOQPYD0yaD7ujtEzjLYv85K9G9rzQr8VamXYF4kDAP+72rS9TcHt76J+kR6YKlVPEbEDsAy4oilBQ31Xj3uBJXU5PfRw9nMWEWen55XHC6MWn6eF3SVvkJNGHWFEbAt4yO5Ph+5L2oqrl2eWr+dEeWAdzyGJCPfVnsX4wvIL3T13rri38dW9otMw5S5sDd51BvxfOxLwgHPYt/wP/AgoAS3O8VE4G6WN/wH0qmQ+I0w9UgAAAABJRU5ErkJggg==";
       let closeSrc = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACIAAAAgCAYAAAB3j6rJAAAB70lEQVRYR82XMUsDMRTH/7mjBSd1FIRqwamgm+KooB3OviLd/SAOioJ+EPciTb2hCnYU3RQ6CdWC4KhOQss1ErnKeb3kUk4wna7k5f1/eXl5eWGw5Mcs4cBEIM1mc1UI4QFYB7AEYDZcyBuARwA3jDG/UqncTbpAI5BGo+E5jnMihFgxFHgQQuxXq1Xf0F4fkXq9Pp/L5c4AbJg6jNm1B4PBXq1We0mbr4yI7/trw+HwXAgxl+ZEN84Ye3UcZ9fzvFutXdKghAiCoA1gKgtEZO6n67obOpixiMjtyOfzd1kjEV+AjEy/319VbdMYCOf8OkNOpAWwTUSbSUa/QOTpYIxdJBm6rosgCNKEvsd1tkKInaTT9AuEc34PYDmuJh2Xy2X0ej10Oh0tTKlUQqFQQKvVUoE/ENFYGfgBCYuVMrOlQLFYRLfbVcKY2MhVMMbW4kXvB4RzfgTgQLdcnZApROj/mIgOo1pRkEsAW2lJkCQ4IYSUuCKibRXIE4CFNBA5HhWW/9O2LMHnMxEtqkDeAUybgERh5LcubxT+PohoxnoQa7bGmmS14/haU9BkBltR4iWINZdeGJX/bwMkiDWNkYSxolUclV0rmucRjBXPieiFFJ6m06TuTXGp/e0DKy7y709O09Ygi53R2zeLgOncL0HKZTDFM68/AAAAAElFTkSuQmCC"
       let { url, error, status, onClick, ...others } = file;
       let wrapStyle: React.CSSProperties = {
-        position: 'relative', marginRight: 12, marginBottom: 9, marginTop: 9, float: 'left', width: 79, height: 79
+        position: 'relative', marginRight: 12, marginBottom: 9, marginTop: 9, float: 'left', width: size, height: size
       }
       let fileStyle: React.CSSProperties = {
         backgroundImage: `url(${url})`,
-        position: 'relative'
+        position: 'relative',
+        width: size,
+        height: size
       };
       let videofileStyle: React.CSSProperties = {
         backgroundImage: `url(${url})`,
-        filter: 'contrast(0.4)'
+        filter: 'contrast(0.4)',
+        width: size,
+        height: size
       };
       let iconStyle: React.CSSProperties = {
         position: 'absolute',
@@ -379,7 +391,7 @@ export default class Uploader extends React.Component<UploaderProps> {
   }
 
   render() {
-    const { className, maxCount, files, onChange, onFileClick, lang, maxsize, onOversize, type, onDelete, currentVideo, showTitle, ...others } = this.props;
+    const { className, maxCount, files, onChange, onFileClick, lang, maxsize, onOversize, type, onDelete, currentVideo, showTitle, size, ...others } = this.props;
     const inputProps = Object.assign({}, others);
     delete inputProps.onError;
     delete inputProps.maxWidth;
@@ -403,7 +415,7 @@ export default class Uploader extends React.Component<UploaderProps> {
           <ul className="weui-uploader__files">
             {this.renderFiles()}
           </ul>
-          <div style={{ marginTop: 9 }} className="weui-uploader__input-box">
+          <div style={{ marginTop: 9, width: size - 2, height: size - 2 }} className="weui-uploader__input-box">
             <input
               ref="uploader"//let react to reset after onchange
               className="weui-uploader__input"
