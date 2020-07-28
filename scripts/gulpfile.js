@@ -2,6 +2,8 @@ const { getProjectPath } = require('./utils/projectHelper'); // eslint-disable-l
 const ts = require('gulp-typescript');
 const babel = require('gulp-babel');
 const tsConfig = require('./utils/getTSCommonConfig')();
+const transformLess = require('./utils/transformLess');
+
 const gulp = require('gulp');
 const rimraf = require('rimraf');
 const tsDefaultReporter = ts.reporter.defaultReporter();
@@ -9,6 +11,7 @@ const getBabelCommonConfig = require('./utils/getBabelCommonConfig');
 const through2 = require('through2');
 const stripCode = require('gulp-strip-code');
 const merge2 = require('merge2');
+const concat = require('gulp-concat');
 
 const libDir = getProjectPath('build/lib');
 const esDir = getProjectPath('build/es');
@@ -71,14 +74,57 @@ function compile(modules) {
   return merge2([less, tsFilesStream, tsd, assets]);
 }
 
+function compileLess() {
+  rimraf.sync(distDir);
+  return gulp
+    .src(['src/components/**/*.less'])
+    .pipe(
+      through2.obj(function (file, encoding, next) {
+        transformLess(file.path)
+            .then(css => {
+              file.contents = Buffer.from(css);
+              file.path = file.path.replace(/\.less$/, '.css');
+              this.push(file);
+              next();
+            })
+            .catch(e => {
+              console.error(e);
+            });
+        // if (
+        //   file.path.match(/(\/|\\)style(\/|\\)index\.less$/) ||
+        //   file.path.match(/(\/|\\)style(\/|\\)v2-compatible-reset\.less$/)
+        // ) {
+        //   transformLess(file.path)
+        //     .then(css => {
+        //       file.contents = Buffer.from(css);
+        //       file.path = file.path.replace(/\.less$/, '.css');
+        //       this.push(file);
+        //       next();
+        //     })
+        //     .catch(e => {
+        //       console.error(e);
+        //     });
+        // } else {
+        //   next();
+        // }
+      })
+    )
+    .pipe(concat('react-weui.css'))
+    .pipe(gulp.dest(distDir));
+}
+
 const tsFiles = ['src/**/*.ts', 'src/**/*.tsx', 'typings/**/*.d.ts'];
 
 gulp.task('compile-with-es', done => {
   console.log('[Parallel] Compile to es...');
   compile(false).on('finish', done);
 });
+gulp.task('compile:less', done => {
+  console.log('Compile less...');
+  compileLess().on('finish', done);
+});
 
 gulp.task(
   'default',
-  gulp.series(gulp.parallel('compile-with-es'))
+  gulp.series('compile:less', gulp.parallel('compile-with-es'))
 );
