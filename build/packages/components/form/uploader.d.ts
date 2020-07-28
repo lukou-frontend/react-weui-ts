@@ -31,6 +31,7 @@ interface UploaderProps {
     currentVideo: (val: string) => void;
     showTitle: boolean;
     size: 'small' | 'normal' | 'large';
+    showAddInput: boolean;
 }
 declare type customFile = {
     nativeFile: Blob;
@@ -111,10 +112,15 @@ export default class Uploader extends React.Component<UploaderProps> {
          */
         showTitle: PropTypes.Requireable<boolean>;
         /**
-         * 图片和视频的预览图宽高
+         * 图片和视频的预览图宽高:small|normal|large
          *
          */
         size: PropTypes.Requireable<string>;
+        /**
+         * 是否显示上传文件的按钮
+         *
+         */
+        showAddInput: PropTypes.Requireable<boolean>;
     };
     static defaultProps: {
         maxCount: number;
