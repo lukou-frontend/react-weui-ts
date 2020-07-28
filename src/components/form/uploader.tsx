@@ -35,7 +35,8 @@ interface UploaderProps {
   onDelete: (file: File, id: number) => void,
   currentVideo: (val: string) => void,
   showTitle: boolean,
-  size: 'small' | 'normal' | 'large'
+  size: 'small' | 'normal' | 'large',
+  showAddInput: boolean
 }
 type customFile = {
   nativeFile: Blob,
@@ -116,10 +117,15 @@ export default class Uploader extends React.Component<UploaderProps> {
      */
     showTitle: PropTypes.bool,
     /**
-     * 图片和视频的预览图宽高,取值为small|normal|large
+     * 图片和视频的预览图宽高:small|normal|large
      *
      */
-    size: PropTypes.string
+    size: PropTypes.string,
+    /**
+     * 是否显示上传文件的按钮
+     *
+     */
+    showAddInput: PropTypes.bool
   };
 
   static defaultProps = {
@@ -403,7 +409,7 @@ export default class Uploader extends React.Component<UploaderProps> {
   }
 
   render() {
-    const { className, maxCount, files, onChange, onFileClick, lang, maxsize, onOversize, type, onDelete, currentVideo, showTitle, size, ...others } = this.props;
+    const { className, maxCount, files, onChange, onFileClick, lang, maxsize, onOversize, type, onDelete, currentVideo, showTitle, size, showAddInput, ...others } = this.props;
     const inputProps = Object.assign({}, others);
     delete inputProps.onError;
     delete inputProps.maxWidth;
@@ -427,7 +433,7 @@ export default class Uploader extends React.Component<UploaderProps> {
           <ul className="weui-uploader__files">
             {this.renderFiles()}
           </ul>
-          <div style={{ width: this.getImageSize() - 2, height: this.getImageSize() - 2 }} className="weui-uploader__input-box">
+          <div style={{ width: this.getImageSize() - 2, height: this.getImageSize() - 2, display: showAddInput === true ? 'block' : 'none' }} className="weui-uploader__input-box">
             <input
               ref="uploader"//let react to reset after onchange
               className="weui-uploader__input"
