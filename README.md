@@ -2,11 +2,11 @@
  * @Author: 刘佑祥
  * @LastEditors: 刘佑祥
  * @LastEditTime: 2020-07-16 10:37:49
---> 
-# React-WeUI 
+-->
+# React-WeUI
 
-[![Build Status](https://travis-ci.org/weui/react-weui.svg?branch=master)](https://travis-ci.org/weui/react-weui) 
-[![Github Workflow Status](https://github.com/weui/react-weui/workflows/ci/badge.svg)](https://github.com/weui/react-weui) 
+[![Build Status](https://travis-ci.org/weui/react-weui.svg?branch=master)](https://travis-ci.org/weui/react-weui)
+[![Github Workflow Status](https://github.com/weui/react-weui/workflows/ci/badge.svg)](https://github.com/weui/react-weui)
 [![npm version](https://img.shields.io/npm/v/react-weui.svg)](https://www.npmjs.org/package/react-weui)
 
 [WeUI](https://github.com/weui/weui) Components build with [React](http://facebook.github.io/react/).
@@ -63,7 +63,7 @@ import ReactDOM from 'react-dom';
 import { Button } from 'react-weui';
 //import styles
 import 'weui';
-import 'react-weui/build/packages/react-weui.css';
+import 'react-weui/build/es/react-weui.css';
 
 const App = () => <Button>hello wechat</Button>;
 

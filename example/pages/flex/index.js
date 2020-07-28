@@ -2,7 +2,7 @@ import * as React from 'react';
 import {
     Flex,
     FlexItem
-} from '../../../build/packages';
+} from '../../../build/es';
 import Page from '../../component/page';
 
 

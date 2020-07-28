@@ -28,7 +28,7 @@ class Docs extends React.Component {
 
     }
     console.log(article);
-    let src = article.component ? require(`!!raw-loader!../../build/packages/components/${article.component}`) : false
+    let src = article.component ? require(`!!raw-loader!../../build/es/components/${article.component}`) : false
     console.log(src);
     let content = src ? generateMarkdown(article.name, article.version, reactDocs.parse(src), this.props.langs.article) : false
     console.log(content);

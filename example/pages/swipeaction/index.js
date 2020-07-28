@@ -6,7 +6,7 @@ import {
   Cell,
   CellHeader,
   CellBody
-} from '../../../build/packages';
+} from '../../../build/es';
 import Page from '../../component/page';
 
 let styles = {

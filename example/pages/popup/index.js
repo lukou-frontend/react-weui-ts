@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Button, Popup, Grids, PopupHeader, Article } from '../../../build/packages';
+import { Button, Popup, Grids, PopupHeader, Article } from '../../../build/es';
 import Page from '../../component/page';
 import iconSrc from '../grid/icon_tabbar.png';
 import srcArticle from '../article/pic_article.png';

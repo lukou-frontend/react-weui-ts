@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Popup, Picker, CityPicker, Form, FormCell, CellBody, CellHeader, Label, Input } from '../../../build/packages';
+import { Popup, Picker, CityPicker, Form, FormCell, CellBody, CellHeader, Label, Input } from '../../../build/es';
 import Page from '../../component/page';
 import cnCity from './cnCity';
 

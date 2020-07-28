@@ -1,7 +1,7 @@
 import * as React from 'react'
 import ReactDOM from 'react-dom';
 import Remarkable from 'react-remarkable';
-import { Article, Toast, Tab, NavBarItem } from '../../build/packages';
+import { Article, Toast, Tab, NavBarItem } from '../../build/es';
 import CodeMirror from 'codemirror/lib/codemirror.js';
 import hljs from 'highlight.js';
 

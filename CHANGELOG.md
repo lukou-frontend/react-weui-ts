@@ -17,7 +17,7 @@ Changes
 Breaking Changes
 - Remove mobile_detect utilities, ActionSheet and Dialog will needs to provide a platform by user.
 - Used standard prop-types library
-- css file now in `react-weui/build/packages/react-weui.css`
+- css file now in `react-weui/build/es/react-weui.css`
 
 Changes
 

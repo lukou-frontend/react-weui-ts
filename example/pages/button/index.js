@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Button, ButtonArea} from '../../../build/packages';
+import {Button, ButtonArea} from '../../../build/es';
 import Page from '../../component/page';
 import './button.less';
 

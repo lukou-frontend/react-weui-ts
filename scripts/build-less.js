@@ -27,7 +27,7 @@ readFiles(
       return console.error('read files error:', error)
     }
     fs.outputFileSync(
-      file.replace(componentsPath, 'build/packages/components'),
+      file.replace(componentsPath, 'build/es/components'),
       fs.readFileSync(file)
     )
   }

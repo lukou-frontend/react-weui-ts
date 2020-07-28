@@ -6,7 +6,7 @@ import {
     NavBar,
     NavBarItem,
     Article
-} from '../../../build/packages';
+} from '../../../build/es';
 
 export default class NavBarDemo extends React.Component {
     state={

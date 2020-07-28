@@ -6,7 +6,7 @@ import {
     Button, Flex, FlexItem,
     Footer,
     FooterText,
-} from '../../build/packages';
+} from '../../build/es';
 import { Link } from 'react-router-dom';
 import './start.less';
 

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Article, Page } from '../../../build/packages';
+import { Article, Page } from '../../../build/es';
 import srcArticle from '../article/pic_article.png';
 
 const PageDemo = (props) => (

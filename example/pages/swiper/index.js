@@ -4,7 +4,7 @@ import {
     CellsTitle,
     Flex,
     FlexItem
-} from '../../../build/packages';
+} from '../../../build/es';
 import Page from '../../component/page';
 import imgSrc from '../article/pic_article.png';
 

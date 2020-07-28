@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
-import { Button } from '../../../build/packages';
+import { Button } from '../../../build/es';
 import Page from '../../component/page';
 
 const MsgDemo = () => (

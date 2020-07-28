@@ -1,6 +1,6 @@
 import * as React from 'react'
 import Page from '../../component/page';
-import { Gallery, GalleryDelete, Button, Icon } from '../../../build/packages';
+import { Gallery, GalleryDelete, Button, Icon } from '../../../build/es';
 import imgSrc from '../uploader/photo.png';
 import imgSrc2 from './2.png';
 import imgSrc3 from './3.png';

@@ -58,7 +58,7 @@ function makeBundleAttributes(bundleType){
             atrs.sourceMap = false;
             atrs.plugins.push(uglify());
         case Bundles.UMD_DEV:
-            atrs.path = './build/packages/';
+            atrs.path = './build/es/';
             atrs.format = 'umd';
             break;
         case Bundles.IIFE_PROD:
@@ -216,7 +216,7 @@ rimraf('build', ()=>{
   // adding build tasks
   tasks.push(
     //Node individual components build
-    // createTask('Making Babel Modules', createNodeBuild()),
+    createTask('Making Babel Modules', createNodeBuild()),
     // createTask('Making UMD Dev Bundles', createBundle(Bundles.UMD_DEV)),
     // createTask('Making UMD Production Bundles', createBundle(Bundles.UMD_PROD)),
     // createTask('Making IIFE Dev Bundles', createBundle(Bundles.IIFE_DEV)),

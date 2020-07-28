@@ -5,7 +5,7 @@
 
 
 import * as React from 'react';
-import {Button, Progress} from '../../../build/packages';
+import {Button, Progress} from '../../../build/es';
 import Page from '../../component/page';
 
 export default class ProgressDemo extends React.Component {

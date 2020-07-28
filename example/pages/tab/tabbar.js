@@ -8,7 +8,7 @@ import {
     TabBarIcon,
     TabBarLabel,
     Article
-} from '../../../build/packages';
+} from '../../../build/es';
 
 import IconButton from '../home/images/icon_nav_button.png';
 import IconMsg from '../home/images/icon_nav_msg.png';
