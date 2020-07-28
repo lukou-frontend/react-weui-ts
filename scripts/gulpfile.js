@@ -24,6 +24,16 @@ function babelify(js, modules) {
 
 function compile(modules) {
   rimraf.sync(modules !== false ? libDir : esDir);
+  // 拷贝less
+  const less = gulp
+    .src(['src/components/**/*.less'])
+    .pipe(
+      through2.obj(function (file, encoding, next) {
+        this.push(file.clone());
+        next();
+      })
+    )
+    .pipe(gulp.dest(modules === false ? `${esDir}/components` : `${libDir}/components`));
   const assets = gulp
     .src(['src/**/*.@(png|svg)'])
     .pipe(gulp.dest(modules === false ? esDir : libDir));
@@ -33,10 +43,10 @@ function compile(modules) {
     'src/**/*.ts',
     'typings/**/*.d.ts',
   ];
-  // allow jsx file in components/xxx/
   if (tsConfig.allowJs) {
     source.unshift('src/**/*.jsx');
   }
+  // 编译ts文件
   const tsResult = gulp.src(source).pipe(
     ts(tsConfig, {
       error(e) {
@@ -55,33 +65,13 @@ function compile(modules) {
 
   tsResult.on('finish', check);
   tsResult.on('end', check);
+  // babel编译
   const tsFilesStream = babelify(tsResult.js, modules);
   const tsd = tsResult.dts.pipe(gulp.dest(modules === false ? esDir : libDir));
-  return merge2([tsFilesStream, tsd, assets]);
+  return merge2([less, tsFilesStream, tsd, assets]);
 }
 
 const tsFiles = ['src/**/*.ts', 'src/**/*.tsx', 'typings/**/*.d.ts'];
-
-function compileTs(stream) {
-  return stream
-    .pipe(ts(tsConfig))
-    .js.pipe(
-      through2.obj(function (file, encoding, next) {
-        // console.log(file.path, file.base);
-        file.path = file.path.replace(/\.[jt]sx$/, '.js');
-        this.push(file);
-        next();
-      })
-    )
-    .pipe(gulp.dest(process.cwd()));
-}
-gulp.task('tsc', () =>
-  compileTs(
-    gulp.src(tsFiles, {
-      base: cwd,
-    })
-  )
-);
 
 gulp.task('compile-with-es', done => {
   console.log('[Parallel] Compile to es...');
