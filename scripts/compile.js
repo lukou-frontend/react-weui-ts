@@ -11,6 +11,7 @@ function createNodeBuild(){
       let count = 0;
       let bat = exec("npm run gulp", { stdio: [0, 1, 2] }, (error, stdout, stderr) => {
         if (error) {
+          console.error(error)
           rej(error);
           return;
         }

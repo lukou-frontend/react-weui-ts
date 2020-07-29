@@ -11,6 +11,7 @@ function createWebpackBuild(config){
   return (res, rej) => {
       webpack(config, (err, stats) => {
         if (err || stats.hasErrors()) {
+          console.error(err)
           rej('webpack build error');
         }
         console.log(stats.toString({
