@@ -8,7 +8,7 @@ publish.sh
 .c9
 pendingtest
 .nyc_output
-dist
+#dist
 demo
 test.html
-build
+#build
