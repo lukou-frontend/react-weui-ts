@@ -10,5 +10,6 @@ pendingtest
 .nyc_output
 #dist
 demo
+docgen
 test.html
 #build

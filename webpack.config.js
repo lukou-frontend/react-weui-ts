@@ -54,12 +54,7 @@ const rules = [
             sourceMap: !isProduction,
             plugins: (loader) => [
                 autoprefixer({
-                    browsers: [
-                        'last 3 version',
-                        'ie >= 10',
-                        'iOS >= 7',
-                        'Android >= 4.1'
-                    ],
+                    overrideBrowserslist: ['iOS >= 8', 'Android >= 4.0', 'last 3 version']
                 })
             ]
           }
@@ -81,12 +76,7 @@ const rules = [
             sourceMap: !isProduction,
             plugins: (loader) => [
                 autoprefixer({
-                    browsers: [
-                        'last 3 version',
-                        'ie >= 10',
-                        'iOS >= 7',
-                        'Android >= 4.1'
-                    ],
+                  overrideBrowserslist: ['iOS >= 8', 'Android >= 4.0', 'last 3 version']
                 })
             ]
           }

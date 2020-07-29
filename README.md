@@ -63,7 +63,7 @@ import ReactDOM from 'react-dom';
 import { Button } from 'react-weui';
 //import styles
 import 'weui';
-import 'react-weui/build/es/react-weui.css';
+import 'react-weui/build/dist/react-weui.css';
 
 const App = () => <Button>hello wechat</Button>;
 

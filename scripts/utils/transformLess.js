@@ -11,7 +11,6 @@ function transformLess(lessFile, config = {}) {
 
   let data = readFileSync(resolvedLessFile, 'utf-8');
   data = data.replace(/^\uFEFF/, '');
-  console.log(postcssConfig.plugins);
   // 编译less
   const lessOpts = {
     paths: [path.dirname(resolvedLessFile)],

@@ -16,6 +16,9 @@ const concat = require('gulp-concat');
 const libDir = getProjectPath('build/lib');
 const esDir = getProjectPath('build/es');
 const distDir = getProjectPath('build/dist');
+const docgenDir = getProjectPath('build/docgen');
+
+const cwd = process.cwd()
 
 function babelify(js, modules) {
   const babelConfig = getBabelCommonConfig(modules);
@@ -25,8 +28,7 @@ function babelify(js, modules) {
   return stream.pipe(gulp.dest(modules === false ? esDir : libDir));
 }
 
-function compile(modules) {
-  rimraf.sync(modules !== false ? libDir : esDir);
+function copyLess(dir) {
   // 拷贝less
   const less = gulp
     .src(['src/components/**/*.less'])
@@ -36,7 +38,13 @@ function compile(modules) {
         next();
       })
     )
-    .pipe(gulp.dest(modules === false ? `${esDir}/components` : `${libDir}/components`));
+    .pipe(gulp.dest(dir));
+  return less
+}
+
+function compile(modules) {
+  rimraf.sync(modules !== false ? libDir : esDir);
+  const less = copyLess(modules === false ? `${esDir}/components` : `${libDir}/components`)
   const assets = gulp
     .src(['src/**/*.@(png|svg)'])
     .pipe(gulp.dest(modules === false ? esDir : libDir));
@@ -90,23 +98,6 @@ function compileLess() {
             .catch(e => {
               console.error(e);
             });
-        // if (
-        //   file.path.match(/(\/|\\)style(\/|\\)index\.less$/) ||
-        //   file.path.match(/(\/|\\)style(\/|\\)v2-compatible-reset\.less$/)
-        // ) {
-        //   transformLess(file.path)
-        //     .then(css => {
-        //       file.contents = Buffer.from(css);
-        //       file.path = file.path.replace(/\.less$/, '.css');
-        //       this.push(file);
-        //       next();
-        //     })
-        //     .catch(e => {
-        //       console.error(e);
-        //     });
-        // } else {
-        //   next();
-        // }
       })
     )
     .pipe(concat('react-weui.css'))
@@ -124,7 +115,31 @@ gulp.task('compile:less', done => {
   compileLess().on('finish', done);
 });
 
+function compileTs(stream) {
+  return stream
+    .pipe(ts(tsConfig))
+    .js.pipe(
+      through2.obj(function (file, encoding, next) {
+        console.log(file.path, file.base);
+        file.path = file.path.replace(/\.[jt]sx$/, '.js').replace(/src\//, '');
+        this.push(file);
+        next();
+      })
+    )
+    .pipe(gulp.dest(docgenDir));
+}
+
+gulp.task('compile-docgen', (done) => {
+  copyLess(docgenDir)
+  compileTs(
+    gulp.src(tsFiles, {
+      base: cwd,
+    })
+  )
+  done()
+})
+
 gulp.task(
   'default',
-  gulp.series('compile:less', gulp.parallel('compile-with-es'))
+  gulp.series('compile:less', gulp.parallel('compile-with-es', 'compile-docgen'))
 );

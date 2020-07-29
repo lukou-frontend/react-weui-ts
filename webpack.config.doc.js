@@ -41,7 +41,7 @@ const rules = [
         test: /\.(js|jsx)$/,
         oneOf: [
             {
-                include: [path.resolve(__dirname, 'docs'), path.resolve(__dirname, 'example'), path.resolve(__dirname, 'build/es')],
+                include: [path.resolve(__dirname, 'docs'), path.resolve(__dirname, 'example')],
                 exclude: [/node_modules/, path.resolve(__dirname, 'src')],
                 use: {
                   loader: 'babel-loader'    //babel的相关配置在.babelrc文件里
@@ -66,10 +66,7 @@ const rules = [
             sourceMap: !isProduction,
             plugins: (loader) => [
                 autoprefixer({
-                    browsers: [
-                        'last 3 version',
-                        'ie >= 10',
-                    ],
+                    overrideBrowserslist: [ 'ie >= 10', 'last 3 version']
                 })
             ]
           }
@@ -91,10 +88,7 @@ const rules = [
             sourceMap: !isProduction,
             plugins: (loader) => [
                 autoprefixer({
-                    browsers: [
-                        'last 3 version',
-                        'ie >= 10',
-                    ],
+                  overrideBrowserslist: [ 'ie >= 10', 'last 3 version']
                 })
             ]
           }
