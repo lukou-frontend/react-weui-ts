@@ -58,7 +58,7 @@ function makeBundleAttributes(bundleType){
             atrs.sourceMap = false;
             atrs.plugins.push(uglify());
         case Bundles.UMD_DEV:
-            atrs.path = './build/packages/';
+            atrs.path = './build/es/';
             atrs.format = 'umd';
             break;
         case Bundles.IIFE_PROD:

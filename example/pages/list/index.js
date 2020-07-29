@@ -6,7 +6,7 @@ import {
     CellHeader,
     CellBody,
     CellFooter,
-} from '../../../build/packages';
+} from '../../../build/es';
 import Page from '../../component/page';
 import iconSrc from './images/icon.png';
 

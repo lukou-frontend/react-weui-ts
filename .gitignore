@@ -8,7 +8,9 @@ publish.sh
 .c9
 pendingtest
 .nyc_output
-dist
+#dist
 demo
+docgen
 test.html
 .vscode
+#build

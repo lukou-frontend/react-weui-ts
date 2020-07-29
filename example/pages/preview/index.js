@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Page from '../../component/page';
-import { Preview, PreviewHeader, PreviewFooter, PreviewBody, PreviewItem, PreviewButton } from '../../../build/packages';
+import { Preview, PreviewHeader, PreviewFooter, PreviewBody, PreviewItem, PreviewButton } from '../../../build/es';
 
 
 const PreviewDemo = (props) => (

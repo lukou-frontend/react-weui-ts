@@ -13,7 +13,7 @@
     "target": "esnext",
     "lib": ["dom", "es7"],
     "declaration": true,
-    "declarationDir": "build/packages",
+    "declarationDir": "build/es",
   },
   "include": [
     "src/**/*"

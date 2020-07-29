@@ -1,11 +1,6 @@
-/*
- * @Author: 刘佑祥
- * @LastEditors: 刘佑祥
- * @LastEditTime: 2020-07-24 16:06:14
- */ 
-import * as React from "react";
-import { Button, Toast } from "../../../build/packages";
-import Page from "../../component/page";
+import * as React from 'react';
+import {Button, Toast} from '../../../build/es';
+import Page from '../../component/page';
 
 export default class ToastDemo extends React.Component {
   state = {

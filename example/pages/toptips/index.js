@@ -5,7 +5,7 @@
  */
 
 import * as React from "react";
-import { Button, Toast, Toptips } from "../../../build/packages";
+import { Button, Toast, Toptips } from "../../../build/es";
 import Page from "../../component/page";
 
 class ToptipsDemo extends React.Component {

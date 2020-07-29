@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Icon} from '../../../build/packages';
+import {Icon} from '../../../build/es';
 import Page from '../../component/page';
 import './icons.less';
 

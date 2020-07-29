@@ -27,11 +27,9 @@ class Docs extends React.Component {
       }
 
     }
-    console.log(article);
-    let src = article.component ? require(`!!raw-loader!../../build/packages/components/${article.component}`) : false
-    console.log(src);
+    let src = article.component ? require(`!!raw-loader!../../build/docgen/components/${article.component}`) : false
     let content = src ? generateMarkdown(article.name, article.version, reactDocs.parse(src), this.props.langs.article) : false
-    console.log(content);
+    const guide = typeof article.guide == 'object' ? article.guide[this.props.locale] : article.guide
     if(!article.preview){
       return (
         <div className="App__detail">
@@ -39,7 +37,7 @@ class Docs extends React.Component {
                docs={this.props.docs}
                aid={this.props.params.aid}
                langs={this.props.langs.article}
-               guide={article.guide ? require(`!!raw-loader!../guide/${ typeof article.guide == 'object' ? article.guide[this.props.locale] : article.guide }`) : false}
+               guide={article.guide ? require(`!!raw-loader!../guide/${guide}`) : false}
                name={!article.preview ? typeof article.name == 'object' ? article.name[this.props.locale] : article.name : false}
                content={content}
                code={code}
@@ -47,7 +45,6 @@ class Docs extends React.Component {
         </div>
       )
     }
-
     return (
       <SplitPane split="vertical" minSize={20} defaultSize="60%" primary="second">
           <div className="App__preview background--canvas flex-center">
@@ -63,7 +60,7 @@ class Docs extends React.Component {
                 docs={this.props.docs}
                 aid={this.props.params.aid}
                 langs={this.props.langs.article}
-                guide={article.guide ? require(`!!raw-loader!../guide/${ typeof article.guide == 'object' ? article.guide[this.props.locale] : article.guide }`) : false}
+                guide={article.guide ? require(`!!raw-loader!../guide/${guide}`) : false}
                 content={content}
                 code={code}
             />
@@ -79,7 +76,7 @@ class Docs extends React.Component {
      if(item.type == 'menu'){
        return this.renderWithMenu()
      }else if(item.type == 'page') {
-       let Page = require(`./${item.link}`)
+       let Page = require(`./${item.link}`).default
        return <Page
                 langs={this.props.langs}
                 locale={this.props.locale}

@@ -6,7 +6,7 @@ import {
   Form,
   Cell,
   CellBody,
-} from '../../../build/packages'
+} from '../../../build/es';
 
 class UploaderDemo extends Component {
   constructor(props) {

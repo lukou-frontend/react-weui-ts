@@ -22,10 +22,10 @@ export type ClassValue = string | number | ClassDictionary | ClassArray | undefi
 var hasOwn = {}.hasOwnProperty;
 
 function classNames (...args: ClassValue[]) {
-	var classes = [];
+	var classes: any = [];
 
 	for (var i = 0; i < args.length; i++) {
-		var arg = args[i];
+		var arg: any = args[i];
 		if (!arg) continue;
 
 		var argType = typeof arg;
