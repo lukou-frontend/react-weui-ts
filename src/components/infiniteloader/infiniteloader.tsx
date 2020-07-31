@@ -72,7 +72,8 @@ class InfiniteLoader extends React.Component<InfiniteLoaderProps, InfiniteLoader
         /**
          * reset the finish status
          */
-        resetStatus: PropTypes.bool
+        resetStatus: PropTypes.bool,
+        resolveStatus: PropTypes.bool
     };
 
     static defaultProps = {
@@ -100,6 +101,9 @@ class InfiniteLoader extends React.Component<InfiniteLoaderProps, InfiniteLoader
     componentWillReceiveProps(nextProps: any) {
         if (nextProps.resetStatus) {
             this.reset();
+        }
+        if (nextProps.resolveStatus) {
+          this.resolveLoading()
         }
     }
 
