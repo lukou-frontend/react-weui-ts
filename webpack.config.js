@@ -38,10 +38,11 @@ const plugins = [
 // Common rules
 const rules = [
     {
-        test: /\.(js|jsx)$/,
+        test: /\.ts(x)?$/,
         exclude: /node_modules/,
         use: [
             'babel-loader',
+            'ts-loader'
         ],
     }, {
         test: /\.css/,
@@ -125,7 +126,7 @@ module.exports = {
   devtool: isProduction ? false : 'source-map',
   context: jsSourcePath,
   entry: {
-    js: './app.js',
+    js: './app.tsx',
   },
   output: {
     path: buildPath,
@@ -136,7 +137,7 @@ module.exports = {
     rules,
   },
   resolve: {
-    extensions: ['.webpack-loader.js', '.web-loader.js', '.loader.js', '.js', '.jsx', '.less'],
+    extensions: ['.webpack-loader.js', '.web-loader.js', '.loader.js', '.tsx', '.ts', '.js', '.jsx', '.less',],
     modules: [
       path.resolve(__dirname, 'node_modules'),
       jsSourcePath,

@@ -1,12 +1,22 @@
 import * as React from 'react'
-import { TransitionGroup, CSSTransition } from 'react-transition-group';
+import { CSSTransition } from 'react-transition-group';
 
-class Accordion extends React.Component {
+interface IProps {
+  transitionName: string,
+  header: React.ReactChild
+}
+
+interface IState {
+  showContent: boolean,
+  headerOpacity: number
+}
+
+class Accordion extends React.Component<IProps, IState> {
     static defaultProps = {
         transitionName: 'slide'
     }
 
-    constructor(props){
+    constructor(props: IProps){
         super(props);
         this.state = {
             showContent: false,
@@ -14,7 +24,7 @@ class Accordion extends React.Component {
         };
     }
 
-    handleClick(e){
+    handleClick(){
         this.setState({
             showContent: !this.state.showContent,
             headerOpacity: this.state.showContent ? 1 : 0.4

@@ -185,7 +185,7 @@ const menus = [
     }
 ];
 
-const Home = (props) => {
+const Home = () => {
     return (
         <Page
             className="home"
@@ -202,13 +202,13 @@ const Home = (props) => {
                                     <FlexItem component="p">
                                         {menu.name}
                                     </FlexItem>
-                                    <img src={menu.icon} alt/>
+                                    <img src={menu.icon} alt=""/>
                                 </Flex>
                             }
                         >
                             <Cells>
                                 {menu.items.map((item, j)=>(
-                                        <Cell key={j} component={Link} to={item.to} access>
+                                        <Cell htmlFor="" key={j} component={Link} to={item.to} access>
                                             <CellBody>
                                                 {item.label}
                                             </CellBody>
