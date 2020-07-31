@@ -52,6 +52,10 @@ var InfiniteLoader = /*#__PURE__*/function (_React$Component) {
       if (nextProps.resetStatus) {
         this.reset();
       }
+
+      if (nextProps.resolveStatus) {
+        this.resolveLoading();
+      }
     }
   }, {
     key: "reset",
@@ -98,7 +102,7 @@ var InfiniteLoader = /*#__PURE__*/function (_React$Component) {
         this.setState({
           loading: true
         });
-        this.props.onLoadMore(this.resolveLoading, this.finish);
+        this.props.onLoadMore(this.finish);
       }
     }
   }, {
@@ -196,7 +200,8 @@ InfiniteLoader.propTypes = {
   /**
    * reset the finish status
    */
-  resetStatus: PropTypes.bool
+  resetStatus: PropTypes.bool,
+  resolveStatus: PropTypes.bool
 };
 InfiniteLoader.defaultProps = {
   height: '100vh',

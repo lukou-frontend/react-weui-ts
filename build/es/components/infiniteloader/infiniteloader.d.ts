@@ -10,7 +10,7 @@ interface InfiniteLoaderProps {
     height?: string;
     loaderDefaultIcon: object;
     loaderLoadingIcon: object;
-    onLoadMore: (resolveLoading: () => void, finish?: () => void) => void;
+    onLoadMore: (finish?: () => void) => void;
     onScroll?: (e?: Event) => void;
     onScrollEnd?: () => void;
     triggerPercent: number;
@@ -68,6 +68,7 @@ declare class InfiniteLoader extends React.Component<InfiniteLoaderProps, Infini
          * reset the finish status
          */
         resetStatus: PropTypes.Requireable<boolean>;
+        resolveStatus: PropTypes.Requireable<boolean>;
     };
     static defaultProps: {
         height: string | undefined;
