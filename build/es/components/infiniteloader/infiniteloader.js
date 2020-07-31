@@ -114,12 +114,14 @@ var InfiniteLoader = /*#__PURE__*/function (_React$Component) {
           height = _a.height,
           triggerPercent = _a.triggerPercent,
           disable = _a.disable,
+          resetStatus = _a.resetStatus,
+          resolveStatus = _a.resolveStatus,
           loaderLoadingIcon = _a.loaderLoadingIcon,
           loaderDefaultIcon = _a.loaderDefaultIcon,
           onScrollEnd = _a.onScrollEnd,
           onScroll = _a.onScroll,
           onLoadMore = _a.onLoadMore,
-          domProps = __rest(_a, ["children", "className", "height", "triggerPercent", "disable", "loaderLoadingIcon", "loaderDefaultIcon", "onScrollEnd", "onScroll", "onLoadMore"]);
+          domProps = __rest(_a, ["children", "className", "height", "triggerPercent", "disable", "resetStatus", "resolveStatus", "loaderLoadingIcon", "loaderDefaultIcon", "onScrollEnd", "onScroll", "onLoadMore"]);
 
       var clx = classNames('react-weui-infiniteloader', className);
       var containerStyle = {
