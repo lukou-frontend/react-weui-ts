@@ -11,6 +11,8 @@ import './infiniteloader.less';
  */
 interface InfiniteLoaderProps {
   disable?: boolean,
+  resetStatus?: boolean,
+  resolveStatus?: boolean,
   height?: string,
   loaderDefaultIcon: object,
   loaderLoadingIcon: object,
@@ -73,6 +75,7 @@ class InfiniteLoader extends React.Component<InfiniteLoaderProps, InfiniteLoader
          * reset the finish status
          */
         resetStatus: PropTypes.bool,
+        
         resolveStatus: PropTypes.bool
     };
 
@@ -81,7 +84,9 @@ class InfiniteLoader extends React.Component<InfiniteLoaderProps, InfiniteLoader
         triggerPercent: 75 as InfiniteLoaderProps['triggerPercent'],
         loaderLoadingIcon: <LoadMore loading> Loading... </LoadMore> as InfiniteLoaderProps['loaderLoadingIcon'],
         loaderDefaultIcon: <LoadMore showLine> No Data</LoadMore> as InfiniteLoaderProps['loaderDefaultIcon'],
-        disable: false
+        disable: false,
+        resetStatus: false,
+        resolveStatus: false,
     }
 
     constructor(props: InfiniteLoaderProps){

@@ -14,3 +14,4 @@ docgen
 test.html
 .vscode
 #build
+/build
