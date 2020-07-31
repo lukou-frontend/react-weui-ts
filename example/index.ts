@@ -1,5 +1,5 @@
 import Home from './pages/home/index';
-console.log(Home);
+import ActionSheet from './pages/actionsheet/index';
 
 // import Button from './pages/button/index';
 // import List from './pages/list/index';
@@ -48,7 +48,7 @@ export default {
     // Msg,
     // Article,
     // Toast,
-    // ActionSheet,
+    ActionSheet,
     // Icons,
     // Panel,
     // NavBar,

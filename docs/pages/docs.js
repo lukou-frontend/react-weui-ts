@@ -21,9 +21,9 @@ class Docs extends React.Component {
     if(article.preview && article.component){
       Sample = Demos[article.preview]
       if(article.code){
-        code = require(`!!raw-loader!../../example/pages/${article.code}`)
+        code = require(`!!raw-loader!../../example/pages/${article.code}/index.tsx`)
       }else{
-        code = require(`!!raw-loader!../../example/pages/${article.preview.toLowerCase()}/index`)
+        code = require(`!!raw-loader!../../example/pages/${article.preview.toLowerCase()}/index.tsx`)
       }
 
     }

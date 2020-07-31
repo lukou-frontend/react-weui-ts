@@ -39,6 +39,7 @@ const plugins = [
 const rules = [
     {
         test: /\.ts(x)?$/,
+        include: [path.resolve(__dirname, 'example')],
         exclude: /node_modules/,
         use: [
             'babel-loader',

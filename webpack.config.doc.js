@@ -38,14 +38,21 @@ const plugins = [
 // Common rules
 const rules = [
     {
+        test: /\.ts(x)?$/,
+        exclude: /node_modules/,
+        include: [path.resolve(__dirname, 'example')],
+        use: [
+            'babel-loader',
+            'ts-loader'
+        ],
+    },
+    {
         test: /\.(js|jsx)$/,
         oneOf: [
             {
-                include: [path.resolve(__dirname, 'docs'), path.resolve(__dirname, 'example')],
+                include: [path.resolve(__dirname, 'docs')],
                 exclude: [/node_modules/, path.resolve(__dirname, 'src')],
-                use: {
-                  loader: 'babel-loader'    //babel的相关配置在.babelrc文件里
-               }
+                use: ['babel-loader']
             },
             {
                 include: path.resolve(__dirname, 'src'),
@@ -148,7 +155,7 @@ module.exports = {
     rules,
   },
   resolve: {
-    extensions: ['.webpack-loader.js', '.web-loader.js', '.loader.js', '.js', '.jsx', '.less'],
+    extensions: ['.webpack-loader.js', '.web-loader.js', '.loader.js', '.tsx', '.ts', '.js', '.jsx', '.less',],
     modules: [
       path.resolve(__dirname, 'node_modules'),
       jsSourcePath,
