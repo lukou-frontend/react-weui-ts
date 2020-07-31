@@ -9,14 +9,14 @@ interface CellProps {
     access?: boolean;
     className?: any;
     link?: boolean;
-    htmlFor: string;
-    href: string;
+    htmlFor?: string;
+    href?: string;
     component?: IReactComponent;
     children?: React.ReactNode;
+    [key: string]: any;
 }
-declare const Cell: {
-    (props: CellProps): JSX.Element;
-    propTypes: {
+export default class Cell extends React.Component<CellProps, any> {
+    static propTypes: {
         /**
          * if cell should have arrow or link
          *
@@ -33,9 +33,11 @@ declare const Cell: {
          */
         component: PropTypes.Requireable<(...args: any[]) => any>;
     };
-    defaultProps: {
+    static defaultProps: {
         access: boolean | undefined;
         link: boolean | undefined;
     };
-};
-export default Cell;
+    constructor(props: CellProps);
+    render(): JSX.Element;
+}
+export {};

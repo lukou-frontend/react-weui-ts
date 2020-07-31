@@ -1,5 +1,9 @@
 import _extends from "@babel/runtime/helpers/extends";
 import _defineProperty from "@babel/runtime/helpers/defineProperty";
+import _classCallCheck from "@babel/runtime/helpers/classCallCheck";
+import _createClass from "@babel/runtime/helpers/createClass";
+import _inherits from "@babel/runtime/helpers/inherits";
+import _createSuper from "@babel/runtime/helpers/createSuper";
 
 var __rest = this && this.__rest || function (s, e) {
   var t = {};
@@ -16,7 +20,7 @@ var __rest = this && this.__rest || function (s, e) {
 /*
  * @Author: 刘佑祥
  * @LastEditors: 刘佑祥
- * @LastEditTime: 2020-07-31 10:06:54
+ * @LastEditTime: 2020-07-31 17:16:23
  */
 
 
@@ -24,30 +28,49 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 import classNames from '../../utils/classnames';
 
-var Cell = function Cell(props) {
-  var className = props.className,
-      children = props.children,
-      access = props.access,
-      href = props.href,
-      link = props.link,
-      component = props.component,
-      htmlFor = props.htmlFor,
-      others = __rest(props, ["className", "children", "access", "href", "link", "component", "htmlFor"]);
+var Cell = /*#__PURE__*/function (_React$Component) {
+  _inherits(Cell, _React$Component);
 
-  var DefaultComponent = href ? 'a' : htmlFor ? 'label' : 'div';
-  var CellComponent = component ? component : DefaultComponent;
-  var cls = classNames(_defineProperty({
-    'weui-cell': true,
-    'weui-cell_access': access,
-    'weui-cell_link': link
-  }, className, className));
-  return /*#__PURE__*/React.createElement(CellComponent, _extends({
-    className: cls,
-    href: href,
-    htmlFor: htmlFor
-  }, others), children);
-};
+  var _super = _createSuper(Cell);
 
+  function Cell(props) {
+    _classCallCheck(this, Cell);
+
+    return _super.call(this, props);
+  }
+
+  _createClass(Cell, [{
+    key: "render",
+    value: function render() {
+      var _a = this.props,
+          className = _a.className,
+          children = _a.children,
+          access = _a.access,
+          href = _a.href,
+          link = _a.link,
+          component = _a.component,
+          htmlFor = _a.htmlFor,
+          others = __rest(_a, ["className", "children", "access", "href", "link", "component", "htmlFor"]);
+
+      var DefaultComponent = href ? 'a' : htmlFor ? 'label' : 'div';
+      var CellComponent = component ? component : DefaultComponent;
+      var cls = classNames(_defineProperty({
+        'weui-cell': true,
+        'weui-cell_access': access,
+        'weui-cell_link': link
+      }, className, className));
+      return /*#__PURE__*/React.createElement(CellComponent, _extends({
+        className: cls,
+        href: href,
+        htmlFor: htmlFor
+      }, others), children);
+    }
+  }]);
+
+  return Cell;
+}(React.Component);
+
+export { Cell as default };
 Cell.propTypes = {
   /**
    * if cell should have arrow or link
@@ -71,4 +94,4 @@ Cell.defaultProps = {
   access: false,
   link: false
 };
-export default Cell;
+;

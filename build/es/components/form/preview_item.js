@@ -51,7 +51,7 @@ PreviewItem.propTypes = {
   value: PropTypes.string
 };
 PreviewItem.defaultProps = {
-  label: false,
-  value: false
+  label: '',
+  value: ''
 };
 export default PreviewItem;

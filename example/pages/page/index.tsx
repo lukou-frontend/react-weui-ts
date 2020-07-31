@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Article, Page } from '../../../build/es';
 import srcArticle from '../article/pic_article.png';
 
-const PageDemo = (props) => (
+const PageDemo = () => (
     <Page transition={true} infiniteLoader={true} ptr={false}>
         <Article>
             <h1>Page Demo</h1>
@@ -15,8 +15,8 @@ const PageDemo = (props) => (
                         quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
                         consequat. Duis aute</p>
                     <p>
-                        <img src={srcArticle} alt/>
-                        <img src={srcArticle} alt/>
+                        <img src={srcArticle} />
+                        <img src={srcArticle} />
                     </p>
                 </section>
                 <section>

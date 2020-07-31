@@ -10,8 +10,8 @@ import classNames from '../../utils/classnames';
  */
 interface PreviewItemProps {
   className?: any,
-  label?: boolean,
-  value?: boolean,
+  label?: string,
+  value?: string,
   children?: React.ReactNode
 }
 const PreviewItem = (props: PreviewItemProps) => {
@@ -45,8 +45,8 @@ PreviewItem.propTypes = {
 };
 
 PreviewItem.defaultProps = {
-    label: false as PreviewItemProps['label'],
-    value: false as PreviewItemProps['value'],
+    label: '' as PreviewItemProps['label'],
+    value: '' as PreviewItemProps['value'],
 };
 
 export default PreviewItem;

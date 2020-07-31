@@ -12,6 +12,7 @@ interface ButtonProps {
     className?: string;
     href?: string;
     component?: IReactComponent;
+    onClick?: () => void;
 }
 export default class Button extends React.Component<ButtonProps> {
     static defaultProps: {

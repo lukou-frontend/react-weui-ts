@@ -1,6 +1,14 @@
 import * as React from 'react';
 
-export default class Page extends React.Component {
+interface PageProps {
+  title?: string,
+  subTitle?: string,
+  spacing?: boolean,
+  className?: any,
+  children?: React.ReactNode,
+  footer?: any
+}
+export default class Page extends React.Component<PageProps> {
     render() {
         const {title, subTitle, spacing, className, children, footer} = this.props;
 

@@ -1,7 +1,12 @@
 import * as React from 'react'
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
+import { any } from 'prop-types';
 
-class Accordion extends React.Component {
+interface AccordionStates {
+  showContent: boolean,
+  headerOpacity: number
+}
+class Accordion extends React.Component<any, AccordionStates> {
     static defaultProps = {
         transitionName: 'slide'
     }

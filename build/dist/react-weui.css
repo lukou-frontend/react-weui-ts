@@ -228,6 +228,16 @@ label.weui-agree > * {
   display: block;
 }
 
+.weui-toptips_default {
+  background-color: #B2B2B2;
+}
+.weui-toptips_info {
+  background-color: #586C94;
+}
+.weui-toptips_primary {
+  background-color: #1AAD19;
+}
+
 .am-swipe {
   overflow: hidden;
   position: relative;
@@ -288,16 +298,6 @@ label.weui-agree > * {
 }
 .am-swipe-btn-text {
   padding: 0 8px;
-}
-
-.weui-toptips_default {
-  background-color: #B2B2B2;
-}
-.weui-toptips_info {
-  background-color: #586C94;
-}
-.weui-toptips_primary {
-  background-color: #1AAD19;
 }
 
 

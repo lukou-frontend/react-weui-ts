@@ -7,6 +7,7 @@ import PropTypes from 'prop-types';
 interface Thisbutton {
     label: string;
     type: 'primary' | 'default' | 'warn' | 'vcode';
+    onClick: () => {};
 }
 interface MsgProps {
     type: string;

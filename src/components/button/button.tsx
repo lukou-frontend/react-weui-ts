@@ -16,7 +16,8 @@ interface ButtonProps {
   plain?: boolean,
   className?: string,
   href?: string,
-  component?: IReactComponent
+  component?: IReactComponent,
+  onClick?: () => void
 }
 export default class Button extends React.Component<ButtonProps> {
 

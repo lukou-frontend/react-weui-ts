@@ -40,9 +40,9 @@ const plugins = [
 // Common rules
 const rules = [
     {
-        test: /\.(js|jsx)$/,
+        test: /\.(js|jsx|ts|tsx)$/,
         exclude: /node_modules/,
-        use: ['babel-loader'],
+        use: ['babel-loader', 'ts-loader'],
     },
     {
         test: /\.css/,
@@ -124,7 +124,7 @@ module.exports = {
     devtool: isProduction ? false : 'source-map',
     context: jsSourcePath,
     entry: {
-        js: './app.js',
+        js: './app.tsx',
     },
     output: {
         path: buildPath,

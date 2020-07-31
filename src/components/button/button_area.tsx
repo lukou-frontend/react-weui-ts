@@ -3,7 +3,8 @@ import classNames from '../../utils/classnames';
 
 interface ButtonAreaProps {
   direction: 'veritical'|'horizontal',
-  className?: string
+  className?: string,
+  onClick?: () => void
 }
 class ButtonArea extends React.Component<ButtonAreaProps> {
 

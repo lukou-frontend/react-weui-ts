@@ -8,7 +8,7 @@ import {
 import Page from '../../component/page';
 
 
-const FooterDemo = (props) => (
+const FooterDemo = () => (
     <Page className="footer" title="Footer" subTitle="页脚" spacing>
         <Footer>
             <FooterText>Copyright &copy; 2008-2016 weui.io</FooterText>
