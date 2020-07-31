@@ -11,7 +11,7 @@ interface CellProps {
     link?: boolean;
     htmlFor: string;
     href: string;
-    component: IReactComponent;
+    component?: IReactComponent;
     children?: React.ReactNode;
 }
 declare const Cell: {
