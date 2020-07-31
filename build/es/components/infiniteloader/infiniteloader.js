@@ -102,7 +102,7 @@ var InfiniteLoader = /*#__PURE__*/function (_React$Component) {
         this.setState({
           loading: true
         });
-        this.props.onLoadMore(this.finish);
+        this.props.onLoadMore(this.resolveLoading, this.finish);
       }
     }
   }, {

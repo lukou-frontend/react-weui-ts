@@ -10,7 +10,7 @@ interface InfiniteLoaderProps {
     height?: string;
     loaderDefaultIcon: object;
     loaderLoadingIcon: object;
-    onLoadMore: (finish?: () => void) => void;
+    onLoadMore: (resolveLoading: () => void, finish?: () => void) => void;
     onScroll?: (e?: Event) => void;
     onScrollEnd?: () => void;
     triggerPercent: number;
