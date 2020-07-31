@@ -157,7 +157,7 @@ class InfiniteLoader extends React.Component<InfiniteLoaderProps, InfiniteLoader
 
     render(){
 
-        const { children, className, height, triggerPercent, disable, loaderLoadingIcon, loaderDefaultIcon, onScrollEnd, onScroll, onLoadMore, ...domProps } = this.props;
+      const { children, className, height, triggerPercent, disable, resetStatus, resolveStatus, loaderLoadingIcon, loaderDefaultIcon, onScrollEnd, onScroll, onLoadMore, ...domProps } = this.props;
         const clx = classNames( 'react-weui-infiniteloader', className );
 
         let containerStyle = {
