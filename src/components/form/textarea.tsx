@@ -14,7 +14,9 @@ interface TextAreaProps {
   onChange?: (value: any) => void,
   className?: any,
   children?: React.ReactNode,
-  style?: React.CSSProperties
+  style?: React.CSSProperties,
+  rows?: number,
+  value?: string,
 }
 interface TextAreaStates {
   textCounter: number
@@ -47,11 +49,11 @@ export default class TextArea extends React.Component<TextAreaProps, TextAreaSta
     this.setState({ textCounter: e.target.value.length });
 
     //forward event to props if any
-    if (this.props.onChange) this.props.onChange(e);
+    this.props.onChange && this.props.onChange(e);
   }
 
   render() {
-    const { className, children, showCounter, maxLength, placeholder, onChange, ...others } = this.props;
+    const { className, children, showCounter, maxLength, placeholder, rows, value, onChange, ...others } = this.props;
     const cls = classNames({
       'weui-textarea': true,
       [className]: className
@@ -63,7 +65,9 @@ export default class TextArea extends React.Component<TextAreaProps, TextAreaSta
           className={cls}
           maxLength={maxLength}
           placeholder={placeholder}
+          value={value || ''}
           onChange={this.handleChange.bind(this)}
+          rows={rows || 3}
           {...others}
         >
           {children}

@@ -12,7 +12,8 @@ import classNames from '../../utils/classnames';
  */
 interface CellsTitleProps {
   className?: any,
-  children?: React.ReactNode
+  children?: React.ReactNode,
+  style?: React.CSSProperties,
 }
 const CellsTitle = (props: CellsTitleProps) => {
     const { className, children, ...others } = props

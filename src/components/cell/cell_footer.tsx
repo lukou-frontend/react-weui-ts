@@ -9,7 +9,8 @@ import classNames from '../../utils/classnames';
 interface CellFooterProps {
   className?: any,
   primary?: boolean,
-  children?: React.ReactNode
+  children?: React.ReactNode,
+  style?: React.CSSProperties,
 }
 const CellFooter = (props: CellFooterProps) => {
     const { className, children, primary, ...others } = props;

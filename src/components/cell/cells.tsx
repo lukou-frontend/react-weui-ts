@@ -15,7 +15,8 @@ import deprecationWarning from '../../utils/deprecationWarning';
 interface CellsProps {
   className?: any,
   access?: boolean,
-  children?: React.ReactNode
+  children?: React.ReactNode,
+  style?: React.CSSProperties,
 }
 const Cells = (props: CellsProps) => {
     const { children, className, access, ...others } = props;

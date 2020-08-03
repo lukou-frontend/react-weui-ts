@@ -8,7 +8,8 @@ import classNames from '../../utils/classnames';
 interface PanelHeaderProps {
   className?: any,
   children: React.ReactNode,
-  style?: React.CSSProperties;
+  style?: React.CSSProperties,
+  style?: React.CSSProperties,
 }
 export default class PanelHeader extends React.Component<PanelHeaderProps> {
     render() {

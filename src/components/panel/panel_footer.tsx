@@ -8,7 +8,8 @@ import classNames from '../../utils/classnames';
 interface PanelFooterProps {
   className?: any,
   href?: string,
-  children: React.ReactNode
+  children: React.ReactNode,
+  style?: React.CSSProperties,
 }
 export default class PanelFooter extends React.Component<PanelFooterProps> {
     render() {

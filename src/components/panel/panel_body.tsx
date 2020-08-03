@@ -7,7 +7,8 @@ import classNames from '../../utils/classnames';
  */
 interface PanelBodyProps {
   className?: any,
-  children: React.ReactNode
+  children: React.ReactNode,
+  style?: React.CSSProperties,
 }
 export default class PanelBody extends React.Component<PanelBodyProps> {
     render() {

@@ -9,29 +9,41 @@ import classNames from '../../utils/classnames';
 interface InputProps {
   defaultValue?: string,
   className?: any,
-  children?: React.ReactNode
+  children?: React.ReactNode,
+  maxLength?: number,
+  style?: React.CSSProperties,
+  value?: string,
+  placeholder?: string,
+  onChange?: (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void,
 }
 const Input = (props: InputProps) => {
-    const { className, ...others } = props;
-    const cls = classNames({
-        'weui-input': true,
-        [className]: className
-    });
+  const { className, maxLength, value, placeholder, onChange, ...others } = props;
+  const cls = classNames({
+    'weui-input': true,
+    [className]: className
+  });
 
-    return (
-        <div>
-            <input className={cls} {...others}/>
-            <span className="weui-icon-checked"></span>
-        </div>
-    );
+  return (
+    <div>
+      <input
+        className={cls}
+        maxLength={maxLength}
+        placeholder={placeholder}
+        value={value || ''}
+        onChange={onChange}
+        {...others}
+      />
+      <span className="weui-icon-checked"></span>
+    </div>
+  );
 };
 
 Input.propTypes = {
-    defaultValue: PropTypes.string
+  defaultValue: PropTypes.string
 };
 
 Input.defaultProps = {
-    defaultValue: undefined as InputProps['defaultValue']
+  defaultValue: undefined as InputProps['defaultValue']
 };
 
 export default Input;

@@ -31,12 +31,13 @@ interface UploaderProps {
   onFileClick?: (e?: any, file?: File, idx?: any) => void,
   maxsize: number,
   onOversize: (val: number) => void,
-  type: 'image' | 'vedio',
+  type: 'image' | 'video',
   onDelete: (file: File, id: number) => void,
   currentVideo: (val: string) => void,
   showTitle: boolean,
   size: 'small' | 'normal' | 'large',
-  showAddInput: boolean
+  showAddInput: boolean,
+  style?: React.CSSProperties,
 }
 type customFile = {
   nativeFile: Blob,

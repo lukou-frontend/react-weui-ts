@@ -9,7 +9,8 @@ import classNames from '../../utils/classnames';
 interface CellHeaderProps {
   className?: any,
   primary?: boolean,
-  children?: React.ReactNode
+  children?: React.ReactNode,
+  style?: React.CSSProperties,
 }
 const CellHeader = (props: CellHeaderProps) => {
     const { className, children, primary, ...others } = props;
