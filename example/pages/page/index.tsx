@@ -3,7 +3,7 @@ import { Article, Page } from '../../../build/es';
 import srcArticle from '../article/pic_article.png';
 
 const PageDemo = () => (
-    <Page transition={true} infiniteLoader={true} ptr={false}>
+    <Page transition={true} infiniteLoader={false} ptr={false}>
         <Article>
             <h1>Page Demo</h1>
             <section>

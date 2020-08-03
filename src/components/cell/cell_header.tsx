@@ -10,6 +10,7 @@ interface CellHeaderProps {
   className?: any,
   primary?: boolean,
   children?: React.ReactNode,
+  style?: React.CSSProperties,
   [key: string]: any
 }
 const CellHeader = (props: CellHeaderProps) => {

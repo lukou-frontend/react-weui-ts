@@ -9,7 +9,9 @@ import classNames from '../../utils/classnames';
  */
 interface PreviewProps {
   className?: any,
-  children?: React.ReactNode
+  children?: React.ReactNode,
+  style?: React.CSSProperties,
+  [key: string]: any
 }
 const Preview = (props: PreviewProps) => {
 

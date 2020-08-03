@@ -15,10 +15,10 @@ import TabBarItem from './tabbar_item';
  */
 interface TabProps {
   defaultIndex?: number,
-  type?: string,
+  type: string,
   onChange?: (index: number) => void,
   className?: ClassValue,
-  children?: React.ReactElement[],
+  children: React.ReactElement[],
   [key: string]: any
 }
 export default class Tab extends React.Component<TabProps> {

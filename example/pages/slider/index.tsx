@@ -11,11 +11,13 @@ const SliderDemo = () => {
         min={1}
         max={5}
         step={1}
+        value={0}
         onChange={(value: number) => console.log(value)}
       />
 
       <CellsTitle>Disabled Example</CellsTitle>
       <Slider
+      value={0}
         disabled
         onChange={(value: number) => console.log(value)}
       />
@@ -36,7 +38,7 @@ const SliderDemo = () => {
             if (controlValue >= 10) setControlValue(controlValue - 10);
           }}>
           - 10
-                    </Button>
+        </Button>
         <Button
           style={{ marginLeft: '10px' }}
           size="small"
@@ -44,13 +46,14 @@ const SliderDemo = () => {
             if (controlValue <= 90) setControlValue(controlValue + 10)
           }}>
           + 10
-                    </Button>
+        </Button>
       </ButtonArea>
 
       <br />
 
       <CellsTitle>No snap & No show value</CellsTitle>
       <Slider
+        value={0}
         snapToValue={false}
         showValue={false}
       />

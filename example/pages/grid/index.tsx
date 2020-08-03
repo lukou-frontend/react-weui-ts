@@ -6,7 +6,7 @@ const iconSrc = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADYAAAA2CAMAAAC7m
 const data = Array(9).fill({
     icon: <img src={iconSrc}/>,
     label: 'Grid',
-    href: 'javascript:;'
+    href: '#!'
 });
 
 const GridDemo = () => (

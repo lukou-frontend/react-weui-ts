@@ -7,8 +7,7 @@ import classNames from '../../utils/classnames';
  */
 interface VCodeProps {
   className?: any,
-  src?: string,
-  [key: string]: any
+  src?: string
 }
 const VCode = (props: VCodeProps) => {
     const { className, src, ...others } = props;

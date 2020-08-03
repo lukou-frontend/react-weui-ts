@@ -69,7 +69,7 @@ class Dialog extends React.Component<DialogProps> {
             });
 
             return (
-                <a key={idx} href="javascript:;" {...others} className={className}>{label}</a>
+                <a key={idx} href="#!" {...others} className={className}>{label}</a>
             );
         });
     }

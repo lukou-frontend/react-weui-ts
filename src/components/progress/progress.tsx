@@ -31,7 +31,7 @@ const Progress = (props: ProgressProps) => {
 
             {
                 showCancel ?
-                    <a href="javascript:;" className="weui-progress__opr" onClick={ e=> { if (onClick) onClick(e); } }>
+                    <a href="#!" className="weui-progress__opr" onClick={ e=> { if (onClick) onClick(e); } }>
                         <Icon value="cancel"/>
                     </a>
                 : false

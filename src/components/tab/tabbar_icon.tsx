@@ -6,9 +6,7 @@ import classNames, { ClassValue } from '../../utils/classnames';
  *
  */
 interface TabBarIconProps {
-  className?: ClassValue,
-  onClick?: () => void,
-  [key: string]: any
+  className?: ClassValue
 }
 export default class TabBarIcon extends React.Component<TabBarIconProps> {
 

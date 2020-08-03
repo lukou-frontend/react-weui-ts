@@ -32,7 +32,7 @@ const InfiniteDemo = () => {
           {
             items.map((item: number, i: number) => {
               return (
-                <Cell href="javascript:;" key={i} access>
+                <Cell href="#!" key={i} access>
                   <CellBody>
                     {item}
                   </CellBody>

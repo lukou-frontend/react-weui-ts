@@ -52,7 +52,7 @@ const ListDemo = () => (
 
         <CellsTitle>List with link</CellsTitle>
         <Cells>
-            <Cell href="javascript:;" access>
+            <Cell href="#!" access>
                 <CellBody>
                     Title
                 </CellBody>
@@ -68,7 +68,7 @@ const ListDemo = () => (
 
         <CellsTitle>List with title & link</CellsTitle>
         <Cells>
-            <Cell href="javascript:;" access>
+            <Cell href="#!" access>
                 <CellBody>
                     Title
                 </CellBody>
@@ -88,7 +88,7 @@ const ListDemo = () => (
 
         <CellsTitle>List with Icon & Link</CellsTitle>
         <Cells>
-            <Cell href="javascript:;" access>
+            <Cell href="#!" access>
                 <CellHeader>
                     <img src={iconSrc} alt="" style={{display: 'block', width: '20px', marginRight: '5px'}}/>
                 </CellHeader>

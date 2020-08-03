@@ -19,7 +19,7 @@ const GalleryDelete = (props: GalleryDeleteProps) => {
 
     return (
         <a className={cls} {...others}>
-            <Icon value="delete" className="weui-icon_gallery-delete" />
+            <Icon onClick={onClick} value="delete" className="weui-icon_gallery-delete" />
         </a>
     );
 };

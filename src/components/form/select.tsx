@@ -7,14 +7,14 @@ import classNames from '../../utils/classnames';
  *
  */
 interface Option {
-  value: string,
+  value: string | number,
   label: string
 }
 interface SelectProps {
   data: Array<Option>,
   className?: any,
   children?: React.ReactNode,
-  defaultValue?: string
+  defaultValue?: string | number
 }
 export default class Select extends React.Component<SelectProps> {
   static propTypes = {
@@ -36,7 +36,6 @@ export default class Select extends React.Component<SelectProps> {
         key={i}
         value={value}
         {...otherItem}
-        selected={this.props.defaultValue === value}
       >
         {label}
       </option>
@@ -51,7 +50,7 @@ export default class Select extends React.Component<SelectProps> {
     });
 
     return (
-      <select className={cls} {...others}>
+    <select defaultValue={defaultValue} className={cls} {...others}>
         {data.length > 0 ? this.renderData(data) : children}
       </select>
     );

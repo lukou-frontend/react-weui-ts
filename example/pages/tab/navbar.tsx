@@ -11,11 +11,11 @@ import {
 const NavBarDemo = () => {
   const [tab, setTab] = React.useState(0)
   return (
-    <Tab>
+    <Tab type="tabbar">
       <NavBar>
-        <NavBarItem active={tab == 0} onClick={() => setTab(0)}>Nav1</NavBarItem>
-        <NavBarItem active={tab == 1} onClick={() => setTab(1)}>Nav2</NavBarItem>
-        <NavBarItem active={tab == 2} onClick={() => setTab(2)}>Nav3</NavBarItem>
+        <NavBarItem label='Nav1' active={tab == 0} onClick={() => setTab(0)}></NavBarItem>
+        <NavBarItem label='Nav2' active={tab == 1} onClick={() => setTab(1)}></NavBarItem>
+        <NavBarItem label='Nav3' active={tab == 2} onClick={() => setTab(2)}></NavBarItem>
       </NavBar>
       <TabBody>
         <Article style={{ display: tab == 0 ? null : 'none' }}>

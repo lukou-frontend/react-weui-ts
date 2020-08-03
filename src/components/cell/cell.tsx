@@ -1,7 +1,7 @@
 /*
  * @Author: 刘佑祥
  * @LastEditors: 刘佑祥
- * @LastEditTime: 2020-07-31 17:16:23
+ * @LastEditTime: 2020-08-03 14:30:18
  */
 import * as React from 'react';
 import PropTypes from 'prop-types'
@@ -24,55 +24,55 @@ interface CellProps {
   href?: string,
   component?: IReactComponent,
   children?: React.ReactNode,
+  onClick?: () => void,
   [key: string]: any
 }
-export default class Cell extends React.Component<CellProps, any> {
-  static propTypes = {
-    /**
-     * if cell should have arrow or link
-     *
-     */
-    access: PropTypes.bool,
-    /**
-     * if this cell body is link
-     *
-     */
-    link: PropTypes.bool,
-    /**
-     * pass in an component to replace Cell but apply same style
-     *
-     */
-    component: PropTypes.func
-  };
+const Cell = (props: CellProps) => {
+  const { className, children, access, href, link, component, htmlFor, onClick, ...others } = props;
+  const DefaultComponent = href ? 'a' : htmlFor ? 'label' : 'div';
+  var CellComponent = component ? component : DefaultComponent;
 
-  static defaultProps = {
-    access: false as CellProps['access'],
-    link: false as CellProps['link'],
-  };
-  constructor(props: CellProps) {
-    super(props)
-  }
-  render() {
-    const { className, children, access, href, link, component, htmlFor, ...others } = this.props;
-    const DefaultComponent = href ? 'a' : htmlFor ? 'label' : 'div';
-    var CellComponent = component ? component : DefaultComponent;
+  const cls = classNames({
+    'weui-cell': true,
+    'weui-cell_access': access,
+    'weui-cell_link': link,
+    [className]: className
+  });
 
-    const cls = classNames({
-      'weui-cell': true,
-      'weui-cell_access': access,
-      'weui-cell_link': link,
-      [className]: className
-    });
-    return (
-      <CellComponent
-        className={cls}
-        href={href}
-        htmlFor={htmlFor}
-        {...others}
-      >
-        {children}
-      </CellComponent>
-    );
-  }
-
+  return (
+    <CellComponent
+      className={cls}
+      href={href}
+      htmlFor={htmlFor}
+      onClick={onClick}
+      {...others}
+    >
+      {children}
+    </CellComponent>
+  );
 };
+
+Cell.propTypes = {
+  /**
+   * if cell should have arrow or link
+   *
+   */
+  access: PropTypes.bool,
+  /**
+   * if this cell body is link
+   *
+   */
+  link: PropTypes.bool,
+  /**
+   * pass in an component to replace Cell but apply same style
+   *
+   */
+  component: PropTypes.func
+};
+
+Cell.defaultProps = {
+  access: false as CellProps['access'],
+  link: false as CellProps['link'],
+};
+
+export default Cell;

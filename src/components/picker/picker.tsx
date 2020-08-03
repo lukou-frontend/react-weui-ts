@@ -8,7 +8,7 @@ import Mask from '../mask';
  *
  */
 interface Action {
-  label?: string,
+  label: string,
   onClick?: (e: any) => void
 }
 interface PickerProps {
@@ -19,10 +19,10 @@ interface PickerProps {
     leftBtn: string,
     rightBtn: string
   },
-  onCancel?: (e: any) => void,
-  onChange?: (selected: any, arg2: any) => void,
+  onCancel: (e: any) => void,
+  onChange: (selected: any, arg2: any) => void,
   onGroupChange?: (item: any, i: any, groupIndex: any, selected: number, arg4: any) => void,
-  show?: boolean,
+  show: boolean,
   className?: any
 }
 interface PickerStates {

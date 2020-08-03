@@ -10,8 +10,6 @@ interface CheckboxProps {
   className?: any,
   children?: React.ReactNode,
   onChange: (checked: boolean, e: React.ChangeEvent) => void,
-  name: string,
-  value: string | number,
   [key: string]: any
 }
 export default class Checkbox extends React.Component<CheckboxProps>{
@@ -29,7 +27,7 @@ export default class Checkbox extends React.Component<CheckboxProps>{
     onChange: undefined as unknown as CheckboxProps['onChange'],
   };
   render () {
-    const { className, onChange, name, value, ...others } = this.props;
+    const { className, onChange, ...others } = this.props;
     const cls = classNames({
         'weui-check': true,
         [className]: className
@@ -40,7 +38,7 @@ export default class Checkbox extends React.Component<CheckboxProps>{
 
     return (
         <div>
-            <input className={cls} name={name} type="checkbox" {...others} value={value} onChange= {handleChange} />
+            <input className={cls} type="checkbox" {...others} onChange= {handleChange} />
             <span className="weui-icon-checked"></span>
         </div>
     );

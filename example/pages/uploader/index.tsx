@@ -59,7 +59,7 @@ const UploaderDemo = () => {
       <Gallery
         src={srcs}
         show
-        onClick={(e: Event) => {
+        onClick={(e: any) => {
           //avoid click background item
           e.preventDefault()
           e.stopPropagation()
@@ -142,6 +142,7 @@ const UploaderDemo = () => {
                     setImageFiles(newFiles)
                   }}
                   onFileClick={(_e: Event, file: MyFile, i: number) => {
+                    console.log(file.url)
                     setGallery2({
                         url: file.url,
                         id: i,

@@ -12,7 +12,8 @@ interface PreviewItemProps {
   className?: any,
   label?: string,
   value?: string,
-  children?: React.ReactNode
+  children?: React.ReactNode,
+  [key: string]: any
 }
 const PreviewItem = (props: PreviewItemProps) => {
 

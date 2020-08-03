@@ -9,7 +9,8 @@ import classNames from '../../utils/classnames';
 interface CellBodyProps {
   className?: any,
   children?: React.ReactNode,
-  primary?: boolean
+  primary?: boolean,
+  style?: React.CSSProperties
 }
 const CellBody = (props: CellBodyProps) => {
     const { className, children, primary, ...others } = props;

@@ -105,14 +105,14 @@ export default class PanelDemo extends React.Component {
                     <PanelBody>
                         <MediaBox type="small_appmsg">
                             <Cells>
-                                <Cell href="javascript:;" access>
+                                <Cell href="#!" access>
                                     <CellHeader>{smallIcon}</CellHeader>
                                     <CellBody>
                                         <p>Media heading</p>
                                     </CellBody>
                                     <CellFooter/>
                                 </Cell>
-                                <Cell href="javascript:;" access>
+                                <Cell href="#!" access>
                                     <CellHeader>{smallIcon}</CellHeader>
                                     <CellBody>
                                         <p>Media heading</p>

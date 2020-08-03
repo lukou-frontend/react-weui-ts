@@ -12,7 +12,7 @@ const srcArticle = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAArIAAAGFBAMAAA
 const data = Array(6).fill({
   icon: <img src={iconSrc} />,
   label: 'Grid',
-  href: 'javascript:;'
+  href: '#!'
 });
 
 const PopupDemo = () => {

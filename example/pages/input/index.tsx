@@ -28,6 +28,7 @@ import vcodeSrc from './images/vcode.jpg';
 const inputDemo = () => {
   const [showToptips, setShowToptips] = React.useState(false)
   const [checked, setChecked] = React.useState(false)
+  const [checked2, setChecked2] = React.useState(false)
   return (
     <Page className="input" title="Input" subTitle="表单输入">
       <CellsTitle>Radio</CellsTitle>
@@ -53,13 +54,13 @@ const inputDemo = () => {
       <Form checkbox>
         <FormCell checkbox>
           <CellHeader>
-            <Checkbox onChange={checked => { console.log(checked) }} name="checkbox1" value="1" />
+            <Checkbox onChange={(checked: boolean) => { console.log(checked) }} name="checkbox1" value="1" />
           </CellHeader>
           <CellBody>Option 1</CellBody>
         </FormCell>
         <FormCell checkbox>
           <CellHeader>
-            <Checkbox onChange={checked => { console.log(checked) }} name="checkbox2" value="2" defaultChecked />
+            <Checkbox onChange={(checked: boolean) => { console.log(checked) }} name="checkbox2" value="2" defaultChecked />
           </CellHeader>
           <CellBody>Option 2</CellBody>
         </FormCell>
@@ -73,7 +74,7 @@ const inputDemo = () => {
         <FormCell switch>
           <CellBody>Switch Label default</CellBody>
           <CellFooter>
-            <Switch checked={checked} onChange={e => {
+            <Switch checked={checked} onChange={(e: any) => {
               setChecked(e)
             }} />
           </CellFooter>
@@ -81,8 +82,8 @@ const inputDemo = () => {
         <FormCell switch>
           <CellBody>Switch Label small</CellBody>
           <CellFooter>
-            <Switch size="small" checked={checked} onChange={e => {
-              setChecked(e)
+            <Switch size="small" checked={checked2} onChange={(e: any) => {
+              setChecked2(e)
             }} />
           </CellFooter>
         </FormCell>
@@ -114,7 +115,7 @@ const inputDemo = () => {
             <Label>Date</Label>
           </CellHeader>
           <CellBody>
-            <Input type="date" defaultValue="" onChange={(e: React.ChangeEvent) => console.log(e)} />
+            <Input type="date" onChange={(e: React.ChangeEvent) => console.log(e)} />
           </CellBody>
         </FormCell>
         <FormCell>
@@ -122,7 +123,7 @@ const inputDemo = () => {
             <Label>Datetime</Label>
           </CellHeader>
           <CellBody>
-            <Input type="datetime-local" defaultValue="" placeholder="" />
+            <Input type="datetime-local" placeholder="" />
           </CellBody>
         </FormCell>
         <FormCell vcode>
@@ -158,7 +159,7 @@ const inputDemo = () => {
       <Form>
         <FormCell>
           <CellBody>
-            <TextArea placeholder="Enter your comments" rows="3" maxlength="200"></TextArea>
+            <TextArea placeholder="Enter your comments" rows={3} maxLength={200}></TextArea>
           </CellBody>
         </FormCell>
       </Form>
@@ -184,7 +185,7 @@ const inputDemo = () => {
       <Form>
         <FormCell select>
           <CellBody>
-            <Select defaultValue="2">
+            <Select defaultValue="1">
               <option value="1">WeChat</option>
               <option value="2">QQ</option>
               <option value="3">Email</option>
@@ -196,7 +197,7 @@ const inputDemo = () => {
             <Label>Country</Label>
           </CellHeader>
           <CellBody>
-            <Select data={[
+            <Select defaultValue='1' data={[
               {
                 value: '1',
                 label: 'China'
@@ -214,7 +215,7 @@ const inputDemo = () => {
         </FormCell>
       </Form>
       <Agreement>
-        &nbsp;&nbsp;I agree to the <a href="javascript:;">WeUI Terms and Privacy</a>
+        &nbsp;&nbsp;I agree to the <a href="#!">WeUI Terms and Privacy</a>
       </Agreement>
 
       <ButtonArea>
