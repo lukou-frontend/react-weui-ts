@@ -8,6 +8,7 @@ interface PanelProps {
     access?: boolean;
     className?: any;
     children: React.ReactNode;
+    style?: React.CSSProperties;
 }
 export default class Panel extends React.Component<PanelProps> {
     static propTypes: {

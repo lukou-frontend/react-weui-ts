@@ -26,12 +26,13 @@ interface UploaderProps {
     onFileClick?: (e?: any, file?: File, idx?: any) => void;
     maxsize: number;
     onOversize: (val: number) => void;
-    type: 'image' | 'vedio';
+    type: 'image' | 'video';
     onDelete: (file: File, id: number) => void;
     currentVideo: (val: string) => void;
     showTitle: boolean;
     size: 'small' | 'normal' | 'large';
     showAddInput: boolean;
+    style?: React.CSSProperties;
 }
 declare type customFile = {
     nativeFile: Blob;
@@ -132,7 +133,7 @@ export default class Uploader extends React.Component<UploaderProps> {
         onOversize: (val: number) => void;
         onDelete: (file: File, id: number) => void;
         lang: Lang;
-        type: "image" | "vedio";
+        type: "video" | "image";
         currentVideo: (val: string) => void;
         showTitle: boolean;
         size: "small" | "normal" | "large";

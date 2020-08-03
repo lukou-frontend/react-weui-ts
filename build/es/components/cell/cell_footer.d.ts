@@ -8,6 +8,7 @@ interface CellFooterProps {
     className?: any;
     primary?: boolean;
     children?: React.ReactNode;
+    style?: React.CSSProperties;
 }
 declare const CellFooter: {
     (props: CellFooterProps): JSX.Element;

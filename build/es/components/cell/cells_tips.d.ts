@@ -6,6 +6,7 @@ import * as React from 'react';
 interface CellsTipsProps {
     className?: any;
     children?: React.ReactNode;
+    style?: React.CSSProperties;
 }
 declare const CellsTips: (props: CellsTipsProps) => JSX.Element;
 export default CellsTips;

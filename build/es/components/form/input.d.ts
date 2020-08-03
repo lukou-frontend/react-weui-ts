@@ -8,6 +8,11 @@ interface InputProps {
     defaultValue?: string;
     className?: any;
     children?: React.ReactNode;
+    maxLength?: number;
+    style?: React.CSSProperties;
+    value?: string;
+    placeholder?: string;
+    onChange?: (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
 }
 declare const Input: {
     (props: InputProps): JSX.Element;

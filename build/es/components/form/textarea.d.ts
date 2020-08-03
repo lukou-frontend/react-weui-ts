@@ -13,6 +13,8 @@ interface TextAreaProps {
     className?: any;
     children?: React.ReactNode;
     style?: React.CSSProperties;
+    rows?: number;
+    value?: string;
 }
 interface TextAreaStates {
     textCounter: number;

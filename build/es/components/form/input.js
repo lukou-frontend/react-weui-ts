@@ -20,13 +20,21 @@ import classNames from '../../utils/classnames';
 
 var Input = function Input(props) {
   var className = props.className,
-      others = __rest(props, ["className"]);
+      maxLength = props.maxLength,
+      value = props.value,
+      placeholder = props.placeholder,
+      onChange = props.onChange,
+      others = __rest(props, ["className", "maxLength", "value", "placeholder", "onChange"]);
 
   var cls = classNames(_defineProperty({
     'weui-input': true
   }, className, className));
   return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("input", _extends({
-    className: cls
+    className: cls,
+    maxLength: maxLength,
+    placeholder: placeholder,
+    value: value || '',
+    onChange: onChange
   }, others)), /*#__PURE__*/React.createElement("span", {
     className: "weui-icon-checked"
   }));

@@ -46,7 +46,7 @@ var TextArea = /*#__PURE__*/function (_React$Component) {
         textCounter: e.target.value.length
       }); //forward event to props if any
 
-      if (this.props.onChange) this.props.onChange(e);
+      this.props.onChange && this.props.onChange(e);
     }
   }, {
     key: "render",
@@ -57,8 +57,10 @@ var TextArea = /*#__PURE__*/function (_React$Component) {
           showCounter = _a.showCounter,
           maxLength = _a.maxLength,
           placeholder = _a.placeholder,
+          rows = _a.rows,
+          value = _a.value,
           onChange = _a.onChange,
-          others = __rest(_a, ["className", "children", "showCounter", "maxLength", "placeholder", "onChange"]);
+          others = __rest(_a, ["className", "children", "showCounter", "maxLength", "placeholder", "rows", "value", "onChange"]);
 
       var cls = classNames(_defineProperty({
         'weui-textarea': true
@@ -67,7 +69,9 @@ var TextArea = /*#__PURE__*/function (_React$Component) {
         className: cls,
         maxLength: maxLength,
         placeholder: placeholder,
-        onChange: this.handleChange.bind(this)
+        value: value || '',
+        onChange: this.handleChange.bind(this),
+        rows: rows || 3
       }, others), children), showCounter ? /*#__PURE__*/React.createElement("div", {
         className: "weui-textarea-counter"
       }, /*#__PURE__*/React.createElement("span", null, this.state.textCounter), maxLength ? '/' + maxLength : false) : false);

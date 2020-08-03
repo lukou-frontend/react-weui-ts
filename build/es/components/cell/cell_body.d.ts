@@ -8,6 +8,7 @@ interface CellBodyProps {
     className?: any;
     children?: React.ReactNode;
     primary?: boolean;
+    style?: React.CSSProperties;
 }
 declare const CellBody: {
     (props: CellBodyProps): JSX.Element;
