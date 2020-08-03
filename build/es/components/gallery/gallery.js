@@ -87,6 +87,7 @@ var Gallery = /*#__PURE__*/function (_React$Component) {
       }, /*#__PURE__*/React.createElement(Swiper, {
         indicators: false,
         defaultIndex: this.props.defaultIndex,
+        onClick: this.props.onClick,
         onChange: function onChange(next) {
           return _this4.setState({
             currentIndex: next
@@ -192,7 +193,8 @@ Gallery.propTypes = {
    * 是否为视频
    *
    */
-  isVideo: PropTypes.bool
+  isVideo: PropTypes.bool,
+  onClick: PropTypes.func
 };
 Gallery.defaultProps = {
   show: undefined,

@@ -19,6 +19,7 @@ interface SwiperProps {
     threshold: number;
     indicators?: boolean;
     onChange?: (ogIndex: number, currentIndex: number) => void;
+    onClick?: React.MouseEventHandler<HTMLElement>;
     children: SwiperChildren[];
 }
 interface SwiperState {

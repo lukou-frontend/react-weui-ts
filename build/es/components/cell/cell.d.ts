@@ -11,9 +11,10 @@ interface CellProps {
     link?: boolean;
     htmlFor?: string;
     href?: string;
-    component: IReactComponent;
+    component?: IReactComponent;
     children?: React.ReactNode;
-    onClick?: () => void;
+    onClick?: React.MouseEventHandler<HTMLElement>;
+    style?: React.CSSProperties;
 }
 declare const Cell: {
     (props: CellProps): JSX.Element;

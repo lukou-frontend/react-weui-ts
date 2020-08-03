@@ -11,6 +11,7 @@ interface GalleryProps {
     className?: any;
     children?: React.ReactElement[];
     isVideo: boolean;
+    onClick?: React.MouseEventHandler<HTMLElement>;
 }
 interface GalleryStates {
     currentIndex: number;
@@ -37,6 +38,7 @@ declare class Gallery extends React.Component<GalleryProps, GalleryStates> {
          *
          */
         isVideo: PropTypes.Requireable<boolean>;
+        onClick: PropTypes.Requireable<(...args: any[]) => any>;
     };
     static defaultProps: {
         show: boolean | undefined;

@@ -8,9 +8,11 @@ interface TextAreaProps {
     defaultValue?: string;
     maxLength?: number;
     showCounter?: boolean;
+    placeholder?: string;
     onChange?: (value: any) => void;
     className?: any;
     children?: React.ReactNode;
+    style?: React.CSSProperties;
 }
 interface TextAreaStates {
     textCounter: number;

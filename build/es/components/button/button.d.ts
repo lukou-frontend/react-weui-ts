@@ -12,6 +12,8 @@ interface ButtonProps {
     className?: string;
     href?: string;
     component?: IReactComponent;
+    style?: React.CSSProperties;
+    onClick?: React.MouseEventHandler<HTMLElement>;
 }
 export default class Button extends React.Component<ButtonProps> {
     static defaultProps: {

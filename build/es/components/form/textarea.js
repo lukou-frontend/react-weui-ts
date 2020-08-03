@@ -56,8 +56,9 @@ var TextArea = /*#__PURE__*/function (_React$Component) {
           children = _a.children,
           showCounter = _a.showCounter,
           maxLength = _a.maxLength,
+          placeholder = _a.placeholder,
           onChange = _a.onChange,
-          others = __rest(_a, ["className", "children", "showCounter", "maxLength", "onChange"]);
+          others = __rest(_a, ["className", "children", "showCounter", "maxLength", "placeholder", "onChange"]);
 
       var cls = classNames(_defineProperty({
         'weui-textarea': true
@@ -65,6 +66,7 @@ var TextArea = /*#__PURE__*/function (_React$Component) {
       return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("textarea", _extends({
         className: cls,
         maxLength: maxLength,
+        placeholder: placeholder,
         onChange: this.handleChange.bind(this)
       }, others), children), showCounter ? /*#__PURE__*/React.createElement("div", {
         className: "weui-textarea-counter"

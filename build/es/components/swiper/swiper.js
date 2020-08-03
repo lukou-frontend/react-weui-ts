@@ -178,7 +178,8 @@ var Swiper = /*#__PURE__*/function (_React$Component) {
           direction = _this$props.direction,
           _this$props$speed = _this$props.speed,
           speed = _this$props$speed === void 0 ? 300 : _this$props$speed,
-          indicators = _this$props.indicators;
+          indicators = _this$props.indicators,
+          onClick = _this$props.onClick;
       var clx = classNames('react-weui-swiper__container', className, {
         'react-weui-swiper__container-horizontal': direction === 'horizontal',
         'react-weui-swiper__container-vertical': direction === 'vertical'
@@ -200,6 +201,7 @@ var Swiper = /*#__PURE__*/function (_React$Component) {
         onTouchMove: this.handleTouchMove,
         onTouchEnd: this.handleTouchEnd,
         style: containerStyle,
+        onClick: onClick,
         ref: "container"
       }, /*#__PURE__*/React.createElement("div", {
         className: "react-weui-swiper__wrapper",
