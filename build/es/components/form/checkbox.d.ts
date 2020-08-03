@@ -8,6 +8,7 @@ interface CheckboxProps {
     className?: any;
     children?: React.ReactNode;
     checked?: boolean;
+    defaultChecked?: boolean;
     disabled?: boolean;
     name?: string;
     value?: string;

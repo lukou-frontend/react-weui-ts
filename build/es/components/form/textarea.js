@@ -59,8 +59,9 @@ var TextArea = /*#__PURE__*/function (_React$Component) {
           placeholder = _a.placeholder,
           rows = _a.rows,
           value = _a.value,
+          defaultValue = _a.defaultValue,
           onChange = _a.onChange,
-          others = __rest(_a, ["className", "children", "showCounter", "maxLength", "placeholder", "rows", "value", "onChange"]);
+          others = __rest(_a, ["className", "children", "showCounter", "maxLength", "placeholder", "rows", "value", "defaultValue", "onChange"]);
 
       var cls = classNames(_defineProperty({
         'weui-textarea': true
@@ -69,6 +70,7 @@ var TextArea = /*#__PURE__*/function (_React$Component) {
         className: cls,
         maxLength: maxLength,
         placeholder: placeholder,
+        defaultValue: defaultValue,
         value: value || '',
         onChange: this.handleChange.bind(this),
         rows: rows || 3
@@ -76,6 +78,7 @@ var TextArea = /*#__PURE__*/function (_React$Component) {
         className: cls,
         maxLength: maxLength,
         placeholder: placeholder,
+        defaultValue: defaultValue,
         onChange: this.handleChange.bind(this),
         rows: rows || 3
       }, others), children), showCounter ? /*#__PURE__*/React.createElement("div", {

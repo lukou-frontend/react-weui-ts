@@ -39,11 +39,12 @@ var Checkbox = /*#__PURE__*/function (_React$Component) {
       var _a = this.props,
           className = _a.className,
           checked = _a.checked,
+          defaultChecked = _a.defaultChecked,
           name = _a.name,
           value = _a.value,
           disabled = _a.disabled,
           onChange = _a.onChange,
-          others = __rest(_a, ["className", "checked", "name", "value", "disabled", "onChange"]);
+          others = __rest(_a, ["className", "checked", "defaultChecked", "name", "value", "disabled", "onChange"]);
 
       var cls = classNames(_defineProperty({
         'weui-check': true
@@ -57,6 +58,7 @@ var Checkbox = /*#__PURE__*/function (_React$Component) {
         disabled: disabled || false,
         name: name,
         value: value,
+        defaultChecked: defaultChecked,
         checked: checked || false,
         className: cls,
         type: "checkbox"
