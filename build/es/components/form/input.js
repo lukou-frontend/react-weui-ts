@@ -29,11 +29,16 @@ var Input = function Input(props) {
   var cls = classNames(_defineProperty({
     'weui-input': true
   }, className, className));
-  return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("input", _extends({
+  return /*#__PURE__*/React.createElement("div", null, value ? /*#__PURE__*/React.createElement("input", _extends({
     className: cls,
     maxLength: maxLength,
     placeholder: placeholder,
     value: value || '',
+    onChange: onChange
+  }, others)) : /*#__PURE__*/React.createElement("input", _extends({
+    className: cls,
+    maxLength: maxLength,
+    placeholder: placeholder,
     onChange: onChange
   }, others)), /*#__PURE__*/React.createElement("span", {
     className: "weui-icon-checked"

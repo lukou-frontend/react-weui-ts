@@ -65,11 +65,17 @@ var TextArea = /*#__PURE__*/function (_React$Component) {
       var cls = classNames(_defineProperty({
         'weui-textarea': true
       }, className, className));
-      return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("textarea", _extends({
+      return /*#__PURE__*/React.createElement("div", null, value ? /*#__PURE__*/React.createElement("textarea", _extends({
         className: cls,
         maxLength: maxLength,
         placeholder: placeholder,
         value: value || '',
+        onChange: this.handleChange.bind(this),
+        rows: rows || 3
+      }, others), children) : /*#__PURE__*/React.createElement("textarea", _extends({
+        className: cls,
+        maxLength: maxLength,
+        placeholder: placeholder,
         onChange: this.handleChange.bind(this),
         rows: rows || 3
       }, others), children), showCounter ? /*#__PURE__*/React.createElement("div", {

@@ -9,6 +9,7 @@ interface MediaBoxProps {
     type?: string;
     href?: string;
     children: React.ReactNode;
+    style?: React.CSSProperties;
 }
 export default class MediaBox extends React.Component<MediaBoxProps> {
     static propTypes: {

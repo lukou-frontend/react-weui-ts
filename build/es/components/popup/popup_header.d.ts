@@ -1,4 +1,4 @@
-/// <reference types="react" />
+import * as React from 'react';
 import PropTypes from 'prop-types';
 /**
  *  Sample Popup header for Popup
@@ -9,6 +9,7 @@ interface PopupHeaderProps {
     right: string;
     leftOnClick: () => void;
     rightOnClick: () => void;
+    style?: React.CSSProperties;
     className?: any;
 }
 declare const PopupHeader: {
