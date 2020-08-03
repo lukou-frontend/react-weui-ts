@@ -61,17 +61,32 @@ export default class TextArea extends React.Component<TextAreaProps, TextAreaSta
 
     return (
       <div>
-        <textarea
-          className={cls}
-          maxLength={maxLength}
-          placeholder={placeholder}
-          value={value || ''}
-          onChange={this.handleChange.bind(this)}
-          rows={rows || 3}
-          {...others}
-        >
-          {children}
-        </textarea>
+        {
+          value ? (
+            <textarea
+              className={cls}
+              maxLength={maxLength}
+              placeholder={placeholder}
+              value={value || ''}
+              onChange={this.handleChange.bind(this)}
+              rows={rows || 3}
+              {...others}
+            >
+              {children}
+            </textarea>
+          ) : (
+              <textarea
+                className={cls}
+                maxLength={maxLength}
+                placeholder={placeholder}
+                onChange={this.handleChange.bind(this)}
+                rows={rows || 3}
+                {...others}
+              >
+                {children}
+              </textarea>
+            )
+        }
         {
           showCounter ?
             <div className="weui-textarea-counter">

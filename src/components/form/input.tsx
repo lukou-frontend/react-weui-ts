@@ -25,14 +25,26 @@ const Input = (props: InputProps) => {
 
   return (
     <div>
-      <input
-        className={cls}
-        maxLength={maxLength}
-        placeholder={placeholder}
-        value={value || ''}
-        onChange={onChange}
-        {...others}
-      />
+      {
+        value ? (
+          <input
+            className={cls}
+            maxLength={maxLength}
+            placeholder={placeholder}
+            value={value || ''}
+            onChange={onChange}
+            {...others}
+          />
+        ) : (
+            <input
+              className={cls}
+              maxLength={maxLength}
+              placeholder={placeholder}
+              onChange={onChange}
+              {...others}
+            />
+          )
+      }
       <span className="weui-icon-checked"></span>
     </div>
   );
