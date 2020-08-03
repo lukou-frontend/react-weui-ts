@@ -9,10 +9,11 @@ interface CellProps {
     access?: boolean;
     className?: any;
     link?: boolean;
-    htmlFor: string;
-    href: string;
+    htmlFor?: string;
+    href?: string;
     component: IReactComponent;
     children?: React.ReactNode;
+    onClick?: () => void;
 }
 declare const Cell: {
     (props: CellProps): JSX.Element;

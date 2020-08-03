@@ -32,7 +32,8 @@ var Cell = function Cell(props) {
       link = props.link,
       component = props.component,
       htmlFor = props.htmlFor,
-      others = __rest(props, ["className", "children", "access", "href", "link", "component", "htmlFor"]);
+      onClick = props.onClick,
+      others = __rest(props, ["className", "children", "access", "href", "link", "component", "htmlFor", "onClick"]);
 
   var DefaultComponent = href ? 'a' : htmlFor ? 'label' : 'div';
   var CellComponent = component ? component : DefaultComponent;
@@ -44,7 +45,8 @@ var Cell = function Cell(props) {
   return /*#__PURE__*/React.createElement(CellComponent, _extends({
     className: cls,
     href: href,
-    htmlFor: htmlFor
+    htmlFor: htmlFor,
+    onClick: onClick
   }, others), children);
 };
 
