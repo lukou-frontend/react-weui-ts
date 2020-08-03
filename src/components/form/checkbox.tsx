@@ -10,6 +10,7 @@ interface CheckboxProps {
   className?: any,
   children?: React.ReactNode,
   checked?: boolean,
+  defaultChecked?: boolean,
   disabled?: boolean,
   name?: string,
   value?: string,
@@ -30,7 +31,7 @@ export default class Checkbox extends React.Component<CheckboxProps>{
     onChange: undefined as unknown as CheckboxProps['onChange'],
   };
   render() {
-    const { className, checked, name, value, disabled, onChange, ...others } = this.props;
+    const { className, checked, defaultChecked, name, value, disabled, onChange, ...others } = this.props;
     const cls = classNames({
       'weui-check': true,
       [className]: className
@@ -45,6 +46,7 @@ export default class Checkbox extends React.Component<CheckboxProps>{
           disabled={disabled || false}
           name={name}
           value={value}
+          defaultChecked={defaultChecked}
           checked={checked || false}
           className={cls}
           type="checkbox"

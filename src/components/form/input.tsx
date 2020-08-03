@@ -17,7 +17,7 @@ interface InputProps {
   onChange?: (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void,
 }
 const Input = (props: InputProps) => {
-  const { className, maxLength, value, placeholder, onChange, ...others } = props;
+  const { className, maxLength, value, defaultValue, placeholder, onChange, ...others } = props;
   const cls = classNames({
     'weui-input': true,
     [className]: className
@@ -32,6 +32,7 @@ const Input = (props: InputProps) => {
             maxLength={maxLength}
             placeholder={placeholder}
             value={value || ''}
+            defaultValue={defaultValue}
             onChange={onChange}
             {...others}
           />
@@ -40,6 +41,7 @@ const Input = (props: InputProps) => {
               className={cls}
               maxLength={maxLength}
               placeholder={placeholder}
+              defaultValue={defaultValue}
               onChange={onChange}
               {...others}
             />

@@ -53,7 +53,7 @@ export default class TextArea extends React.Component<TextAreaProps, TextAreaSta
   }
 
   render() {
-    const { className, children, showCounter, maxLength, placeholder, rows, value, onChange, ...others } = this.props;
+    const { className, children, showCounter, maxLength, placeholder, rows, value, defaultValue, onChange, ...others } = this.props;
     const cls = classNames({
       'weui-textarea': true,
       [className]: className
@@ -67,6 +67,7 @@ export default class TextArea extends React.Component<TextAreaProps, TextAreaSta
               className={cls}
               maxLength={maxLength}
               placeholder={placeholder}
+              defaultValue={defaultValue}
               value={value || ''}
               onChange={this.handleChange.bind(this)}
               rows={rows || 3}
@@ -79,6 +80,7 @@ export default class TextArea extends React.Component<TextAreaProps, TextAreaSta
                 className={cls}
                 maxLength={maxLength}
                 placeholder={placeholder}
+                defaultValue={defaultValue}
                 onChange={this.handleChange.bind(this)}
                 rows={rows || 3}
                 {...others}
