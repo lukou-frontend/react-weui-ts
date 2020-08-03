@@ -55,7 +55,7 @@ var Dialog = /*#__PURE__*/function (_React$Component) {
         });
         return /*#__PURE__*/React.createElement("a", _extends({
           key: idx,
-          href: "javascript:;"
+          href: "#"
         }, others, {
           className: className
         }), label);
