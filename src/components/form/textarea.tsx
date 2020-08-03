@@ -12,7 +12,8 @@ interface TextAreaProps {
   showCounter?: boolean,
   onChange?: (value: any) => void,
   className?: any,
-  children?: React.ReactNode
+  children?: React.ReactNode,
+  [key: string]: any
 }
 interface TextAreaStates {
   textCounter: number

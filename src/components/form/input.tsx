@@ -9,7 +9,8 @@ import classNames from '../../utils/classnames';
 interface InputProps {
   defaultValue?: string,
   className?: any,
-  children?: React.ReactNode
+  children?: React.ReactNode,
+  [key: string]: any
 }
 const Input = (props: InputProps) => {
     const { className, ...others } = props;

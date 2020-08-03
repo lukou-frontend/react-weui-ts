@@ -3,7 +3,12 @@ import { Icon } from '../../../build/es';
 import Page from '../../component/page';
 import './icons.less';
 
-const IconBox = (props) => (
+interface IconProps {
+  icon: any,
+  title: string,
+  desc: any
+}
+const IconBox = (props: IconProps) => (
   <div className="icon-box">
     {props.icon}
     <div className="icon-box__ctn">

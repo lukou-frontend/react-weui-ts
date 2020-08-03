@@ -13,7 +13,13 @@ const FailFooter = () => (
   </Footer>
 );
 
-const FailMsg = (props) => (
+type FileMsgProps = {
+  history: {
+    goBack: () => void
+  }
+}
+
+const FailMsg = (props: FileMsgProps) => (
   <Page className="msg_warn">
     <Msg
       type="warn"

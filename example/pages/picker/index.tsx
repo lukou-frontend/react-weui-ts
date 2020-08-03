@@ -1,12 +1,12 @@
 import * as React from 'react';
-import { Popup, Picker, CityPicker, Form, FormCell, CellBody, CellHeader, Label, Input } from '../../../build/es';
+import { Picker, CityPicker, Form, FormCell, CellBody, CellHeader, Label, Input } from '../../../build/es';
 import Page from '../../component/page';
 import cnCity from './cnCity';
 
 const PickerDemo = () => {
   const [picker_show, setPicker_show] = React.useState(false)
   const [picker_value, setPicker_value] = React.useState('')
-  const [picker_group, setPicker_group] = React.useState([
+  const [picker_group] = React.useState([
     {
       items: [
         {
@@ -31,11 +31,6 @@ const PickerDemo = () => {
   const [city_show, setCity_show] = React.useState(false)
   const [city_value, setCity_value] = React.useState('')
 
-  const hide = () => {
-    setCity_show(false)
-    setPicker_show(false)
-  }
-
   return (
     <Page className="picker" title="Picker" subTitle="多列选择器" >
       <Form>
@@ -46,7 +41,7 @@ const PickerDemo = () => {
           <CellBody>
             <Input type="text"
               value={city_value}
-              onClick={e => {
+              onClick={(e: Event) => {
                 e.preventDefault();
                 setCity_show(true)
               }}
@@ -59,8 +54,8 @@ const PickerDemo = () => {
 
       <CityPicker
         data={cnCity}
-        onCancel={setCity_show(false)}
-        onChange={text => { setCity_show(false), setCity_value(text) }}
+        onCancel={() => setCity_show(false)}
+        onChange={(text: string) => { setCity_show(false), setCity_value(text) }}
         show={city_show}
       />
 
@@ -74,7 +69,7 @@ const PickerDemo = () => {
           <CellBody>
             <Input
               type="text"
-              onClick={e => {
+              onClick={(e: Event) => {
                 e.preventDefault();
                 setPicker_show(true)
               }}
@@ -87,9 +82,9 @@ const PickerDemo = () => {
       </Form>
 
       <Picker
-        onChange={selected => {
+        onChange={(selected: any[]) => {
           let value = '';
-          selected.forEach((s, i) => {
+          selected.forEach((s: any, i: any) => {
             value = picker_group[i]['items'][s].label;
           });
           setPicker_show(false)
@@ -97,7 +92,7 @@ const PickerDemo = () => {
         }}
         groups={picker_group}
         show={picker_show}
-        onCancel={setPicker_show(false)}
+        onCancel={() => setPicker_show(false)}
       />
 
       <br />

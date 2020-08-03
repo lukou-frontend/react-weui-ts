@@ -13,7 +13,7 @@ import deprecationWarning from '../../utils/deprecationWarning';
 interface Thisbutton {
   label: string,
   type: 'primary'|'default'|'warn'|'vcode'
-  onClick: () => {}
+  onClick: () => void
 }
 interface MsgProps {
   type: string,
@@ -70,7 +70,6 @@ export default class Msg extends React.Component<MsgProps> {
   };
 
   _renderButtons() {
-
     return this.props.buttons.map((button, idx) => {
       const { type, label, ...others } = button;
       return (

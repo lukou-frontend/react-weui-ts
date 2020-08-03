@@ -12,8 +12,13 @@ const SuccessFooter = ()=>(
         </FooterText>
     </Footer>
 );
+type SuccessMsgProps = {
+  history: {
+    goBack: () => void
+  }
+}
 
-const SuccessMsg = (props) => {
+const SuccessMsg = (props: SuccessMsgProps) => {
     return (
     <Page className="msg_success">
         <Msg
@@ -23,11 +28,11 @@ const SuccessMsg = (props) => {
             buttons={[{
                 type: 'primary',
                 label: 'Ok',
-                onClick: props.history ? props.history.goBack : false
+                onClick: props.history.goBack
             }, {
                 type: 'default',
                 label: 'Cancel',
-                onClick: props.history ? props.history.goBack : false
+                onClick: props.history.goBack
             }]}
             footer={SuccessFooter}
         />

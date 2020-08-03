@@ -1,12 +1,12 @@
 import * as React from 'react';
 
 interface PageProps {
-  title?: string,
+  title?: React.ReactChild,
   subTitle?: string,
   spacing?: boolean,
   className?: any,
   children?: React.ReactNode,
-  footer?: any
+  footer?: React.ReactChild
 }
 export default class Page extends React.Component<PageProps> {
     render() {

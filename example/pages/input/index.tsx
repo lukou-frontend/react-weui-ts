@@ -114,7 +114,7 @@ const inputDemo = () => {
             <Label>Date</Label>
           </CellHeader>
           <CellBody>
-            <Input type="date" defaultValue="" onChange={e => console.log(e.target.value)} />
+            <Input type="date" defaultValue="" onChange={(e: React.ChangeEvent) => console.log(e)} />
           </CellBody>
         </FormCell>
         <FormCell>
@@ -198,15 +198,15 @@ const inputDemo = () => {
           <CellBody>
             <Select data={[
               {
-                value: 1,
+                value: '1',
                 label: 'China'
               },
               {
-                value: 2,
+                value: '2',
                 label: 'United States'
               },
               {
-                value: 3,
+                value: '3',
                 label: 'Germany'
               }
             ]} />
@@ -220,7 +220,7 @@ const inputDemo = () => {
       <ButtonArea>
         <Button
           //button to display toptips
-          onClick={e => {
+          onClick={() => {
             if (showToptips) return;
             setShowToptips(!showToptips);
             window.setTimeout(() => setShowToptips(!showToptips), 2000);

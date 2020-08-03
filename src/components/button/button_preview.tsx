@@ -5,8 +5,9 @@ interface PreviewButtonProps {
   className?: string,
   primary: boolean,
   children: React.ReactNode,
-  onClick?: () => void
-  [key: string]: any
+  onClick?: () => void,
+  [key: string]: any,
+  style?: React.CSSProperties
 }
 const PreviewButton = (props: PreviewButtonProps) => {
     const { className = '', primary, children, ...others } = props;

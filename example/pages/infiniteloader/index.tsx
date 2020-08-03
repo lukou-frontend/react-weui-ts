@@ -1,5 +1,4 @@
 import * as React from 'react';
-import ReactDOM from 'react-dom';
 import {
   InfiniteLoader,
   Cells,
@@ -15,7 +14,7 @@ const InfiniteDemo = () => {
   const [items, setItems] = React.useState([...Array(20).keys()])
   return (
     <InfiniteLoader
-      onLoadMore={(resolve, finish) => {
+      onLoadMore={(_resolve, finish) => {
         //mock request
         setTimeout(() => {
           if (items.length > 22) {
@@ -31,7 +30,7 @@ const InfiniteDemo = () => {
         <CellsTitle>List with 22 Max</CellsTitle>
         <Cells>
           {
-            this.state.items.map((item, i) => {
+            items.map((item: number, i: number) => {
               return (
                 <Cell href="javascript:;" key={i} access>
                   <CellBody>

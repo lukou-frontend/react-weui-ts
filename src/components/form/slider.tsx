@@ -10,13 +10,13 @@ import classNames from '../../utils/classnames';
 interface SliderProps {
   defaultValue?: number,
   disabled?: boolean,
-  max: number,
-  min: number,
+  max?: number,
+  min?: number,
   onChange?: (value: number) => void,
   showValue?: boolean,
   snapToValue?: boolean,
-  step: number,
-  value: number,
+  step?: number,
+  value?: number,
   className?: any,
   children?: React.ReactNode
 }

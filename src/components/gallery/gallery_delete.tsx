@@ -7,10 +7,11 @@ import Icon from '../icon';
  *
  */
 interface GalleryDeleteProps {
-  className?: any
+  className?: any,
+  onClick?: (e:Event, i: number) => void
 }
 const GalleryDelete = (props: GalleryDeleteProps) => {
-    const { className, ...others } = props;
+    const { className, onClick, ...others } = props;
     const cls = classNames({
         'weui-gallery__del': true,
         [className]: className

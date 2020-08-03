@@ -1,7 +1,7 @@
 /*
  * @Author: 刘佑祥
  * @LastEditors: 刘佑祥
- * @LastEditTime: 2020-07-31 16:48:09
+ * @LastEditTime: 2020-08-03 09:29:42
  */
 import * as React from 'react';
 import { Button, Popup, Grids, PopupHeader, Article } from '../../../build/es';
@@ -19,33 +19,28 @@ const PopupDemo = () => {
   const [bottom_show, setBottom_show] = React.useState(false)
   const [fullpage_show, setFullpage_show] = React.useState(false)
 
-  const hide = () => {
-    setBottom_show(false)
-    setFullpage_show(false)
-  }
-
   return (
     <Page className="popup" title="Popup" subTitle="pop pop pop it up" spacing>
 
-      <Button type="default" onClick={setBottom_show(true)}>Popup</Button>
+      <Button type="default" onClick={() => setBottom_show(true)}>Popup</Button>
       <Popup
         show={bottom_show}
-        onRequestClose={setBottom_show(false)}
+        onRequestClose={() => setBottom_show(false)}
       >
         <PopupHeader
           left="Cancel"
           right="Ok"
-          leftOnClick={setBottom_show(false)}
-          rightOnClick={setBottom_show(false)}
+          leftOnClick={() => setBottom_show(false)}
+          rightOnClick={() => setBottom_show(false)}
         />
         <Grids data={data} />
       </Popup>
 
       <br />
-      <Button type="default" onClick={setFullpage_show(true)}>Full pagePopup</Button>
+      <Button type="default" onClick={() => setFullpage_show(true)}>Full pagePopup</Button>
       <Popup
         show={fullpage_show}
-        onRequestClose={setFullpage_show(false)}
+        onRequestClose={() => setFullpage_show(false)}
       >
         <div style={{ height: '100vh', overflow: 'scroll' }}>
           <Article>
@@ -71,7 +66,7 @@ const PopupDemo = () => {
                                         proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
               </section>
             </section>
-            <Button onClick={setFullpage_show(true)}>Close Popup</Button>
+            <Button onClick={() => setFullpage_show(true)}>Close Popup</Button>
           </Article>
         </div>
       </Popup>

@@ -8,21 +8,21 @@ import Mask from '../mask';
  *
  */
 interface Action {
-  label: string,
+  label?: string,
   onClick?: (e: any) => void
 }
 interface PickerProps {
   actions: Array<Action>,
-  defaultSelect: Array<any>,
+  defaultSelect?: Array<any>,
   groups: Array<any>,
   lang: {
     leftBtn: string,
     rightBtn: string
   },
-  onCancel: (e: any) => void,
-  onChange: (selected: any, arg2: any) => void,
-  onGroupChange: (item: any, i: any, groupIndex: any, selected: number, arg4: any) => void,
-  show: boolean,
+  onCancel?: (e: any) => void,
+  onChange?: (selected: any, arg2: any) => void,
+  onGroupChange?: (item: any, i: any, groupIndex: any, selected: number, arg4: any) => void,
+  show?: boolean,
   className?: any
 }
 interface PickerStates {

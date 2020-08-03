@@ -9,19 +9,6 @@ const ProgressDemo = () => {
   const [value, setValue] = React.useState(0)
   const [timer, setTimer] = React.useState(null)
   const [isUploading, setIsUploading] = React.useState(false)
-
-  const start = () => {
-    if (isUploading) {
-      return;
-    }
-    setIsUploading(true)
-    this.upload();
-  }
-
-  const pause = () => {
-    setIsUploading(false)
-  }
-
   const upload = () => {
     if (!isUploading) {
       return;
@@ -29,6 +16,19 @@ const ProgressDemo = () => {
     setValue((value+1) % 100)
     setTimer(setTimeout(upload.bind(this), 20))
   }
+  const start = () => {
+    if (isUploading) {
+      return;
+    }
+    setIsUploading(true)
+    upload();
+  }
+
+  const pause = () => {
+    setIsUploading(false)
+  }
+
+  
 
   React.useEffect(() => {
     timer && clearInterval(timer);
