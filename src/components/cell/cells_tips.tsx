@@ -7,7 +7,8 @@ import classNames from '../../utils/classnames';
  */
 interface CellsTipsProps {
   className?: any,
-  children?: React.ReactNode
+  children?: React.ReactNode,
+  style?: React.CSSProperties,
 }
 const CellsTips = (props: CellsTipsProps) => {
     const { className, children, ...others } = props;

@@ -24,8 +24,13 @@ interface CellProps {
   href?: string,
   component?: IReactComponent,
   children?: React.ReactNode,
+<<<<<<< HEAD
   onClick?: () => void,
   [key: string]: any
+=======
+  onClick?: React.MouseEventHandler<HTMLElement>,
+  style?: React.CSSProperties,
+>>>>>>> cb04d572b814b626a65c9c2e3fe8db6eb459ebd6
 }
 const Cell = (props: CellProps) => {
   const { className, children, access, href, link, component, htmlFor, onClick, ...others } = props;

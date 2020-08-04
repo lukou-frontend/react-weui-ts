@@ -6,7 +6,7 @@
   "scripts": {
     "start": "webpack-dev-server",
     "start:doc": "webpack-dev-server --config webpack.config.doc.js --progress --colors --port 8080",
-    "compile": "node scripts/compile.js -p",
+    "compile": "npm run gulp",
     "compile:doc": "node scripts/compile-doc.js -p",
     "lint": "eslint 'src/**/*.js'",
     "pretest": "npm run lint",
@@ -28,6 +28,10 @@
     "url": "git+https://github.com/weui/react-weui.git"
   },
   "typings": "build/es/index.d.ts",
+  "files": [
+    "build",
+    "scripts"
+  ],
   "keywords": [
     "mobile",
     "ui",

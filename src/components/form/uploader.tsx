@@ -36,7 +36,8 @@ interface UploaderProps {
   currentVideo: (val: string) => void,
   showTitle: boolean,
   size: 'small' | 'normal' | 'large',
-  showAddInput: boolean
+  showAddInput: boolean,
+  style?: React.CSSProperties,
 }
 type customFile = {
   nativeFile: Blob,

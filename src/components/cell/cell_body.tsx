@@ -10,7 +10,11 @@ interface CellBodyProps {
   className?: any,
   children?: React.ReactNode,
   primary?: boolean,
+<<<<<<< HEAD
   style?: React.CSSProperties
+=======
+  style?: React.CSSProperties,
+>>>>>>> cb04d572b814b626a65c9c2e3fe8db6eb459ebd6
 }
 const CellBody = (props: CellBodyProps) => {
     const { className, children, primary, ...others } = props;

@@ -120,7 +120,7 @@ function compileTs(stream) {
     .pipe(ts(tsConfig))
     .js.pipe(
       through2.obj(function (file, encoding, next) {
-        console.log(file.path, file.base);
+        // console.log(file.path, file.base);
         file.path = file.path.replace(/\.[jt]sx$/, '.js').replace(/src\//, '');
         this.push(file);
         next();

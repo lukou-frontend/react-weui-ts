@@ -13,6 +13,7 @@ interface PopupProps {
   show: boolean,
   className?: any,
   children?: React.ReactNode,
+  style?: React.CSSProperties,
   onRequestClose?: () => void
 }
 class Popup extends React.Component<PopupProps> {

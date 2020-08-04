@@ -12,9 +12,15 @@ interface GalleryProps {
   show?: boolean,
   src?: string | Array<any>,
   className?: any,
+<<<<<<< HEAD
   children?: any,
   isVideo: boolean,
   onClick?: (e: any) => void
+=======
+  children?: React.ReactElement[],
+  isVideo: boolean,
+  onClick?: React.MouseEventHandler<HTMLElement>,
+>>>>>>> cb04d572b814b626a65c9c2e3fe8db6eb459ebd6
 }
 interface GalleryStates {
   currentIndex: number
@@ -44,6 +50,8 @@ class Gallery extends React.Component<GalleryProps, GalleryStates> {
      *
      */
     isVideo: PropTypes.bool,
+
+    onClick: PropTypes.func
   };
 
   static defaultProps = {
@@ -99,6 +107,7 @@ class Gallery extends React.Component<GalleryProps, GalleryStates> {
         <Swiper
           indicators={false}
           defaultIndex={this.props.defaultIndex}
+          onClick={this.props.onClick}
           onChange={(next: any) => this.setState({ currentIndex: next })}
         >
           {

@@ -21,85 +21,93 @@ interface DialogProps {
   children?: React.ReactNode
 }
 class Dialog extends React.Component<DialogProps> {
-    static propTypes = {
-        /**
-         * Object Arrays of buttons, `label` property is require
-         *
-         */
-        buttons: PropTypes.array,
-        /**
-         * to display the dialog
-         *
-         */
-        show: PropTypes.bool,
-        /**
-         * Title of dialog
-         *
-         */
-        title: PropTypes.string,
-        /**
-         * Specify display style: ios/android, default is ios when autoDetect not on
-         *
-         */
-        type: PropTypes.string,
+  static propTypes = {
+    /**
+     * Object Arrays of buttons, `label` property is require
+     *
+     */
+    buttons: PropTypes.array,
+    /**
+     * to display the dialog
+     *
+     */
+    show: PropTypes.bool,
+    /**
+     * Title of dialog
+     *
+     */
+    title: PropTypes.string,
+    /**
+     * Specify display style: ios/android, default is ios when autoDetect not on
+     *
+     */
+    type: PropTypes.string,
+  };
+
+  static defaultProps = {
+    buttons: [] as DialogProps['buttons'],
+    show: false as DialogProps['show'],
+    title: '' as DialogProps['title'],
+    type: '' as DialogProps['type'],
+  };
+
+  constructor(props: DialogProps) {
+    super(props);
+
+    this.state = {
+      isAndroid: ''
     };
+  }
 
-    static defaultProps = {
-        buttons: [] as DialogProps['buttons'],
-        show: false as DialogProps['show'],
-        title: '' as DialogProps['title'],
-        type: '' as DialogProps['type'],
-    };
+  renderButtons() {
+    return this.props.buttons.map((action, idx) => {
+      const { type, label, ...others } = action;
+      const className = classNames({
+        'weui-dialog__btn': true,
+        'weui-dialog__btn_default': type === 'default',
+        'weui-dialog__btn_primary': type === 'primary'
+      });
 
-    constructor(props: DialogProps){
-        super(props);
-
-        this.state = {
-            isAndroid: ''
-        };
-    }
-
-    renderButtons() {
-        return this.props.buttons.map((action, idx) => {
-            const {type, label, ...others} = action;
-            const className = classNames({
-                'weui-dialog__btn': true,
-                'weui-dialog__btn_default': type === 'default',
-                'weui-dialog__btn_primary': type === 'primary'
-            });
-
+<<<<<<< HEAD
             return (
                 <a key={idx} href="#!" {...others} className={className}>{label}</a>
             );
         });
     }
+=======
+      return (
+        <a key={idx} href="#" {...others} className={className}>{label}</a>
+      );
+    });
+  }
+>>>>>>> cb04d572b814b626a65c9c2e3fe8db6eb459ebd6
 
-    render() {
-        const {title, show, className, children, buttons, type, autoDectect, ...others} = this.props;
-        const styleType = type ? type : 'ios';
-        const cls = classNames('weui-dialog', {
-            'weui-skin_android': styleType === 'android',
-            [className]: className
-        });
+  render() {
+    const { title, show, className, children, buttons, type, autoDectect, ...others } = this.props;
+    const styleType = type ? type : 'ios';
+    const cls = classNames('weui-dialog', {
+      'weui-skin_android': styleType === 'android',
+      [className]: className
+    });
 
-        return (
-            <div style={{display: show ? 'block' : 'none'}}>
-                <Mask/>
-                <div className={cls} {...others}>
-                    { title ?
-                    <div className="weui-dialog__hd">
-                        <strong className="weui-dialog__title">{title}</strong>
-                    </div> : false }
-                    <div className="weui-dialog__bd">
-                        {children}
-                    </div>
-                    <div className="weui-dialog__ft">
-                        {this.renderButtons()}
-                    </div>
-                </div>
-            </div>
-        );
-    }
+    return (
+      <div style={{ display: show ? 'block' : 'none' }}>
+        <Mask />
+        <div className={cls} {...others}>
+          {title ?
+            <div className="weui-dialog__hd">
+              <strong className="weui-dialog__title">{title}</strong>
+            </div> : false}
+          <div className="weui-dialog__bd">
+            {children}
+          </div>
+          <div className="weui-dialog__ft">
+            {this.renderButtons()}
+          </div>
+        </div>
+      </div>
+    );
+  }
 }
 
 export default Dialog;

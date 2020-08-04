@@ -11,6 +11,7 @@ interface PopupHeaderProps {
   right: string,
   leftOnClick: () => void,
   rightOnClick: () => void,
+  style?: React.CSSProperties,
   className?: any
 }
 const PopupHeader = (props: PopupHeaderProps) => {
