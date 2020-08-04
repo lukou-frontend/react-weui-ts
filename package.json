@@ -28,6 +28,10 @@
     "url": "git+https://github.com/weui/react-weui.git"
   },
   "typings": "build/es/index.d.ts",
+  "files": [
+    "build",
+    "scripts"
+  ],
   "keywords": [
     "mobile",
     "ui",
