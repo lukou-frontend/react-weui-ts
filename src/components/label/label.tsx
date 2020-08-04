@@ -6,10 +6,11 @@ import classNames from '../../utils/classnames';
  *
  */
 interface LabelProps {
-  className?: any
+  className?: any,
+  children?: React.ReactNode
 }
 const Label = (props: LabelProps) => {
-    const { className, ...others } = props;
+    const { className, children, ...others } = props;
     const cls = classNames({
         'weui-label': true,
         [className]: className
@@ -17,7 +18,7 @@ const Label = (props: LabelProps) => {
 
     return (
         <div>
-            <label className={cls} {...others}/>
+            <label className={cls} {...others}>{children}</label>
         </div>
     );
 };

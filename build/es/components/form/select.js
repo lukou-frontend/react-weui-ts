@@ -54,12 +54,14 @@ var Select = /*#__PURE__*/function (_React$Component) {
           className = _a.className,
           data = _a.data,
           children = _a.children,
-          others = __rest(_a, ["className", "data", "children"]);
+          defaultValue = _a.defaultValue,
+          others = __rest(_a, ["className", "data", "children", "defaultValue"]);
 
       var cls = classNames(_defineProperty({
         'weui-select': true
       }, className, className));
       return /*#__PURE__*/React.createElement("select", _extends({
+        defaultValue: defaultValue,
         className: cls
       }, others), data.length > 0 ? this.renderData(data) : children);
     }

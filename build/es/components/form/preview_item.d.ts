@@ -6,9 +6,10 @@ import PropTypes from 'prop-types';
  */
 interface PreviewItemProps {
     className?: any;
-    label?: boolean;
-    value?: boolean;
+    label?: string;
+    value?: string;
     children?: React.ReactNode;
+    [key: string]: any;
 }
 declare const PreviewItem: {
     (props: PreviewItemProps): JSX.Element;
@@ -25,8 +26,8 @@ declare const PreviewItem: {
         value: PropTypes.Requireable<string>;
     };
     defaultProps: {
-        label: boolean | undefined;
-        value: boolean | undefined;
+        label: string | undefined;
+        value: string | undefined;
     };
 };
 export default PreviewItem;

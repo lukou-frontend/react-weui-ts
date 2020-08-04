@@ -37,7 +37,11 @@ var SearchBar = /*#__PURE__*/function (_React$Component) {
     key: "changeHandle",
     value: function changeHandle(e) {
       var text = e.target.value;
-      if (this.props.onChange) this.props.onChange(text, e);
+
+      if (this.props.onChange) {
+        this.props.onChange(text, e);
+      }
+
       this.setState({
         text: text
       });
@@ -55,7 +59,6 @@ var SearchBar = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "clearHandle",
     value: function clearHandle(e) {
-      e.preventDefault();
       e.stopPropagation();
       this.setState({
         text: '',
@@ -82,7 +85,6 @@ var SearchBar = /*#__PURE__*/function (_React$Component) {
     key: "submitHandle",
     value: function submitHandle(e) {
       if (this.props.onSubmit) {
-        e.preventDefault();
         e.stopPropagation();
         this.props.onSubmit(this.state.text, e);
       }
@@ -105,6 +107,9 @@ var SearchBar = /*#__PURE__*/function (_React$Component) {
         className: clz
       }, /*#__PURE__*/React.createElement("form", {
         className: "weui-search-bar__form",
+        style: {
+          touchAction: 'none'
+        },
         onSubmit: this.submitHandle.bind(this)
       }, /*#__PURE__*/React.createElement("div", {
         className: "weui-search-bar__box"
@@ -127,7 +132,10 @@ var SearchBar = /*#__PURE__*/function (_React$Component) {
         autoComplete: autocomplete
       }), /*#__PURE__*/React.createElement("a", {
         className: "weui-icon-clear",
-        onClick: this.clearHandle.bind(this)
+        onClick: this.clearHandle.bind(this),
+        style: {
+          touchAction: 'none'
+        }
       })), /*#__PURE__*/React.createElement("label", {
         className: "weui-search-bar__label",
         onClick: function onClick() {
@@ -203,7 +211,7 @@ SearchBar.propTypes = {
 };
 SearchBar.defaultProps = {
   placeholder: '搜索',
-  searchName: 'q',
+  searchName: 'a',
   onChange: undefined,
   onClear: undefined,
   onCancel: undefined,

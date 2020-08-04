@@ -5,8 +5,10 @@ import PropTypes from 'prop-types';
  *
  */
 declare type CityData = {
-    label: string;
+    label?: string;
     subitems?: any;
+    name?: string;
+    code?: string;
 };
 interface CityPickerProps {
     data: Array<CityData>;

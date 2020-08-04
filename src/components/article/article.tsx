@@ -1,7 +1,7 @@
 /*
  * @Author: 刘佑祥
  * @LastEditors: 刘佑祥
- * @LastEditTime: 2020-07-16 10:21:38
+ * @LastEditTime: 2020-08-03 14:45:05
  */ 
 import * as React from 'react';
 import classNames from '../../utils/classnames';
@@ -11,7 +11,8 @@ import classNames from '../../utils/classnames';
  *
  */
 interface ArticalProps {
-  className?: any
+  className?: any,
+  style?: React.CSSProperties
 }
 
 export default class Article extends React.Component<ArticalProps> {

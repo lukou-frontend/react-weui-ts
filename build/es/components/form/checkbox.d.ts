@@ -7,12 +7,12 @@ import PropTypes from 'prop-types';
 interface CheckboxProps {
     className?: any;
     children?: React.ReactNode;
-    checked?: boolean;
     defaultChecked?: boolean;
     disabled?: boolean;
     name?: string;
     value?: string;
     onChange: (checked: boolean, e: React.ChangeEvent) => void;
+    [key: string]: any;
 }
 export default class Checkbox extends React.Component<CheckboxProps> {
     constructor(props: CheckboxProps);

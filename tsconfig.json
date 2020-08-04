@@ -2,21 +2,20 @@
 {
   "compilerOptions": {
     "module": "es6",
-    "strictNullChecks": true,
     "moduleResolution": "node",
     "esModuleInterop": true,
-    "experimentalDecorators": true,
     "jsx": "react",
     "noUnusedParameters": true,
     "noUnusedLocals": true,
     "noImplicitAny": true,
     "target": "esnext",
     "lib": ["dom", "es7"],
-    "declaration": true,
-    "declarationDir": "build/es",
+    // "declaration": true,
+    // "declarationDir": "build/packages",
   },
   "include": [
-    "src/**/*"
+    // "src/**/*",
+    "example/**/*",
   ],
   "exclude": [
     "node_modules",

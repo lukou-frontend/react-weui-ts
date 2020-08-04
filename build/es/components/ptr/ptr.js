@@ -94,9 +94,7 @@ var PullToRefresh = /*#__PURE__*/function (_React$Component) {
       if (diffY < 0) return; //if it's not at top
 
       var $content = ReactDOM.findDOMNode(this.refs.content);
-      if ($content.scrollTop > 0) return; //prevent move background
-
-      e.preventDefault();
+      if ($content.scrollTop > 0) return;
       diffY = diffY - this.state.initScrollTop > 100 ? 100 : diffY - this.state.initScrollTop;
       this.setState({
         pullPercent: diffY
@@ -162,6 +160,9 @@ var PullToRefresh = /*#__PURE__*/function (_React$Component) {
         style: loaderStyle
       }, this.state.loading ? loaderLoadingIcon : loaderDefaultIcon(this.state.pullPercent)), /*#__PURE__*/React.createElement("div", {
         className: "react-weui-ptr__content",
+        style: {
+          touchAction: 'none'
+        },
         ref: "content",
         onTouchStart: this.handleTouchStart,
         onTouchMove: this.handleTouchMove,

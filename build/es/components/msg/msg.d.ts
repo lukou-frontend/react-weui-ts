@@ -7,6 +7,7 @@ import PropTypes from 'prop-types';
 interface Thisbutton {
     label: string;
     type: 'primary' | 'default' | 'warn' | 'vcode';
+    onClick?: () => void;
 }
 interface MsgProps {
     type: string;
@@ -17,6 +18,7 @@ interface MsgProps {
     extraText?: string;
     footer?: any;
     className?: any;
+    [key: string]: any;
 }
 export default class Msg extends React.Component<MsgProps> {
     static propTypes: {

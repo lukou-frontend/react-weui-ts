@@ -30,15 +30,6 @@ label.weui-agree > * {
   pointer-events: none;
 }
 
-.react-weui-infiniteloader {
-  overflow: scroll;
-}
-.react-weui-infiniteloader__content {
-  overflow: scroll;
-  -webkit-overflow-scrolling: touch;
-  z-index: 1;
-}
-
 .weui-page {
   position: absolute;
   top: 0;
@@ -298,6 +289,15 @@ label.weui-agree > * {
 }
 .weui-toptips_primary {
   background-color: #1AAD19;
+}
+
+.react-weui-infiniteloader {
+  overflow: scroll;
+}
+.react-weui-infiniteloader__content {
+  overflow: scroll;
+  -webkit-overflow-scrolling: touch;
+  z-index: 1;
 }
 
 

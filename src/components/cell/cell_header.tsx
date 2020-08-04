@@ -11,6 +11,7 @@ interface CellHeaderProps {
   primary?: boolean,
   children?: React.ReactNode,
   style?: React.CSSProperties,
+  [key: string]: any
 }
 const CellHeader = (props: CellHeaderProps) => {
     const { className, children, primary, ...others } = props;

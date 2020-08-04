@@ -9,6 +9,7 @@ interface CellHeaderProps {
     primary?: boolean;
     children?: React.ReactNode;
     style?: React.CSSProperties;
+    [key: string]: any;
 }
 declare const CellHeader: {
     (props: CellHeaderProps): JSX.Element;

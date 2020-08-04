@@ -19,14 +19,15 @@ import classNames from '../../utils/classnames';
 
 var Label = function Label(props) {
   var className = props.className,
-      others = __rest(props, ["className"]);
+      children = props.children,
+      others = __rest(props, ["className", "children"]);
 
   var cls = classNames(_defineProperty({
     'weui-label': true
   }, className, className));
   return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", _extends({
     className: cls
-  }, others)));
+  }, others), children));
 };
 
 export default Label;

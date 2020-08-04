@@ -6,8 +6,8 @@ import { ClassValue } from '../../utils/classnames';
  *
  */
 interface TabProps {
-    defaultIndex: number;
-    type: string;
+    defaultIndex?: number;
+    type?: 'normal' | 'tabbar' | 'navbar';
     onChange?: (index: number) => void;
     className?: ClassValue;
     children: React.ReactElement[];
@@ -32,7 +32,7 @@ export default class Tab extends React.Component<TabProps> {
         defaultIndex: number;
     };
     state: {
-        index: number;
+        index: number | undefined;
     };
     handleHeaderClick(idx: number): void;
     parseChild(childrenInput: React.ReactElement[]): {

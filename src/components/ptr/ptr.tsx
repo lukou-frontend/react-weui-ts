@@ -140,9 +140,6 @@ class PullToRefresh extends React.Component<PullToRefreshProps, PullToRefreshSta
         let $content = ReactDOM.findDOMNode(this.refs.content) as HTMLDivElement;
         if ($content.scrollTop > 0) return;
 
-        //prevent move background
-        e.preventDefault();
-
         diffY = ( diffY - this.state.initScrollTop ) > 100 ? 100 : ( diffY - this.state.initScrollTop );
 
         this.setState({
@@ -206,6 +203,7 @@ class PullToRefresh extends React.Component<PullToRefreshProps, PullToRefreshSta
                 </div>
                 <div
                     className="react-weui-ptr__content"
+                    style={{touchAction: 'none'}}
                     ref="content"
                     onTouchStart={this.handleTouchStart}
                     onTouchMove={this.handleTouchMove}

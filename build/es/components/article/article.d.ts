@@ -5,6 +5,7 @@ import * as React from 'react';
  */
 interface ArticalProps {
     className?: any;
+    style?: React.CSSProperties;
 }
 export default class Article extends React.Component<ArticalProps> {
     render(): JSX.Element;

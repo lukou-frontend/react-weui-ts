@@ -11,8 +11,8 @@ interface SearchBarState {
     clearing: boolean;
 }
 interface SearchBarProps {
-    defaultValue: string;
-    autocomplete: string;
+    defaultValue?: string;
+    autocomplete?: string;
     lang: {
         cancel: string;
     };
@@ -20,8 +20,8 @@ interface SearchBarProps {
     onChange?: (text: string, e?: React.ChangeEvent<HTMLInputElement> | React.TouchEvent) => void;
     onClear?: (e: React.TouchEvent) => void;
     onSubmit?: (text: string, e: React.SyntheticEvent<HTMLFormElement>) => void;
-    placeholder: string;
-    searchName: string;
+    placeholder?: string;
+    searchName?: string;
     className?: ClassValue;
 }
 declare class SearchBar extends React.Component<SearchBarProps, SearchBarState> {

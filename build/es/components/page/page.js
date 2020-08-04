@@ -90,7 +90,8 @@ var Page = /*#__PURE__*/function (_React$Component) {
         onScroll: function onScroll(e) {
           return _this3.handleContentScroll(e);
         },
-        onLoadMore: this.props.onLoadMore
+        onLoadMore: this.props.onLoadMore,
+        resolveStatus: true
       }, children);
       if (!ptr && infiniteLoader) return ContentWithInfiniteLoader;
       if (ptr && !infiniteLoader) return /*#__PURE__*/React.createElement(PullToRefresh, {
@@ -163,7 +164,7 @@ Page.defaultProps = {
       resolve();
     }, 1000);
   },
-  infiniteLoader: true,
+  infiniteLoader: false,
   onLoadMore: function onLoadMore(finish) {
     //mock request
     setTimeout(function () {

@@ -10,6 +10,7 @@ interface TabBarItemProps {
     icon?: any;
     label?: string;
     className?: ClassValue;
+    onClick?: () => void;
 }
 export default class TabBarItem extends React.Component<TabBarItemProps> {
     static propTypes: {

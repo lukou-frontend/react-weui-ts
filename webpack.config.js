@@ -40,11 +40,14 @@ const plugins = [
 // Common rules
 const rules = [
     {
-        test: /\.(js|jsx)$/,
+        test: /\.ts(x)?$/,
+        include: [path.resolve(__dirname, 'example')],
         exclude: /node_modules/,
-        use: ['babel-loader'],
-    },
-    {
+        use: [
+            'babel-loader',
+            'ts-loader'
+        ],
+    }, {
         test: /\.css/,
         loader: [
         'style-loader',
@@ -121,53 +124,49 @@ if (!isProduction) {
 }
 
 module.exports = {
-    devtool: isProduction ? false : 'source-map',
-    context: jsSourcePath,
-    entry: {
-        js: './app.js',
+  devtool: isProduction ? false : 'source-map',
+  context: jsSourcePath,
+  entry: {
+    js: './app.tsx',
+  },
+  output: {
+    path: buildPath,
+    publicPath: '',
+    filename: 'app-[hash].js',
+  },
+  module: {
+    rules,
+  },
+  resolve: {
+    extensions: ['.webpack-loader.js', '.web-loader.js', '.loader.js', '.tsx', '.ts', '.js', '.jsx', '.less',],
+    modules: [
+      path.resolve(__dirname, 'node_modules'),
+      jsSourcePath,
+    ],
+  },
+  plugins,
+  devServer: {
+    contentBase: isProduction ? buildPath : sourcePath,
+    historyApiFallback: true,
+    port: 3000,
+    compress: isProduction,
+    inline: !isProduction,
+    hot: !isProduction,
+    host: '0.0.0.0',
+    disableHostCheck: true,
+    stats: {
+      assets: true,
+      children: false,
+      chunks: false,
+      hash: false,
+      modules: false,
+      publicPath: false,
+      timings: true,
+      version: false,
+      warnings: true,
+      colors: {
+        green: '\u001b[32m',
+      },
     },
-    output: {
-        path: buildPath,
-        publicPath: '',
-        filename: 'app-[hash].js',
-    },
-    module: {
-        rules,
-    },
-    resolve: {
-        extensions: [
-            '.webpack-loader.js',
-            '.web-loader.js',
-            '.loader.js',
-            '.js',
-            '.jsx',
-            '.less',
-        ],
-        modules: [path.resolve(__dirname, 'node_modules'), jsSourcePath],
-    },
-    plugins,
-    devServer: {
-        contentBase: isProduction ? buildPath : sourcePath,
-        historyApiFallback: true,
-        port: 3000,
-        compress: isProduction,
-        inline: !isProduction,
-        hot: !isProduction,
-        host: '0.0.0.0',
-        disableHostCheck: true,
-        stats: {
-            assets: true,
-            children: false,
-            chunks: false,
-            hash: false,
-            modules: false,
-            publicPath: false,
-            timings: true,
-            version: false,
-            warnings: true,
-            colors: {
-                green: '\u001b[32m',
-            },
-        },
-    },
+  }
 };

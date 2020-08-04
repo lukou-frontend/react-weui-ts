@@ -41,7 +41,7 @@ var Progress = function Progress(props) {
       width: "".concat(pgWdith, "%")
     }
   })), showCancel ? /*#__PURE__*/React.createElement("a", {
-    href: "javascript:;",
+    href: "#!",
     className: "weui-progress__opr",
     onClick: function onClick(e) {
       if (_onClick) _onClick(e);

@@ -7,8 +7,10 @@ import Picker from './picker';
  *
  */
 declare type CityData = {
-  label: string,
-  subitems?: any
+  label?: string,
+  subitems?: any,
+  name?: string,
+  code?: string
 }
 interface CityPickerProps {
   data: Array<CityData>,

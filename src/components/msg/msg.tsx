@@ -12,7 +12,8 @@ import deprecationWarning from '../../utils/deprecationWarning';
  */
 interface Thisbutton {
   label: string,
-  type: 'primary'|'default'|'warn'|'vcode'
+  type: 'primary'|'default'|'warn'|'vcode',
+  onClick?: () => void
 }
 interface MsgProps {
   type: string,
@@ -22,7 +23,8 @@ interface MsgProps {
   extraHref?: string,
   extraText?: string,
   footer?: any,
-  className?: any
+  className?: any,
+  [key: string]: any
 }
 export default class Msg extends React.Component<MsgProps> {
   static propTypes = {

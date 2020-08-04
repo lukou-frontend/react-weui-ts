@@ -20,7 +20,8 @@ import Icon from '../icon';
 
 var GalleryDelete = function GalleryDelete(props) {
   var className = props.className,
-      others = __rest(props, ["className"]);
+      onClick = props.onClick,
+      others = __rest(props, ["className", "onClick"]);
 
   var cls = classNames(_defineProperty({
     'weui-gallery__del': true
@@ -28,6 +29,7 @@ var GalleryDelete = function GalleryDelete(props) {
   return /*#__PURE__*/React.createElement("a", _extends({
     className: cls
   }, others), /*#__PURE__*/React.createElement(Icon, {
+    onClick: onClick,
     value: "delete",
     className: "weui-icon_gallery-delete"
   }));

@@ -15,6 +15,7 @@ interface CellProps {
     children?: React.ReactNode;
     onClick?: React.MouseEventHandler<HTMLElement>;
     style?: React.CSSProperties;
+    [key: string]: any;
 }
 declare const Cell: {
     (props: CellProps): JSX.Element;

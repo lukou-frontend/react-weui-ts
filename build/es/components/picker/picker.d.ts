@@ -10,7 +10,7 @@ interface Action {
 }
 interface PickerProps {
     actions: Array<Action>;
-    defaultSelect: Array<any>;
+    defaultSelect?: Array<any>;
     groups: Array<any>;
     lang: {
         leftBtn: string;
@@ -18,7 +18,7 @@ interface PickerProps {
     };
     onCancel: (e: any) => void;
     onChange: (selected: any, arg2: any) => void;
-    onGroupChange: (item: any, i: any, groupIndex: any, selected: number, arg4: any) => void;
+    onGroupChange?: (item: any, i: any, groupIndex: any, selected: number, arg4: any) => void;
     show: boolean;
     className?: any;
 }

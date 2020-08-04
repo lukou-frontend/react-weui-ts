@@ -7,7 +7,8 @@ import classNames from '../../utils/classnames';
  */
 interface RadioProps {
   className?: any,
-  children?: React.ReactNode
+  children?: React.ReactNode,
+  [key: string]: any
 }
 const Radio = (props: RadioProps) => {
     const { className, ...others } = props;

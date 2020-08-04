@@ -9,7 +9,8 @@ import classNames, { ClassValue } from '../../utils/classnames';
 interface NavBarItemProps {
   active?: boolean,
   className?: ClassValue,
-  label: string
+  label: string,
+  onClick?: () => void
 }
 export default class NavBarItem extends React.Component<NavBarItemProps> {
     static propTypes = {

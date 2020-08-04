@@ -12,7 +12,8 @@ interface TabBarItemProps {
   active?: boolean,
   icon?: any,
   label?: string,
-  className?: ClassValue
+  className?: ClassValue,
+  onClick?: () => void
 }
 export default class TabBarItem extends React.Component<TabBarItemProps> {
     static propTypes = {

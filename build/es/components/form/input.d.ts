@@ -13,6 +13,7 @@ interface InputProps {
     value?: string;
     placeholder?: string;
     onChange?: (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+    [key: string]: any;
 }
 declare const Input: {
     (props: InputProps): JSX.Element;

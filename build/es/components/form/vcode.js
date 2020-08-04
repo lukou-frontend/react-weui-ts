@@ -19,12 +19,14 @@ import classNames from '../../utils/classnames';
 
 var VCode = function VCode(props) {
   var className = props.className,
-      others = __rest(props, ["className"]);
+      src = props.src,
+      others = __rest(props, ["className", "src"]);
 
   var cls = classNames(_defineProperty({
     'weui-vcode-img': true
   }, className, className));
   return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("img", _extends({
+    src: src,
     className: cls
   }, others)));
 };

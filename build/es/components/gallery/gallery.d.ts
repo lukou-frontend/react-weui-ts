@@ -9,9 +9,9 @@ interface GalleryProps {
     show?: boolean;
     src?: string | Array<any>;
     className?: any;
-    children?: React.ReactElement[];
+    children?: any;
     isVideo: boolean;
-    onClick?: React.MouseEventHandler<HTMLElement>;
+    onClick?: (e: any) => void;
 }
 interface GalleryStates {
     currentIndex: number;
@@ -50,7 +50,10 @@ declare class Gallery extends React.Component<GalleryProps, GalleryStates> {
     handleClick(func: (arg0: any, arg1: number) => void): (e: any) => void;
     renderImages(imgs: any[]): JSX.Element;
     renderVideos(videos: any[]): JSX.Element;
-    renderOprs(): false | React.ReactElement<any, string | ((props: any) => React.ReactElement<any, string | any | (new (props: any) => React.Component<any, any, any>)> | null) | (new (props: any) => React.Component<any, any, any>)>[] | React.DetailedReactHTMLElement<{
+    renderOprs(): false | React.DetailedReactHTMLElement<{
+        key: number;
+        onClick: (e: any) => void;
+    }, HTMLElement>[] | React.DetailedReactHTMLElement<{
         onClick: (e: any) => void;
     }, HTMLElement>;
     render(): false | JSX.Element;

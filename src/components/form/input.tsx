@@ -15,6 +15,7 @@ interface InputProps {
   value?: string,
   placeholder?: string,
   onChange?: (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void,
+  [key: string]: any
 }
 const Input = (props: InputProps) => {
   const { className, maxLength, value, defaultValue, placeholder, onChange, ...others } = props;

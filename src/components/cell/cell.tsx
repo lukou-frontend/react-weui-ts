@@ -1,7 +1,7 @@
 /*
  * @Author: 刘佑祥
  * @LastEditors: 刘佑祥
- * @LastEditTime: 2020-07-16 17:10:05
+ * @LastEditTime: 2020-08-04 15:41:16
  */
 import * as React from 'react';
 import PropTypes from 'prop-types'
@@ -26,6 +26,7 @@ interface CellProps {
   children?: React.ReactNode,
   onClick?: React.MouseEventHandler<HTMLElement>,
   style?: React.CSSProperties,
+  [key: string]: any
 }
 const Cell = (props: CellProps) => {
   const { className, children, access, href, link, component, htmlFor, onClick, ...others } = props;

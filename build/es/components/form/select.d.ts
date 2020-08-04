@@ -5,13 +5,14 @@ import PropTypes from 'prop-types';
  *
  */
 interface Option {
-    value: string;
+    value: string | number;
     label: string;
 }
 interface SelectProps {
     data: Array<Option>;
     className?: any;
     children?: React.ReactNode;
+    defaultValue?: string | number;
 }
 export default class Select extends React.Component<SelectProps> {
     static propTypes: {

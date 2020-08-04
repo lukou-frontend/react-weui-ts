@@ -7,13 +7,14 @@ import classNames from '../../utils/classnames';
  *
  */
 interface Option {
-  value: string,
+  value: string | number,
   label: string
 }
 interface SelectProps {
   data: Array<Option>,
   className?: any,
-  children?: React.ReactNode
+  children?: React.ReactNode,
+  defaultValue?: string | number
 }
 export default class Select extends React.Component<SelectProps> {
   static propTypes = {
@@ -42,14 +43,14 @@ export default class Select extends React.Component<SelectProps> {
   }
 
   render() {
-    const { className, data, children, ...others } = this.props;
+    const { className, data, children, defaultValue, ...others } = this.props;
     const cls = classNames({
       'weui-select': true,
       [className]: className
     });
 
     return (
-      <select className={cls} {...others}>
+    <select defaultValue={defaultValue} className={cls} {...others}>
         {data.length > 0 ? this.renderData(data) : children}
       </select>
     );
