@@ -6,7 +6,7 @@
   "scripts": {
     "start": "webpack-dev-server",
     "start:doc": "webpack-dev-server --config webpack.config.doc.js --progress --colors --port 8080",
-    "compile": "node scripts/compile.js -p",
+    "compile": "npm run gulp",
     "compile:doc": "node scripts/compile-doc.js -p",
     "lint": "eslint 'src/**/*.js'",
     "pretest": "npm run lint",
