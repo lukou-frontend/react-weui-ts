@@ -68,19 +68,11 @@ class Dialog extends React.Component<DialogProps> {
         'weui-dialog__btn_primary': type === 'primary'
       });
 
-<<<<<<< HEAD
-            return (
-                <a key={idx} href="#!" {...others} className={className}>{label}</a>
-            );
-        });
-    }
-=======
       return (
         <a key={idx} href="#" {...others} className={className}>{label}</a>
       );
     });
   }
->>>>>>> cb04d572b814b626a65c9c2e3fe8db6eb459ebd6
 
   render() {
     const { title, show, className, children, buttons, type, autoDectect, ...others } = this.props;

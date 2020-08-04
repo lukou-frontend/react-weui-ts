@@ -10,15 +10,12 @@ interface InputProps {
   defaultValue?: string,
   className?: any,
   children?: React.ReactNode,
-<<<<<<< HEAD
-  [key: string]: any
-=======
   maxLength?: number,
   style?: React.CSSProperties,
   value?: string,
   placeholder?: string,
   onChange?: (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void,
->>>>>>> cb04d572b814b626a65c9c2e3fe8db6eb459ebd6
+  [key: string]: any
 }
 const Input = (props: InputProps) => {
   const { className, maxLength, value, defaultValue, placeholder, onChange, ...others } = props;

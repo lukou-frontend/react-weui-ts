@@ -12,15 +12,9 @@ interface GalleryProps {
   show?: boolean,
   src?: string | Array<any>,
   className?: any,
-<<<<<<< HEAD
   children?: any,
   isVideo: boolean,
   onClick?: (e: any) => void
-=======
-  children?: React.ReactElement[],
-  isVideo: boolean,
-  onClick?: React.MouseEventHandler<HTMLElement>,
->>>>>>> cb04d572b814b626a65c9c2e3fe8db6eb459ebd6
 }
 interface GalleryStates {
   currentIndex: number
