@@ -42,8 +42,7 @@ var Slider = /*#__PURE__*/function (_React$Component) {
       ogX: 0,
       touchId: undefined,
       percent: _this.props.value ? _this.props.value / (_this.props.max - _this.props.min) * 100 : _this.props.defaultValue ? _this.props.defaultValue / (_this.props.max - _this.props.min) * 100 : 0,
-      animating: false,
-      ogPercent: _this.state.percent
+      animating: false
     };
     _this.handleTouchStart = _this.handleTouchStart.bind(_assertThisInitialized(_this));
     _this.handleTouchMove = _this.handleTouchMove.bind(_assertThisInitialized(_this));
@@ -137,6 +136,7 @@ var Slider = /*#__PURE__*/function (_React$Component) {
 
       if (!this.state.touching || this.props.disabled) return;
       if (e.targetTouches[0].identifier !== this.state.touchId) return;
+      if (typeof this.state.ogPercent === 'undefined') return;
       var pageX = e.targetTouches[0].pageX;
       var diffX = pageX - this.state.ogX;
       var percent = diffX / this.state.totalWidth * 100 + this.state.ogPercent;

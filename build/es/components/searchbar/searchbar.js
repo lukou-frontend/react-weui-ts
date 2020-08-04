@@ -37,7 +37,11 @@ var SearchBar = /*#__PURE__*/function (_React$Component) {
     key: "changeHandle",
     value: function changeHandle(e) {
       var text = e.target.value;
-      if (this.props.onChange) this.props.onChange(text, e);
+
+      if (this.props.onChange) {
+        this.props.onChange(text, e);
+      }
+
       this.setState({
         text: text
       });

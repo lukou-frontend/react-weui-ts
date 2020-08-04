@@ -1,8 +1,6 @@
 import * as React from 'react';
 import Page from '../../component/page';
-const SampleData = [
-  "Aaren", "Aarika", "Abagael", "Abagail", "Abbe", "Abbey", "Abbi"
-]
+import SampleData from './nameDB'
 
 import {
   //main component
@@ -35,7 +33,8 @@ const SearchBarDemo = () => {
   const [searchText, setSearchText] = React.useState('a')
   const [results, setResults] = React.useState([])
 
-  const handleChange = (text: string) => {
+  const handleChange = (text: string, e: any) => {
+    console.log(text,e)
     let keywords = [text];
     let results = SampleData.filter(/./.test.bind(new RegExp(keywords.join('|'), 'i')));
 
@@ -47,7 +46,7 @@ const SearchBarDemo = () => {
   return (
     <Page className="searchbar" title="SearchBar" subTitle="搜索栏">
       <SearchBar
-        onChange={() => handleChange.bind(this)}
+        onChange={(text: string, e: any) => handleChange(text, e)}
         defaultValue={searchText}
         placeholder="Female Name Search"
         lang={{
@@ -64,7 +63,7 @@ const SearchBarDemo = () => {
             results.length > 0 ?
               results.map((item: string, i: number) => {
                 return (
-                  <MediaBox key={i} type="appmsg" href="javascript:void(0);">
+                  <MediaBox key={i} type="appmsg" href="#!">
                     <MediaBoxHeader>{appMsgIcon}</MediaBoxHeader>
                     <MediaBoxBody>
                       <MediaBoxTitle>{item}</MediaBoxTitle>
@@ -78,7 +77,7 @@ const SearchBarDemo = () => {
               : <MediaBox>Can't find any！</MediaBox>
           }
         </PanelBody>
-        <PanelFooter href="javascript:void(0);">
+        <PanelFooter href="#!">
           <CellMore />
         </PanelFooter>
       </Panel>

@@ -11,14 +11,14 @@ import {
 const NavBarDemo = () => {
   const [tab, setTab] = React.useState(0)
   return (
-    <Tab type="tabbar">
+    <Tab>
       <NavBar>
-        <NavBarItem label='Nav1' active={tab == 0} onClick={() => setTab(0)}></NavBarItem>
-        <NavBarItem label='Nav2' active={tab == 1} onClick={() => setTab(1)}></NavBarItem>
-        <NavBarItem label='Nav3' active={tab == 2} onClick={() => setTab(2)}></NavBarItem>
+        <NavBarItem label='Nav1' active={tab === 0} onClick={() => setTab(0)}></NavBarItem>
+        <NavBarItem label='Nav2' active={tab === 1} onClick={() => setTab(1)}></NavBarItem>
+        <NavBarItem label='Nav3' active={tab === 2} onClick={() => setTab(2)}></NavBarItem>
       </NavBar>
       <TabBody>
-        <Article style={{ display: tab == 0 ? null : 'none' }}>
+        <Article style={{ display: tab === 0 ? null : 'none' }}>
           <h1>Page 1</h1>
           <section>
             <h2 className="title">Heading</h2>
@@ -31,7 +31,7 @@ const NavBarDemo = () => {
             </section>
           </section>
         </Article>
-        <Article style={{ display: tab == 1 ? null : 'none' }}>
+        <Article style={{ display: tab === 1 ? null : 'none' }}>
           <h1>Page 2</h1>
           <section>
             <h2 className="title">Heading</h2>
@@ -51,7 +51,7 @@ const NavBarDemo = () => {
             </section>
           </section>
         </Article>
-        <Article style={{ display: tab == 2 ? null : 'none' }}>
+        <Article style={{ display: tab === 2 ? null : 'none' }}>
           <h1>Page 3</h1>
           <section>
             <h2 className="title">Heading</h2>

@@ -16,15 +16,15 @@ const FooterDemo = () => (
         <br/><br/>
         <Footer>
             <FooterLinks>
-                <FooterLink href="javascript:void(0);">Link</FooterLink>
+                <FooterLink href="#!">Link</FooterLink>
             </FooterLinks>
             <FooterText>Copyright &copy; 2008-2016 weui.io</FooterText>
         </Footer>
         <br/><br/>
         <Footer>
             <FooterLinks>
-                <FooterLink href="javascript:void(0);">Link</FooterLink>
-                <FooterLink href="javascript:void(0);">Link</FooterLink>
+                <FooterLink href="#!">Link</FooterLink>
+                <FooterLink href="#!">Link</FooterLink>
             </FooterLinks>
             <FooterText>Copyright &copy; 2008-2016 weui.io</FooterText>
         </Footer>

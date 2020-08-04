@@ -18,10 +18,10 @@ import IconCell from "../home/images/icon_nav_cell.png";
 const TabBarDemo = () => {
   const [tab, setTab] = React.useState(0)
   return (
-    <Tab type='tabbar'>
+    <Tab>
       <TabBody>
         <Article
-          style={{ display: tab === 0 ? null : "none" }}
+          style={{ display: tab == 0 ? null : "none" }}
         >
           <h1>Page 1</h1>
           <section>
@@ -105,7 +105,7 @@ const TabBarDemo = () => {
           label="Tab1"
         />
         <TabBarItem
-          active={tab === 1}
+          active={tab == 1}
           onClick={() => setTab(1)}
         >
           <TabBarIcon>
@@ -114,13 +114,13 @@ const TabBarDemo = () => {
           <TabBarLabel>Tab2</TabBarLabel>
         </TabBarItem>
         <TabBarItem
-          active={tab === 2}
+          active={tab == 2}
           onClick={() => setTab(2)}
           icon={<img src={IconArticle} />}
           label="Tab3"
         />
         <TabBarItem
-          active={tab === 3}
+          active={tab == 3}
           onClick={() => setTab(3)}
           icon={<img src={IconCell} />}
           label="Tab4"

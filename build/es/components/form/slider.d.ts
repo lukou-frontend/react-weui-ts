@@ -26,7 +26,7 @@ interface SliderStates {
     touchId: any;
     percent: number;
     animating: boolean;
-    ogPercent: number;
+    ogPercent?: number;
 }
 declare class Slider extends React.Component<SliderProps, SliderStates> {
     static propTypes: {

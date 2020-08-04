@@ -99,7 +99,7 @@ class SearchBar extends React.Component<SearchBarProps, SearchBarState> {
 
   changeHandle(e: React.ChangeEvent<HTMLInputElement>) {
     let text = e.target.value;
-    if (this.props.onChange) this.props.onChange(text, e);
+    if (this.props.onChange) {this.props.onChange(text, e);}
     this.setState({ text });
   }
 

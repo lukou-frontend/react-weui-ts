@@ -134,6 +134,7 @@ var Tab = /*#__PURE__*/function (_React$Component) {
           className: cls
         }, divProps), children);
       } else {
+        if (!type) type = 'normal';
         return this.renderBar(type, children, cls);
       }
     }

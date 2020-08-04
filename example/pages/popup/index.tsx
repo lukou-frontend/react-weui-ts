@@ -1,7 +1,7 @@
 /*
  * @Author: 刘佑祥
  * @LastEditors: 刘佑祥
- * @LastEditTime: 2020-08-03 09:29:42
+ * @LastEditTime: 2020-08-03 18:30:01
  */
 import * as React from 'react';
 import { Button, Popup, Grids, PopupHeader, Article } from '../../../build/es';
@@ -66,7 +66,7 @@ const PopupDemo = () => {
                                         proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
               </section>
             </section>
-            <Button onClick={() => setFullpage_show(true)}>Close Popup</Button>
+            <Button onClick={() => setFullpage_show(false)}>Close Popup</Button>
           </Article>
         </div>
       </Popup>

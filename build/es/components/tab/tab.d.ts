@@ -7,7 +7,7 @@ import { ClassValue } from '../../utils/classnames';
  */
 interface TabProps {
     defaultIndex?: number;
-    type: string;
+    type?: 'normal' | 'tabbar' | 'navbar';
     onChange?: (index: number) => void;
     className?: ClassValue;
     children: React.ReactElement[];

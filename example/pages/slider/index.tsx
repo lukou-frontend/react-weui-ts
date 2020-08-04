@@ -8,16 +8,16 @@ const SliderDemo = () => {
     <Page className="slider" title="Slider" subTitle="滑块" spacing>
       <CellsTitle>Basic Example</CellsTitle>
       <Slider
+        value={1}
         min={1}
         max={5}
         step={1}
-        value={0}
         onChange={(value: number) => console.log(value)}
       />
 
       <CellsTitle>Disabled Example</CellsTitle>
       <Slider
-      value={0}
+        value={1}
         disabled
         onChange={(value: number) => console.log(value)}
       />
@@ -53,7 +53,7 @@ const SliderDemo = () => {
 
       <CellsTitle>No snap & No show value</CellsTitle>
       <Slider
-        value={0}
+        value={1}
         snapToValue={false}
         showValue={false}
       />

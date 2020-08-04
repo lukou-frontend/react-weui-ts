@@ -29,7 +29,7 @@ interface SliderStates {
   touchId: any,
   percent: number,
   animating: boolean,
-  ogPercent: number
+  ogPercent?: number
 }
 class Slider extends React.Component<SliderProps, SliderStates> {
 
@@ -98,14 +98,12 @@ class Slider extends React.Component<SliderProps, SliderStates> {
       value: this.props.value ? this.props.value : this.props.defaultValue ? this.props.defaultValue : 0,
       controlled: typeof this.props.value !== 'undefined',
       totalWidth: 0,
-
       touching: false,
       ogX: 0,
       touchId: undefined,
       percent: this.props.value ? this.props.value / (this.props.max - this.props.min) * 100 :
         this.props.defaultValue ? this.props.defaultValue / (this.props.max - this.props.min) * 100 : 0,
-      animating: false,
-      ogPercent: this.state.percent
+      animating: false
     };
 
     this.handleTouchStart = this.handleTouchStart.bind(this);
@@ -176,7 +174,7 @@ class Slider extends React.Component<SliderProps, SliderStates> {
   handleTouchMove(e: React.TouchEvent<HTMLDivElement>) {
     if (!this.state.touching || this.props.disabled) return;
     if (e.targetTouches[0].identifier !== this.state.touchId) return;
-
+    if(typeof(this.state.ogPercent)==='undefined') return
     const pageX = e.targetTouches[0].pageX;
     const diffX = pageX - this.state.ogX;
     let percent = diffX / this.state.totalWidth * 100 + this.state.ogPercent;

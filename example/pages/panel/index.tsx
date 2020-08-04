@@ -51,7 +51,7 @@ export default class PanelDemo extends React.Component {
                         Media with image
                     </PanelHeader>
                     <PanelBody>
-                        <MediaBox type="appmsg" href="javascript:void(0);">
+                        <MediaBox type="appmsg" href="#!">
                             <MediaBoxHeader>{appMsgIcon}</MediaBoxHeader>
                             <MediaBoxBody>
                                 <MediaBoxTitle>Media heading</MediaBoxTitle>
@@ -60,7 +60,7 @@ export default class PanelDemo extends React.Component {
                                 </MediaBoxDescription>
                             </MediaBoxBody>
                         </MediaBox>
-                        <MediaBox type="appmsg" href="javascript:void(0);">
+                        <MediaBox type="appmsg" href="#!">
                             <MediaBoxHeader>{appMsgIcon}</MediaBoxHeader>
                             <MediaBoxBody>
                                 <MediaBoxTitle>Media heading</MediaBoxTitle>
@@ -70,7 +70,7 @@ export default class PanelDemo extends React.Component {
                             </MediaBoxBody>
                         </MediaBox>
                     </PanelBody>
-                    <PanelFooter href="javascript:void(0);">
+                    <PanelFooter href="#!">
                         <CellMore />
                     </PanelFooter>
                 </Panel>
@@ -93,7 +93,7 @@ export default class PanelDemo extends React.Component {
                             </MediaBoxDescription>
                         </MediaBox>
                     </PanelBody>
-                    <PanelFooter href="javascript:void(0);">
+                    <PanelFooter href="#!">
                         <CellMore />
                     </PanelFooter>
                 </Panel>
