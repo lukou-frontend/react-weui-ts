@@ -252,7 +252,7 @@ class PickerGroup extends React.Component<PickerGroupProps, PickerGroupStates> {
                             item: { [x: string]: any; disabled: any },
                             j: string | number | undefined,
                         ) => {
-                            const label = item[this.props.mapKeys.label];
+                            const label = item[this.props.mapKeys!.label];
                             const itemCls = classNames('weui-picker__item', {
                                 'weui-picker__item_disabled': item.disabled,
                             });

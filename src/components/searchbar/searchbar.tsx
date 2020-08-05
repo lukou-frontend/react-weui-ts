@@ -200,7 +200,7 @@ class SearchBar extends React.Component<SearchBarProps, SearchBarState> {
                         onClick={() => {
                             const { searchInput } = this;
                             if (searchInput.current) {
-                                searchInput.current.focus();
+                                searchInput.current!.focus();
                             }
                         }}
                         style={{

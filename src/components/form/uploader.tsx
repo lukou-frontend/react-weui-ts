@@ -367,7 +367,7 @@ export default class Uploader extends React.Component<UploaderProps> {
                 }
                 this.handleFile(file, (_file: File, _e: RenderOnloadEvent) => {
                     if (this.props.onChange) this.props.onChange(_file, _e);
-                    this.uploaderRef.current.value = '';
+                    this.uploaderRef.current!.value = '';
                 });
             }
         }

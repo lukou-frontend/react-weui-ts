@@ -97,8 +97,8 @@ class Swiper extends React.Component<SwiperProps, SwiperState> {
     };
 
     static defaultProps: DefaultProps = {
-        height: null,
-        width: null,
+        height: undefined,
+        width: undefined,
         defaultIndex: 0,
         direction: 'horizontal',
         threshold: 50,
@@ -131,7 +131,7 @@ class Swiper extends React.Component<SwiperProps, SwiperState> {
     }
 
     componentDidMount() {
-        const $container = this.containerRef.current;
+        const $container = this.containerRef.current!;
 
         this.setState({
             wrapperWidth:

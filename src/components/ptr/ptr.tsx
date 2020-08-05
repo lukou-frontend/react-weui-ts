@@ -126,7 +126,7 @@ class PullToRefresh extends React.Component<
         if (this.state.touching || this.state.loading || this.props.disable)
             return;
 
-        const $content = this.contentRef.current;
+        const $content = this.contentRef.current!;
         this.setState((prevState) => ({
             touching: true,
             touchId: e.targetTouches[0].identifier,
@@ -152,7 +152,7 @@ class PullToRefresh extends React.Component<
         if (diffY < 0) return;
 
         //if it's not at top
-        const $content = this.contentRef.current;
+        const $content = this.contentRef.current!;
         if ($content.scrollTop > 0) return;
 
         diffY =

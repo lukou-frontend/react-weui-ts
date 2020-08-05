@@ -70,7 +70,11 @@ export default class Tab extends React.Component<TabProps> {
         return { ChildHeaders, ChildContents };
     }
 
-    renderBar(type: string, children: React.ReactElement[], cls: string) {
+    renderBar(
+        type: TabProps['type'],
+        children: React.ReactElement[],
+        cls: string,
+    ) {
         const { ChildHeaders, ChildContents } = this.parseChild(children);
 
         const newHeaders = ChildHeaders.map((item, idx) => {

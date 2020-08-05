@@ -184,7 +184,7 @@ class Slider extends React.Component<SliderProps, SliderStates> {
         this.setState((prevState) => ({
             touching: true,
             touchId: e.targetTouches[0].identifier,
-            totalWidth: this.BarRef.current.clientWidth,
+            totalWidth: this.BarRef.current!.clientWidth,
             ogX: e.targetTouches[0].pageX,
             ogPercent: prevState.percent,
         }));
@@ -199,7 +199,7 @@ class Slider extends React.Component<SliderProps, SliderStates> {
         this.setState(
             (prevState) => {
                 let percent =
-                    (diffX / prevState.totalWidth) * 100 + prevState.ogPercent;
+                    (diffX / prevState.totalWidth) * 100 + prevState.ogPercent!;
                 percent = percent < 0 ? 0 : percent > 100 ? 100 : percent;
                 return {
                     percent,
