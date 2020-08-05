@@ -7,20 +7,24 @@ import classNames from '../../utils/classnames';
  *
  */
 interface PopupHeaderProps {
-  left: string,
-  right: string,
-  leftOnClick: () => void,
-  rightOnClick: () => void,
-  style?: React.CSSProperties,
-  className?: any
+    left: string;
+    right: string;
+    leftOnClick: () => void;
+    rightOnClick: () => void;
+    style?: React.CSSProperties;
+    className?: any;
 }
 const PopupHeader = (props: PopupHeaderProps) => {
-    const { left, right, leftOnClick, rightOnClick, className } = props;
+    const { left, right, leftOnClick, rightOnClick, className, style } = props;
     const cls = classNames('weui-popup__hd', className);
     return (
-        <div className={cls}>
-            <a className="weui-popup__action" onClick={leftOnClick}>{left}</a>
-            <a className="weui-popup__action" onClick={rightOnClick}>{right}</a>
+        <div className={cls} style={style}>
+            <a className="weui-popup__action" onClick={leftOnClick}>
+                {left}
+            </a>
+            <a className="weui-popup__action" onClick={rightOnClick}>
+                {right}
+            </a>
         </div>
     );
 };
@@ -45,12 +49,12 @@ PopupHeader.propTypes = {
      * right button onclick
      *
      */
-    rightOnClick: PropTypes.func
+    rightOnClick: PropTypes.func,
 };
 
 PopupHeader.defaultProps = {
     left: '',
-    right: ''
+    right: '',
 };
 
 export default PopupHeader;

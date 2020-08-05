@@ -7,37 +7,39 @@ import classNames from '../../utils/classnames';
  *
  */
 interface MediaBoxProps {
-  className?: any,
-  type?: string,
-  href?: string,
-  children: React.ReactNode,
-  style?: React.CSSProperties,
+    className?: any;
+    type?: string;
+    href?: string;
+    children: React.ReactNode;
+    style?: React.CSSProperties;
 }
-export default class MediaBox extends React.Component<MediaBoxProps> {
-    static propTypes = {
-        /**
-         * The layout of media box, Options: appmsg/text/small_appmsg
-         *
-         */
-        type: PropTypes.string
-    };
-
-    static defaultProps = {
-        type: 'text' as MediaBoxProps['type']
-    };
-
-    render() {
-        const {children, type, className, ...others} = this.props;
-        const Component = this.props.href ? 'a' : 'div';
-        const cls = classNames({
+export default function MediaBox(props: MediaBoxProps) {
+    const { children, type, className, ...others } = props;
+    const Component = props.href ? 'a' : 'div';
+    const cls = classNames(
+        {
             'weui-media-box': true,
             'weui-media-box_appmsg': type === 'appmsg',
             'weui-media-box_text': type === 'text',
             'weui-media-box_small-appmsg': type === 'small_appmsg',
-        }, className);
+        },
+        className,
+    );
 
-        return (
-            <Component className={cls} {...others}>{children}</Component>
-        );
-    }
+    return (
+        <Component className={cls} {...others}>
+            {children}
+        </Component>
+    );
+}
+MediaBox.propTypes = {
+    /**
+     * The layout of media box, Options: appmsg/text/small_appmsg
+     *
+     */
+    type: PropTypes.string,
+};
+
+MediaBox.defaultProps = {
+    type: 'text' as MediaBoxProps['type'],
 };

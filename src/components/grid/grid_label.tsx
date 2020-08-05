@@ -6,18 +6,21 @@ import classNames from '../../utils/classnames';
  *
  */
 interface GridLabelProps {
-  className?: any,
-  children?: React.ReactNode
+    className?: any;
+    children?: React.ReactNode;
 }
-export default class GridLabel extends React.Component<GridLabelProps> {
-    render() {
-        const {children, className, ...others} = this.props;
-        const cls = classNames({
-            'weui-grid__label': true
-        }, className);
+export default function GridLabel(props: GridLabelProps) {
+    const { children, className, ...others } = props;
+    const cls = classNames(
+        {
+            'weui-grid__label': true,
+        },
+        className,
+    );
 
-        return (
-            <p className={cls} {...others}>{children}</p>
-        );
-    }
-};
+    return (
+        <p className={cls} {...others}>
+            {children}
+        </p>
+    );
+}

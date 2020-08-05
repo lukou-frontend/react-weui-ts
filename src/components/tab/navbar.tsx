@@ -6,21 +6,21 @@ import classNames, { ClassValue } from '../../utils/classnames';
  *
  */
 interface NavBarProps {
-  className?: ClassValue
+    className?: ClassValue;
+    children?: React.ReactNode;
 }
-export default class NavBar extends React.Component<NavBarProps> {
+export default function NavBar(props: NavBarProps) {
+    const { children, className, ...others } = props;
+    const cls = classNames(
+        {
+            'weui-navbar': true,
+        },
+        className,
+    );
 
-    render() {
-
-        const {children, className, ...others} = this.props;
-        const cls = classNames({
-            'weui-navbar': true
-        }, className);
-
-        return (
-            <div className={cls} {...others}>
-                {children}
-            </div>
-        );
-    }
+    return (
+        <div className={cls} {...others}>
+            {children}
+        </div>
+    );
 }

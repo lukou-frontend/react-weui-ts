@@ -9,6 +9,7 @@ module.exports = {
     'spaced-comment': 0,
     '@typescript-eslint/no-unused-expressions': 0,
     "jsx-a11y/label-has-associated-control": 0,
-    'no-nested-ternary': 0
+    'no-nested-ternary': 0,
+    'no-param-reassign': 0
   },
 };

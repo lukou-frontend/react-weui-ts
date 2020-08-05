@@ -6,25 +6,36 @@ import classNames from '../../utils/classnames';
  *
  */
 interface MediaBoxHeaderProps {
-  className?: ''
+    className?: '';
 }
-export default class MediaBoxHeader extends React.Component<MediaBoxHeaderProps> {
+export default class MediaBoxHeader extends React.Component<
+    MediaBoxHeaderProps
+> {
     render() {
-        const {children, className, ...others} = this.props;
-        const clz = classNames({
-            'weui-media-box__hd': true
-        }, className);
+        const { children, className, ...others } = this.props;
+        const clz = classNames(
+            {
+                'weui-media-box__hd': true,
+            },
+            className,
+        );
 
-        let childrenWithProps = React.Children.map(children, (child: React.ReactElement) => {
-            if (child.type === 'img' && !child.props.className){
-              return React.cloneElement(child, { className: 'weui-media-box__thumb' });
-            } else {
-              return child;
-            }
-        });
+        const childrenWithProps = React.Children.map(
+            children,
+            (child: React.ReactElement) => {
+                if (child.type === 'img' && !child.props.className) {
+                    return React.cloneElement(child, {
+                        className: 'weui-media-box__thumb',
+                    });
+                }
+                return child;
+            },
+        );
 
         return (
-            <div className={clz} {...others}>{childrenWithProps}</div>
+            <div className={clz} {...others}>
+                {childrenWithProps}
+            </div>
         );
     }
-};
+}

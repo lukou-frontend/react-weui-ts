@@ -6,27 +6,23 @@ import classNames from '../../utils/classnames';
  *
  */
 interface MaskProps {
-  transparent?: boolean,
-  className?: any,
-  [key: string]: any
+    transparent?: boolean;
+    className?: any;
+    [key: string]: any;
 }
-class Mask extends React.Component<MaskProps> {
-
-    static defaultProps = {
-        transparent: false as MaskProps['transparent']
-    };
-
-    render() {
-        const {transparent, className, ...others} = this.props;
-        const clz = classNames({
+function Mask(props: MaskProps) {
+    const { transparent, className, ...others } = props;
+    const clz = classNames(
+        {
             'weui-mask': !transparent,
-            'weui-mask_transparent': transparent
-        }, className);
+            'weui-mask_transparent': transparent,
+        },
+        className,
+    );
 
-        return (
-            <div className={clz} {...others}></div>
-        );
-    }
+    return <div className={clz} {...others} />;
 }
-
+Mask.defaultProps = {
+    transparent: false as MaskProps['transparent'],
+};
 export default Mask;

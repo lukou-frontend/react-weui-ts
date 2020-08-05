@@ -6,17 +6,21 @@ import classNames from '../../utils/classnames';
  *
  */
 interface MediaBoxTitleProps {
-  className?: any
+    className?: any;
+    children?: React.ReactNode;
 }
-export default class MediaBoxTitle extends React.Component<MediaBoxTitleProps> {
-    render() {
-        const {children, className, ...others} = this.props;
-        const cls = classNames({
-           'weui-media-box__title': true
-        }, className);
+export default function MediaBoxTitle(props: MediaBoxTitleProps) {
+    const { children, className, ...others } = props;
+    const cls = classNames(
+        {
+            'weui-media-box__title': true,
+        },
+        className,
+    );
 
-        return (
-            <h4 className={cls} {...others}>{children}</h4>
-        );
-    }
-};
+    return (
+        <h4 className={cls} {...others}>
+            {children}
+        </h4>
+    );
+}

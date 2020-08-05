@@ -9,52 +9,53 @@ import GridLabel from './grid_label';
  *
  */
 type IReactComponent<P = any> =
-  | React.FC<P>
-  | React.ComponentClass<P>
-  | React.ClassicComponentClass<P>;
+    | React.FC<P>
+    | React.ComponentClass<P>
+    | React.ClassicComponentClass<P>;
 interface GridProps {
-  icon?: any,
-  label?: string,
-  component?: IReactComponent,
-  className?: any
+    icon?: any;
+    label?: string;
+    component?: IReactComponent;
+    className?: any;
+    children?: React.ReactNode;
 }
-export default class Grid extends React.Component<GridProps> {
-    static propTypes = {
-      /**
-       * Label string for grid
-       *
-       */
-      label: PropTypes.string,
-      /**
-       * Icon placeholder
-       *
-       */
-      icon: PropTypes.any,
-      /**
-       * pass in an component to replace Grid but apply same style
-       */
-      component: PropTypes.func
-    };
+export default function Grid(props: GridProps) {
+    const { children, icon, label, className, component, ...others } = props;
+    const cls = classNames(
+        {
+            'weui-grid': true,
+        },
+        className,
+    );
+    const DefaultComponent = 'a';
+    const GridComponent = component || DefaultComponent;
 
-    static defaultProps = {
-      label: '' as GridProps['label'],
-      icon: false as GridProps['icon']
-    };
+    return (
+        <GridComponent className={cls} {...others}>
+            {icon ? <GridIcon>{icon}</GridIcon> : false}
+            {children}
+            {label ? <GridLabel>{label}</GridLabel> : false}
+        </GridComponent>
+    );
+}
+Grid.propTypes = {
+    /**
+     * Label string for grid
+     *
+     */
+    label: PropTypes.string,
+    /**
+     * Icon placeholder
+     *
+     */
+    icon: PropTypes.any,
+    /**
+     * pass in an component to replace Grid but apply same style
+     */
+    component: PropTypes.func,
+};
 
-    render() {
-        const {children, icon, label, className, component, ...others} = this.props;
-        const cls = classNames({
-            'weui-grid': true
-        }, className);
-        var DefaultComponent = 'a';
-        var GridComponent = component ? component : DefaultComponent;
-
-        return (
-            <GridComponent className={cls} {...others}>
-              {icon ? <GridIcon>{icon}</GridIcon> : false}
-              {children}
-              {label ? <GridLabel>{label}</GridLabel> : false}
-            </GridComponent>
-        );
-    }
+Grid.defaultProps = {
+    label: '' as GridProps['label'],
+    icon: false as GridProps['icon'],
 };

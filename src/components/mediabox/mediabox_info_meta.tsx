@@ -7,31 +7,34 @@ import classNames from '../../utils/classnames';
  *
  */
 interface MediaBoxInfoMetaProps {
-  className?: any,
-  extra?: boolean
+    className?: any;
+    extra?: boolean;
+    children?: React.ReactNode;
 }
-export default class MediaBoxInfoMeta extends React.Component<MediaBoxInfoMetaProps> {
-    static propTypes = {
-        /**
-         * add left margin to indicate extra
-         *
-         */
-        extra: PropTypes.bool,
-    };
-
-    static defaultProps = {
-        extra: false,
-    };
-
-    render() {
-        const {children, extra, className, ...others} = this.props;
-        const cls = classNames({
+export default function MediaBoxInfoMeta(props: MediaBoxInfoMetaProps) {
+    const { children, extra, className, ...others } = props;
+    const cls = classNames(
+        {
             'weui-media-box__info__meta': true,
-            'weui-media-box__info__meta_extra': extra
-        }, className);
+            'weui-media-box__info__meta_extra': extra,
+        },
+        className,
+    );
 
-        return (
-            <li className={cls} {...others}>{children}</li>
-        );
-    }
+    return (
+        <li className={cls} {...others}>
+            {children}
+        </li>
+    );
+}
+MediaBoxInfoMeta.propTypes = {
+    /**
+     * add left margin to indicate extra
+     *
+     */
+    extra: PropTypes.bool,
+};
+
+MediaBoxInfoMeta.defaultProps = {
+    extra: false,
 };
