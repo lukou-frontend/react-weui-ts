@@ -6,19 +6,19 @@ import classNames from '../../utils/classnames';
  *
  */
 interface VCodeProps {
-  className?: any,
-  src?: string
+    className?: any;
+    src?: string;
 }
 const VCode = (props: VCodeProps) => {
     const { className, src, ...others } = props;
     const cls = classNames({
         'weui-vcode-img': true,
-        [className]: className
+        [className]: className,
     });
 
     return (
         <div>
-            <img src={src} className={cls} {...others}/>
+            <img src={src} className={cls} {...others} alt="" />
         </div>
     );
 };
