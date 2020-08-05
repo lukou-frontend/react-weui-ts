@@ -1,103 +1,113 @@
-import * as React from 'react';
-import { Picker, CityPicker, Form, FormCell, CellBody, CellHeader, Label, Input } from '../../../build/es';
+import React, { useState } from 'react';
+import {
+    Picker,
+    CityPicker,
+    Form,
+    FormCell,
+    CellBody,
+    CellHeader,
+    Label,
+    Input,
+} from '../../../build/es';
 import Page from '../../component/page';
 import cnCity from './cnCity';
 
 const PickerDemo = () => {
-  const [picker_show, setPicker_show] = React.useState(false)
-  const [picker_value, setPicker_value] = React.useState('')
-  const [picker_group] = React.useState([
-    {
-      items: [
+    const [pickerShow, setPickerShow] = useState(false);
+    const [pickerValue, setPickerValue] = useState('');
+    const [pickerGroup] = useState([
         {
-          label: 'Item1'
+            items: [
+                {
+                    label: 'Item1',
+                },
+                {
+                    label: 'Item2 (Disabled)',
+                    disabled: true,
+                },
+                {
+                    label: 'Item3',
+                },
+                {
+                    label: 'Item4',
+                },
+                {
+                    label: 'Item5',
+                },
+            ],
         },
-        {
-          label: 'Item2 (Disabled)',
-          disabled: true
-        },
-        {
-          label: 'Item3'
-        },
-        {
-          label: 'Item4'
-        },
-        {
-          label: 'Item5'
-        }
-      ]
-    }
-  ])
-  const [city_show, setCity_show] = React.useState(false)
-  const [city_value, setCity_value] = React.useState('')
+    ]);
+    const [cityShow, setCityShow] = useState(false);
+    const [cityValue, setCityValue] = useState('');
 
-  return (
-    <Page className="picker" title="Picker" subTitle="多列选择器" >
-      <Form>
-        <FormCell>
-          <CellHeader>
-            <Label>City</Label>
-          </CellHeader>
-          <CellBody>
-            <Input type="text"
-              value={city_value}
-              onClick={(e: Event) => {
-                e.preventDefault();
-                setCity_show(true)
-              }}
-              placeholder="Chose Your City"
-              readOnly={true}
+    return (
+        <Page className="picker" title="Picker" subTitle="多列选择器">
+            <Form>
+                <FormCell>
+                    <CellHeader>
+                        <Label>City</Label>
+                    </CellHeader>
+                    <CellBody>
+                        <Input
+                            type="text"
+                            value={cityValue}
+                            onClick={(e: Event) => {
+                                e.preventDefault();
+                                setCityShow(true);
+                            }}
+                            placeholder="Chose Your City"
+                            readOnly
+                        />
+                    </CellBody>
+                </FormCell>
+            </Form>
+
+            <CityPicker
+                data={cnCity}
+                onCancel={() => setCityShow(false)}
+                onChange={(text: string) => {
+                    setCityShow(false);
+                    setCityValue(text);
+                }}
+                show={cityShow}
             />
-          </CellBody>
-        </FormCell>
-      </Form>
 
-      <CityPicker
-        data={cnCity}
-        onCancel={() => setCity_show(false)}
-        onChange={(text: string) => { setCity_show(false), setCity_value(text) }}
-        show={city_show}
-      />
+            <Form>
+                <FormCell>
+                    <CellHeader>
+                        <Label>Direct Picker</Label>
+                    </CellHeader>
+                    <CellBody>
+                        <Input
+                            type="text"
+                            onClick={(e: Event) => {
+                                e.preventDefault();
+                                setPickerShow(true);
+                            }}
+                            placeholder="Pick a item"
+                            value={pickerValue}
+                            readOnly
+                        />
+                    </CellBody>
+                </FormCell>
+            </Form>
 
-
-
-      <Form>
-        <FormCell>
-          <CellHeader>
-            <Label>Direct Picker</Label>
-          </CellHeader>
-          <CellBody>
-            <Input
-              type="text"
-              onClick={(e: Event) => {
-                e.preventDefault();
-                setPicker_show(true)
-              }}
-              placeholder="Pick a item"
-              value={picker_value}
-              readOnly={true}
+            <Picker
+                onChange={(selected: any[]) => {
+                    let value = '';
+                    selected.forEach((s: any, i: any) => {
+                        value = pickerGroup[i].items[s].label;
+                    });
+                    setPickerShow(false);
+                    setPickerValue(value);
+                }}
+                groups={pickerGroup}
+                show={pickerShow}
+                onCancel={() => setPickerShow(false)}
             />
-          </CellBody>
-        </FormCell>
-      </Form>
 
-      <Picker
-        onChange={(selected: any[]) => {
-          let value = '';
-          selected.forEach((s: any, i: any) => {
-            value = picker_group[i]['items'][s].label;
-          });
-          setPicker_show(false)
-          setPicker_value(value)
-        }}
-        groups={picker_group}
-        show={picker_show}
-        onCancel={() => setPicker_show(false)}
-      />
-
-      <br />
-
-    </Page>
-  );
+            <br />
+        </Page>
+    );
 };
 export default PickerDemo;
