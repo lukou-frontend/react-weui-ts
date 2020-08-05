@@ -1,14 +1,16 @@
 import * as React from 'react';
-import { SwipeActionPropsType } from './PropsType';
 import PropTypes from 'prop-types';
+import { SwipeActionPropsType } from './PropsType';
 import './swipeaction.less';
 export interface SwipeActionProps extends SwipeActionPropsType<React.CSSProperties> {
     prefixCls?: string;
     className?: string;
     style?: React.CSSProperties;
+    children?: React.ReactNode;
 }
-declare class SwipeAction extends React.Component<SwipeActionProps, any> {
-    static propTypes: {
+declare function SwipeAction(props: SwipeActionProps): JSX.Element;
+declare namespace SwipeAction {
+    var propTypes: {
         /**
          * swipeout 样式
          */
@@ -37,8 +39,9 @@ declare class SwipeAction extends React.Component<SwipeActionProps, any> {
          * 关闭时回调函数
          */
         onClose: PropTypes.Requireable<(...args: any[]) => any>;
+        prefixCls: PropTypes.Requireable<string>;
     };
-    static defaultProps: {
+    var defaultProps: {
         prefixCls: string;
         autoClose: boolean;
         disabled: boolean;
@@ -47,6 +50,5 @@ declare class SwipeAction extends React.Component<SwipeActionProps, any> {
         onOpen(): void;
         onClose(): void;
     };
-    render(): JSX.Element;
 }
 export default SwipeAction;

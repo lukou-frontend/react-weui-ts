@@ -31,8 +31,8 @@ var Page = /*#__PURE__*/function (_React$Component) {
   }
 
   _createClass(Page, [{
-    key: "componentWillReceiveProps",
-    value: function componentWillReceiveProps(newProps) {
+    key: "UNSAFE_componentWillReceiveProps",
+    value: function UNSAFE_componentWillReceiveProps(newProps) {
       if (newProps.infiniteLoader) {
         this.setState({
           contentScrollOnTop: true
@@ -114,11 +114,14 @@ var Page = /*#__PURE__*/function (_React$Component) {
           transition = _this$props.transition,
           ptr = _this$props.ptr;
       var cls = classNames('weui-page', className);
+
+      var styles = _extends({
+        animationName: transition ? 'pageInRight' : ''
+      }, style);
+
       return /*#__PURE__*/React.createElement("div", {
         className: cls,
-        style: _extends({}, {
-          animationName: transition ? 'pageInRight' : ''
-        }, style)
+        style: styles
       }, this.renderContent(children, ptr, infiniteLoader));
     }
   }]);

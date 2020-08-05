@@ -40,7 +40,6 @@ var PickerGroup = /*#__PURE__*/function (_React$Component) {
       touchId: undefined,
       translate: 0,
       totalHeight: 0,
-      selected: 0,
       animating: _this.props.animation
     };
     _this.handleTouchStart = _this.handleTouchStart.bind(_assertThisInitialized(_this));
@@ -56,8 +55,8 @@ var PickerGroup = /*#__PURE__*/function (_React$Component) {
       this.adjustPosition(this.props);
     }
   }, {
-    key: "componentWillReceiveProps",
-    value: function componentWillReceiveProps(nextProps) {
+    key: "UNSAFE_componentWillReceiveProps",
+    value: function UNSAFE_componentWillReceiveProps(nextProps) {
       this.adjustPosition(nextProps);
     }
   }, {
@@ -94,7 +93,6 @@ var PickerGroup = /*#__PURE__*/function (_React$Component) {
       }
 
       this.setState({
-        selected: defaultIndex,
         ogTranslate: translate,
         totalHeight: totalHeight,
         translate: translate
@@ -129,12 +127,14 @@ var PickerGroup = /*#__PURE__*/function (_React$Component) {
     value: function handleTouchStart(e) {
       e.stopPropagation();
       if (this.state.touching || this.props.items.length <= 1) return;
-      this.setState({
-        touching: true,
-        ogTranslate: this.state.translate,
-        touchId: e.targetTouches[0].identifier,
-        ogY: this.state.translate === 0 ? e.targetTouches[0].pageY : e.targetTouches[0].pageY - this.state.translate,
-        animating: false
+      this.setState(function (prevState) {
+        return {
+          touching: true,
+          ogTranslate: prevState.translate,
+          touchId: e.targetTouches[0].identifier,
+          ogY: prevState.translate === 0 ? e.targetTouches[0].pageY : e.targetTouches[0].pageY - prevState.translate,
+          animating: false
+        };
       });
     }
   }, {
@@ -144,9 +144,10 @@ var PickerGroup = /*#__PURE__*/function (_React$Component) {
       if (!this.state.touching || this.props.items.length <= 1) return;
       if (e.targetTouches[0].identifier !== this.state.touchId) return;
       var pageY = e.targetTouches[0].pageY;
-      var diffY = pageY - this.state.ogY;
-      this.setState({
-        translate: diffY
+      this.setState(function (prevState) {
+        return {
+          translate: pageY - prevState.ogY
+        };
       });
     }
   }, {
@@ -161,7 +162,7 @@ var PickerGroup = /*#__PURE__*/function (_React$Component) {
           itemHeight = _this$props2.itemHeight;
       var translate = this.state.translate;
 
-      if (Math.abs(translate - this.state.ogTranslate) < itemHeight * .51) {
+      if (Math.abs(translate - this.state.ogTranslate) < itemHeight * 0.51) {
         translate = this.state.ogTranslate;
       } else if (translate > indicatorTop) {
         //top boundry
@@ -171,8 +172,8 @@ var PickerGroup = /*#__PURE__*/function (_React$Component) {
         translate = indicatorTop + indicatorHeight - this.state.totalHeight;
       } else {
         //pass single item range but not exceed boundry
-        var step = 0,
-            adjust = 0;
+        var step = 0;
+        var adjust = 0;
         var diff = (translate - this.state.ogTranslate) / itemHeight;
 
         if (Math.abs(diff) < 1) {
@@ -217,8 +218,8 @@ var PickerGroup = /*#__PURE__*/function (_React$Component) {
 
       var cls = classNames('weui-picker__group', className);
       var styles = {
-        'transform': "translate(0, ".concat(this.state.translate, "px)"),
-        'transition': this.state.animating ? 'transform .3s' : 'none'
+        transform: "translate(0, ".concat(this.state.translate, "px)"),
+        transition: this.state.animating ? 'transform .3s' : 'none'
       };
       return /*#__PURE__*/React.createElement("div", _extends({
         style: {
@@ -235,8 +236,7 @@ var PickerGroup = /*#__PURE__*/function (_React$Component) {
         className: "weui-picker__indicator"
       }), /*#__PURE__*/React.createElement("div", {
         className: "weui-picker__content",
-        style: styles,
-        ref: "content"
+        style: styles
       }, items.map(function (item, j) {
         var label = item[_this5.props.mapKeys.label];
         var itemCls = classNames('weui-picker__item', {
@@ -261,7 +261,8 @@ PickerGroup.propTypes = {
   onChange: PropTypes.func,
   aniamtion: PropTypes.bool,
   groupIndex: PropTypes.number,
-  defaultIndex: PropTypes.number
+  defaultIndex: PropTypes.number,
+  mapKeys: PropTypes.object
 };
 PickerGroup.defaultProps = {
   height: 238,

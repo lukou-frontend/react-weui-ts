@@ -10,9 +10,11 @@ interface GridProps {
     label?: string;
     component?: IReactComponent;
     className?: any;
+    children?: React.ReactNode;
 }
-export default class Grid extends React.Component<GridProps> {
-    static propTypes: {
+declare function Grid(props: GridProps): JSX.Element;
+declare namespace Grid {
+    var propTypes: {
         /**
          * Label string for grid
          *
@@ -28,10 +30,9 @@ export default class Grid extends React.Component<GridProps> {
          */
         component: PropTypes.Requireable<(...args: any[]) => any>;
     };
-    static defaultProps: {
+    var defaultProps: {
         label: string | undefined;
         icon: any;
     };
-    render(): JSX.Element;
 }
-export {};
+export default Grid;

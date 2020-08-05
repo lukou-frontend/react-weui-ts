@@ -1,8 +1,4 @@
 import _extends from "@babel/runtime/helpers/extends";
-import _classCallCheck from "@babel/runtime/helpers/classCallCheck";
-import _createClass from "@babel/runtime/helpers/createClass";
-import _inherits from "@babel/runtime/helpers/inherits";
-import _createSuper from "@babel/runtime/helpers/createSuper";
 
 var __rest = this && this.__rest || function (s, e) {
   var t = {};
@@ -20,43 +16,22 @@ var __rest = this && this.__rest || function (s, e) {
 import * as React from 'react';
 import PropTypes from 'prop-types';
 import classNames from '../../utils/classnames';
+export default function TabBodyItem(props) {
+  var children = props.children,
+      className = props.className,
+      active = props.active,
+      others = __rest(props, ["children", "className", "active"]);
 
-var TabBodyItem = /*#__PURE__*/function (_React$Component) {
-  _inherits(TabBodyItem, _React$Component);
-
-  var _super = _createSuper(TabBodyItem);
-
-  function TabBodyItem() {
-    _classCallCheck(this, TabBodyItem);
-
-    return _super.apply(this, arguments);
-  }
-
-  _createClass(TabBodyItem, [{
-    key: "render",
-    value: function render() {
-      var _a = this.props,
-          children = _a.children,
-          className = _a.className,
-          active = _a.active,
-          others = __rest(_a, ["children", "className", "active"]);
-
-      var cls = classNames({
-        'weui-tab__bd-item': true
-      }, className);
-      return /*#__PURE__*/React.createElement("div", _extends({
-        className: cls,
-        style: {
-          display: active ? 'block' : 'none'
-        }
-      }, others), children);
+  var cls = classNames({
+    'weui-tab__bd-item': true
+  }, className);
+  return /*#__PURE__*/React.createElement("div", _extends({
+    className: cls,
+    style: {
+      display: active ? 'block' : 'none'
     }
-  }]);
-
-  return TabBodyItem;
-}(React.Component);
-
-export { TabBodyItem as default };
+  }, others), children);
+}
 TabBodyItem.propTypes = {
   /**
    * display this component

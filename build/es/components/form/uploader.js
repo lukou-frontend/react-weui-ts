@@ -20,7 +20,6 @@ var __rest = this && this.__rest || function (s, e) {
 
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import ReactDOM from 'react-dom';
 import Icon from '../icon';
 import classNames from '../../utils/classnames';
 import deprecationWarning from '../../utils/deprecationWarning';
@@ -30,20 +29,42 @@ var Uploader = /*#__PURE__*/function (_React$Component) {
 
   var _super = _createSuper(Uploader);
 
-  function Uploader(props) {
+  function Uploader() {
+    var _this;
+
     _classCallCheck(this, Uploader);
 
-    return _super.call(this, props);
+    _this = _super.apply(this, arguments);
+    _this.uploaderRef = /*#__PURE__*/React.createRef();
+    return _this;
   }
-  /**
-   * Detecting vertical squash in loaded image.
-   * Fixes a bug which squash image vertically while drawing into canvas for some images.
-   * This is a bug in iOS6 devices. This function from https://github.com/stomita/ios-imagefile-megapixel
-   * With react fix by n7best
-   */
-
 
   _createClass(Uploader, [{
+    key: "getImageSize",
+    value: function getImageSize() {
+      var size;
+
+      if (this.props.size === 'small') {
+        size = 57;
+      } else if (this.props.size === 'normal') {
+        size = 76;
+      } else if (this.props.size === 'large') {
+        size = 106;
+      } else {
+        return 76;
+      }
+
+      return size;
+    }
+    /**
+     * Detecting vertical squash in loaded image.
+     * Fixes a bug which squash image vertically while drawing into canvas for some images.
+     * This is a bug in iOS6 devices. This function from https://github.com/stomita/ios-imagefile-megapixel
+     * With react fix by n7best
+     */
+    // eslint-disable-next-line class-methods-use-this
+
+  }, {
     key: "detectVerticalSquash",
     value: function detectVerticalSquash(img) {
       var data;
@@ -60,7 +81,8 @@ var Uploader = /*#__PURE__*/function (_React$Component) {
         data = ctx.getImageData(0, 0, 1, ih).data;
       } catch (err) {
         // hopeless, assume the image is well and good.
-        console.log('Cannot check verticalSquash: CORS?');
+        console.log('Cannot check verticalSquash: CORS?'); // eslint-disable-next-line consistent-return
+
         return 1;
       } // search image edge pixel position in case it is squashed vertically.
 
@@ -76,26 +98,28 @@ var Uploader = /*#__PURE__*/function (_React$Component) {
           ey = py;
         } else {
           sy = py;
-        }
+        } // eslint-disable-next-line no-bitwise
+
 
         py = ey + sy >> 1;
       }
 
-      var ratio = py / ih;
+      var ratio = py / ih; // eslint-disable-next-line consistent-return
+
       return ratio === 0 ? 1 : ratio;
     }
   }, {
     key: "handleFile",
     value: function handleFile(file, cb) {
       var _arguments = arguments,
-          _this = this;
+          _this2 = this;
 
       var reader;
 
       if (typeof FileReader !== 'undefined') {
         reader = new FileReader();
-      } else {
-        if (window.FileReader) reader = new window.FileReader();
+      } else if (window.FileReader) {
+        reader = new window.FileReader();
       }
 
       reader.onload = function (e) {
@@ -104,12 +128,12 @@ var Uploader = /*#__PURE__*/function (_React$Component) {
 
           if (typeof img !== 'undefined') {
             img = new Image();
-          } else {
-            if (window.Image) img = new window.Image();
+          } else if (window.Image) {
+            img = new window.Image();
           }
 
           img.onload = function () {
-            var w = Math.min(_this.props.maxWidth, img.width);
+            var w = Math.min(_this2.props.maxWidth, img.width);
             var h = img.height * (w / img.width);
             var canvas = document.createElement('canvas');
             var ctx = canvas.getContext('2d');
@@ -119,14 +143,16 @@ var Uploader = /*#__PURE__*/function (_React$Component) {
 
               var newDrawImage = function newDrawImage(_img, sx, sy, sw, sh, dx, dy, dw, dh) {
                 var vertSquashRatio = 1;
+                var newSw = sw;
+                var newSh = sh;
 
                 if (!!_img && _img.nodeName === 'IMG') {
-                  vertSquashRatio = _this.detectVerticalSquash(_img);
-                  if (typeof sw === 'undefined') sw = _img.naturalWidth;
-                  if (typeof sh === 'undefined') sh = _img.naturalHeight;
+                  vertSquashRatio = _this2.detectVerticalSquash(_img);
+                  if (typeof newSw === 'undefined') newSw = _img.naturalWidth;
+                  if (typeof newSh === 'undefined') newSh = _img.naturalHeight;
                 }
 
-                if (_arguments.length === 9) drawImage.call(ctx, _img, sx, sy, sw, sh, dx, dy, dw, dh / vertSquashRatio);else if (typeof sw !== 'undefined') drawImage.call(ctx, _img, sx, sy, sw, sh / vertSquashRatio);else drawImage.call(ctx, _img, sx, sy);
+                if (_arguments.length === 9) drawImage.call(ctx, _img, sx, sy, newSw, newSh, dx, dy, dw, dh / vertSquashRatio);else if (typeof newSw !== 'undefined') drawImage.call(ctx, _img, sx, sy, newSw, newSh / vertSquashRatio);else drawImage.call(ctx, _img, sx, sy);
               };
 
               canvas.width = w;
@@ -151,14 +177,14 @@ var Uploader = /*#__PURE__*/function (_React$Component) {
         } else if (/video/g.test(file.type)) {
           var video = document.createElement('video');
           video.src = e.target.result;
-          video.width = _this.getImageSize();
-          video.height = _this.getImageSize();
+          video.width = _this2.getImageSize();
+          video.height = _this2.getImageSize();
           video.controls = true;
           video.muted = true;
           video.autoplay = true;
           video.preload = 'preload';
 
-          _this.props.currentVideo(e.target.result);
+          _this2.props.currentVideo(e.target.result);
 
           video.addEventListener('loadeddata', function () {
             var canvas = document.createElement('canvas');
@@ -190,57 +216,42 @@ var Uploader = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "handleChange",
     value: function handleChange(e) {
-      var _this2 = this;
+      var _this3 = this;
 
       var langs = this.props.lang;
-      var _files = e.target.files;
-      if (!_files || _files.length === 0) return;
+      var files = e.target.files;
+      if (!files || files.length === 0) return;
 
       if (this.props.files.length >= this.props.maxCount) {
         this.props.onError(langs.maxError(this.props.maxCount));
         return;
-      }
+      } // eslint-disable-next-line no-restricted-syntax
 
-      for (var key in _files) {
-        if (!_files.hasOwnProperty(key)) continue;
-        var file = _files[key];
 
-        if (file.size / (1024 * 1024) > this.props.maxsize) {
-          this.props.onOversize(file.size);
-          return;
+      for (var key in files) {
+        if (files.hasOwnProperty(key)) {
+          var file = files[key];
+
+          if (file.size / (1024 * 1024) > this.props.maxsize) {
+            this.props.onOversize(file.size);
+            return;
+          }
+
+          this.handleFile(file, function (_file, _e) {
+            if (_this3.props.onChange) _this3.props.onChange(_file, _e);
+            _this3.uploaderRef.current.value = '';
+          });
         }
-
-        this.handleFile(file, function (_file, _e) {
-          if (_this2.props.onChange) _this2.props.onChange(_file, _e);
-          ReactDOM.findDOMNode(_this2.refs.uploader);
-        });
       }
-    }
-  }, {
-    key: "getImageSize",
-    value: function getImageSize() {
-      var size;
-
-      if (this.props.size === 'small') {
-        size = 57;
-      } else if (this.props.size === 'normal') {
-        size = 76;
-      } else if (this.props.size === 'large') {
-        size = 106;
-      } else {
-        return 76;
-      }
-
-      return size;
     }
   }, {
     key: "renderFiles",
     value: function renderFiles() {
-      var _this3 = this;
+      var _this4 = this;
 
       return this.props.files.map(function (file, idx) {
-        var imgSrc = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAC4AAAAuCAYAAABXuSs3AAAEVElEQVRoQ82Za8ilUxTHf3/3SxhyyS2XSUjJdT64ROMyyDBTIuMyDJFBQmRcx62GEMOUomimMbl8mDEJzQef5DJ8INdkNEoSCkUpLP2nfd6eOec55+xnP+e9rE9v77v2Wr+93rXXXns9oqVExEHATOBo4FBgf2AnYDvgT+AP4Dvga+BD4B1JP7d0i0oMRMS+wHzgMuCwhjYCeA9YDqyS5I01lkbgEXEgcBdwObBNY2+9C34DngaekOSfsyULPCIMeTtwJ7B9tvV8xZ+A2yStyF0yFDwiDgZeBo7LNdpC7zXgakm/D7MxEDwiTgFWA9OGGRrh378BZknyge4rfcEjYjbwSqoOI+TKMvUjcIakz/tp14KnSL81SdAd1h+AEyVtrIPvAU85/fEEp0e/wDriMyT91a2wGXiqHu9O0EHMyhngRUlXDgO/G3gw1+IE6p0j6c2qv7GIp8vli8I6/R+wxThu5FvgCEl/d3xUwZ9zDS1w/j5wGuDS+ThweIGNnCXXSXp2M/DUe2wovMaXSrrJBiNiK+AG4L5xONyu64dI+te+NkU8InyVP5yz7RqdMfDO3yJij2RvAbBlod26ZWdJersK/mVBl9cx3ANe2cAxwFLX4xHBr5R06Sbw1E87TUqlL3hlA/OARwG3w23kF2BPSWHwq4DnW1gbCp7SccfUXd7S8kY+StInBn8GuH68wSvRn56qz/mFPhdIesHg64DTC414WVbEu+1HxCzgyYKz9YikOwz+VXorlrIXgaf02Rq4MZXPnTMBXpJ0icHdhe2TuahOrRi8kj6OvrvRHFkr6TyD/wrslrOij84owH1p+e2ZI+sknWnw79NIIWfRSCOeWmi3CXMaOF8taa7BP3MD02Bht2rjiEeES+Mi4NaC0rhc0nyDrwXOnSjwiLg4XUb7Ffq8X9Jigz+Wdl5oJ68cRoQnXb7+Typ1lNbNk7TK4Bem8UOpvYGpEhG7Aw+llnkUDdd0SRsM7k7OA5mhM5YmVSW1uAuBxcCupVHpWrdRkqdpY22t35knFBqva2v9sHiq5aEfWME6/fi1wNjrouEGlklyHXZf78mty9vchjZy1Y+X9FE14r5uPb8omVh53TXAqcDNBeUtF3q9pBkd5eqb8wHgnlwrk6A3R9KaOnBH2w3XXpMANcylz+DJfkD0gKcc9aDeA/epJP8Ax0r6tApVN4J7FbhgCpEvkrSkm6cOfBdgvUcBUwD+DWB2NUVqU6Xzy1TWnFd7TyK8P3TNlOQPYD0yaD7ujtEzjLYv85K9G9rzQr8VamXYF4kDAP+72rS9TcHt76J+kR6YKlVPEbEDsAy4oilBQ31Xj3uBJXU5PfRw9nMWEWen55XHC6MWn6eF3SVvkJNGHWFEbAt4yO5Ph+5L2oqrl2eWr+dEeWAdzyGJCPfVnsX4wvIL3T13rri38dW9otMw5S5sDd51BvxfOxLwgHPYt/wP/AgoAS3O8VE4G6WN/wH0qmQ+I0w9UgAAAABJRU5ErkJggg==";
-        var closeSrc = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACIAAAAgCAYAAAB3j6rJAAAB70lEQVRYR82XMUsDMRTH/7mjBSd1FIRqwamgm+KooB3OviLd/SAOioJ+EPciTb2hCnYU3RQ6CdWC4KhOQss1ErnKeb3kUk4wna7k5f1/eXl5eWGw5Mcs4cBEIM1mc1UI4QFYB7AEYDZcyBuARwA3jDG/UqncTbpAI5BGo+E5jnMihFgxFHgQQuxXq1Xf0F4fkXq9Pp/L5c4AbJg6jNm1B4PBXq1We0mbr4yI7/trw+HwXAgxl+ZEN84Ye3UcZ9fzvFutXdKghAiCoA1gKgtEZO6n67obOpixiMjtyOfzd1kjEV+AjEy/319VbdMYCOf8OkNOpAWwTUSbSUa/QOTpYIxdJBm6rosgCNKEvsd1tkKInaTT9AuEc34PYDmuJh2Xy2X0ej10Oh0tTKlUQqFQQKvVUoE/ENFYGfgBCYuVMrOlQLFYRLfbVcKY2MhVMMbW4kXvB4RzfgTgQLdcnZApROj/mIgOo1pRkEsAW2lJkCQ4IYSUuCKibRXIE4CFNBA5HhWW/9O2LMHnMxEtqkDeAUybgERh5LcubxT+PohoxnoQa7bGmmS14/haU9BkBltR4iWINZdeGJX/bwMkiDWNkYSxolUclV0rmucRjBXPieiFFJ6m06TuTXGp/e0DKy7y709O09Ygi53R2zeLgOncL0HKZTDFM68/AAAAAElFTkSuQmCC";
+        var imgSrc = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAC4AAAAuCAYAAABXuSs3AAAEVElEQVRoQ82Za8ilUxTHf3/3SxhyyS2XSUjJdT64ROMyyDBTIuMyDJFBQmRcx62GEMOUomimMbl8mDEJzQef5DJ8INdkNEoSCkUpLP2nfd6eOec55+xnP+e9rE9v77v2Wr+93rXXXns9oqVExEHATOBo4FBgf2AnYDvgT+AP4Dvga+BD4B1JP7d0i0oMRMS+wHzgMuCwhjYCeA9YDqyS5I01lkbgEXEgcBdwObBNY2+9C34DngaekOSfsyULPCIMeTtwJ7B9tvV8xZ+A2yStyF0yFDwiDgZeBo7LNdpC7zXgakm/D7MxEDwiTgFWA9OGGRrh378BZknyge4rfcEjYjbwSqoOI+TKMvUjcIakz/tp14KnSL81SdAd1h+AEyVtrIPvAU85/fEEp0e/wDriMyT91a2wGXiqHu9O0EHMyhngRUlXDgO/G3gw1+IE6p0j6c2qv7GIp8vli8I6/R+wxThu5FvgCEl/d3xUwZ9zDS1w/j5wGuDS+ThweIGNnCXXSXp2M/DUe2wovMaXSrrJBiNiK+AG4L5xONyu64dI+te+NkU8InyVP5yz7RqdMfDO3yJij2RvAbBlod26ZWdJersK/mVBl9cx3ANe2cAxwFLX4xHBr5R06Sbw1E87TUqlL3hlA/OARwG3w23kF2BPSWHwq4DnW1gbCp7SccfUXd7S8kY+StInBn8GuH68wSvRn56qz/mFPhdIesHg64DTC414WVbEu+1HxCzgyYKz9YikOwz+VXorlrIXgaf02Rq4MZXPnTMBXpJ0icHdhe2TuahOrRi8kj6OvrvRHFkr6TyD/wrslrOij84owH1p+e2ZI+sknWnw79NIIWfRSCOeWmi3CXMaOF8taa7BP3MD02Bht2rjiEeES+Mi4NaC0rhc0nyDrwXOnSjwiLg4XUb7Ffq8X9Jigz+Wdl5oJ68cRoQnXb7+Typ1lNbNk7TK4Bem8UOpvYGpEhG7Aw+llnkUDdd0SRsM7k7OA5mhM5YmVSW1uAuBxcCupVHpWrdRkqdpY22t35knFBqva2v9sHiq5aEfWME6/fi1wNjrouEGlklyHXZf78mty9vchjZy1Y+X9FE14r5uPb8omVh53TXAqcDNBeUtF3q9pBkd5eqb8wHgnlwrk6A3R9KaOnBH2w3XXpMANcylz+DJfkD0gKcc9aDeA/epJP8Ax0r6tApVN4J7FbhgCpEvkrSkm6cOfBdgvUcBUwD+DWB2NUVqU6Xzy1TWnFd7TyK8P3TNlOQPYD0yaD7ujtEzjLYv85K9G9rzQr8VamXYF4kDAP+72rS9TcHt76J+kR6YKlVPEbEDsAy4oilBQ31Xj3uBJXU5PfRw9nMWEWen55XHC6MWn6eF3SVvkJNGHWFEbAt4yO5Ph+5L2oqrl2eWr+dEeWAdzyGJCPfVnsX4wvIL3T13rri38dW9otMw5S5sDd51BvxfOxLwgHPYt/wP/AgoAS3O8VE4G6WN/wH0qmQ+I0w9UgAAAABJRU5ErkJggg==';
+        var closeSrc = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACIAAAAgCAYAAAB3j6rJAAAB70lEQVRYR82XMUsDMRTH/7mjBSd1FIRqwamgm+KooB3OviLd/SAOioJ+EPciTb2hCnYU3RQ6CdWC4KhOQss1ErnKeb3kUk4wna7k5f1/eXl5eWGw5Mcs4cBEIM1mc1UI4QFYB7AEYDZcyBuARwA3jDG/UqncTbpAI5BGo+E5jnMihFgxFHgQQuxXq1Xf0F4fkXq9Pp/L5c4AbJg6jNm1B4PBXq1We0mbr4yI7/trw+HwXAgxl+ZEN84Ye3UcZ9fzvFutXdKghAiCoA1gKgtEZO6n67obOpixiMjtyOfzd1kjEV+AjEy/319VbdMYCOf8OkNOpAWwTUSbSUa/QOTpYIxdJBm6rosgCNKEvsd1tkKInaTT9AuEc34PYDmuJh2Xy2X0ej10Oh0tTKlUQqFQQKvVUoE/ENFYGfgBCYuVMrOlQLFYRLfbVcKY2MhVMMbW4kXvB4RzfgTgQLdcnZApROj/mIgOo1pRkEsAW2lJkCQ4IYSUuCKibRXIE4CFNBA5HhWW/9O2LMHnMxEtqkDeAUybgERh5LcubxT+PohoxnoQa7bGmmS14/haU9BkBltR4iWINZdeGJX/bwMkiDWNkYSxolUclV0rmucRjBXPieiFFJ6m06TuTXGp/e0DKy7y709O09Ygi53R2zeLgOncL0HKZTDFM68/AAAAAElFTkSuQmCC';
 
         var url = file.url,
             error = file.error,
@@ -253,20 +264,20 @@ var Uploader = /*#__PURE__*/function (_React$Component) {
           marginRight: 12,
           marginBottom: 9,
           "float": 'left',
-          width: _this3.getImageSize(),
-          height: _this3.getImageSize()
+          width: _this4.getImageSize(),
+          height: _this4.getImageSize()
         };
         var fileStyle = {
           backgroundImage: "url(".concat(url, ")"),
           position: 'relative',
-          width: _this3.getImageSize(),
-          height: _this3.getImageSize()
+          width: _this4.getImageSize(),
+          height: _this4.getImageSize()
         };
         var videofileStyle = {
           backgroundImage: "url(".concat(url, ")"),
           filter: 'contrast(0.4)',
-          width: _this3.getImageSize(),
-          height: _this3.getImageSize()
+          width: _this4.getImageSize(),
+          height: _this4.getImageSize()
         };
         var iconStyle = {
           position: 'absolute',
@@ -292,16 +303,16 @@ var Uploader = /*#__PURE__*/function (_React$Component) {
           deprecationWarning('File onClick', 'Uploader onFileClick', null);
         }
 
-        var handleFileClick = onClick ? onClick : function (e) {
-          if (_this3.props.onFileClick) _this3.props.onFileClick(e, file, idx);
+        var handleFileClick = onClick || function (e) {
+          if (_this4.props.onFileClick) _this4.props.onFileClick(e, file, idx);
         };
 
         var handleClick = function handleClick(e) {
           e.stopPropagation();
-          if (_this3.props.onDelete) _this3.props.onDelete(file, idx);
+          if (_this4.props.onDelete) _this4.props.onDelete(file, idx);
         };
 
-        if (_this3.props.type === 'image') {
+        if (_this4.props.type === 'image') {
           return /*#__PURE__*/React.createElement("div", {
             style: wrapStyle,
             key: idx
@@ -320,29 +331,30 @@ var Uploader = /*#__PURE__*/function (_React$Component) {
             onClick: handleClick,
             alt: ""
           }));
-        } else {
-          return /*#__PURE__*/React.createElement("div", {
-            style: wrapStyle,
-            key: idx
-          }, /*#__PURE__*/React.createElement("li", _extends({
-            className: cls,
-            key: idx,
-            style: videofileStyle,
-            onClick: handleFileClick
-          }, others), error || status ? /*#__PURE__*/React.createElement("div", {
-            className: "weui-uploader__file-content"
-          }, error ? /*#__PURE__*/React.createElement(Icon, {
-            value: "warn"
-          }) : status) : false), /*#__PURE__*/React.createElement("img", {
-            src: closeSrc,
-            style: iconStyle,
-            onClick: handleClick,
-            alt: ""
-          }), /*#__PURE__*/React.createElement("img", {
-            src: imgSrc,
-            style: btnStyle
-          }));
         }
+
+        return /*#__PURE__*/React.createElement("div", {
+          style: wrapStyle,
+          key: idx
+        }, /*#__PURE__*/React.createElement("li", _extends({
+          className: cls,
+          key: idx,
+          style: videofileStyle,
+          onClick: handleFileClick
+        }, others), error || status ? /*#__PURE__*/React.createElement("div", {
+          className: "weui-uploader__file-content"
+        }, error ? /*#__PURE__*/React.createElement(Icon, {
+          value: "warn"
+        }) : status) : false), /*#__PURE__*/React.createElement("img", {
+          src: closeSrc,
+          style: iconStyle,
+          onClick: handleClick,
+          alt: ""
+        }), /*#__PURE__*/React.createElement("img", {
+          src: imgSrc,
+          style: btnStyle,
+          alt: ""
+        }));
       });
     }
   }, {
@@ -393,7 +405,7 @@ var Uploader = /*#__PURE__*/function (_React$Component) {
         },
         className: "weui-uploader__input-box"
       }, /*#__PURE__*/React.createElement("input", _extends({
-        ref: "uploader" //let react to reset after onchange
+        ref: this.uploaderRef //let react to reset after onchange
         ,
         className: "weui-uploader__input",
         type: "file",
@@ -511,4 +523,3 @@ Uploader.defaultProps = {
   showTitle: false,
   size: 'normal'
 };
-;

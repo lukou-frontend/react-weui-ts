@@ -6,20 +6,20 @@ import classNames from '../../utils/classnames';
  *
  */
 interface PanelHeaderProps {
-  className?: any,
-  children: React.ReactNode,
-  style?: React.CSSProperties,
+    className?: any;
+    children: React.ReactNode;
+    style?: React.CSSProperties;
 }
-export default class PanelHeader extends React.Component<PanelHeaderProps> {
-    render() {
-        const {className, children, ...others} = this.props;
-        const cls = classNames({
-            'weui-panel__hd': true,
-            [className]: className
-        });
+export default function PanelHeader(props: PanelHeaderProps) {
+    const { className, children, ...others } = props;
+    const cls = classNames({
+        'weui-panel__hd': true,
+        [className]: className,
+    });
 
-        return (
-            <div className={cls} {...others}>{children}</div>
-        );
-    }
-};
+    return (
+        <div className={cls} {...others}>
+            {children}
+        </div>
+    );
+}

@@ -35,7 +35,10 @@ interface SwiperState {
     wrapperWidth: number;
     wrapperHeight: number;
 }
+interface DefaultProps extends Pick<SwiperProps, 'height' | 'width' | 'defaultIndex' | 'direction' | 'threshold' | 'speed' | 'indicators'> {
+}
 declare class Swiper extends React.Component<SwiperProps, SwiperState> {
+    private containerRef;
     static propTypes: {
         /**
          * height for the container, number in px
@@ -78,15 +81,7 @@ declare class Swiper extends React.Component<SwiperProps, SwiperState> {
          */
         onChange: PropTypes.Requireable<(...args: any[]) => any>;
     };
-    static defaultProps: {
-        height: null;
-        width: null;
-        defaultIndex: number;
-        direction: string;
-        threshold: number;
-        speed: number;
-        indicators: boolean;
-    };
+    static defaultProps: DefaultProps;
     constructor(props: SwiperProps);
     componentDidMount(): void;
     handleTouchStart(e: React.TouchEvent<HTMLDivElement>): void;

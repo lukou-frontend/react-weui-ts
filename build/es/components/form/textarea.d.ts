@@ -35,7 +35,7 @@ export default class TextArea extends React.Component<TextAreaProps, TextAreaSta
     };
     static defaultProps: {
         showCounter: boolean;
-        defaultValue: undefined;
+        defaultValue: string;
     };
     state: {
         textCounter: number;

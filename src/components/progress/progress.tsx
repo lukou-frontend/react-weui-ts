@@ -8,34 +8,42 @@ import Icon from '../icon';
  *
  */
 interface ProgressProps {
-  className?: string,
-  showCancel: boolean,
-  value: number,
-  onClick: (e: React.MouseEvent<HTMLAnchorElement>) => void
+    className?: string;
+    showCancel: boolean;
+    value: number;
+    onClick: (e: React.MouseEvent<HTMLAnchorElement>) => void;
 }
 const Progress = (props: ProgressProps) => {
-
     const { className = '', showCancel, value, onClick, ...others } = props;
     const cls = classNames({
         'weui-progress': true,
-        [className]: className
+        [className]: className,
     });
 
-    let pgWdith = value > 100 ? 100 : value < 0 ? 0 : value;
+    const pgWdith = value > 100 ? 100 : value < 0 ? 0 : value;
 
     return (
         <div className={cls} {...others}>
             <div className="weui-progress__bar">
-                <div className="weui-progress__inner-bar" style={{width: `${pgWdith}%`}}></div>
+                <div
+                    className="weui-progress__inner-bar"
+                    style={{ width: `${pgWdith}%` }}
+                />
             </div>
 
-            {
-                showCancel ?
-                    <a href="#!" className="weui-progress__opr" onClick={ e=> { if (onClick) onClick(e); } }>
-                        <Icon value="cancel"/>
-                    </a>
-                : false
-            }
+            {showCancel ? (
+                <a
+                    href="#!"
+                    className="weui-progress__opr"
+                    onClick={(e) => {
+                        if (onClick) onClick(e);
+                    }}
+                >
+                    <Icon value="cancel" />
+                </a>
+            ) : (
+                false
+            )}
         </div>
     );
 };
@@ -50,12 +58,12 @@ Progress.propTypes = {
      * enable cancel button
      *
      */
-    showCancel: PropTypes.bool
+    showCancel: PropTypes.bool,
 };
 
 Progress.defaultProps = {
     value: 0,
-    showCancel: true
+    showCancel: true,
 };
 
 export default Progress;

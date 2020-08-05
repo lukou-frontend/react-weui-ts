@@ -8,13 +8,13 @@ import MediaBoxInfoMeta from './mediabox_info_meta';
  *
  */
 interface Data {
-  extra: string,
-  label: string
+    extra: boolean;
+    label: string;
 }
 interface MediaBoxInfoProps {
-  className?: any,
-  data: Array<Data>,
-  children: React.ReactNode
+    className?: any;
+    data: Array<Data>;
+    children: React.ReactNode;
 }
 export default class MediaBoxInfo extends React.Component<MediaBoxInfoProps> {
     static propTypes = {
@@ -29,22 +29,30 @@ export default class MediaBoxInfo extends React.Component<MediaBoxInfoProps> {
         data: [] as MediaBoxInfoProps['data'],
     };
 
-    renderData(metas: any[]) {
-        return metas.map((meta: { extra: boolean | undefined; label: React.ReactNode; }, i: string | number | undefined) => {
-            return <MediaBoxInfoMeta key={i} extra={meta.extra}>{meta.label}</MediaBoxInfoMeta>;
+    renderData() {
+        const { data } = this.props;
+        return data.map((meta, i: number) => {
+            return (
+                <MediaBoxInfoMeta key={i} extra={meta.extra}>
+                    {meta.label}
+                </MediaBoxInfoMeta>
+            );
         });
     }
 
     render() {
-        const {children, data, className, ...others} = this.props;
-        const cls = classNames({
-            'weui-media-box__info': true
-        }, className);
+        const { children, data, className, ...others } = this.props;
+        const cls = classNames(
+            {
+                'weui-media-box__info': true,
+            },
+            className,
+        );
 
         return (
             <ul className={cls} {...others}>
-                {data.length > 0 ? this.renderData(data) : children}
+                {data.length > 0 ? this.renderData() : children}
             </ul>
         );
     }
-};
+}

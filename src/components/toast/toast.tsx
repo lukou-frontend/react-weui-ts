@@ -9,50 +9,50 @@ import Icon, { SizeType } from '../icon/index';
  *
  */
 interface ToastProps {
-  className?: string,
-  show: boolean,
-  iconSize?: SizeType,
-  [key: string]: any
+    className?: string;
+    show: boolean;
+    iconSize?: SizeType;
+    [key: string]: any;
 }
-class Toast extends React.Component<ToastProps> {
-    static propTypes = {
-        /**
-         * Icon Value
-         *
-         */
-        icon: PropTypes.string,
-        /**
-         * Icon Size
-         *
-         */
-        iconSize: PropTypes.string,
-        /**
-         * display toast
-         *
-         */
-        show: PropTypes.bool
-    };
-
-    static defaultProps = {
-        icon: 'toast',
-        show: false,
-    };
-
-    render() {
-        const {className = '', icon, show, children, iconSize, ...others} = this.props;
-        const cls = classNames('weui-toast', {
-            [className]: className
-        });
-        return (
-            <div style={{display: show ? 'block' : 'none'}}>
-                <Mask transparent={true}/>
-                <div className={cls} {...others}>
-                    <Icon value={icon} size={iconSize} className="weui-icon_toast"/>
-                    <p className="weui-toast_content">{children}</p>
-                </div>
+function Toast(props: ToastProps) {
+    const { className = '', icon, show, children, iconSize, ...others } = props;
+    const cls = classNames('weui-toast', {
+        [className]: className,
+    });
+    return (
+        <div style={{ display: show ? 'block' : 'none' }}>
+            <Mask transparent />
+            <div className={cls} {...others}>
+                <Icon
+                    value={icon}
+                    size={iconSize}
+                    className="weui-icon_toast"
+                />
+                <p className="weui-toast_content">{children}</p>
             </div>
-        );
-    }
+        </div>
+    );
 }
+Toast.propTypes = {
+    /**
+     * Icon Value
+     *
+     */
+    icon: PropTypes.string,
+    /**
+     * Icon Size
+     *
+     */
+    iconSize: PropTypes.string,
+    /**
+     * display toast
+     *
+     */
+    show: PropTypes.bool,
+};
 
+Toast.defaultProps = {
+    icon: 'toast',
+    show: false,
+};
 export default Toast;

@@ -1,8 +1,4 @@
 import _extends from "@babel/runtime/helpers/extends";
-import _classCallCheck from "@babel/runtime/helpers/classCallCheck";
-import _createClass from "@babel/runtime/helpers/createClass";
-import _inherits from "@babel/runtime/helpers/inherits";
-import _createSuper from "@babel/runtime/helpers/createSuper";
 
 var __rest = this && this.__rest || function (s, e) {
   var t = {};
@@ -19,36 +15,15 @@ var __rest = this && this.__rest || function (s, e) {
 
 import * as React from 'react';
 import classNames from '../../utils/classnames';
+export default function NavBar(props) {
+  var children = props.children,
+      className = props.className,
+      others = __rest(props, ["children", "className"]);
 
-var NavBar = /*#__PURE__*/function (_React$Component) {
-  _inherits(NavBar, _React$Component);
-
-  var _super = _createSuper(NavBar);
-
-  function NavBar() {
-    _classCallCheck(this, NavBar);
-
-    return _super.apply(this, arguments);
-  }
-
-  _createClass(NavBar, [{
-    key: "render",
-    value: function render() {
-      var _a = this.props,
-          children = _a.children,
-          className = _a.className,
-          others = __rest(_a, ["children", "className"]);
-
-      var cls = classNames({
-        'weui-navbar': true
-      }, className);
-      return /*#__PURE__*/React.createElement("div", _extends({
-        className: cls
-      }, others), children);
-    }
-  }]);
-
-  return NavBar;
-}(React.Component);
-
-export { NavBar as default };
+  var cls = classNames({
+    'weui-navbar': true
+  }, className);
+  return /*#__PURE__*/React.createElement("div", _extends({
+    className: cls
+  }, others), children);
+}

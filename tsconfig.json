@@ -10,11 +10,9 @@
     "noImplicitAny": true,
     "target": "esnext",
     "lib": ["dom", "es7"],
-    // "declaration": true,
-    // "declarationDir": "build/packages",
   },
   "include": [
-    // "src/**/*",
+    "src/**/*",
     "example/**/*",
   ],
   "exclude": [

@@ -6,33 +6,38 @@ import classNames, { ClassValue } from '../../utils/classnames';
  * Content wrapper for each Tab Item
  */
 interface TabBodyItemProps {
-  active?: boolean,
-  className?: ClassValue
+    active?: boolean;
+    className?: ClassValue;
+    children?: React.ReactNode;
 }
-export default class TabBodyItem extends React.Component<TabBodyItemProps> {
-    static propTypes = {
-        /**
-         * display this component
-         *
-         */
-        active: PropTypes.bool
-    };
+export default function TabBodyItem(props: TabBodyItemProps) {
+    const { children, className, active, ...others } = props;
+    const cls = classNames(
+        {
+            'weui-tab__bd-item': true,
+        },
+        className,
+    );
 
-    static defaultProps = {
-      active: false
-    };
-
-    render() {
-
-        const {children, className, active, ...others} = this.props;
-        const cls = classNames({
-           'weui-tab__bd-item': true
-        }, className);
-
-        return (
-            <div className={cls} style={{display: active ? 'block' : 'none'}} {...others}>
-                {children}
-            </div>
-        );
-    }
+    return (
+        <div
+            className={cls}
+            style={{ display: active ? 'block' : 'none' }}
+            {...others}
+        >
+            {children}
+        </div>
+    );
 }
+
+TabBodyItem.propTypes = {
+    /**
+     * display this component
+     *
+     */
+    active: PropTypes.bool,
+};
+
+TabBodyItem.defaultProps = {
+    active: false,
+};

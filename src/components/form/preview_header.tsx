@@ -5,21 +5,21 @@
  */
 import * as React from 'react';
 import classNames from '../../utils/classnames';
+
 interface PreviewHeader {
-  className?: any,
-  children?: React.ReactNode
+    className?: any;
+    children?: React.ReactNode;
 }
 const PreviewHeader = (props: PreviewHeader) => {
-
     const { className, children, ...others } = props;
     const cls = classNames({
         'weui-form-preview__hd': true,
-        [className]: className
+        [className]: className,
     });
 
     return (
         <div className={cls} {...others}>
-            { children }
+            {children}
         </div>
     );
 };

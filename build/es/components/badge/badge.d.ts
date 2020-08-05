@@ -6,12 +6,14 @@ import PropTypes from 'prop-types';
  */
 interface BadgeProps {
     dot?: boolean;
-    preset: 'header' | 'body' | 'footer' | 'default';
+    preset?: 'header' | 'body' | 'footer' | 'default';
     className?: any;
     style?: React.CSSProperties;
+    children?: React.ReactNode;
 }
-declare class Badge extends React.Component<BadgeProps> {
-    static propTypes: {
+declare function Badge(props: BadgeProps): JSX.Element;
+declare namespace Badge {
+    var propTypes: {
         /**
          * display dot style without content
          *
@@ -23,10 +25,9 @@ declare class Badge extends React.Component<BadgeProps> {
          */
         preset: PropTypes.Requireable<string>;
     };
-    static defaultProps: {
+    var defaultProps: {
         dot: boolean | undefined;
-        preset: "default" | "body" | "footer" | "header";
+        preset: "default" | "body" | "footer" | "header" | undefined;
     };
-    render(): JSX.Element;
 }
 export default Badge;

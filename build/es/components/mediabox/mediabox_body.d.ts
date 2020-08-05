@@ -7,7 +7,5 @@ interface PanelBodyProps {
     className?: any;
     children: React.ReactNode;
 }
-export default class PanelBody extends React.Component<PanelBodyProps> {
-    render(): JSX.Element;
-}
+export default function PanelBody(props: PanelBodyProps): JSX.Element;
 export {};

@@ -82,7 +82,7 @@ declare class InfiniteLoader extends React.Component<InfiniteLoaderProps, Infini
         resolveStatus: boolean;
     };
     constructor(props: InfiniteLoaderProps);
-    componentWillReceiveProps(nextProps: any): void;
+    UNSAFE_componentWillReceiveProps(nextProps: any): void;
     reset(): void;
     finish(): void;
     resolveLoading(): void;

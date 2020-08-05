@@ -54,7 +54,7 @@ declare class Page extends React.Component<PageProps, PageStates> {
         transition: boolean;
     };
     constructor(props: Readonly<PageProps>);
-    componentWillReceiveProps(newProps: any): void;
+    UNSAFE_componentWillReceiveProps(newProps: any): void;
     componentWillUnmount(): void;
     handleRefresh(resolve: () => void): void;
     handleContentScroll(e: any): void;

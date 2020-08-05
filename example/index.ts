@@ -2,7 +2,7 @@
  * @Author: 刘佑祥
  * @LastEditors: 刘佑祥
  * @LastEditTime: 2020-08-03 18:07:02
- */ 
+ */
 import Home from './pages/home/index';
 import Button from './pages/button/index';
 import List from './pages/list/index';
@@ -10,7 +10,6 @@ import Input from './pages/input/index';
 import Toast from './pages/toast/index';
 import Dialog from './pages/dialog/index';
 import Progress from './pages/progress/index';
-import Msg from './pages/msg/index';
 import Article from './pages/article/index';
 import ActionSheet from './pages/actionsheet/index';
 import Icons from './pages/icons/index';
@@ -48,7 +47,6 @@ export default {
     Input,
     Dialog,
     Progress,
-    Msg,
     Article,
     Toast,
     ActionSheet,
@@ -78,5 +76,5 @@ export default {
     Infinite,
     Swiper,
     Page,
-    SwipeAction
+    SwipeAction,
 };

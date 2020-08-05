@@ -1,8 +1,4 @@
 import _extends from "@babel/runtime/helpers/extends";
-import _classCallCheck from "@babel/runtime/helpers/classCallCheck";
-import _createClass from "@babel/runtime/helpers/createClass";
-import _inherits from "@babel/runtime/helpers/inherits";
-import _createSuper from "@babel/runtime/helpers/createSuper";
 
 var __rest = this && this.__rest || function (s, e) {
   var t = {};
@@ -23,45 +19,27 @@ import classNames from '../../utils/classnames';
 import Mask from '../mask/index';
 import './popup.less';
 
-var Popup = /*#__PURE__*/function (_React$Component) {
-  _inherits(Popup, _React$Component);
+function Popup(props) {
+  var className = props.className,
+      children = props.children,
+      show = props.show,
+      onRequestClose = props.onRequestClose,
+      enableMask = props.enableMask,
+      others = __rest(props, ["className", "children", "show", "onRequestClose", "enableMask"]);
 
-  var _super = _createSuper(Popup);
-
-  function Popup() {
-    _classCallCheck(this, Popup);
-
-    return _super.apply(this, arguments);
-  }
-
-  _createClass(Popup, [{
-    key: "render",
-    value: function render() {
-      var _a = this.props,
-          className = _a.className,
-          children = _a.children,
-          show = _a.show,
-          onRequestClose = _a.onRequestClose,
-          enableMask = _a.enableMask,
-          others = __rest(_a, ["className", "children", "show", "onRequestClose", "enableMask"]);
-
-      var cls = classNames('weui-popup', {
-        'weui-popup_toggle': show
-      }, className);
-      return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(Mask, {
-        transparent: enableMask,
-        style: {
-          display: show ? 'block' : 'none'
-        },
-        onClick: onRequestClose
-      }), /*#__PURE__*/React.createElement("div", _extends({
-        className: cls
-      }, others), children));
-    }
-  }]);
-
-  return Popup;
-}(React.Component);
+  var cls = classNames('weui-popup', {
+    'weui-popup_toggle': show
+  }, className);
+  return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(Mask, {
+    transparent: enableMask,
+    style: {
+      display: show ? 'block' : 'none'
+    },
+    onClick: onRequestClose
+  }), /*#__PURE__*/React.createElement("div", _extends({
+    className: cls
+  }, others), children));
+}
 
 Popup.propTypes = {
   /**

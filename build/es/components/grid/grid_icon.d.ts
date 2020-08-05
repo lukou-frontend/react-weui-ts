@@ -7,7 +7,5 @@ interface GridIconProps {
     className?: any;
     children?: React.ReactNode;
 }
-export default class GridIcon extends React.Component<GridIconProps> {
-    render(): JSX.Element;
-}
+export default function GridIcon(props: GridIconProps): JSX.Element;
 export {};

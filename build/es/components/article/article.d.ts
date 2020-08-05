@@ -6,8 +6,7 @@ import * as React from 'react';
 interface ArticalProps {
     className?: any;
     style?: React.CSSProperties;
+    children: React.ReactNode;
 }
-export default class Article extends React.Component<ArticalProps> {
-    render(): JSX.Element;
-}
+export default function Article(props: ArticalProps): JSX.Element;
 export {};

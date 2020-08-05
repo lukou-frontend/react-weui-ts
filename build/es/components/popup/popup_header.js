@@ -7,10 +7,12 @@ var PopupHeader = function PopupHeader(props) {
       right = props.right,
       leftOnClick = props.leftOnClick,
       rightOnClick = props.rightOnClick,
-      className = props.className;
+      className = props.className,
+      style = props.style;
   var cls = classNames('weui-popup__hd', className);
   return /*#__PURE__*/React.createElement("div", {
-    className: cls
+    className: cls,
+    style: style
   }, /*#__PURE__*/React.createElement("a", {
     className: "weui-popup__action",
     onClick: leftOnClick

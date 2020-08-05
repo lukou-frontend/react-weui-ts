@@ -1,4 +1,4 @@
-import * as React from 'react';
+/// <reference types="react" />
 import PropTypes from 'prop-types';
 /**
  * WeUI Icons
@@ -12,8 +12,9 @@ interface IconProps {
     primary?: any;
     [key: string]: any;
 }
-declare class Icon extends React.Component<IconProps> {
-    static propTypes: {
+declare function Icon(props: IconProps): JSX.Element;
+declare namespace Icon {
+    var propTypes: {
         /**
          * types of [weui icons](https://github.com/weui/weui/wiki/Icon)
          *
@@ -25,10 +26,9 @@ declare class Icon extends React.Component<IconProps> {
          */
         size: PropTypes.Requireable<string>;
     };
-    static defaultProps: {
+    var defaultProps: {
         value: string;
         size: "small" | "large" | undefined;
     };
-    render(): JSX.Element;
 }
 export default Icon;

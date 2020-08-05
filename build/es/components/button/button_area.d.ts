@@ -1,12 +1,21 @@
 import * as React from 'react';
+import PropTypes from 'prop-types';
 interface ButtonAreaProps {
     direction: 'veritical' | 'horizontal';
     className?: string;
+    children: React.ReactNode;
 }
-declare class ButtonArea extends React.Component<ButtonAreaProps> {
-    static defaultProps: {
+declare function ButtonArea(props: ButtonAreaProps): JSX.Element;
+declare namespace ButtonArea {
+    var propTypes: {
+        /**
+         * 'veritical'|'horizontal'
+         *
+         */
+        direction: PropTypes.Requireable<string>;
+    };
+    var defaultProps: {
         direction: string;
     };
-    render(): JSX.Element;
 }
 export default ButtonArea;

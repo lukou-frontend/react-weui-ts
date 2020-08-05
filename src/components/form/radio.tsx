@@ -6,21 +6,21 @@ import classNames from '../../utils/classnames';
  *
  */
 interface RadioProps {
-  className?: any,
-  children?: React.ReactNode,
-  [key: string]: any
+    className?: any;
+    children?: React.ReactNode;
+    [key: string]: any;
 }
 const Radio = (props: RadioProps) => {
     const { className, ...others } = props;
     const cls = classNames({
         'weui-check': true,
-        [className]: className
+        [className]: className,
     });
 
     return (
         <div>
-            <input className={cls} type="radio" {...others}/>
-            <span className="weui-icon-checked"></span>
+            <input className={cls} type="radio" {...others} />
+            <span className="weui-icon-checked" />
         </div>
     );
 };

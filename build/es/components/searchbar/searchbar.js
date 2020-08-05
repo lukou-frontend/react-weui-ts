@@ -20,13 +20,13 @@ var SearchBar = /*#__PURE__*/function (_React$Component) {
 
     _this = _super.call(this, props);
     _this.searchInput = /*#__PURE__*/React.createRef();
+    var defaultValue = props.defaultValue;
     _this.state = {
-      focus: _this.props.defaultValue ? true : false,
-      clearing: false,
-      text: _this.props.defaultValue ? _this.props.defaultValue : ''
+      focus: !!defaultValue,
+      text: defaultValue || ''
     };
 
-    if (_this.props.defaultValue !== '') {
+    if (defaultValue !== '') {
       if (_this.props.onChange) _this.props.onChange(_this.state.text);
     }
 
@@ -61,8 +61,7 @@ var SearchBar = /*#__PURE__*/function (_React$Component) {
     value: function clearHandle(e) {
       e.stopPropagation();
       this.setState({
-        text: '',
-        clearing: true
+        text: ''
       });
       if (this.props.onClear) this.props.onClear(e); // In most cases, you can attach a ref to the DOM node and avoid using findDOMNode at all.
       // When render returns null or false, findDOMNode returns null.
@@ -130,7 +129,7 @@ var SearchBar = /*#__PURE__*/function (_React$Component) {
         onChange: this.changeHandle.bind(this),
         value: this.state.text,
         autoComplete: autocomplete
-      }), /*#__PURE__*/React.createElement("a", {
+      }), /*#__PURE__*/React.createElement("div", {
         className: "weui-icon-clear",
         onClick: this.clearHandle.bind(this),
         style: {
@@ -207,7 +206,13 @@ SearchBar.propTypes = {
    * language object consists of `cancel` property
    *
    */
-  lang: PropTypes.object
+  lang: PropTypes.object,
+
+  /**
+   * 输入字段是否应该启用自动完成功能。on|off
+   *
+   */
+  autocomplete: PropTypes.string
 };
 SearchBar.defaultProps = {
   placeholder: '搜索',

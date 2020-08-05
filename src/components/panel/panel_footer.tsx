@@ -6,22 +6,22 @@ import classNames from '../../utils/classnames';
  *
  */
 interface PanelFooterProps {
-  className?: any,
-  href?: string,
-  children: React.ReactNode,
-  style?: React.CSSProperties,
+    className?: any;
+    href?: string;
+    children: React.ReactNode;
+    style?: React.CSSProperties;
 }
-export default class PanelFooter extends React.Component<PanelFooterProps> {
-    render() {
-        const {className, children, ...others} = this.props;
-        const Component = this.props.href ? 'a' : 'div';
-        const cls = classNames({
-            'weui-panel__ft': true,
-            [className]: className
-        });
+export default function PanelFooter(props: PanelFooterProps) {
+    const { className, children, ...others } = props;
+    const Component = props.href ? 'a' : 'div';
+    const cls = classNames({
+        'weui-panel__ft': true,
+        [className]: className,
+    });
 
-        return (
-            <Component className={cls} {...others}>{children}</Component>
-        );
-    }
-};
+    return (
+        <Component className={cls} {...others}>
+            {children}
+        </Component>
+    );
+}

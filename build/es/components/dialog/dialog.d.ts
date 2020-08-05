@@ -46,7 +46,6 @@ declare class Dialog extends React.Component<DialogProps> {
         title: string | undefined;
         type: "ios" | "android" | undefined;
     };
-    constructor(props: DialogProps);
     renderButtons(): JSX.Element[];
     render(): JSX.Element;
 }

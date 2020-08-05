@@ -6,18 +6,21 @@ import classNames from '../../utils/classnames';
  *
  */
 interface GridIconProps {
-  className?: any,
-  children?: React.ReactNode
+    className?: any;
+    children?: React.ReactNode;
 }
-export default class GridIcon extends React.Component<GridIconProps> {
-    render() {
-        const {children, className, ...others} = this.props;
-        const cls = classNames({
-            'weui-grid__icon': true
-        }, className);
+export default function GridIcon(props: GridIconProps) {
+    const { children, className, ...others } = props;
+    const cls = classNames(
+        {
+            'weui-grid__icon': true,
+        },
+        className,
+    );
 
-        return (
-            <div className={cls} {...others}>{children}</div>
-        );
-    }
-};
+    return (
+        <div className={cls} {...others}>
+            {children}
+        </div>
+    );
+}

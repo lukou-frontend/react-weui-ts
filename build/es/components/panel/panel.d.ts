@@ -11,17 +11,17 @@ interface PanelProps {
     style?: React.CSSProperties;
     [key: string]: any;
 }
-export default class Panel extends React.Component<PanelProps> {
-    static propTypes: {
+declare function Panel(props: PanelProps): JSX.Element;
+declare namespace Panel {
+    var propTypes: {
         /**
          * deprecated property from 0.4.x
          *
          */
         access: PropTypes.Requireable<boolean>;
     };
-    static defaultProps: {
+    var defaultProps: {
         access: boolean;
     };
-    render(): JSX.Element;
 }
-export {};
+export default Panel;

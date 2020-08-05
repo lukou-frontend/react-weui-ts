@@ -35,7 +35,8 @@ var Select = /*#__PURE__*/function (_React$Component) {
 
   _createClass(Select, [{
     key: "renderData",
-    value: function renderData(data) {
+    value: function renderData() {
+      var data = this.props.data;
       return data.map(function (item, i) {
         var value = item.value,
             label = item.label,
@@ -63,7 +64,7 @@ var Select = /*#__PURE__*/function (_React$Component) {
       return /*#__PURE__*/React.createElement("select", _extends({
         defaultValue: defaultValue,
         className: cls
-      }, others), data.length > 0 ? this.renderData(data) : children);
+      }, others), data.length > 0 ? this.renderData() : children);
     }
   }]);
 
@@ -81,4 +82,3 @@ Select.propTypes = {
 Select.defaultProps = {
   data: []
 };
-;

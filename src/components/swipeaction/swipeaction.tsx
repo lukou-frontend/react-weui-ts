@@ -1,19 +1,55 @@
-import classNames from '../../utils/classnames';
 import Swipeout from 'rc-swipeout';
 import * as React from 'react';
-import { SwipeActionPropsType } from './PropsType';
 import PropTypes from 'prop-types';
-import './swipeaction.less'
+import classNames from '../../utils/classnames';
+import { SwipeActionPropsType } from './PropsType';
+import './swipeaction.less';
 
 export interface SwipeActionProps
-  extends SwipeActionPropsType<React.CSSProperties> {
-  prefixCls?: string;
-  className?: string;
-  style?: React.CSSProperties;
+    extends SwipeActionPropsType<React.CSSProperties> {
+    prefixCls?: string;
+    className?: string;
+    style?: React.CSSProperties;
+    children?: React.ReactNode;
 }
 
-class SwipeAction extends React.Component<SwipeActionProps, any> {
-  static propTypes = {
+function SwipeAction(props: SwipeActionProps) {
+    const {
+        className,
+        style,
+        prefixCls,
+        left = [],
+        right = [],
+        autoClose,
+        disabled,
+        onOpen,
+        onClose,
+        children,
+    } = props;
+
+    const wrapClass = classNames(prefixCls, className);
+
+    return left.length || right.length ? (
+        <div style={style} className={className}>
+            <Swipeout
+                prefixCls={prefixCls}
+                left={left}
+                right={right}
+                autoClose={autoClose}
+                disabled={disabled}
+                onOpen={onOpen}
+                onClose={onClose}
+            >
+                {children}
+            </Swipeout>
+        </div>
+    ) : (
+        <div style={style} className={wrapClass}>
+            {children}
+        </div>
+    );
+}
+SwipeAction.propTypes = {
     /**
      * swipeout 样式
      */
@@ -42,9 +78,10 @@ class SwipeAction extends React.Component<SwipeActionProps, any> {
      * 关闭时回调函数
      */
     onClose: PropTypes.func,
-  }
+    prefixCls: PropTypes.string,
+};
 
-  static defaultProps = {
+SwipeAction.defaultProps = {
     prefixCls: 'am-swipe',
     autoClose: false,
     disabled: false,
@@ -52,44 +89,5 @@ class SwipeAction extends React.Component<SwipeActionProps, any> {
     right: [],
     onOpen() {},
     onClose() {},
-  };
-
-  render() {
-    const {
-      className,
-      style,
-      prefixCls,
-      left = [],
-      right = [],
-      autoClose,
-      disabled,
-      onOpen,
-      onClose,
-      children,
-    } = this.props;
-
-    const wrapClass = classNames(prefixCls, className);
-
-    return left.length || right.length ? (
-      <div style={style} className={className}>
-        <Swipeout
-          prefixCls={prefixCls}
-          left={left}
-          right={right}
-          autoClose={autoClose}
-          disabled={disabled}
-          onOpen={onOpen}
-          onClose={onClose}
-        >
-          {children}
-        </Swipeout>
-      </div>
-    ) : (
-      <div style={style} className={wrapClass}>
-        {children}
-      </div>
-    );
-  }
-}
-
+};
 export default SwipeAction;

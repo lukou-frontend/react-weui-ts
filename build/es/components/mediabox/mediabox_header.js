@@ -47,9 +47,9 @@ var MediaBoxHeader = /*#__PURE__*/function (_React$Component) {
           return /*#__PURE__*/React.cloneElement(child, {
             className: 'weui-media-box__thumb'
           });
-        } else {
-          return child;
         }
+
+        return child;
       });
       return /*#__PURE__*/React.createElement("div", _extends({
         className: clz
@@ -61,4 +61,3 @@ var MediaBoxHeader = /*#__PURE__*/function (_React$Component) {
 }(React.Component);
 
 export { MediaBoxHeader as default };
-;

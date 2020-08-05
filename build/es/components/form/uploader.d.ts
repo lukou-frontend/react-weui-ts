@@ -34,7 +34,7 @@ interface UploaderProps {
     showAddInput: boolean;
     style?: React.CSSProperties;
 }
-declare type customFile = {
+declare type CustomFile = {
     nativeFile: Blob;
     lastModified: number;
     lastModifiedDate: Date;
@@ -43,14 +43,14 @@ declare type customFile = {
     size: number;
     type: string;
 };
-declare type handleFileCallback = (file: customFile | Blob, e: renderOnloadEvent) => void;
-declare type renderOnloadEvent = {
+declare type HandleFileCallback = (file: CustomFile | Blob, e: RenderOnloadEvent) => void;
+declare type RenderOnloadEvent = {
     target: {
         result: any;
     };
 };
 export default class Uploader extends React.Component<UploaderProps> {
-    constructor(props: UploaderProps);
+    private uploaderRef;
     static propTypes: {
         /**
          * max amount of allow file
@@ -138,6 +138,7 @@ export default class Uploader extends React.Component<UploaderProps> {
         showTitle: boolean;
         size: "small" | "normal" | "large";
     };
+    getImageSize(): any;
     /**
      * Detecting vertical squash in loaded image.
      * Fixes a bug which squash image vertically while drawing into canvas for some images.
@@ -145,9 +146,8 @@ export default class Uploader extends React.Component<UploaderProps> {
      * With react fix by n7best
      */
     detectVerticalSquash(img: any): number | undefined;
-    handleFile(file: Blob, cb: handleFileCallback): void;
+    handleFile(file: Blob, cb: HandleFileCallback): void;
     handleChange(e: React.ChangeEvent<HTMLInputElement>): void;
-    getImageSize(): any;
     renderFiles(): JSX.Element[];
     render(): JSX.Element;
 }

@@ -39,7 +39,7 @@ export default class Tab extends React.Component<TabProps> {
         ChildHeaders: React.ReactElement<any, string | ((props: any) => React.ReactElement<any, string | any | (new (props: any) => React.Component<any, any, any>)> | null) | (new (props: any) => React.Component<any, any, any>)>[];
         ChildContents: React.ReactElement<any, string | ((props: any) => React.ReactElement<any, string | any | (new (props: any) => React.Component<any, any, any>)> | null) | (new (props: any) => React.Component<any, any, any>)>[];
     };
-    renderBar(type: string, children: React.ReactElement[], cls: string): false | JSX.Element;
+    renderBar(type: TabProps['type'], children: React.ReactElement[], cls: string): false | JSX.Element;
     render(): false | JSX.Element;
 }
 export {};

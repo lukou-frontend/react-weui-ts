@@ -4,17 +4,19 @@ import './actionsheet.less';
 /**
  * Used to display a collection of actions that contain a set of interactivity, including descriptions, links, and so on. Popup from the bottom, generally used to respond to user clicks on the page.
  */
-declare type item = {
+declare type Item = {
     label: string;
     className?: string;
     [key: string]: any;
 };
 interface ActionSheetProps {
-    menus: item[];
-    actions: item[];
+    menus: Item[];
+    actions: Item[];
     show: boolean;
     onRequestClose: React.TouchEventHandler;
     type: string;
+}
+interface DefaultProps extends Pick<ActionSheetProps, 'menus' | 'actions' | 'type' | 'show'> {
 }
 declare class ActionSheet extends React.Component<ActionSheetProps> {
     static propTypes: {
@@ -43,16 +45,11 @@ declare class ActionSheet extends React.Component<ActionSheetProps> {
          */
         type: PropTypes.Requireable<string>;
     };
-    static defaultProps: {
-        type: string;
-        menus: never[];
-        actions: never[];
-        show: boolean;
-    };
+    static defaultProps: DefaultProps;
     constructor(props: Readonly<ActionSheetProps>);
+    handleMaskClick(e: React.TouchEvent): void;
     renderMenuItem(): JSX.Element[];
     renderActions(): JSX.Element[];
-    handleMaskClick(e: React.TouchEvent): void;
     render(): JSX.Element;
 }
 export default ActionSheet;

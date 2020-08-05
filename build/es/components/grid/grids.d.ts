@@ -24,7 +24,7 @@ export default class Grids extends React.Component<GridsProps> {
     static defaultProps: {
         data: Data[];
     };
-    renderData(data: Array<Data>): JSX.Element[];
+    renderData(): JSX.Element[];
     render(): JSX.Element;
 }
 export {};

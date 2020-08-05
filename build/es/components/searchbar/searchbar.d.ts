@@ -8,7 +8,6 @@ import { ClassValue } from '../../utils/classnames';
 interface SearchBarState {
     text: string;
     focus: boolean;
-    clearing: boolean;
 }
 interface SearchBarProps {
     defaultValue?: string;
@@ -23,6 +22,8 @@ interface SearchBarProps {
     placeholder?: string;
     searchName?: string;
     className?: ClassValue;
+}
+interface DefaultProps extends Pick<SearchBarProps, 'placeholder' | 'searchName' | 'onChange' | 'onClear' | 'onCancel' | 'onSubmit' | 'lang' | 'autocomplete'> {
 }
 declare class SearchBar extends React.Component<SearchBarProps, SearchBarState> {
     private searchInput;
@@ -67,19 +68,13 @@ declare class SearchBar extends React.Component<SearchBarProps, SearchBarState> 
          *
          */
         lang: PropTypes.Requireable<object>;
+        /**
+         * 输入字段是否应该启用自动完成功能。on|off
+         *
+         */
+        autocomplete: PropTypes.Requireable<string>;
     };
-    static defaultProps: {
-        placeholder: string;
-        searchName: string;
-        onChange: undefined;
-        onClear: undefined;
-        onCancel: undefined;
-        onSubmit: undefined;
-        lang: {
-            cancel: string;
-        };
-        autocomplete: string;
-    };
+    static defaultProps: DefaultProps;
     constructor(props: SearchBarProps);
     changeHandle(e: React.ChangeEvent<HTMLInputElement>): void;
     cancelHandle(e: React.TouchEvent): void;

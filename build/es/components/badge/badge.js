@@ -1,8 +1,4 @@
 import _extends from "@babel/runtime/helpers/extends";
-import _classCallCheck from "@babel/runtime/helpers/classCallCheck";
-import _createClass from "@babel/runtime/helpers/createClass";
-import _inherits from "@babel/runtime/helpers/inherits";
-import _createSuper from "@babel/runtime/helpers/createSuper";
 
 var __rest = this && this.__rest || function (s, e) {
   var t = {};
@@ -21,58 +17,41 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 import classNames from '../../utils/classnames';
 var presetStyles = {
-  'default': {},
-  'header': {
+  "default": {},
+  header: {
     position: 'absolute',
     top: '-.4em',
     right: '-.4em'
   },
-  'body': {
+  body: {
     marginLeft: '5px'
   },
-  'footer': {
+  footer: {
     marginLeft: '5px',
     marginRight: '5px'
   }
 };
 
-var Badge = /*#__PURE__*/function (_React$Component) {
-  _inherits(Badge, _React$Component);
+function Badge(props) {
+  var children = props.children,
+      className = props.className,
+      dot = props.dot,
+      style = props.style,
+      _props$preset = props.preset,
+      preset = _props$preset === void 0 ? 'default' : _props$preset,
+      domProps = __rest(props, ["children", "className", "dot", "style", "preset"]);
 
-  var _super = _createSuper(Badge);
+  var clz = classNames('weui-badge', {
+    'weui-badge_dot': dot
+  }, className);
 
-  function Badge() {
-    _classCallCheck(this, Badge);
+  var stylez = _extends(_extends({}, presetStyles[preset]), style);
 
-    return _super.apply(this, arguments);
-  }
-
-  _createClass(Badge, [{
-    key: "render",
-    value: function render() {
-      var _a = this.props,
-          children = _a.children,
-          className = _a.className,
-          dot = _a.dot,
-          style = _a.style,
-          preset = _a.preset,
-          domProps = __rest(_a, ["children", "className", "dot", "style", "preset"]);
-
-      var clz = classNames('weui-badge', {
-        'weui-badge_dot': dot
-      }, className);
-
-      var stylez = _extends({}, presetStyles[preset], style);
-
-      return /*#__PURE__*/React.createElement("span", _extends({
-        className: clz,
-        style: stylez
-      }, domProps), children);
-    }
-  }]);
-
-  return Badge;
-}(React.Component);
+  return /*#__PURE__*/React.createElement("span", _extends({
+    className: clz,
+    style: stylez
+  }, domProps), children);
+}
 
 Badge.propTypes = {
   /**

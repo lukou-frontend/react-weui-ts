@@ -12,7 +12,9 @@ interface PickerGroupProps {
     aniamtion: boolean;
     className?: any;
     items?: any;
-    mapKeys?: any;
+    mapKeys?: {
+        label: string;
+    };
 }
 interface PickerGroupStates {
     touching: boolean;
@@ -21,7 +23,6 @@ interface PickerGroupStates {
     touchId: any;
     translate: number;
     totalHeight: number;
-    selected: number;
     animating: boolean | undefined;
 }
 declare class PickerGroup extends React.Component<PickerGroupProps, PickerGroupStates> {
@@ -34,6 +35,7 @@ declare class PickerGroup extends React.Component<PickerGroupProps, PickerGroupS
         aniamtion: PropTypes.Requireable<boolean>;
         groupIndex: PropTypes.Requireable<number>;
         defaultIndex: PropTypes.Requireable<number>;
+        mapKeys: PropTypes.Requireable<object>;
     };
     static defaultProps: {
         height: number;
@@ -49,7 +51,7 @@ declare class PickerGroup extends React.Component<PickerGroupProps, PickerGroupS
     };
     constructor(props: PickerGroupProps);
     componentDidMount(): void;
-    componentWillReceiveProps(nextProps: PickerGroupProps): void;
+    UNSAFE_componentWillReceiveProps(nextProps: PickerGroupProps): void;
     adjustPosition(props: PickerGroupProps): void;
     updateSelected(propagate?: boolean): void;
     handleTouchStart(e: React.TouchEvent): void;

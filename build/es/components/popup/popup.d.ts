@@ -13,8 +13,9 @@ interface PopupProps {
     style?: React.CSSProperties;
     onRequestClose?: () => void;
 }
-declare class Popup extends React.Component<PopupProps> {
-    static propTypes: {
+declare function Popup(props: PopupProps): JSX.Element;
+declare namespace Popup {
+    var propTypes: {
         /**
          * display the component
          *
@@ -26,10 +27,9 @@ declare class Popup extends React.Component<PopupProps> {
          */
         enableMask: PropTypes.Requireable<boolean>;
     };
-    static defaultProps: {
+    var defaultProps: {
         show: boolean;
         enableMask: boolean;
     };
-    render(): JSX.Element;
 }
 export default Popup;

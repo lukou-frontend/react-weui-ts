@@ -20,7 +20,6 @@ var __rest = this && this.__rest || function (s, e) {
 
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import ReactDOM from 'react-dom';
 import classNames from '../../utils/classnames';
 import Icon from '../icon';
 import LoadMore from '../loadmore';
@@ -37,6 +36,7 @@ var PullToRefresh = /*#__PURE__*/function (_React$Component) {
     _classCallCheck(this, PullToRefresh);
 
     _this = _super.call(this, props);
+    _this.contentRef = /*#__PURE__*/React.createRef();
     _this.state = {
       pullPercent: 0,
       touching: false,
@@ -74,13 +74,15 @@ var PullToRefresh = /*#__PURE__*/function (_React$Component) {
     key: "handleTouchStart",
     value: function handleTouchStart(e) {
       if (this.state.touching || this.state.loading || this.props.disable) return;
-      var $content = ReactDOM.findDOMNode(this.refs.content);
-      this.setState({
-        touching: true,
-        touchId: e.targetTouches[0].identifier,
-        ogY: this.state.pullPercent === 0 ? e.targetTouches[0].pageY : e.targetTouches[0].pageY - this.state.pullPercent,
-        animating: false,
-        initScrollTop: $content.scrollTop
+      var $content = this.contentRef.current;
+      this.setState(function (prevState) {
+        return {
+          touching: true,
+          touchId: e.targetTouches[0].identifier,
+          animating: false,
+          initScrollTop: $content.scrollTop,
+          ogY: prevState.pullPercent === 0 ? e.targetTouches[0].pageY : e.targetTouches[0].pageY - prevState.pullPercent
+        };
       });
     }
   }, {
@@ -88,12 +90,13 @@ var PullToRefresh = /*#__PURE__*/function (_React$Component) {
     value: function handleTouchMove(e) {
       if (!this.state.touching || this.state.loading || this.props.disable) return;
       if (e.targetTouches[0].identifier !== this.state.touchId) return;
-      var pageY = e.targetTouches[0].pageY;
+      var pageY = e.targetTouches[0].pageY; // eslint-disable-next-line react/no-access-state-in-setstate
+
       var diffY = pageY - this.state.ogY; //if it's scroll
 
       if (diffY < 0) return; //if it's not at top
 
-      var $content = ReactDOM.findDOMNode(this.refs.content);
+      var $content = this.contentRef.current;
       if ($content.scrollTop > 0) return;
       diffY = diffY - this.state.initScrollTop > 100 ? 100 : diffY - this.state.initScrollTop;
       this.setState({
@@ -163,7 +166,7 @@ var PullToRefresh = /*#__PURE__*/function (_React$Component) {
         style: {
           touchAction: 'none'
         },
-        ref: "content",
+        ref: this.contentRef,
         onTouchStart: this.handleTouchStart,
         onTouchMove: this.handleTouchMove,
         onTouchEnd: this.handleTouchEnd

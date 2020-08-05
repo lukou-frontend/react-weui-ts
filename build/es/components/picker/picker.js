@@ -107,7 +107,7 @@ var Picker = /*#__PURE__*/function (_React$Component) {
         return /*#__PURE__*/React.createElement("a", _extends({}, others, {
           key: i,
           className: "weui-picker__action"
-        }), " ", label);
+        }), ' ', label);
       });
       return /*#__PURE__*/React.createElement("div", {
         className: "weui-picker__hd"

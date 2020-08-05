@@ -7,18 +7,19 @@ import { ClassValue } from '../../utils/classnames';
 interface TabBodyItemProps {
     active?: boolean;
     className?: ClassValue;
+    children?: React.ReactNode;
 }
-export default class TabBodyItem extends React.Component<TabBodyItemProps> {
-    static propTypes: {
+declare function TabBodyItem(props: TabBodyItemProps): JSX.Element;
+declare namespace TabBodyItem {
+    var propTypes: {
         /**
          * display this component
          *
          */
         active: PropTypes.Requireable<boolean>;
     };
-    static defaultProps: {
+    var defaultProps: {
         active: boolean;
     };
-    render(): JSX.Element;
 }
-export {};
+export default TabBodyItem;

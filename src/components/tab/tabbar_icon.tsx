@@ -6,21 +6,21 @@ import classNames, { ClassValue } from '../../utils/classnames';
  *
  */
 interface TabBarIconProps {
-  className?: ClassValue
+    className?: ClassValue;
+    children?: React.ReactNode;
 }
-export default class TabBarIcon extends React.Component<TabBarIconProps> {
-
-    render() {
-
-        const {children, className, ...others} = this.props;
-        const cls = classNames({
+export default function TabBarIcon(props: TabBarIconProps) {
+    const { children, className, ...others } = props;
+    const cls = classNames(
+        {
             'weui-tabbar__icon': true,
-        }, className);
+        },
+        className,
+    );
 
-        return (
-            <div className={cls} {...others}>
-                {children}
-            </div>
-        );
-    }
+    return (
+        <div className={cls} {...others}>
+            {children}
+        </div>
+    );
 }

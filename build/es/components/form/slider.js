@@ -20,7 +20,6 @@ var __rest = this && this.__rest || function (s, e) {
 
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import ReactDOM from 'react-dom';
 import classNames from '../../utils/classnames';
 
 var Slider = /*#__PURE__*/function (_React$Component) {
@@ -34,14 +33,19 @@ var Slider = /*#__PURE__*/function (_React$Component) {
     _classCallCheck(this, Slider);
 
     _this = _super.call(this, props);
+    _this.BarRef = /*#__PURE__*/React.createRef();
+    var value = props.value,
+        defaultValue = props.defaultValue,
+        max = props.max,
+        min = props.min;
     _this.state = {
-      value: _this.props.value ? _this.props.value : _this.props.defaultValue ? _this.props.defaultValue : 0,
-      controlled: typeof _this.props.value !== 'undefined',
+      value: value || defaultValue || 0,
+      controlled: typeof value !== 'undefined',
       totalWidth: 0,
       touching: false,
       ogX: 0,
       touchId: undefined,
-      percent: _this.props.value ? _this.props.value / (_this.props.max - _this.props.min) * 100 : _this.props.defaultValue ? _this.props.defaultValue / (_this.props.max - _this.props.min) * 100 : 0,
+      percent: value ? value / (max - min) * 100 : defaultValue ? defaultValue / (max - min) * 100 : 0,
       animating: false
     };
     _this.handleTouchStart = _this.handleTouchStart.bind(_assertThisInitialized(_this));
@@ -57,8 +61,8 @@ var Slider = /*#__PURE__*/function (_React$Component) {
       if (this.state.value === 0) this.updateValue();
     }
   }, {
-    key: "componentWillReceiveProps",
-    value: function componentWillReceiveProps(nextProps) {
+    key: "UNSAFE_componentWillReceiveProps",
+    value: function UNSAFE_componentWillReceiveProps(nextProps) {
       if (this.state.controlled) {
         if (nextProps.value <= this.props.max && nextProps.value >= this.props.min) {
           var percent = nextProps.value / (this.props.max - this.props.min) * 100;
@@ -76,21 +80,21 @@ var Slider = /*#__PURE__*/function (_React$Component) {
 
       var snap = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
       var value = 0;
-      var percent = this.state.percent,
-          _this$props = this.props,
+      var percent = this.state.percent;
+      var _this$props = this.props,
           min = _this$props.min,
           max = _this$props.max,
           step = _this$props.step,
-          onChange = _this$props.onChange,
-          steps = (max - min) / step,
-          perPercent = 100 / steps;
+          onChange = _this$props.onChange;
+      var steps = (max - min) / step;
+      var perPercent = 100 / steps;
 
       if (percent === 100) {
         value = max;
       } else if (percent === 0) {
         value = min;
       } else {
-        for (var i = 0; i < steps; i++) {
+        for (var i = 0; i < steps; i += 1) {
           //over 50 margin than next
           if (percent > i * perPercent && percent <= (i + 1) * perPercent) {
             value = percent - i * perPercent > perPercent / 2 ? (i + 1) * step + min : i * step + min;
@@ -119,32 +123,37 @@ var Slider = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "handleTouchStart",
     value: function handleTouchStart(e) {
+      var _this3 = this;
+
       if (this.state.touching || this.props.disabled) return;
-      var barDOM = ReactDOM.findDOMNode(this.refs.bar);
-      this.setState({
-        touching: true,
-        touchId: e.targetTouches[0].identifier,
-        totalWidth: barDOM.clientWidth,
-        ogX: e.targetTouches[0].pageX,
-        ogPercent: this.state.percent
+      this.setState(function (prevState) {
+        return {
+          touching: true,
+          touchId: e.targetTouches[0].identifier,
+          totalWidth: _this3.BarRef.current.clientWidth,
+          ogX: e.targetTouches[0].pageX,
+          ogPercent: prevState.percent
+        };
       });
     }
   }, {
     key: "handleTouchMove",
     value: function handleTouchMove(e) {
-      var _this3 = this;
+      var _this4 = this;
 
       if (!this.state.touching || this.props.disabled) return;
       if (e.targetTouches[0].identifier !== this.state.touchId) return;
       if (typeof this.state.ogPercent === 'undefined') return;
       var pageX = e.targetTouches[0].pageX;
       var diffX = pageX - this.state.ogX;
-      var percent = diffX / this.state.totalWidth * 100 + this.state.ogPercent;
-      percent = percent < 0 ? 0 : percent > 100 ? 100 : percent;
-      this.setState({
-        percent: percent
+      this.setState(function (prevState) {
+        var percent = diffX / prevState.totalWidth * 100 + prevState.ogPercent;
+        percent = percent < 0 ? 0 : percent > 100 ? 100 : percent;
+        return {
+          percent: percent
+        };
       }, function () {
-        return _this3.updateValue();
+        return _this4.updateValue();
       });
     }
   }, {
@@ -194,7 +203,7 @@ var Slider = /*#__PURE__*/function (_React$Component) {
         className: "weui-slider"
       }, domProps), /*#__PURE__*/React.createElement("div", {
         className: "weui-slider__inner",
-        ref: "bar"
+        ref: this.BarRef
       }, /*#__PURE__*/React.createElement("div", {
         style: trackStyles,
         className: "weui-slider__track"

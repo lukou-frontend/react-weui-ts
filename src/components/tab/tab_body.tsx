@@ -5,21 +5,21 @@ import classNames, { ClassValue } from '../../utils/classnames';
  * Content Wrapper for Tab
  */
 interface TabBodyProps {
-  className?: ClassValue
+    className?: ClassValue;
+    children?: React.ReactNode;
 }
-export default class TabBody extends React.Component<TabBodyProps> {
+export default function TabBody(props: TabBodyProps) {
+    const { children, className, ...others } = props;
+    const cls = classNames(
+        {
+            'weui-tab__panel': true,
+        },
+        className,
+    );
 
-    render() {
-
-        const {children, className, ...others} = this.props;
-        const cls = classNames({
-            'weui-tab__panel': true
-        }, className);
-
-        return (
-            <div className={cls} {...others}>
-                {children}
-            </div>
-        );
-    }
+    return (
+        <div className={cls} {...others}>
+            {children}
+        </div>
+    );
 }
