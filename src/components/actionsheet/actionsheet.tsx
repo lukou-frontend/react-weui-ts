@@ -7,48 +7,49 @@ import './actionsheet.less';
 /**
  * Used to display a collection of actions that contain a set of interactivity, including descriptions, links, and so on. Popup from the bottom, generally used to respond to user clicks on the page.
  */
-type item = {
-  label: string,
-  className?: string,
-  [key: string]: any
-}
+type Item = {
+    label: string;
+    className?: string;
+    [key: string]: any;
+};
 interface ActionSheetProps {
-  menus: item[],
-  actions: item[],
-  show: boolean,
-  onRequestClose: React.TouchEventHandler,
-  type: string
+    menus: Item[];
+    actions: Item[];
+    show: boolean;
+    onRequestClose: React.TouchEventHandler;
+    type: string;
 }
+interface DefaultProps
+    extends Pick<ActionSheetProps, 'menus' | 'actions' | 'type' | 'show'> {}
 class ActionSheet extends React.Component<ActionSheetProps> {
     static propTypes = {
-      /**
-       * Array of Objects for menus, `label` property is Required
-       *
-       */
-      menus: PropTypes.array,
-      /**
-       * Array of Objects for actions, `label` property is Required
-       *
-       */
-      actions: PropTypes.array,
-      /**
-       * To display ActionSheet
-       *
-       */
-      show: PropTypes.bool,
-      /**
-       * Function triggers when user click on the mask
-       *
-       */
-      onRequestClose: PropTypes.func,
-      /**
-       * style: ios/android
-       */
-      type: PropTypes.string,
+        /**
+         * Array of Objects for menus, `label` property is Required
+         *
+         */
+        menus: PropTypes.array,
+        /**
+         * Array of Objects for actions, `label` property is Required
+         *
+         */
+        actions: PropTypes.array,
+        /**
+         * To display ActionSheet
+         *
+         */
+        show: PropTypes.bool,
+        /**
+         * Function triggers when user click on the mask
+         *
+         */
+        onRequestClose: PropTypes.func,
+        /**
+         * style: ios/android
+         */
+        type: PropTypes.string,
     };
 
-
-    static defaultProps = {
+    static defaultProps: DefaultProps = {
         type: '',
         menus: [],
         actions: [],
@@ -58,67 +59,78 @@ class ActionSheet extends React.Component<ActionSheetProps> {
     constructor(props: Readonly<ActionSheetProps>) {
         super(props);
 
-
         this.handleMaskClick = this.handleMaskClick.bind(this);
     }
 
+    handleMaskClick(e: React.TouchEvent) {
+        if (this.props.onRequestClose) this.props.onRequestClose(e);
+    }
+
     renderMenuItem() {
-        return this.props.menus.map((menu, idx) => {
-            const {label, className = '', ...others} = menu;
+        return this.props.menus.map((menu) => {
+            const { label, className = '', ...others } = menu;
             const cls = classNames({
                 'weui-actionsheet__cell': true,
-                [className]: className
+                [className]: className,
             });
 
             return (
-                <div key={idx} {...others} className={cls}>{label}</div>
+                <div key={label} {...others} className={cls}>
+                    {label}
+                </div>
             );
         });
     }
 
     renderActions() {
-        return this.props.actions.map((action, idx) => {
-            const {label, className = '', ...others} = action;
+        return this.props.actions.map((action) => {
+            const { label, className = '', ...others } = action;
             const cls = classNames({
                 'weui-actionsheet__cell': true,
-                [className]: className
+                [className]: className,
             });
 
             return (
-                <div key={idx} {...others} className={cls}>{label}</div>
+                <div key={label} {...others} className={cls}>
+                    {label}
+                </div>
             );
         });
     }
 
-    handleMaskClick(e: React.TouchEvent){
-        if (this.props.onRequestClose) this.props.onRequestClose(e);
-    }
-
     render() {
-        const {show, type, onRequestClose, menus, actions, ...others} = this.props;
+        const {
+            show,
+            type,
+            onRequestClose,
+            menus,
+            actions,
+            ...others
+        } = this.props;
         const cls = classNames({
             'weui-actionsheet': true,
-            'weui-actionsheet_toggle': show
+            'weui-actionsheet_toggle': show,
         });
 
-        let styleType = type ? type : 'ios';
+        const styleType = type || 'ios';
 
         return (
-            <div
-                className={styleType === 'android' ? 'weui-skin_android' : ''}
-            >
-                    <Mask style={{display: show ? 'block' : 'none'}} onClick={this.handleMaskClick} />
-                    <div className={cls} {...others} >
-                        <div className="weui-actionsheet__menu">
-                            {this.renderMenuItem()}
-                        </div>
-                        <div className="weui-actionsheet__action">
-                            {this.renderActions()}
-                        </div>
+            <div className={styleType === 'android' ? 'weui-skin_android' : ''}>
+                <Mask
+                    style={{ display: show ? 'block' : 'none' }}
+                    onClick={this.handleMaskClick}
+                />
+                <div className={cls} {...others}>
+                    <div className="weui-actionsheet__menu">
+                        {this.renderMenuItem()}
                     </div>
+                    <div className="weui-actionsheet__action">
+                        {this.renderActions()}
+                    </div>
+                </div>
             </div>
         );
     }
-};
+}
 
 export default ActionSheet;
