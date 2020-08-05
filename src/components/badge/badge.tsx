@@ -23,14 +23,21 @@ const presetStyles = {
  */
 interface BadgeProps {
     dot?: boolean;
-    preset: 'header' | 'body' | 'footer' | 'default';
+    preset?: 'header' | 'body' | 'footer' | 'default';
     className?: any;
     style?: React.CSSProperties;
-    children: React.ReactNode;
+    children?: React.ReactNode;
 }
 
 function Badge(props: BadgeProps) {
-    const { children, className, dot, style, preset, ...domProps } = props;
+    const {
+        children,
+        className,
+        dot,
+        style,
+        preset = 'default',
+        ...domProps
+    } = props;
     const clz = classNames(
         'weui-badge',
         {
