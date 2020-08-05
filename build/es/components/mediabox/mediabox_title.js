@@ -1,8 +1,4 @@
 import _extends from "@babel/runtime/helpers/extends";
-import _classCallCheck from "@babel/runtime/helpers/classCallCheck";
-import _createClass from "@babel/runtime/helpers/createClass";
-import _inherits from "@babel/runtime/helpers/inherits";
-import _createSuper from "@babel/runtime/helpers/createSuper";
 
 var __rest = this && this.__rest || function (s, e) {
   var t = {};
@@ -19,37 +15,15 @@ var __rest = this && this.__rest || function (s, e) {
 
 import * as React from 'react';
 import classNames from '../../utils/classnames';
+export default function MediaBoxTitle(props) {
+  var children = props.children,
+      className = props.className,
+      others = __rest(props, ["children", "className"]);
 
-var MediaBoxTitle = /*#__PURE__*/function (_React$Component) {
-  _inherits(MediaBoxTitle, _React$Component);
-
-  var _super = _createSuper(MediaBoxTitle);
-
-  function MediaBoxTitle() {
-    _classCallCheck(this, MediaBoxTitle);
-
-    return _super.apply(this, arguments);
-  }
-
-  _createClass(MediaBoxTitle, [{
-    key: "render",
-    value: function render() {
-      var _a = this.props,
-          children = _a.children,
-          className = _a.className,
-          others = __rest(_a, ["children", "className"]);
-
-      var cls = classNames({
-        'weui-media-box__title': true
-      }, className);
-      return /*#__PURE__*/React.createElement("h4", _extends({
-        className: cls
-      }, others), children);
-    }
-  }]);
-
-  return MediaBoxTitle;
-}(React.Component);
-
-export { MediaBoxTitle as default };
-;
+  var cls = classNames({
+    'weui-media-box__title': true
+  }, className);
+  return /*#__PURE__*/React.createElement("h4", _extends({
+    className: cls
+  }, others), children);
+}

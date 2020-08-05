@@ -6,8 +6,7 @@ import { ClassValue } from '../../utils/classnames';
  */
 interface TabBarLabelProps {
     className?: ClassValue;
+    children?: React.ReactNode;
 }
-export default class TabBarLabel extends React.Component<TabBarLabelProps> {
-    render(): JSX.Element;
-}
+export default function TabBarLabel(props: TabBarLabelProps): JSX.Element;
 export {};

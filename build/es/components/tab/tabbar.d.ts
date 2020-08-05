@@ -6,8 +6,7 @@ import { ClassValue } from '../../utils/classnames';
  */
 interface TabBarProps {
     className?: ClassValue;
+    children?: React.ReactNode;
 }
-export default class TabBar extends React.Component<TabBarProps> {
-    render(): JSX.Element;
-}
+export default function TabBar(props: TabBarProps): JSX.Element;
 export {};

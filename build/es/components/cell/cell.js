@@ -33,10 +33,11 @@ var Cell = function Cell(props) {
       component = props.component,
       htmlFor = props.htmlFor,
       onClick = props.onClick,
-      others = __rest(props, ["className", "children", "access", "href", "link", "component", "htmlFor", "onClick"]);
+      others = __rest(props, ["className", "children", "access", "href", "link", "component", "htmlFor", "onClick"]); // eslint-disable-next-line no-nested-ternary
+
 
   var DefaultComponent = href ? 'a' : htmlFor ? 'label' : 'div';
-  var CellComponent = component ? component : DefaultComponent;
+  var CellComponent = component || DefaultComponent;
   var cls = classNames(_defineProperty({
     'weui-cell': true,
     'weui-cell_access': access,

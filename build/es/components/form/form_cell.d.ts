@@ -16,8 +16,9 @@ interface FormCellProps {
     className?: any;
     children?: React.ReactNode;
 }
-export default class FormCell extends React.Component<FormCellProps> {
-    static propTypes: {
+declare function FormCell(props: FormCellProps): JSX.Element;
+declare namespace FormCell {
+    var propTypes: {
         /**
          * if cell use for vcode
          *
@@ -54,7 +55,7 @@ export default class FormCell extends React.Component<FormCellProps> {
          */
         selectPos: PropTypes.Requireable<string>;
     };
-    static defaultProps: {
+    var defaultProps: {
         vcode: boolean | undefined;
         warn: boolean | undefined;
         radio: boolean | undefined;
@@ -63,6 +64,5 @@ export default class FormCell extends React.Component<FormCellProps> {
         switch: boolean | undefined;
         selectPos: "after" | "before" | undefined;
     };
-    render(): JSX.Element;
 }
-export {};
+export default FormCell;

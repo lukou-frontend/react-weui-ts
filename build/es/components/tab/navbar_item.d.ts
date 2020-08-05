@@ -10,9 +10,11 @@ interface NavBarItemProps {
     className?: ClassValue;
     label: string;
     onClick?: () => void;
+    children?: React.ReactNode;
 }
-export default class NavBarItem extends React.Component<NavBarItemProps> {
-    static propTypes: {
+declare function NavBarItem(props: NavBarItemProps): JSX.Element;
+declare namespace NavBarItem {
+    var propTypes: {
         /**
          * indicate tab is active
          *
@@ -24,9 +26,8 @@ export default class NavBarItem extends React.Component<NavBarItemProps> {
          */
         label: PropTypes.Requireable<string>;
     };
-    static defaultProps: {
+    var defaultProps: {
         active: boolean;
     };
-    render(): JSX.Element;
 }
-export {};
+export default NavBarItem;

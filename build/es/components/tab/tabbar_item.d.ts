@@ -11,9 +11,11 @@ interface TabBarItemProps {
     label?: string;
     className?: ClassValue;
     onClick?: () => void;
+    children?: React.ReactNode;
 }
-export default class TabBarItem extends React.Component<TabBarItemProps> {
-    static propTypes: {
+declare function TabBarItem(props: TabBarItemProps): JSX.Element;
+declare namespace TabBarItem {
+    var propTypes: {
         /**
          * indicate currently active
          *
@@ -30,11 +32,10 @@ export default class TabBarItem extends React.Component<TabBarItemProps> {
          */
         label: PropTypes.Requireable<string>;
     };
-    static defaultProps: {
+    var defaultProps: {
         active: boolean;
         icon: boolean;
         label: string;
     };
-    render(): JSX.Element;
 }
-export {};
+export default TabBarItem;

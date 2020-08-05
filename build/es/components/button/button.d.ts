@@ -16,12 +16,12 @@ interface ButtonProps {
     onClick?: React.MouseEventHandler<HTMLElement>;
     [key: string]: any;
 }
-export default class Button extends React.Component<ButtonProps> {
-    static defaultProps: {
+declare function Button(props: ButtonProps): JSX.Element;
+declare namespace Button {
+    var defaultProps: {
         disabled: boolean;
         type: "default" | "primary" | "warn" | "vcode" | undefined;
         size: "small" | "normal" | undefined;
     };
-    render(): JSX.Element;
 }
-export {};
+export default Button;

@@ -28,8 +28,9 @@ interface CityPickerProps {
 interface CityPickerStates {
     groups: Array<any>;
     selected: Array<CityData>;
-    picker_show: boolean;
     text: string;
+}
+interface DefaultProps extends Pick<CityPickerProps, 'data' | 'dataMap' | 'selected' | 'show' | 'lang'> {
 }
 declare class CityPicker extends React.Component<CityPickerProps, CityPickerStates> {
     static propTypes: {
@@ -37,7 +38,7 @@ declare class CityPicker extends React.Component<CityPickerProps, CityPickerStat
          * Array of item trees, consists property for label and subitems
          *
          */
-        data: PropTypes.Validator<any[]>;
+        data: PropTypes.Requireable<any[]>;
         /**
          * keys for data provide, `id` to indicate property name for label, `items` to indicate property name for subitems
          *
@@ -59,19 +60,7 @@ declare class CityPicker extends React.Component<CityPickerProps, CityPickerStat
          */
         lang: PropTypes.Requireable<object>;
     };
-    static defaultProps: {
-        data: never[];
-        dataMap: {
-            id: string;
-            items: string;
-        };
-        selected: never[];
-        show: boolean;
-        lang: {
-            leftBtn: string;
-            rightBtn: string;
-        };
-    };
+    static defaultProps: DefaultProps;
     constructor(props: CityPickerProps);
     parseData(data: Array<any>, subKey: any, selected?: Array<any>, group?: Array<any>, newselected?: Array<any>): any;
     updateDataBySelected(selected: any, cb: any): void;

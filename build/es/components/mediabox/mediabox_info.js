@@ -35,8 +35,9 @@ var MediaBoxInfo = /*#__PURE__*/function (_React$Component) {
 
   _createClass(MediaBoxInfo, [{
     key: "renderData",
-    value: function renderData(metas) {
-      return metas.map(function (meta, i) {
+    value: function renderData() {
+      var data = this.props.data;
+      return data.map(function (meta, i) {
         return /*#__PURE__*/React.createElement(MediaBoxInfoMeta, {
           key: i,
           extra: meta.extra
@@ -57,7 +58,7 @@ var MediaBoxInfo = /*#__PURE__*/function (_React$Component) {
       }, className);
       return /*#__PURE__*/React.createElement("ul", _extends({
         className: cls
-      }, others), data.length > 0 ? this.renderData(data) : children);
+      }, others), data.length > 0 ? this.renderData() : children);
     }
   }]);
 
@@ -75,4 +76,3 @@ MediaBoxInfo.propTypes = {
 MediaBoxInfo.defaultProps = {
   data: []
 };
-;

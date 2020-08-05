@@ -11,17 +11,17 @@ interface MediaBoxProps {
     children: React.ReactNode;
     style?: React.CSSProperties;
 }
-export default class MediaBox extends React.Component<MediaBoxProps> {
-    static propTypes: {
+declare function MediaBox(props: MediaBoxProps): JSX.Element;
+declare namespace MediaBox {
+    var propTypes: {
         /**
          * The layout of media box, Options: appmsg/text/small_appmsg
          *
          */
         type: PropTypes.Requireable<string>;
     };
-    static defaultProps: {
+    var defaultProps: {
         type: string | undefined;
     };
-    render(): JSX.Element;
 }
-export {};
+export default MediaBox;

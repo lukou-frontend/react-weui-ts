@@ -1,4 +1,4 @@
-import * as React from 'react';
+/// <reference types="react" />
 /**
  * screen mask, use in `Dialog`, `ActionSheet`, `Popup`.
  *
@@ -8,10 +8,10 @@ interface MaskProps {
     className?: any;
     [key: string]: any;
 }
-declare class Mask extends React.Component<MaskProps> {
-    static defaultProps: {
+declare function Mask(props: MaskProps): JSX.Element;
+declare namespace Mask {
+    var defaultProps: {
         transparent: boolean | undefined;
     };
-    render(): JSX.Element;
 }
 export default Mask;

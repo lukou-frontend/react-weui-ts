@@ -52,7 +52,7 @@ const SearchBarDemo = () => {
     return (
         <Page className="searchbar" title="SearchBar" subTitle="搜索栏">
             <SearchBar
-                onChange={(text: string, e: any) => handleChange(text, e)}
+                onChange={(text: string) => handleChange(text)}
                 defaultValue={searchText}
                 placeholder="Female Name Search"
                 lang={{

@@ -15,8 +15,8 @@ var __rest = this && this.__rest || function (s, e) {
 };
 
 import * as React from 'react';
-import classNames from '../../utils/classnames';
 import PropTypes from 'prop-types';
+import classNames from '../../utils/classnames';
 import './switch.less';
 
 var Switch = function Switch(props) {

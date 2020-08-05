@@ -83,7 +83,7 @@ var TextArea = /*#__PURE__*/function (_React$Component) {
         rows: rows || 3
       }, others), children), showCounter ? /*#__PURE__*/React.createElement("div", {
         className: "weui-textarea-counter"
-      }, /*#__PURE__*/React.createElement("span", null, this.state.textCounter), maxLength ? '/' + maxLength : false) : false);
+      }, /*#__PURE__*/React.createElement("span", null, this.state.textCounter), maxLength ? "/".concat(maxLength) : false) : false);
     }
   }]);
 
@@ -107,6 +107,5 @@ TextArea.propTypes = {
 };
 TextArea.defaultProps = {
   showCounter: true,
-  defaultValue: undefined
+  defaultValue: ''
 };
-;

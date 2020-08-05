@@ -1,4 +1,4 @@
-import * as React from 'react';
+/// <reference types="react" />
 import PropTypes from 'prop-types';
 import { SizeType } from '../icon/index';
 /**
@@ -11,8 +11,9 @@ interface ToastProps {
     iconSize?: SizeType;
     [key: string]: any;
 }
-declare class Toast extends React.Component<ToastProps> {
-    static propTypes: {
+declare function Toast(props: ToastProps): JSX.Element;
+declare namespace Toast {
+    var propTypes: {
         /**
          * Icon Value
          *
@@ -29,10 +30,9 @@ declare class Toast extends React.Component<ToastProps> {
          */
         show: PropTypes.Requireable<boolean>;
     };
-    static defaultProps: {
+    var defaultProps: {
         icon: string;
         show: boolean;
     };
-    render(): JSX.Element;
 }
 export default Toast;

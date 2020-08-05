@@ -1,8 +1,4 @@
 import _extends from "@babel/runtime/helpers/extends";
-import _classCallCheck from "@babel/runtime/helpers/classCallCheck";
-import _createClass from "@babel/runtime/helpers/createClass";
-import _inherits from "@babel/runtime/helpers/inherits";
-import _createSuper from "@babel/runtime/helpers/createSuper";
 
 var __rest = this && this.__rest || function (s, e) {
   var t = {};
@@ -20,41 +16,20 @@ var __rest = this && this.__rest || function (s, e) {
 import * as React from 'react';
 import PropTypes from 'prop-types';
 import classNames from '../../utils/classnames';
+export default function MediaBoxInfoMeta(props) {
+  var children = props.children,
+      extra = props.extra,
+      className = props.className,
+      others = __rest(props, ["children", "extra", "className"]);
 
-var MediaBoxInfoMeta = /*#__PURE__*/function (_React$Component) {
-  _inherits(MediaBoxInfoMeta, _React$Component);
-
-  var _super = _createSuper(MediaBoxInfoMeta);
-
-  function MediaBoxInfoMeta() {
-    _classCallCheck(this, MediaBoxInfoMeta);
-
-    return _super.apply(this, arguments);
-  }
-
-  _createClass(MediaBoxInfoMeta, [{
-    key: "render",
-    value: function render() {
-      var _a = this.props,
-          children = _a.children,
-          extra = _a.extra,
-          className = _a.className,
-          others = __rest(_a, ["children", "extra", "className"]);
-
-      var cls = classNames({
-        'weui-media-box__info__meta': true,
-        'weui-media-box__info__meta_extra': extra
-      }, className);
-      return /*#__PURE__*/React.createElement("li", _extends({
-        className: cls
-      }, others), children);
-    }
-  }]);
-
-  return MediaBoxInfoMeta;
-}(React.Component);
-
-export { MediaBoxInfoMeta as default };
+  var cls = classNames({
+    'weui-media-box__info__meta': true,
+    'weui-media-box__info__meta_extra': extra
+  }, className);
+  return /*#__PURE__*/React.createElement("li", _extends({
+    className: cls
+  }, others), children);
+}
 MediaBoxInfoMeta.propTypes = {
   /**
    * add left margin to indicate extra
@@ -65,4 +40,3 @@ MediaBoxInfoMeta.propTypes = {
 MediaBoxInfoMeta.defaultProps = {
   extra: false
 };
-;

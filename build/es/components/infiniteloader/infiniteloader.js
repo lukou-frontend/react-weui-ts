@@ -47,8 +47,8 @@ var InfiniteLoader = /*#__PURE__*/function (_React$Component) {
   }
 
   _createClass(InfiniteLoader, [{
-    key: "componentWillReceiveProps",
-    value: function componentWillReceiveProps(nextProps) {
+    key: "UNSAFE_componentWillReceiveProps",
+    value: function UNSAFE_componentWillReceiveProps(nextProps) {
       if (nextProps.resetStatus) {
         this.reset();
       }
@@ -139,8 +139,7 @@ var InfiniteLoader = /*#__PURE__*/function (_React$Component) {
         onScroll: this.scrollHandle
       }, domProps), /*#__PURE__*/React.createElement("div", {
         className: "react-weui-infiniteloader__content",
-        style: contentStyle,
-        ref: "container"
+        style: contentStyle
       }, children, /*#__PURE__*/React.createElement("div", {
         style: loaderStyle
       }, this.state.finish ? loaderDefaultIcon : this.state.loading ? loaderLoadingIcon : false)));

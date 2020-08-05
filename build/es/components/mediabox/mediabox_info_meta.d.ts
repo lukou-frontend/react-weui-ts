@@ -7,18 +7,19 @@ import PropTypes from 'prop-types';
 interface MediaBoxInfoMetaProps {
     className?: any;
     extra?: boolean;
+    children?: React.ReactNode;
 }
-export default class MediaBoxInfoMeta extends React.Component<MediaBoxInfoMetaProps> {
-    static propTypes: {
+declare function MediaBoxInfoMeta(props: MediaBoxInfoMetaProps): JSX.Element;
+declare namespace MediaBoxInfoMeta {
+    var propTypes: {
         /**
          * add left margin to indicate extra
          *
          */
         extra: PropTypes.Requireable<boolean>;
     };
-    static defaultProps: {
+    var defaultProps: {
         extra: boolean;
     };
-    render(): JSX.Element;
 }
-export {};
+export default MediaBoxInfoMeta;

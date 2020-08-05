@@ -29,6 +29,7 @@ interface SliderStates {
     ogPercent?: number;
 }
 declare class Slider extends React.Component<SliderProps, SliderStates> {
+    private BarRef;
     static propTypes: {
         /**
          * max value of the slider
@@ -87,7 +88,7 @@ declare class Slider extends React.Component<SliderProps, SliderStates> {
     };
     constructor(props: SliderProps);
     componentDidMount(): void;
-    componentWillReceiveProps(nextProps: SliderProps): void;
+    UNSAFE_componentWillReceiveProps(nextProps: SliderProps): void;
     updateValue(snap?: boolean): void;
     handleTouchStart(e: React.TouchEvent<HTMLDivElement>): void;
     handleTouchMove(e: React.TouchEvent<HTMLDivElement>): void;

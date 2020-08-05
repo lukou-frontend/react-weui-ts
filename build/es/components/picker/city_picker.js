@@ -30,7 +30,6 @@ var CityPicker = /*#__PURE__*/function (_React$Component) {
     _this.state = {
       groups: groups,
       selected: newselected,
-      picker_show: false,
       text: ''
     }; //console.log(this.state.groups)
 
@@ -47,30 +46,26 @@ var CityPicker = /*#__PURE__*/function (_React$Component) {
       var selected = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [];
       var group = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : [];
       var newselected = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : [];
-      var _selected = 0;
+      var newSelected = 0;
 
       if (Array.isArray(selected) && selected.length > 0) {
-        var _selectedClone = selected.slice(0);
-
-        _selected = _selectedClone.shift();
-        selected = _selectedClone;
+        var selectedClone = selected.slice(0);
+        newSelected = selectedClone.shift();
+        selected = selectedClone;
       }
 
-      if (typeof data[_selected] === 'undefined') {
-        _selected = 0;
+      if (typeof data[newSelected] === 'undefined') {
+        newSelected = 0;
       }
 
-      newselected.push(_selected);
-      var item = data[_selected];
-
-      var _group = JSON.parse(JSON.stringify(data));
-
-      _group.forEach(function (g) {
+      newselected.push(newSelected);
+      var item = data[newSelected];
+      var newGroup = JSON.parse(JSON.stringify(data));
+      newGroup.forEach(function (g) {
         return delete g[subKey];
       });
-
       group.push({
-        items: _group,
+        items: newGroup,
         mapKeys: {
           label: this.props.dataMap.id
         }
@@ -78,12 +73,12 @@ var CityPicker = /*#__PURE__*/function (_React$Component) {
 
       if (typeof item[subKey] !== 'undefined' && Array.isArray(item[subKey])) {
         return this.parseData(item[subKey], subKey, selected, group, newselected);
-      } else {
-        return {
-          groups: group,
-          newselected: newselected
-        };
       }
+
+      return {
+        groups: group,
+        newselected: newselected
+      };
     }
   }, {
     key: "updateDataBySelected",
@@ -102,7 +97,7 @@ var CityPicker = /*#__PURE__*/function (_React$Component) {
 
       try {
         groups.forEach(function (group, _i) {
-          text += "".concat(group['items'][selected[_i]][_this2.props.dataMap.id], " ");
+          text += "".concat(group.items[selected[_i]][_this2.props.dataMap.id], " ");
         });
       } catch (err) {
         //wait
@@ -167,7 +162,7 @@ CityPicker.propTypes = {
    * Array of item trees, consists property for label and subitems
    *
    */
-  data: PropTypes.array.isRequired,
+  data: PropTypes.array,
 
   /**
    * keys for data provide, `id` to indicate property name for label, `items` to indicate property name for subitems

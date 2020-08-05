@@ -28,16 +28,10 @@ var Dialog = /*#__PURE__*/function (_React$Component) {
 
   var _super = _createSuper(Dialog);
 
-  function Dialog(props) {
-    var _this;
-
+  function Dialog() {
     _classCallCheck(this, Dialog);
 
-    _this = _super.call(this, props);
-    _this.state = {
-      isAndroid: ''
-    };
-    return _this;
+    return _super.apply(this, arguments);
   }
 
   _createClass(Dialog, [{
@@ -74,7 +68,7 @@ var Dialog = /*#__PURE__*/function (_React$Component) {
           autoDectect = _a.autoDectect,
           others = __rest(_a, ["title", "show", "className", "children", "buttons", "type", "autoDectect"]);
 
-      var styleType = type ? type : 'ios';
+      var styleType = type || 'ios';
       var cls = classNames('weui-dialog', _defineProperty({
         'weui-skin_android': styleType === 'android'
       }, className, className));

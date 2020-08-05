@@ -115,15 +115,15 @@ var Gallery = /*#__PURE__*/function (_React$Component) {
             onClick: _this5.handleClick(child.props.onClick)
           });
         });
-      } else {
-        if (this.props.children) {
-          return /*#__PURE__*/React.cloneElement(this.props.children, {
-            onClick: this.handleClick(this.props.children.props.onClick)
-          });
-        } else {
-          return false;
-        }
       }
+
+      if (this.props.children) {
+        return /*#__PURE__*/React.cloneElement(this.props.children, {
+          onClick: this.handleClick(this.props.children.props.onClick)
+        });
+      }
+
+      return false;
     }
   }, {
     key: "render",

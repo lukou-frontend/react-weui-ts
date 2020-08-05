@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
  *
  */
 interface Data {
-    extra: string;
+    extra: boolean;
     label: string;
 }
 interface MediaBoxInfoProps {
@@ -24,7 +24,7 @@ export default class MediaBoxInfo extends React.Component<MediaBoxInfoProps> {
     static defaultProps: {
         data: Data[];
     };
-    renderData(metas: any[]): JSX.Element[];
+    renderData(): JSX.Element[];
     render(): JSX.Element;
 }
 export {};

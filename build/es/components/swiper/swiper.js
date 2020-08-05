@@ -6,7 +6,6 @@ import _inherits from "@babel/runtime/helpers/inherits";
 import _createSuper from "@babel/runtime/helpers/createSuper";
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import ReactDOM from 'react-dom';
 import classNames from '../../utils/classnames';
 import './swiper.less';
 
@@ -21,6 +20,7 @@ var Swiper = /*#__PURE__*/function (_React$Component) {
     _classCallCheck(this, Swiper);
 
     _this = _super.call(this, props);
+    _this.containerRef = /*#__PURE__*/React.createRef();
     _this.state = {
       containerWidth: 0,
       containerHeight: 0,
@@ -44,7 +44,7 @@ var Swiper = /*#__PURE__*/function (_React$Component) {
   _createClass(Swiper, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      var $container = ReactDOM.findDOMNode(this.refs.container);
+      var $container = this.containerRef.current;
       this.setState({
         wrapperWidth: this.props.direction === 'horizontal' ? $container.offsetWidth * this.props.children.length : $container.offsetWidth,
         wrapperHeight: this.props.direction === 'vertical' ? $container.offsetHeight * this.props.children.length : $container.offsetHeight,
@@ -65,12 +65,14 @@ var Swiper = /*#__PURE__*/function (_React$Component) {
         og = e.targetTouches[0].pageY - this.state.translate;
       }
 
-      this.setState({
-        touching: true,
-        ogTranslate: this.state.translate,
-        touchId: e.targetTouches[0].identifier,
-        og: og,
-        animating: false
+      this.setState(function (prevState) {
+        return {
+          touching: true,
+          ogTranslate: prevState.translate,
+          touchId: e.targetTouches[0].identifier,
+          og: og,
+          animating: false
+        };
       });
     }
   }, {
@@ -78,6 +80,7 @@ var Swiper = /*#__PURE__*/function (_React$Component) {
     value: function handleTouchMove(e) {
       if (!this.state.touching || this.props.children.length <= 1) return;
       if (e.targetTouches[0].identifier !== this.state.touchId) return; //prevent move background
+      // eslint-disable-next-line react/no-access-state-in-setstate
 
       var diff = this.state.translate;
 
@@ -100,9 +103,10 @@ var Swiper = /*#__PURE__*/function (_React$Component) {
       var _this2 = this;
 
       if (!this.state.touching || this.props.children.length <= 1) return;
-      var translate = this.state.translate;
+      var _this$state = this.state,
+          translate = _this$state.translate,
+          currentIndex = _this$state.currentIndex;
       var max = this.props.direction === 'horizontal' ? this.state.wrapperWidth - this.state.containerWidth : this.state.wrapperHeight - this.state.containerHeight;
-      var currentIndex = this.state.currentIndex;
       var ogIndex = currentIndex;
 
       if (translate > 0) {
@@ -114,7 +118,7 @@ var Swiper = /*#__PURE__*/function (_React$Component) {
       } else {
         //default case
         var diff = Math.abs(translate - this.state.ogTranslate);
-        var isNext = translate - this.state.ogTranslate < 0 ? true : false; //console.log(translate - this.state.ogTranslate, diff, isNext)
+        var isNext = translate - this.state.ogTranslate < 0; //console.log(translate - this.state.ogTranslate, diff, isNext)
 
         if (diff >= this.props.threshold) {
           if (isNext) {
@@ -202,7 +206,7 @@ var Swiper = /*#__PURE__*/function (_React$Component) {
         onTouchEnd: this.handleTouchEnd,
         style: containerStyle,
         onClick: onClick,
-        ref: "container"
+        ref: this.containerRef
       }, /*#__PURE__*/React.createElement("div", {
         className: "react-weui-swiper__wrapper",
         style: wrapperStyle
@@ -210,7 +214,7 @@ var Swiper = /*#__PURE__*/function (_React$Component) {
         return /*#__PURE__*/React.cloneElement(child, {
           className: classNames('react-weui-swiper__item', child.className),
           key: i,
-          style: _extends({}, child.props.style, {
+          style: _extends(_extends({}, child.props.style), {
             display: direction === 'horizontal' ? 'inline-block' : 'block',
             verticalAlign: direction === 'horizontal' ? 'top' : 'bottom',
             width: _this4.state.containerWidth,
@@ -276,8 +280,8 @@ Swiper.propTypes = {
   onChange: PropTypes.func
 };
 Swiper.defaultProps = {
-  height: null,
-  width: null,
+  height: undefined,
+  width: undefined,
   defaultIndex: 0,
   direction: 'horizontal',
   threshold: 50,

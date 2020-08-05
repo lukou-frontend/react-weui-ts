@@ -26,6 +26,7 @@ interface PullToRefreshProps {
     className?: ClassValue;
 }
 declare class PullToRefresh extends React.Component<PullToRefreshProps, PullToRefreshState> {
+    private contentRef;
     static propTypes: {
         /**
          * height for the container, use string like '10px', default for '100%'

@@ -68,7 +68,8 @@ var Msg = /*#__PURE__*/function (_React$Component) {
           others = __rest(_a, ["children", "className", "type", "title", "description", "extraHref", "extraText", "footer", "buttons"]);
 
       var cls = classNames('weui-msg', _defineProperty({}, className, className));
-      var elFooter = footer ? footer : function () {
+
+      var elFooter = footer || function () {
         return false;
       };
 

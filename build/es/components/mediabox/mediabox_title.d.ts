@@ -5,8 +5,7 @@ import * as React from 'react';
  */
 interface MediaBoxTitleProps {
     className?: any;
+    children?: React.ReactNode;
 }
-export default class MediaBoxTitle extends React.Component<MediaBoxTitleProps> {
-    render(): JSX.Element;
-}
+export default function MediaBoxTitle(props: MediaBoxTitleProps): JSX.Element;
 export {};

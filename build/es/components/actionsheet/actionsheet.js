@@ -41,9 +41,14 @@ var ActionSheet = /*#__PURE__*/function (_React$Component) {
   }
 
   _createClass(ActionSheet, [{
+    key: "handleMaskClick",
+    value: function handleMaskClick(e) {
+      if (this.props.onRequestClose) this.props.onRequestClose(e);
+    }
+  }, {
     key: "renderMenuItem",
     value: function renderMenuItem() {
-      return this.props.menus.map(function (menu, idx) {
+      return this.props.menus.map(function (menu) {
         var label = menu.label,
             _menu$className = menu.className,
             className = _menu$className === void 0 ? '' : _menu$className,
@@ -53,7 +58,7 @@ var ActionSheet = /*#__PURE__*/function (_React$Component) {
           'weui-actionsheet__cell': true
         }, className, className));
         return /*#__PURE__*/React.createElement("div", _extends({
-          key: idx
+          key: label
         }, others, {
           className: cls
         }), label);
@@ -62,7 +67,7 @@ var ActionSheet = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "renderActions",
     value: function renderActions() {
-      return this.props.actions.map(function (action, idx) {
+      return this.props.actions.map(function (action) {
         var label = action.label,
             _action$className = action.className,
             className = _action$className === void 0 ? '' : _action$className,
@@ -72,16 +77,11 @@ var ActionSheet = /*#__PURE__*/function (_React$Component) {
           'weui-actionsheet__cell': true
         }, className, className));
         return /*#__PURE__*/React.createElement("div", _extends({
-          key: idx
+          key: label
         }, others, {
           className: cls
         }), label);
       });
-    }
-  }, {
-    key: "handleMaskClick",
-    value: function handleMaskClick(e) {
-      if (this.props.onRequestClose) this.props.onRequestClose(e);
     }
   }, {
     key: "render",
@@ -98,7 +98,7 @@ var ActionSheet = /*#__PURE__*/function (_React$Component) {
         'weui-actionsheet': true,
         'weui-actionsheet_toggle': show
       });
-      var styleType = type ? type : 'ios';
+      var styleType = type || 'ios';
       return /*#__PURE__*/React.createElement("div", {
         className: styleType === 'android' ? 'weui-skin_android' : ''
       }, /*#__PURE__*/React.createElement(Mask, {
@@ -155,5 +155,4 @@ ActionSheet.defaultProps = {
   actions: [],
   show: false
 };
-;
 export default ActionSheet;

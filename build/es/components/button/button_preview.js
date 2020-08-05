@@ -15,6 +15,7 @@ var __rest = this && this.__rest || function (s, e) {
 };
 
 import * as React from 'react';
+import PropTypes from 'prop-types';
 import classNames from '../../utils/classnames';
 
 var PreviewButton = function PreviewButton(props) {
@@ -34,6 +35,13 @@ var PreviewButton = function PreviewButton(props) {
   }, others), children);
 };
 
+PreviewButton.propTypes = {
+  /**
+   * 默认default，可选：true false
+   *
+   */
+  primary: PropTypes.bool
+};
 PreviewButton.defaultProps = {
   primary: false
 };

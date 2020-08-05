@@ -1,9 +1,5 @@
 import _extends from "@babel/runtime/helpers/extends";
 import _defineProperty from "@babel/runtime/helpers/defineProperty";
-import _classCallCheck from "@babel/runtime/helpers/classCallCheck";
-import _createClass from "@babel/runtime/helpers/createClass";
-import _inherits from "@babel/runtime/helpers/inherits";
-import _createSuper from "@babel/runtime/helpers/createSuper";
 
 var __rest = this && this.__rest || function (s, e) {
   var t = {};
@@ -19,59 +15,38 @@ var __rest = this && this.__rest || function (s, e) {
 };
 
 import * as React from 'react';
-import classNames from '../../utils/classnames';
 import PropTypes from 'prop-types';
+import classNames from '../../utils/classnames';
+export default function Checkbox(props) {
+  var className = props.className,
+      checked = props.checked,
+      name = props.name,
+      value = props.value,
+      disabled = props.disabled,
+      onChange = props.onChange,
+      others = __rest(props, ["className", "checked", "name", "value", "disabled", "onChange"]);
 
-var Checkbox = /*#__PURE__*/function (_React$Component) {
-  _inherits(Checkbox, _React$Component);
+  var cls = classNames(_defineProperty({
+    'weui-check': true
+  }, className, className));
 
-  var _super = _createSuper(Checkbox);
+  var handleChange = function handleChange(e) {
+    onChange && onChange(e.target.checked, e);
+  };
 
-  function Checkbox(props) {
-    _classCallCheck(this, Checkbox);
-
-    return _super.call(this, props);
-  }
-
-  _createClass(Checkbox, [{
-    key: "render",
-    value: function render() {
-      var _a = this.props,
-          className = _a.className,
-          checked = _a.checked,
-          name = _a.name,
-          value = _a.value,
-          disabled = _a.disabled,
-          onChange = _a.onChange,
-          others = __rest(_a, ["className", "checked", "name", "value", "disabled", "onChange"]);
-
-      var cls = classNames(_defineProperty({
-        'weui-check': true
-      }, className, className));
-
-      var handleChange = function handleChange(e) {
-        onChange && onChange(e.target.checked, e);
-      };
-
-      return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("input", _extends({
-        disabled: disabled || false,
-        name: name,
-        value: value,
-        checked: checked,
-        className: cls,
-        type: "checkbox"
-      }, others, {
-        onChange: handleChange
-      })), /*#__PURE__*/React.createElement("span", {
-        className: "weui-icon-checked"
-      }));
-    }
-  }]);
-
-  return Checkbox;
-}(React.Component);
-
-export { Checkbox as default };
+  return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("input", _extends({
+    disabled: disabled || false,
+    name: name,
+    value: value,
+    checked: checked,
+    className: cls,
+    type: "checkbox"
+  }, others, {
+    onChange: handleChange
+  })), /*#__PURE__*/React.createElement("span", {
+    className: "weui-icon-checked"
+  }));
+}
 Checkbox.propTypes = {
   /**
    * onChange事件回调函数，function(checked:boolean, event: Event)
@@ -82,4 +57,3 @@ Checkbox.propTypes = {
 Checkbox.defaultProps = {
   onChange: undefined
 };
-;

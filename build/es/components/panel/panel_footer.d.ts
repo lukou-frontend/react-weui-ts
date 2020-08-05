@@ -9,7 +9,5 @@ interface PanelFooterProps {
     children: React.ReactNode;
     style?: React.CSSProperties;
 }
-export default class PanelFooter extends React.Component<PanelFooterProps> {
-    render(): JSX.Element;
-}
+export default function PanelFooter(props: PanelFooterProps): JSX.Element;
 export {};

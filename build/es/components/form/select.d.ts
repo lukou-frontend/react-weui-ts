@@ -25,7 +25,7 @@ export default class Select extends React.Component<SelectProps> {
     static defaultProps: {
         data: Option[];
     };
-    renderData(data: Array<Option>): JSX.Element[];
+    renderData(): JSX.Element[];
     render(): JSX.Element;
 }
 export {};

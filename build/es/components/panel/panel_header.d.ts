@@ -8,7 +8,5 @@ interface PanelHeaderProps {
     children: React.ReactNode;
     style?: React.CSSProperties;
 }
-export default class PanelHeader extends React.Component<PanelHeaderProps> {
-    render(): JSX.Element;
-}
+export default function PanelHeader(props: PanelHeaderProps): JSX.Element;
 export {};

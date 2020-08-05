@@ -1,8 +1,4 @@
 import _extends from "@babel/runtime/helpers/extends";
-import _classCallCheck from "@babel/runtime/helpers/classCallCheck";
-import _createClass from "@babel/runtime/helpers/createClass";
-import _inherits from "@babel/runtime/helpers/inherits";
-import _createSuper from "@babel/runtime/helpers/createSuper";
 
 var __rest = this && this.__rest || function (s, e) {
   var t = {};
@@ -20,37 +16,19 @@ var __rest = this && this.__rest || function (s, e) {
 import * as React from 'react';
 import classNames from '../../utils/classnames';
 
-var Mask = /*#__PURE__*/function (_React$Component) {
-  _inherits(Mask, _React$Component);
+function Mask(props) {
+  var transparent = props.transparent,
+      className = props.className,
+      others = __rest(props, ["transparent", "className"]);
 
-  var _super = _createSuper(Mask);
-
-  function Mask() {
-    _classCallCheck(this, Mask);
-
-    return _super.apply(this, arguments);
-  }
-
-  _createClass(Mask, [{
-    key: "render",
-    value: function render() {
-      var _a = this.props,
-          transparent = _a.transparent,
-          className = _a.className,
-          others = __rest(_a, ["transparent", "className"]);
-
-      var clz = classNames({
-        'weui-mask': !transparent,
-        'weui-mask_transparent': transparent
-      }, className);
-      return /*#__PURE__*/React.createElement("div", _extends({
-        className: clz
-      }, others));
-    }
-  }]);
-
-  return Mask;
-}(React.Component);
+  var clz = classNames({
+    'weui-mask': !transparent,
+    'weui-mask_transparent': transparent
+  }, className);
+  return /*#__PURE__*/React.createElement("div", _extends({
+    className: clz
+  }, others));
+}
 
 Mask.defaultProps = {
   transparent: false

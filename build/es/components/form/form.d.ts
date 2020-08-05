@@ -10,8 +10,9 @@ interface FormProps {
     className?: any;
     children?: React.ReactNode;
 }
-declare class Form extends React.Component<FormProps> {
-    static propTypes: {
+declare function Form(props: FormProps): JSX.Element;
+declare namespace Form {
+    var propTypes: {
         /**
          * if this form is use for radios
          *
@@ -23,10 +24,9 @@ declare class Form extends React.Component<FormProps> {
          */
         checkbox: PropTypes.Requireable<boolean>;
     };
-    static defaultProps: {
+    var defaultProps: {
         radio: boolean | undefined;
         checkbox: boolean | undefined;
     };
-    render(): JSX.Element;
 }
 export default Form;

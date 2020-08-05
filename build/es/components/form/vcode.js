@@ -28,7 +28,9 @@ var VCode = function VCode(props) {
   return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("img", _extends({
     src: src,
     className: cls
-  }, others)));
+  }, others, {
+    alt: ""
+  })));
 };
 
 export default VCode;

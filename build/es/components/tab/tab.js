@@ -51,7 +51,8 @@ var Tab = /*#__PURE__*/function (_React$Component) {
         index: idx
       });
       if (this.props.onChange) this.props.onChange(idx);
-    }
+    } // eslint-disable-next-line class-methods-use-this
+
   }, {
     key: "parseChild",
     value: function parseChild(childrenInput) {
@@ -63,9 +64,7 @@ var Tab = /*#__PURE__*/function (_React$Component) {
 
         if (child.type === TabBarItem || child.type === NavBarItem) {
           ChildHeaders.push(child);
-          if (children) ChildContents.push( /*#__PURE__*/React.createElement(TabBodyItem, {
-            children: children
-          }));
+          if (children) ChildContents.push( /*#__PURE__*/React.createElement(TabBodyItem, null, children));
         } else if (child.type === TabBodyItem) {
           ChildContents.push(child);
         }
@@ -84,15 +83,14 @@ var Tab = /*#__PURE__*/function (_React$Component) {
           ChildHeaders = _this$parseChild.ChildHeaders,
           ChildContents = _this$parseChild.ChildContents;
 
-      var _headers = ChildHeaders.map(function (item, idx) {
+      var newHeaders = ChildHeaders.map(function (item, idx) {
         return /*#__PURE__*/React.cloneElement(item, {
           key: idx,
           active: _this2.state.index === idx,
           onClick: _this2.handleHeaderClick.bind(_this2, idx, item)
         });
       });
-
-      var _contents = ChildContents.map(function (item, idx) {
+      var newContents = ChildContents.map(function (item, idx) {
         return /*#__PURE__*/React.cloneElement(item, {
           key: idx,
           active: _this2.state.index === idx,
@@ -103,14 +101,16 @@ var Tab = /*#__PURE__*/function (_React$Component) {
       if (type === 'tabbar') {
         return /*#__PURE__*/React.createElement("div", {
           className: cls
-        }, /*#__PURE__*/React.createElement(TabBody, null, _contents), /*#__PURE__*/React.createElement(TabBar, null, _headers));
-      } else if (type === 'navbar') {
+        }, /*#__PURE__*/React.createElement(TabBody, null, newContents), /*#__PURE__*/React.createElement(TabBar, null, newHeaders));
+      }
+
+      if (type === 'navbar') {
         return /*#__PURE__*/React.createElement("div", {
           className: cls
-        }, /*#__PURE__*/React.createElement(NavBar, null, _headers), /*#__PURE__*/React.createElement(TabBody, null, _contents));
-      } else {
-        return false;
+        }, /*#__PURE__*/React.createElement(NavBar, null, newHeaders), /*#__PURE__*/React.createElement(TabBody, null, newContents));
       }
+
+      return false;
     }
   }, {
     key: "render",
@@ -133,10 +133,9 @@ var Tab = /*#__PURE__*/function (_React$Component) {
         return /*#__PURE__*/React.createElement("div", _extends({
           className: cls
         }, divProps), children);
-      } else {
-        if (!type) type = 'normal';
-        return this.renderBar(type, children, cls);
       }
+
+      return this.renderBar(type, children, cls);
     }
   }]);
 

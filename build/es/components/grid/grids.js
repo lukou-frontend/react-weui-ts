@@ -35,7 +35,8 @@ var Grids = /*#__PURE__*/function (_React$Component) {
 
   _createClass(Grids, [{
     key: "renderData",
-    value: function renderData(data) {
+    value: function renderData() {
+      var data = this.props.data;
       return data.map(function (item, i) {
         return /*#__PURE__*/React.createElement(Grid, _extends({
           key: i,
@@ -58,7 +59,7 @@ var Grids = /*#__PURE__*/function (_React$Component) {
       }, className);
       return /*#__PURE__*/React.createElement("div", _extends({
         className: cls
-      }, others), data.length > 0 ? this.renderData(data) : children);
+      }, others), data.length > 0 ? this.renderData() : children);
     }
   }]);
 
@@ -76,4 +77,3 @@ Grids.propTypes = {
 Grids.defaultProps = {
   data: []
 };
-;

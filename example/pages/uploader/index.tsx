@@ -52,7 +52,7 @@ class UploaderDemo extends Component<any, States> {
                     onClick={(_e: Event, id: number) => {
                         this.setState((prevState) => ({
                             demoFiles: prevState.demoFiles.filter(
-                                (e: Event, i: number) => i !== id,
+                                (_event: Event, i: number) => i !== id,
                             ),
                             gallery1: prevState.demoFiles.length <= 1,
                         }));
@@ -83,7 +83,7 @@ class UploaderDemo extends Component<any, States> {
                     onClick={(_e: Event, id: number) => {
                         this.setState((prevState) => ({
                             imageFiles: prevState.imageFiles.filter(
-                                (e: Event, i: number) => i !== id,
+                                (_event: Event, i: number) => i !== id,
                             ),
                             gallery2: prevState.imageFiles.length <= 1,
                         }));
