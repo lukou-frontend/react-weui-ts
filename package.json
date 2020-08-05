@@ -103,7 +103,7 @@
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.14.0",
     "eslint": "^7.6.0",
-    "eslint-plugin-react": "^3.11.3",
+    "eslint-plugin-react": "^7.20.5",
     "extract-text-webpack-plugin": "^3.0.0",
     "fastclick": "^1.0.6",
     "file-loader": "^0.8.5",
