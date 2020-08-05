@@ -231,8 +231,9 @@ var Uploader = /*#__PURE__*/function (_React$Component) {
       for (var key in files) {
         if (files.hasOwnProperty(key)) {
           var file = files[key];
+          var maxsize = this.props.maxsize || (this.props.type === 'image' ? 2 : 10);
 
-          if (file.size / (1024 * 1024) > this.props.maxsize) {
+          if (file.size / (1024 * 1024) > maxsize) {
             this.props.onOversize(file.size);
             return;
           }
@@ -367,7 +368,6 @@ var Uploader = /*#__PURE__*/function (_React$Component) {
           onChange = _a.onChange,
           onFileClick = _a.onFileClick,
           lang = _a.lang,
-          maxsize = _a.maxsize,
           onOversize = _a.onOversize,
           type = _a.type,
           onDelete = _a.onDelete,
@@ -375,7 +375,7 @@ var Uploader = /*#__PURE__*/function (_React$Component) {
           showTitle = _a.showTitle,
           size = _a.size,
           showAddInput = _a.showAddInput,
-          others = __rest(_a, ["className", "maxCount", "files", "onChange", "onFileClick", "lang", "maxsize", "onOversize", "type", "onDelete", "currentVideo", "showTitle", "size", "showAddInput"]);
+          others = __rest(_a, ["className", "maxCount", "files", "onChange", "onFileClick", "lang", "onOversize", "type", "onDelete", "currentVideo", "showTitle", "size", "showAddInput"]);
 
       var inputProps = _extends({}, others);
 
@@ -506,7 +506,6 @@ Uploader.propTypes = {
 };
 Uploader.defaultProps = {
   maxCount: 4,
-  maxsize: 5,
   maxWidth: 500,
   files: [],
   onChange: undefined,

@@ -24,7 +24,7 @@ interface UploaderProps {
     onError: (error: any) => void;
     className?: any;
     onFileClick?: (e?: any, file?: File, idx?: any) => void;
-    maxsize: number;
+    maxsize?: number;
     onOversize: (val: number) => void;
     type: 'image' | 'video';
     onDelete: (file: File, id: number) => void;
@@ -125,7 +125,6 @@ export default class Uploader extends React.Component<UploaderProps> {
     };
     static defaultProps: {
         maxCount: number;
-        maxsize: number;
         maxWidth: number;
         files: MyFile[];
         onChange: ((file: File, event?: any) => void) | undefined;
