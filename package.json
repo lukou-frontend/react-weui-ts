@@ -17,6 +17,23 @@
     "deploy:doc": "scp -r build/demo/* lukou@121.41.121.230:/home/lukou/tmp/coupon_qiuyu/react-weui",
     "gulp": "gulp --gulpfile ./scripts/gulpfile.js --cwd ./"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "src/**/*.ts?(x)": [
+      "prettier --parser=typescript --write",
+      "eslint --fix",
+      "git add"
+    ],
+    "example/**/*.ts?(x)": [
+      "prettier --parser=typescript --write",
+      "eslint --fix",
+      "git add"
+    ]
+  },
   "Browserslist": [
     "last 3 version",
     "ie >= 10",
@@ -73,6 +90,7 @@
     "@types/react-dom": "^16.9.8",
     "@types/react-router-dom": "^5.1.5",
     "@types/react-transition-group": "^4.4.0",
+    "@umijs/fabric": "^2.2.2",
     "autoprefixer": "^9.8.5",
     "babel-loader": "^8.1.0",
     "babel-plugin-inline-import-data-uri": "^1.0.1",
@@ -84,7 +102,7 @@
     "csstype": "^2.6.11",
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.14.0",
-    "eslint": "^3.17.1",
+    "eslint": "^7.6.0",
     "eslint-plugin-react": "^3.11.3",
     "extract-text-webpack-plugin": "^3.0.0",
     "fastclick": "^1.0.6",
@@ -99,6 +117,7 @@
     "highlight.js": "^9.8.0",
     "history": "^4.5.1",
     "html-webpack-plugin": "^2.14.0",
+    "husky": "^4.2.5",
     "ignore-styles": "^5.0.1",
     "jsdom": "9.8.3",
     "jsdom-global": "2.1.0",
@@ -106,12 +125,14 @@
     "less": "^2.7.2",
     "less-loader": "^4.0.5",
     "less-plugin-npm-import": "^2.1.0",
+    "lint-staged": "^10.2.11",
     "merge2": "^1.4.1",
     "minimist": "^1.2.0",
     "mocha": "^6.2.0",
     "nyc": "^9.0.1",
     "open-browser-webpack-plugin": "0.0.1",
     "postcss-loader": "^2.0.6",
+    "prettier": "^2.0.5",
     "raw-loader": "^0.5.1",
     "react": "^16.9.0",
     "react-codemirror": "^0.2.6",
