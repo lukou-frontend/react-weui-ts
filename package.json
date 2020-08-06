@@ -1,5 +1,6 @@
 {
   "name": "react-weui",
+  "sideEffects": false,
   "version": "1.2.2",
   "description": "weui for react",
   "main": "./build/es/index.js",
