@@ -20,7 +20,7 @@ declare function Button(props: ButtonProps): JSX.Element;
 declare namespace Button {
     var defaultProps: {
         disabled: boolean;
-        type: "default" | "primary" | "warn" | "vcode" | undefined;
+        type: "default" | "warn" | "primary" | "vcode" | undefined;
         size: "small" | "normal" | undefined;
     };
 }
