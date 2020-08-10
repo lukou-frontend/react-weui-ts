@@ -29,17 +29,6 @@ npm install --save weui@1.1.0 react-weui
 npm install weui@1.1.0 react-weui --save
 ```
 
-With browser (CDN by [unpkg](http://unpkg.com/))
-
-Javacript
-```
-https://unpkg.com/react-weui@1.1.2
-```
-
-CSS
-```
-https://unpkg.com/react-weui@1.1.1/build/dist/react-weui.css
-```
 ## 举例
 
 文档里面有例子，这里简单介绍下怎么使用组件
@@ -51,8 +40,7 @@ import ReactDOM from 'react-dom';
 import { Button } from 'react-weui';
 //import styles
 import 'weui';
-// 由于代码里引用了less文件，可以不用引下面的css
-// import 'react-weui/build/dist/react-weui.css';
+
 
 const App = () => <Button>hello wechat</Button>;
 

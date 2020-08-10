@@ -1,7 +1,7 @@
 {
-  "name": "react-weui",
-  "version": "1.2.2",
-  "description": "weui for react",
+  "name": "react-weui-ts",
+  "version": "1.0.0",
+  "description": "weui for react, written by typescript",
   "main": "./build/es/index.js",
   "scripts": {
     "start": "webpack-dev-server",
