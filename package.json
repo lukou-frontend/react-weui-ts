@@ -45,7 +45,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/weui/react-weui.git"
+    "url": "git+https://github.com/lukou-frontend/react-weui-ts.git"
   },
   "typings": "build/es/index.d.ts",
   "files": [
@@ -63,9 +63,9 @@
   "author": "wechat ui team",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/weui/react-weui/issues"
+    "url": "https://github.com/lukou-frontend/react-weui-ts/issues"
   },
-  "homepage": "https://github.com/weui/react-weui",
+  "homepage": "https://github.com/lukou-frontend/react-weui-ts",
   "dependencies": {
     "@babel/runtime": "^7.10.5",
     "babel-runtime": "^6.26.0",
