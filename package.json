@@ -17,6 +17,9 @@
     "deploy:doc": "scp -r build/demo/* lukou@121.41.121.230:/home/lukou/tmp/coupon_qiuyu/react-weui",
     "gulp": "gulp --gulpfile ./scripts/gulpfile.js --cwd ./"
   },
+  "sideEffects": [
+    "*.less"
+  ],
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged"
