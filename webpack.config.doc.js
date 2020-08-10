@@ -38,14 +38,21 @@ const plugins = [
 // Common rules
 const rules = [
     {
+        test: /\.ts(x)?$/,
+        exclude: /node_modules/,
+        include: [path.resolve(__dirname, 'example')],
+        use: [
+            'babel-loader',
+            'ts-loader'
+        ],
+    },
+    {
         test: /\.(js|jsx)$/,
         oneOf: [
             {
-                include: [path.resolve(__dirname, 'docs'), path.resolve(__dirname, 'example')],
+                include: [path.resolve(__dirname, 'docs')],
                 exclude: [/node_modules/, path.resolve(__dirname, 'src')],
-                use: [
-                    'babel-loader',
-                ]
+                use: ['babel-loader']
             },
             {
                 include: path.resolve(__dirname, 'src'),
@@ -66,10 +73,7 @@ const rules = [
             sourceMap: !isProduction,
             plugins: (loader) => [
                 autoprefixer({
-                    browsers: [
-                        'last 3 version',
-                        'ie >= 10',
-                    ],
+                    overrideBrowserslist: [ 'ie >= 10', 'last 3 version']
                 })
             ]
           }
@@ -91,10 +95,7 @@ const rules = [
             sourceMap: !isProduction,
             plugins: (loader) => [
                 autoprefixer({
-                    browsers: [
-                        'last 3 version',
-                        'ie >= 10',
-                    ],
+                  overrideBrowserslist: [ 'ie >= 10', 'last 3 version']
                 })
             ]
           }
@@ -154,7 +155,7 @@ module.exports = {
     rules,
   },
   resolve: {
-    extensions: ['.webpack-loader.js', '.web-loader.js', '.loader.js', '.js', '.jsx', '.less'],
+    extensions: ['.webpack-loader.js', '.web-loader.js', '.loader.js', '.tsx', '.ts', '.js', '.jsx', '.less',],
     modules: [
       path.resolve(__dirname, 'node_modules'),
       jsSourcePath,
@@ -164,7 +165,7 @@ module.exports = {
   devServer: {
     contentBase: isProduction ? buildPath : sourcePath,
     historyApiFallback: true,
-    port: 3000,
+    port: 3001,
     compress: isProduction,
     inline: !isProduction,
     hot: !isProduction,

@@ -1,5 +1,5 @@
 /* eslint-disable */
-import React, { Component } from 'react';
+import * as React from 'react'
 import ReactDOM from 'react-dom';
 import SplitPane from 'react-split-pane';
 import Preview from "../components/preview";
@@ -12,7 +12,7 @@ import iconSrc from '../logo.svg';
 import Demos from '../../example';
 import './home.less';
 
-class Docs extends Component {
+class Docs extends React.Component {
 
   renderWithMenu(){
     let article = this.props.docs[this.props.params.id].items[this.props.params.aid]
@@ -20,18 +20,16 @@ class Docs extends Component {
     let code = '';
     if(article.preview && article.component){
       Sample = Demos[article.preview]
-
       if(article.code){
-        code = require(`!!raw-loader!../../example/pages/${article.code}`)
+        code = require(`!!raw-loader!../../example/pages/${article.code}/index.tsx`)
       }else{
-        code = require(`!!raw-loader!../../example/pages/${article.preview.toLowerCase()}/index`)
+        code = require(`!!raw-loader!../../example/pages/${article.preview.toLowerCase()}/index.tsx`)
       }
 
     }
-    let src = article.component ? require(`!!raw-loader!../../src/components/${article.component}`) : false
-
+    let src = article.component ? require(`!!raw-loader!../../build/docgen/components/${article.component}`) : false
     let content = src ? generateMarkdown(article.name, article.version, reactDocs.parse(src), this.props.langs.article) : false
-
+    const guide = typeof article.guide == 'object' ? article.guide[this.props.locale] : article.guide
     if(!article.preview){
       return (
         <div className="App__detail">
@@ -39,7 +37,7 @@ class Docs extends Component {
                docs={this.props.docs}
                aid={this.props.params.aid}
                langs={this.props.langs.article}
-               guide={article.guide ? require(`!!raw-loader!../guide/${ typeof article.guide == 'object' ? article.guide[this.props.locale] : article.guide }`) : false}
+               guide={article.guide ? require(`!!raw-loader!../guide/${guide}`) : false}
                name={!article.preview ? typeof article.name == 'object' ? article.name[this.props.locale] : article.name : false}
                content={content}
                code={code}
@@ -47,7 +45,6 @@ class Docs extends Component {
         </div>
       )
     }
-
     return (
       <SplitPane split="vertical" minSize={20} defaultSize="60%" primary="second">
           <div className="App__preview background--canvas flex-center">
@@ -63,7 +60,7 @@ class Docs extends Component {
                 docs={this.props.docs}
                 aid={this.props.params.aid}
                 langs={this.props.langs.article}
-                guide={article.guide ? require(`!!raw-loader!../guide/${ typeof article.guide == 'object' ? article.guide[this.props.locale] : article.guide }`) : false}
+                guide={article.guide ? require(`!!raw-loader!../guide/${guide}`) : false}
                 content={content}
                 code={code}
             />
@@ -79,7 +76,7 @@ class Docs extends Component {
      if(item.type == 'menu'){
        return this.renderWithMenu()
      }else if(item.type == 'page') {
-       let Page = require(`./${item.link}`)
+       let Page = require(`./${item.link}`).default
        return <Page
                 langs={this.props.langs}
                 locale={this.props.locale}

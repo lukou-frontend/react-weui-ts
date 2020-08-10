@@ -1,39 +1,32 @@
-# React-WeUI 
+<!--
+ * @Author: 刘佑祥
+ * @LastEditors: 刘佑祥
+ * @LastEditTime: 2020-07-16 10:37:49
+-->
+# React-WeUI
 
-[![Build Status](https://travis-ci.org/weui/react-weui.svg?branch=master)](https://travis-ci.org/weui/react-weui) 
-[![Github Workflow Status](https://github.com/weui/react-weui/workflows/ci/badge.svg)](https://github.com/weui/react-weui) 
-[![npm version](https://img.shields.io/npm/v/react-weui.svg)](https://www.npmjs.org/package/react-weui)
-
-[WeUI](https://github.com/weui/weui) Components build with [React](http://facebook.github.io/react/).
-
-[![Coverage Status](https://coveralls.io/repos/github/weui/react-weui/badge.svg?branch=master)](https://coveralls.io/github/weui/react-weui?branch=master)  [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md#pull-requests) [![QQ](http://pub.idqqimg.com/wpa/images/group.png)](http://jq.qq.com/?_wv=1027&k=413HLfV)
+基于weui封装的react移动端组件库
 
 ## Docs
 
-1.0.x [documentation](https://weui.github.io/react-weui/docs/) with live examples.
-0.4.x [documentation](https://n7best.github.io/react-weui-doc-0.4.0) with live examples.
+- [使用文档](http://qiuyu.coupon.lukou.com/react-weui/docs)
+- [demo](http://qiuyu.coupon.lukou.com/react-weui)
 
 ## Installation
 
 With [npm](http://npmjs.com/):
 
-If React is not installed
+如果未安装react
 
 ```
 npm install --save react react-dom
 npm install --save weui@1.1.0 react-weui
 ```
 
-With React Installed
+如果已经安装react
 
 ```
 npm install weui@1.1.0 react-weui --save
-```
-
-To use the development version (`API might changes on realese version`)
-
-```
-npm install react-weui@alpha --save
 ```
 
 With browser (CDN by [unpkg](http://unpkg.com/))
@@ -47,18 +40,19 @@ CSS
 ```
 https://unpkg.com/react-weui@1.1.1/build/dist/react-weui.css
 ```
-## Example
+## 举例
 
-We have several examples on the documentation. Here is the first one to get you started:
+文档里面有例子，这里简单介绍下怎么使用组件
 ```javascript
 // app.js
 
-import React from 'react';
+import * as React from 'react';
 import ReactDOM from 'react-dom';
 import { Button } from 'react-weui';
 //import styles
 import 'weui';
-import 'react-weui/build/packages/react-weui.css';
+// 由于代码里引用了less文件，可以不用引下面的css
+// import 'react-weui/build/dist/react-weui.css';
 
 const App = () => <Button>hello wechat</Button>;
 
@@ -68,18 +62,11 @@ ReactDOM.render((
 
 ```
 
-## Contributing
+## 构建
+`npm run compile`
 
-Welcome and send the PR in! Development of components will happen in this github repo.
+## 构建文档
+`npm run compile:doc`
 
-See the [contributing guidelines](https://github.com/n7best/react-weui-1/blob/master/CONTRIBUTING.md) for details.
-
-## Mobile Demo
-
-![react-weui](./docs/qrcode.png)
-
-[1.0.0](https://weui.github.io/react-weui)
-
-## License
-
-The MIT License([http://opensource.org/licenses/MIT](http://opensource.org/licenses/MIT))
+## 发布文档
+`npm run deploy:doc`

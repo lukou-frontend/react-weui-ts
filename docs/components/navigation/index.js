@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import * as React from 'react'
 import FontAwesome from 'react-fontawesome';
 import { NavLink as Link } from 'react-router-dom';
-import { SearchBar, Cells, CellsTitle, FormCell, Label, Select, Cell, CellHeader, CellBody, CellFooter, Dialog } from '../../../build/packages';
+import { SearchBar, Cells, CellsTitle, FormCell, Label, Select, Cell, CellHeader, CellBody, CellFooter, Dialog } from '../../../build/es';
 import './style.css';
 
-class Navigation extends Component {
+class Navigation extends React.Component {
 
     constructor(props){
         super(props);

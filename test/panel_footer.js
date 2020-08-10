@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { shallow } from 'enzyme';
 import assert from 'assert';
 import WeUI from '../src/index';
@@ -13,8 +13,8 @@ describe('<PanelFooter></PanelFooter>', ()=> {
                 <PanelFooter>{child}</PanelFooter>
             );
 
-            it(`should have 'weui-panel__ft' class name`, ()=>{
-                assert(wrapper.hasClass(`weui-panel__ft`));
+            it('should have \'weui-panel__ft\' class name', ()=>{
+                assert(wrapper.hasClass('weui-panel__ft'));
             });
 
             it(`should have child ${child}`, ()=>{

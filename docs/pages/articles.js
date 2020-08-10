@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import * as React from 'react'
 import ReactDOM from 'react-dom';
 import Remarkable from 'react-remarkable';
-import { Article, Toast, Tab, NavBarItem } from '../../build/packages';
+import { Article, Toast, Tab, NavBarItem } from '../../build/es';
 import CodeMirror from 'codemirror/lib/codemirror.js';
 import hljs from 'highlight.js';
 
@@ -15,7 +15,7 @@ import 'codemirror/addon/display/autorefresh';
 import 'github-markdown-css';
 import './home.less';
 
-class Articles extends Component {
+class Articles extends React.Component {
     static defaultProps = {
         langs: {
             detail: 'Detail',

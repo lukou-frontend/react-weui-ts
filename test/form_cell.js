@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { shallow } from 'enzyme';
 import assert from 'assert';
 import WeUI from '../src/index';
@@ -26,12 +26,12 @@ describe('<FormCell></FormCell>', ()=> {
                                             </FormCell>
                                         );
 
-                                        it(`should render <FormCell></FormCell> component `, ()=>{
+                                        it('should render <FormCell></FormCell> component ', ()=>{
                                             assert(wrapper.instance() instanceof FormCell);
                                         });
 
-                                        it(`should have 'weui-cell' class name`, ()=>{
-                                            assert(wrapper.hasClass(`weui-cell`));
+                                        it('should have \'weui-cell\' class name', ()=>{
+                                            assert(wrapper.hasClass('weui-cell'));
                                         });
 
                                         it(`should have custom class name ${clazz} when className is not null or empty`, ()=>{
@@ -40,63 +40,63 @@ describe('<FormCell></FormCell>', ()=> {
                                             }
                                         });
 
-                                        it(`should have header child`, ()=>{
+                                        it('should have header child', ()=>{
                                             assert(shallow(header).html() === wrapper.find(CellHeader).html());
                                         });
 
-                                        it(`should have body child`, ()=>{
+                                        it('should have body child', ()=>{
                                             assert(shallow(body).html() === wrapper.find(CellBody).html());
                                         });
 
-                                        it(`should have footer child`, ()=>{
+                                        it('should have footer child', ()=>{
                                             assert(shallow(footer).html() === wrapper.find(CellFooter).html());
                                         });
 
-                                        it(`should have 'weui-cell_vcode' when vcode attribute is true`, ()=> {
+                                        it('should have \'weui-cell_vcode\' when vcode attribute is true', ()=> {
                                             if (vcode) {
-                                                assert(wrapper.hasClass(`weui-cell_vcode`));
+                                                assert(wrapper.hasClass('weui-cell_vcode'));
                                             }
                                         });
 
-                                        it(`should have 'weui-cell_warn' when warn attribute is true`, ()=> {
+                                        it('should have \'weui-cell_warn\' when warn attribute is true', ()=> {
                                             if (warn) {
-                                                assert(wrapper.hasClass(`weui-cell_warn`));
+                                                assert(wrapper.hasClass('weui-cell_warn'));
                                             }
                                         });
 
-                                        it(`should have 'weui-cell_switch' when switch attribute is true`, ()=> {
+                                        it('should have \'weui-cell_switch\' when switch attribute is true', ()=> {
                                             if (_switch) {
-                                                assert(wrapper.hasClass(`weui-cell_switch`));
+                                                assert(wrapper.hasClass('weui-cell_switch'));
                                             }
                                         });
 
-                                        it(`should have 'weui-cell_select' when select attribute is true`, ()=> {
+                                        it('should have \'weui-cell_select\' when select attribute is true', ()=> {
                                             if (select) {
-                                                assert(wrapper.hasClass(`weui-cell_select`));
+                                                assert(wrapper.hasClass('weui-cell_select'));
                                             }
                                         });
 
-                                        it(`should have 'weui-cell_select-before' when selectPos attribute is before`, ()=> {
+                                        it('should have \'weui-cell_select-before\' when selectPos attribute is before', ()=> {
                                             if (selectPos == 'before') {
-                                                assert(wrapper.hasClass(`weui-cell_select-before`));
+                                                assert(wrapper.hasClass('weui-cell_select-before'));
                                             }
                                         });
 
-                                        it(`should have 'weui-cell_select-after' when selectPos attribute is after`, ()=> {
+                                        it('should have \'weui-cell_select-after\' when selectPos attribute is after', ()=> {
                                             if (selectPos == 'after') {
-                                                assert(wrapper.hasClass(`weui-cell_select-after`));
+                                                assert(wrapper.hasClass('weui-cell_select-after'));
                                             }
                                         });
 
-                                        it(`should have 'weui-check__label' when radio attribute is true`, ()=> {
+                                        it('should have \'weui-check__label\' when radio attribute is true', ()=> {
                                             if (radio) {
-                                                assert(wrapper.hasClass(`weui-check__label`));
+                                                assert(wrapper.hasClass('weui-check__label'));
                                             }
                                         });
 
-                                        it(`should have 'weui-check__label' when checkbox attribute is true`, ()=> {
+                                        it('should have \'weui-check__label\' when checkbox attribute is true', ()=> {
                                             if (checkbox) {
-                                                assert(wrapper.hasClass(`weui-check__label`));
+                                                assert(wrapper.hasClass('weui-check__label'));
                                             }
                                         });
                                     });

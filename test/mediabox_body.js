@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { shallow } from 'enzyme';
 import assert from 'assert';
 import WeUI from '../src/index';
@@ -12,8 +12,8 @@ describe('<MediaBoxBody></MediaBoxBody>', ()=> {
                 const wrapper = shallow(
                     <MediaBoxBody className={clazz}>{child}</MediaBoxBody>
                 );
-                it(`should have 'weui-media-box__bd' class name`, ()=>{
-                    assert(wrapper.hasClass(`weui-media-box__bd`));
+                it('should have \'weui-media-box__bd\' class name', ()=>{
+                    assert(wrapper.hasClass('weui-media-box__bd'));
                 });
 
                 it(`should have custom class name ${clazz}`, ()=>{

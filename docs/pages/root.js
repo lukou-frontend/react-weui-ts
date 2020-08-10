@@ -1,11 +1,11 @@
 /* eslint-disable */
-import React, { Component } from 'react';
+import * as React from 'react'
 import Navigation from '../components/navigation';
 import langs from '../langs.json';
 import docs from '../docs.json';
 import './root.less';
 
-class Root extends Component {
+class Root extends React.Component {
 
   constructor(props){
     super(props)

@@ -15,12 +15,15 @@ const less = require('rollup-plugin-less');
 const progress = require('rollup-plugin-progress');
 //file handling
 const rimraf = require('rimraf');
-const join = require('path').join;
+const path = require('path');
 const fs = require('fs');
 const exec = require( 'child_process' ).exec;
 //console utils
 const argv = require('minimist')(process.argv.slice(2));
 const chalk = require('chalk');
+const typescript = require('rollup-plugin-typescript2')
+const postcss = require('rollup-plugin-postcss');
+
 const showWrite = argv.progress;
 const showSection = argv.step || true;
 const log = console.log;
@@ -55,7 +58,7 @@ function makeBundleAttributes(bundleType){
             atrs.sourceMap = false;
             atrs.plugins.push(uglify());
         case Bundles.UMD_DEV:
-            atrs.path = './build/packages/';
+            atrs.path = './build/es/';
             atrs.format = 'umd';
             break;
         case Bundles.IIFE_PROD:
@@ -74,17 +77,33 @@ function makeBundleAttributes(bundleType){
 function makeConfig(bundleType){
     let atrs = makeBundleAttributes(bundleType);
     let config = {
-      entry: 'src/index.js',
+      input: 'src/index.ts',
       plugins: [
-        less({
-          output: atrs.path + 'react-weui.css'
+        postcss({
+          minimize: atrs.env === 'production',
+          extensions: ['css', 'less'],
+          plugins: [
+            require('autoprefixer')({
+              Browserslist: [
+                "last 3 version",
+                "ie >= 10",
+                "iOS >= 7",
+                "Android >= 4.1"
+              ]
+            })
+          ],
+          extract: path.resolve(atrs.path + 'react-weui.css')
         }),
+        // less({
+        //   output: atrs.path + 'react-weui.css'
+        // }),
         cjs({
           include: 'node_modules/**',
           namedExports: {
             'node_modules/react/react.js': ['PropTypes', 'Component']
           }
         }),
+        typescript(),
         babelRollup({
           babelrc: false,
           exclude: 'node_modules/**',
@@ -139,11 +158,11 @@ function runTasks($tasks){
 function createNodeBuild(){
     return (res, rej)=>{
         let count = 0;
-        let bat = exec('NODE_ENV=production babel ./src --out-dir ./build/packages --copy-files', { stdio: [0, 1, 2] }, (error, stdout, stderr) => {
-              if (error) {
-                rej(error);
-                return;
-              }
+        let bat = exec("npm run tsc && npm run build-less", { stdio: [0, 1, 2] }, (error, stdout, stderr) => {
+          if (error) {
+            rej(error);
+            return;
+          }
         });
         bat.stdout.on('data', (data) => {
           CLI.write(count++, data);
@@ -176,10 +195,10 @@ function createBundle(bundleType){
         .then( bundle => {
             CLI.section('Writing Bundle to file');
             return bundle.write({
-              moduleName: 'WeUI',
-              dest: atrs.path + (atrs.env === 'production' ? 'react-weui.min.js' : 'react-weui.js'),
+              name: 'WeUI',
+              file: atrs.path + (atrs.env === 'production' ? 'react-weui.min.js' : 'react-weui.js'),
               format: atrs.format,
-              sourceMap: atrs.sourceMap
+              sourcemap: atrs.sourceMap
             });
         })
         .then(()=>{
@@ -196,9 +215,9 @@ rimraf('build', ()=>{
   // create a new build directory
   fs.mkdirSync('build');
   // create the packages folder for NODE+UMD bundles
-  fs.mkdirSync(join('build', 'packages'));
+  fs.mkdirSync(path.join('build', 'packages'));
   // create the dist folder for UMD bundles
-  fs.mkdirSync(join('build', 'dist'));
+  fs.mkdirSync(path.join('build', 'dist'));
   // adding build tasks
   tasks.push(
     //Node individual components build

@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { shallow, mount } from 'enzyme';
 import assert from 'assert';
 import sinon from 'sinon';
@@ -15,7 +15,7 @@ describe('<Progress></Progress>', ()=> {
                         <Progress value={value} onClick={onClick} showCancel={showCancel}/>
                     );
 
-                    it(`should render <Progress></Progress> component`, ()=> {
+                    it('should render <Progress></Progress> component', ()=> {
                         //not detecting for stateless component
                         //assert(wrapper.instance() instanceof Progress);
                         assert(wrapper.hasClass('weui-progress'));
@@ -29,22 +29,22 @@ describe('<Progress></Progress>', ()=> {
 
 
                         if (value < 0) {
-                            assert($bar.prop('style').width === `0%`);
+                            assert($bar.prop('style').width === '0%');
                         }
                         else if (value > 100) {
-                            assert($bar.prop('style').width === `100%`);
+                            assert($bar.prop('style').width === '100%');
                         }
                         else {
                             assert($bar.prop('style').width === `${value}%`);
                         }
                     });
 
-                    it(`should have .weui-progress__opr element with 'onClick' attribute`, ()=> {
+                    it('should have .weui-progress__opr element with \'onClick\' attribute', ()=> {
                         if (showCancel) {
                             assert(wrapper.find('.weui-progress__opr').length === 1);
-                            if(onClick){
+                            if (onClick){
                                 wrapper.find('.weui-progress__opr').simulate('click');
-                                assert(onClick.called)
+                                assert(onClick.called);
                             }
                         }
                         else {
@@ -52,7 +52,7 @@ describe('<Progress></Progress>', ()=> {
                         }
                     });
                 });
-            })
+            });
         });
     });
 });

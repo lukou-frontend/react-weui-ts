@@ -9,7 +9,7 @@ npm install --save react react-dom
 npm install --save weui@1.1.0 react-weui
 ```
 
-如果 React 已经安装
+如果 React 已经安装，注意weui的版本必须为weui@1.1.0，新版本很多样式不兼容
 
 ```
 npm install weui@1.1.0 react-weui --save
@@ -19,12 +19,12 @@ npm install weui@1.1.0 react-weui --save
 
 我们的组件文档里头有很多例子, 这里提供给一个快速上手的例子:
 ```javascript
-import React from 'react';
+import * as React from 'react';
 import ReactDOM from 'react-dom';
 import { Button } from 'react-weui';
 //import styles
 import 'weui';
-import 'react-weui/build/packages/react-weui.css';
+import 'react-weui/build/dist/react-weui.css';
 
 const App = () => <Button>hello wechat</Button>;
 

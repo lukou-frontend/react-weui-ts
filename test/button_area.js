@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { shallow } from 'enzyme';
 import assert from 'assert';
 import WeUI from '../src/index';
@@ -16,12 +16,12 @@ describe('<ButtonArea></ButtonArea>', () => {
                     </ButtonArea>
                 );
 
-                it(`should render a <ButtonArea></ButtonArea> component`, () => {
+                it('should render a <ButtonArea></ButtonArea> component', () => {
                     assert(wrapper.instance() instanceof ButtonArea);
                 });
 
-                it(`should have 'weui-btn-area' class name`, () => {
-                    assert(wrapper.hasClass(`weui-btn-area`));
+                it('should have \'weui-btn-area\' class name', () => {
+                    assert(wrapper.hasClass('weui-btn-area'));
                 });
 
                 it(`should have custom class name ${className}`, () => {
@@ -30,16 +30,16 @@ describe('<ButtonArea></ButtonArea>', () => {
                     }
                 });
 
-                it(`should have 'weui-btn-area_inline' when direction equal 'horizontal'`, () => {
+                it('should have \'weui-btn-area_inline\' when direction equal \'horizontal\'', () => {
                     if (direction === 'horizontal') {
-                        assert(wrapper.hasClass(`weui-btn-area_inline`));
+                        assert(wrapper.hasClass('weui-btn-area_inline'));
                     }
                     else {
-                        assert(!wrapper.hasClass(`weui-btn-area_inline`));
+                        assert(!wrapper.hasClass('weui-btn-area_inline'));
                     }
                 });
 
-                it(`should have children`, () => {
+                it('should have children', () => {
                     assert(wrapper.find(Button).html() === shallow(child).html());
                 });
             });

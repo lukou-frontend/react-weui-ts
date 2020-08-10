@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import FontAwesome from 'react-fontawesome';
 import './home.less';
 //import { Button } from 'react-weui';

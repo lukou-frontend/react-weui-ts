@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { shallow } from 'enzyme';
 import assert from 'assert';
 import WeUI from '../src/index';
@@ -28,23 +28,23 @@ describe('<Select></Select>', ()=> {
                     </Select>
                 );
 
-                it(`should render <Select></Select> component`, ()=> {
+                it('should render <Select></Select> component', ()=> {
                     assert(wrapper.instance() instanceof Select);
                 });
 
-                it(`should render Select component with weui-select class`, ()=> {
+                it('should render Select component with weui-select class', ()=> {
                     assert(wrapper.find('select').hasClass('weui-select'));
                 });
 
-                it(`should render options when child is present and no data`, ()=> {
-                    if(data.length == 0){
-                        assert.equal('1',wrapper.find('option').first().text());
+                it('should render options when child is present and no data', ()=> {
+                    if (data.length == 0){
+                        assert.equal('1', wrapper.find('option').first().text());
                     }
                 });
 
-                it(`should render data instead of child if data length > 0`, ()=> {
-                    if(data.length > 0){
-                        assert.equal('test1',wrapper.find('option').first().text());
+                it('should render data instead of child if data length > 0', ()=> {
+                    if (data.length > 0){
+                        assert.equal('test1', wrapper.find('option').first().text());
                     }
                 });
 

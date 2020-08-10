@@ -1,0 +1,22 @@
+// https://zhuanlan.zhihu.com/p/103962257?utm_source=qq
+{
+  "compilerOptions": {
+    "module": "es6",
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "jsx": "react",
+    "noUnusedParameters": true,
+    "noUnusedLocals": true,
+    "noImplicitAny": true,
+    "target": "esnext",
+    "lib": ["dom", "es7"],
+  },
+  "include": [
+    "src/**/*",
+    "example/**/*",
+  ],
+  "exclude": [
+    "node_modules",
+  ]
+}
+

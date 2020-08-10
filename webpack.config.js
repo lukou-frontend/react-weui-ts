@@ -24,7 +24,9 @@ const plugins = [
     }),
     new webpack.DefinePlugin({
         'process.env': {
-            NODE_ENV: JSON.stringify(isProduction ? 'production' : 'development'),
+            NODE_ENV: JSON.stringify(
+                isProduction ? 'production' : 'development'
+            ),
         },
     }),
     new webpack.NamedModulesPlugin(),
@@ -32,16 +34,18 @@ const plugins = [
         template: path.join(sourcePath, 'index.html'),
         path: buildPath,
         filename: 'index.html',
-    })
+    }),
 ];
 
 // Common rules
 const rules = [
     {
-        test: /\.(js|jsx)$/,
+        test: /\.ts(x)?$/,
+        include: [path.resolve(__dirname, 'example')],
         exclude: /node_modules/,
         use: [
             'babel-loader',
+            'ts-loader'
         ],
     }, {
         test: /\.css/,
@@ -54,12 +58,7 @@ const rules = [
             sourceMap: !isProduction,
             plugins: (loader) => [
                 autoprefixer({
-                    browsers: [
-                        'last 3 version',
-                        'ie >= 10',
-                        'iOS >= 7',
-                        'Android >= 4.1'
-                    ],
+                    overrideBrowserslist: ['iOS >= 8', 'Android >= 4.0', 'last 3 version']
                 })
             ]
           }
@@ -81,12 +80,7 @@ const rules = [
             sourceMap: !isProduction,
             plugins: (loader) => [
                 autoprefixer({
-                    browsers: [
-                        'last 3 version',
-                        'ie >= 10',
-                        'iOS >= 7',
-                        'Android >= 4.1'
-                    ],
+                  overrideBrowserslist: ['iOS >= 8', 'Android >= 4.0', 'last 3 version']
                 })
             ]
           }
@@ -102,40 +96,38 @@ const rules = [
     {
         test: /\.(png|gif|jpg|svg)$/,
         use: 'url-loader?limit=20480&name=assets/[name]-[hash].[ext]',
-    }
+    },
 ];
 
 if (!isProduction) {
-  plugins.push(
-        new webpack.HotModuleReplacementPlugin()
-    );
+    plugins.push(new webpack.HotModuleReplacementPlugin());
 } else {
     plugins.push(
         new webpack.optimize.UglifyJsPlugin({
-          compress: {
-            warnings: false,
-            screw_ie8: true,
-            conditionals: true,
-            unused: true,
-            comparisons: true,
-            sequences: true,
-            dead_code: true,
-            evaluate: true,
-            if_return: true,
-            join_vars: true,
-          },
-          output: {
-            comments: false,
-          },
+            compress: {
+                warnings: false,
+                screw_ie8: true,
+                conditionals: true,
+                unused: true,
+                comparisons: true,
+                sequences: true,
+                dead_code: true,
+                evaluate: true,
+                if_return: true,
+                join_vars: true,
+            },
+            output: {
+                comments: false,
+            },
         })
-  );
+    );
 }
 
 module.exports = {
   devtool: isProduction ? false : 'source-map',
   context: jsSourcePath,
   entry: {
-    js: './app.js',
+    js: './app.tsx',
   },
   output: {
     path: buildPath,
@@ -146,7 +138,7 @@ module.exports = {
     rules,
   },
   resolve: {
-    extensions: ['.webpack-loader.js', '.web-loader.js', '.loader.js', '.js', '.jsx', '.less'],
+    extensions: ['.webpack-loader.js', '.web-loader.js', '.loader.js', '.tsx', '.ts', '.js', '.jsx', '.less',],
     modules: [
       path.resolve(__dirname, 'node_modules'),
       jsSourcePath,
@@ -176,5 +168,5 @@ module.exports = {
         green: '\u001b[32m',
       },
     },
-  },
+  }
 };

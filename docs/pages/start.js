@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import * as React from 'react'
 import ReactDOM from 'react-dom';
 import Globe from '../components/globe';
 import FontAwesome from 'react-fontawesome';
@@ -6,11 +6,11 @@ import {
     Button, Flex, FlexItem,
     Footer,
     FooterText,
-} from '../../build/packages';
+} from '../../build/es';
 import { Link } from 'react-router-dom';
 import './start.less';
 
-class Start extends Component {
+class Start extends React.Component {
     componentDidMount() {
         this.canvasInit();
     }
@@ -210,7 +210,7 @@ class Start extends Component {
                             <h2>React WeUI</h2>
                             <p className="desc">{ lang.bannerHeading }</p>
                             <div className="actions">
-                                <Button plain target="_blank" href="http://weui.github.io/react-weui">{ lang.demo }</Button>
+                                <Button plain target="_blank" href="http://qiuyu.coupon.lukou.com/react-weui/#/">{ lang.demo }</Button>
                                 <br/>
                             </div>
                         </div>

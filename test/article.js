@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { shallow } from 'enzyme';
 import assert from 'assert';
 import WeUI from '../src/index';
@@ -40,8 +40,8 @@ describe('<ActionSheet></ActionSheet>', ()=> {
                 assert(wrapper.instance() instanceof Article);
             });
 
-            it(`should have class name 'weui-article'`, ()=> {
-                assert(wrapper.hasClass(`weui-article`));
+            it('should have class name \'weui-article\'', ()=> {
+                assert(wrapper.hasClass('weui-article'));
             });
 
             it(`should have custom class name ${clazz}`, ()=> {
@@ -50,9 +50,9 @@ describe('<ActionSheet></ActionSheet>', ()=> {
                 }
             });
 
-            it(`should have children`, ()=> {
+            it('should have children', ()=> {
                 assert(shallow(content).html() === wrapper.children().html());
             });
         });
-    })
+    });
 });

@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { shallow } from 'enzyme';
 import assert from 'assert';
 import WeUI from '../src/index';
@@ -14,8 +14,8 @@ describe('<CellFooter></CellFooter>', ()=> {
                 <CellFooter className={customClassName}>{child}</CellFooter>
             );
 
-            it(`should have 'weui-cell__ft' class name`, ()=>{
-                assert(wrapper.hasClass(`weui-cell__ft`));
+            it('should have \'weui-cell__ft\' class name', ()=>{
+                assert(wrapper.hasClass('weui-cell__ft'));
             });
 
             it(`should have custom class name ${customClassName}`, ()=> {
