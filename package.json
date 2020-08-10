@@ -1,10 +1,7 @@
 {
-  "name": "react-weui",
-  "sideEffects": [
-    "*.less"
-  ],
-  "version": "1.2.2",
-  "description": "weui for react",
+  "name": "react-weui-ts",
+  "version": "1.0.0",
+  "description": "weui for react, written by typescript",
   "main": "./build/es/index.js",
   "scripts": {
     "start": "webpack-dev-server",
@@ -20,6 +17,9 @@
     "deploy:doc": "scp -r build/demo/* lukou@121.41.121.230:/home/lukou/tmp/coupon_qiuyu/react-weui",
     "gulp": "gulp --gulpfile ./scripts/gulpfile.js --cwd ./"
   },
+  "sideEffects": [
+    "*.less"
+  ],
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged"
